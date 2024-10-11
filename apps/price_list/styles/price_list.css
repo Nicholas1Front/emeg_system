@@ -474,3 +474,13 @@ header h2{
     background-color: #0079dc;
     transition:0.2s;
 }
+
+/* edit-price-list-section -> delete-item-container_edit-price-list*/
+
+.edit-price-list-section > .delete-item-container_edit-price-list{
+    margin-top:1.5rem;   
+}
+
+.edit-price-list-section > .delete-item-container_edit-price-list > .title-container{
+    margin-top:1.5rem;
+}
