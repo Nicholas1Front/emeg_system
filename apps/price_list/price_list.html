@@ -133,6 +133,8 @@
             <button id="delete-item-link-btn">Excluir item da tabela <i class="fa-solid fa-square-minus"></i></button>
 
             <button id="edit-item-link-btn">Editar item da tabela <i class="fa-solid fa-square-pen"></i></button>
+
+            <button id="send-to-server-btn">Enviar alterações para o servidor <i class="fa-solid fa-paper-plane"></i></button>
         </div>
 
         <div class="add-item-container_edit-price-list">
@@ -147,8 +149,18 @@
             </div>
 
             <div class="input-container">
-                <select id="service-type-add-item_select"></select>
+                <select id="service-type-add-item_select">
+                    <option value=""></option>
+                    <option value="HIDRAÚLICO">HIDRAÚLICO</option>
+                    <option value="MECÂNICO">MECÂNICO</option>
+                    <option value="ELÉTRICO">ELÉTRICO</option>
+                </select>
                 <input type="text" id="service-name-add-item_input" placeholder="Digite a descrição completa do serviço e o equipamento..."/>
+                <input type="number" id="service-price-add-item_input" placeholder="Digite o preço do serviço...">
+            </div>
+
+            <div class="button-container">
+                <button id="service-add-item_btn">Adicionar item <i class="fa-solid fa-square-plus"></i></button>
             </div>
         </div>
     </section>
