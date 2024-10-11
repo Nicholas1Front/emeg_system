@@ -36,17 +36,17 @@
     <section class="main-hub-section">
         <div class="main-hub-container">
             <button id="consult-price-list-btn">
-                Consultar tabela de preços
+                Pesquisar item especifico da tabela
                 <i class="fa-solid fa-magnifying-glass-dollar"></i>
             </button>
 
             <button id="price-list-show-btn">
-                Mostrar toda a tabela de preços
+                Mostrar tabela completa
                 <i class="fa-solid fa-clipboard-list"></i>
             </button>
 
             <button id="edit-price-list-btn">
-                Editar tabela de preços
+                Editar tabela
                 <i class="fa-solid fa-pen-to-square"></i>
             </button>
 
@@ -57,7 +57,12 @@
 
         <div class="back-home-control">
             <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
-            <h3>// Consultar tabela de preços</h3>
+            <h3>// Pesquisar item especifico da tabela</h3>
+        </div>
+
+        <div class="title-container">
+            <h3>Insira informações para prosseguir com a pesquisa</h3>
+            <div class="line"></div>
         </div>
 
         <div class="search-input-container">
@@ -77,7 +82,7 @@
 
         <div class="back-home-control">
             <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
-            <h3>// Mostrar toda a tabela de preços</h3>
+            <h3>// Mostrar tabela completa</h3>
         </div>
 
         <div class="price-list-show-container">
@@ -119,16 +124,32 @@
 
         <div class="back-home-control">
             <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
-            <h3>// Editar tablea de preços</h3>
+            <h3>// Editar tabela</h3>
         </div>
 
-        <div class="title-container">
-            <h3>Selecione o item para edição</h3>
-            <div class="line"></div>
+        <div class="main-hub-container_edit-price-list">
+            <button id="add-item-link-btn">Adicionar item a tabela <i class="fa-solid fa-square-plus"></i></button>
+
+            <button id="delete-item-link-btn">Excluir item da tabela <i class="fa-solid fa-square-minus"></i></button>
+
+            <button id="edit-item-link-btn">Editar item da tabela <i class="fa-solid fa-square-pen"></i></button>
         </div>
 
-        <div class="search-for-item-container">
-            select
+        <div class="add-item-container_edit-price-list">
+            <div class="back-home-control">
+                <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para edição da tabela</button>
+                <h3>// Editar tabela / Adicionar item a tabela</h3>
+            </div>
+
+            <div class="title-container">
+                <h3>Adicionar item a tabela</h3>
+                <div class="line"></div>
+            </div>
+
+            <div class="input-container">
+                <select id="service-type-add-item_select"></select>
+                <input type="text" id="service-name-add-item_input" placeholder="Digite a descrição completa do serviço e o equipamento..."/>
+            </div>
         </div>
     </section>
 </body>

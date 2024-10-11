@@ -112,7 +112,7 @@ header h2{
 
 .main-hub-section{
     margin:1.5rem 0;
-    display:block;
+    display:none;
 }
 
 .main-hub-section > .main-hub-container{
@@ -351,4 +351,60 @@ header h2{
 .price-list-show-container > .price-list-show-control > .price-list-show-item > .price-list-item_service-price{
     width:30%;
     text-align: center;
+}
+
+/* edit-price-list-section */
+
+.edit-price-list-section{
+    margin-top:1.5rem;
+}
+
+.edit-price-list-section > .main-hub-container_edit-price-list{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-price-list-section > .main-hub-container_edit-price-list button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a91818;
+    width:30%;
+    padding:10px 0;
+    margin:0.7rem 0;
+    cursor: pointer;
+    font-size: 19px;
+    transition:0.2s;
+}
+
+.edit-price-list-section > .main-hub-container_edit-price-list button > i{
+    margin-left:7px;
+    font-size:22px;
+}
+
+.edit-price-list-section > .main-hub-container_edit-price-list button:hover{
+    transition:0.2s;
+    background-color: #d61e1e;
+}
+
+/* edit-price-list-section -> add-item-container_edit-price-list*/
+
+.edit-price-list-section > .add-item-container_edit-price-list{
+    margin-top:1.5rem;
+}
+
+.edit-price-list-section > .add-item-container_edit-price-list > .title-container{
+    margin-top:1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 25px;
+}
+
+.edit-price-list-section > .add-item-container_edit-price-list > .title-container > .line{
+    width:9rem;
+    margin-left:18%;
+    height:2px;
+    background-color: #d61e1e;
 }
