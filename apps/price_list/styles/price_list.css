@@ -565,3 +565,84 @@ header h2{
     transition:0.2s;
     background-color: #d61e1e;
 }
+
+/* edit-price-list-section -> edit-item-container_edit-price-list */
+
+.edit-price-list-section > .edit-item-container_edit-price-list{
+    margin-top:1.5rem;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .title-container{
+    margin-top:1.5rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size: 25px;   
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .title-container > .line{
+    width:9rem;
+    margin-left:18%;
+    height:2px;
+    background-color: #d61e1e;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container{
+    width:90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:1.5rem auto;   
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container input,
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container select{
+    border-radius:25px;
+    border: 1px solid #969696;
+    margin:0 8px;
+    padding:8px 0;   
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-type-select_edit-item{
+    width:20%;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_edit-item{
+    width:50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;   
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_edit-item input{
+    width:100%;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_edit-item > .service-name-edit-item_options-control{
+    display:block;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 44%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;   
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_edit-item > .service-name-edit-item_options-control > .service-name-edit-item_option{
+    padding:8px 0;
+    padding-left:8px;    
+    transition:0.2s;
+    cursor:pointer;   
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-price-span_edit-item{
+    width:30%;
+    margin:0 8px;
+    padding:8px 0;
+    padding-left:8px;
+    border:1px solid #969696;
+    border-radius:25px;
+}

@@ -205,7 +205,12 @@
             </div>
 
             <div class="input-container">
-                <select id="service-type-select_edit-item"></select>
+                <select id="service-type-select_edit-item">
+                    <option value=""></option>
+                    <option value="HIDRAÚLICO">HIDRAÚLICO</option>
+                    <option value="MECÂNICO">MECÂNICO</option>
+                    <option value="ELÉTRICO">ELÉTRICO</option>
+                </select>
                 <div class="service-name-input-control_edit-item">
                     <input type="text" id="service-name-edit-item_input" autocomplete="off"/>
                     <div class="service-name-edit-item_options-control">
@@ -213,6 +218,7 @@
                         <div class="service-name-edit-item_option">MONTAGEM E USINAGEM MOTOR</div>
                     </div>
                 </div>
+                <span id="service-price-span_edit-item">R$ --</span>
             </div>
         </div>
     </section>
