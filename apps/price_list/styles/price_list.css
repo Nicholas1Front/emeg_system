@@ -586,6 +586,7 @@ header h2{
 
 .edit-price-list-section{
     margin-top:1.5rem;
+    
 }
 
 .edit-price-list-section > .main-hub-container_edit-price-list{
@@ -631,6 +632,7 @@ header h2{
 
 .edit-price-list-section > .add-item-container_edit-price-list{
     margin-top:1.5rem;
+    display: none;
 }
 
 .edit-price-list-section > .add-item-container_edit-price-list > .title-container{
@@ -717,7 +719,8 @@ header h2{
 /* edit-price-list-section -> delete-item-container_edit-price-list*/
 
 .edit-price-list-section > .delete-item-container_edit-price-list{
-    margin-top:1.5rem;   
+    margin-top:1.5rem;
+    display: none;   
 }
 
 .edit-price-list-section > .delete-item-container_edit-price-list > .title-container{
@@ -839,6 +842,7 @@ header h2{
 
 .edit-price-list-section > .edit-item-container_edit-price-list{
     margin-top:1.5rem;
+    display: none;
 }
 
 .edit-price-list-section > .edit-item-container_edit-price-list > .title-container{

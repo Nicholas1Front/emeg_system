@@ -1,0 +1,17 @@
+[
+    {
+        "name":"TROCA REPARO CILINDRO DE ELEVAÇÃO (GUINDASTE)",
+        "type":"HIDRAÚLICO",
+        "price":"R$100,00"
+    },
+    {
+        "name":"DESMONTAGEM , USINAGEM E MONTAGEM DE MOTO (MOTOR PERKINS / CAMINHÃO VOLVO)",
+        "type":"MECÂNICO",
+        "price":"R$4.000,00"
+    },
+    {
+        "name":"TROCA DE ÓLEO (GUINDAUTO ARGOS)",
+        "type":"HIDRAÚLICO",
+        "price":"R$133,50"
+    }
+]
