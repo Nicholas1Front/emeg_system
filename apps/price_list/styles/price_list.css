@@ -22,6 +22,225 @@ button{
     cursor:pointer;
 }
 
+input:focus,
+select:focus{
+    outline:1px solid #d61e1e;
+}
+
+/* overlay-for-loading */
+
+.overlay-for-loading{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index:1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+    cursor:not-allowed;
+}
+
+.overlay-for-loading > .loading-container{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.overlay-for-loading > .loading-container i{
+    font-size:75px;
+    margin-bottom:0.5rem;
+}
+
+.overlay-for-loading > .loading-container span{
+    font-size: 25px;
+}
+
+.overlay{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index:1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.7);
+}
+
+/* confirmation-popup */
+
+.confirmation-popup{
+    background-color: #000;
+    width:35%;
+    border-radius:25px;
+    padding:1rem 0;
+    display: flex;
+    flex-direction:column;
+    align-items: center;
+}
+
+.confirmation-popup > #close-confirmation-popup-btn{
+    color: #fff;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    border:none;
+    margin-left:85%;
+    margin-top:0.8rem;
+}
+
+.confirmation-popup > .title-control{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confirmation-popup > .title-control i{
+    font-size:75px;
+    color: #d61e1e;
+}
+
+.confirmation-popup > .title-control h2{
+    font-size:25px;
+    margin-top:0.2rem;
+    color:#fff;
+}
+
+.confirmation-popup > .input-control{
+    margin-top:1.2rem;
+    margin-bottom:1rem;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.confirmation-popup > .input-control > .wrong-password-span{
+    color:#000;
+    margin-top:0.5rem;
+    padding: 2px 8px;
+    background-color: #d61e1e;
+    font-size: 13px;
+    display: none;
+}
+
+.confirmation-popup > .input-control input{
+    width:35%;
+    background-color: #fff;
+    border:none;
+    border-radius:25px;
+    font-size: 15px;
+    padding:8px 0;
+    text-align: center;
+    transition:0.2s;
+}
+
+.confirmation-popup > .input-control input:focus{
+    outline: none;
+    box-shadow: 0px 0px 9px 4px #d61e1e;
+    transition:0.2s;
+}
+
+.confirmation-popup > .input-control button{
+    width:fit-content;
+    background-color: #d61e1e;
+    border:none;
+    border-radius:25px;
+    font-size:15px;
+    font-weight: 500;
+    padding:5px 15px;
+    margin-top:0.9rem ;
+    cursor: pointer;
+}
+
+/* server-message-popup */
+
+.server-message-popup{
+    position:absolute;
+    display: none;
+    margin-top:7%;
+    margin-left:73%;
+    width:26%;
+    border-radius:15px;
+    height:10%;
+    background-color: #0364b3;
+    color:#fff;
+}
+
+.server-message-popup > .close-server-message-popup-btn{
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    background-color: transparent;
+    border:none;
+    margin-left:92%;
+    margin-top:0.5rem;
+}
+
+.server-message-popup > .server-message-control{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:5px 0;
+}
+
+.server-message-popup > .server-message-control i{
+    font-size:25px;
+    margin-right:5px;
+}
+
+.server-message-popup > .server-message-control span{
+    font-size: 17px;
+}
+
+/* message-popup */
+
+.message-popup{
+    background-color: #d61e1e;
+    position: fixed;
+    display:none;
+    width:30%;
+    border-radius:15px;
+    color: #fff;
+    margin-left:69%;
+    margin-top:40%;
+}
+
+.message-popup > .close-message-popup-btn{
+    font-size: 16px;
+    color: #fff;
+    cursor: pointer;
+    background-color: transparent;
+    border:none;
+    margin-left:92%;
+    margin-top:0.5rem;
+}
+
+.message-popup > .message-popup-control{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.message-popup > .message-popup-control i{
+    font-size: 65px;
+    margin:0.3rem 0;
+}
+
+.message-popup > .message-popup-control  > .message-popup-span{
+    font-size: 17px;
+    margin-bottom:0.8rem;
+}
+
 /* header */
 
 header{
@@ -144,6 +363,15 @@ header h2{
 .main-hub-section > .main-hub-container button:hover{
     background-color:#d61e1e ;
     transition:0.2s;
+}
+
+.main-hub-section > .main-hub-container > #edit-price-list-btn{
+    background-color: #0364b3;
+    transition:0.2s;
+}
+
+.main-hub-section > .main-hub-container > #edit-price-list-btn:hover{
+    background-color: #0079dc;
 }
 
 /* consult-price-list-section */
@@ -387,6 +615,16 @@ header h2{
 .edit-price-list-section > .main-hub-container_edit-price-list button:hover{
     transition:0.2s;
     background-color: #d61e1e;
+}
+
+.edit-price-list-section > .main-hub-container_edit-price-list > #send-to-server-btn{
+    background-color: #0364b3;
+    transition:0.2s;
+}
+
+.edit-price-list-section > .main-hub-container_edit-price-list > #send-to-server-btn:hover{
+    background-color: #0079dc;
+    transition:0.2s;
 }
 
 /* edit-price-list-section -> add-item-container_edit-price-list*/
