@@ -66,9 +66,9 @@
         </div>
 
         <div class="search-input-container">
-            <select id="service-type_select-list"></select>
+            <select id="service-type_select-search"></select>
             <div class="service-name-input-control">
-                <input type="text" id="service-name-input" autocomplete="off"/>
+                <input type="text" id="service-name-input-search" autocomplete="off"/>
                 <div class="service-name-options-control">
                     <div class="service-name-option">TROCA REPARO</div>
                     <div class="service-name-option">MONTAGEM E USINAGEM MOTOR</div>
@@ -183,7 +183,14 @@
                     <option value="ELÉTRICO">ELÉTRICO</option>
                 </select>
 
-                <input type="text" id="service-name-delete-item_input" placeholder="Digite a descrição completa do serviço e o equipamento..."/>
+                <div class="service-name-input-control_delete-item">
+                    <input type="text" id="service-name-delete-item_input" autocomplete="off"/>
+                    <div class="service-name-delete-item_options-control">
+                        <div class="service-name-delete-item_option">TROCA REPARO...</div>
+                        <div class="service-name-delete-item_option">MONTAGEM DO MOTOR...</div>
+                    </div>
+
+                </div>
 
                 <span id="service-price-delete-item_span">R$ 550</span>
             </div>
@@ -212,13 +219,32 @@
                     <option value="ELÉTRICO">ELÉTRICO</option>
                 </select>
                 <div class="service-name-input-control_edit-item">
-                    <input type="text" id="service-name-edit-item_input" autocomplete="off"/>
+                    <input type="text" id="service-name-select_edit-item" autocomplete="off"/>
                     <div class="service-name-edit-item_options-control">
                         <div class="service-name-edit-item_option">TROCA REPARO</div>
                         <div class="service-name-edit-item_option">MONTAGEM E USINAGEM MOTOR</div>
                     </div>
                 </div>
                 <span id="service-price-span_edit-item">R$ --</span>
+            </div>
+
+            <div class="button-container">
+                <button id="next-step-edit-item-btn">Próximo passo <i class="fa-solid fa-turn-down"></i></button>
+            </div>
+
+            <div class="input-container">
+                <select id="service-type-select_update-item">
+                    <option value=""></option>
+                    <option value="HIDRAÚLICO">HIDRAÚLICO</option>
+                    <option value="MECÂNICO">MECÂNICO</option>
+                    <option value="ELÉTRICO">ELÉTRICO</option>
+                </select>
+                <input type="text" id="service-name-input_update-item" autocomplete="off"/>
+                <input type="number" id="service-price-input_update-item" autocomplete="off"/>
+            </div>
+
+            <div class="button-container">
+                <button id="edit-item-btn">Editar item<i class="fa-solid fa-square-pen"></i></button>
             </div>
         </div>
     </section>

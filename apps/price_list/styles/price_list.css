@@ -19,6 +19,7 @@ button{
     color:#fff;
     border-radius:25px;
     border:none;
+    cursor:pointer;
 }
 
 /* header */
@@ -504,7 +505,6 @@ header h2{
     margin:1.5rem auto;
 }
 
-.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > input,
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > select,
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > span{
     border-radius:25px;
@@ -513,7 +513,6 @@ header h2{
     padding:8px 0;
 }
 
-.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > input:focus,
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > select:focus,
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > span:focus{
     outline: 1px solid #d61e1e;
@@ -524,9 +523,41 @@ header h2{
     padding-left:8px;
 }
 
-.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > #service-name-delete-item_input{
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-name-input-control_delete-item {
     width:50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
     padding-left:8px;
+}
+
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-name-input-control_delete-item input{
+    width:100%;
+    border-radius:25px;
+    border: 1px solid #969696;
+    margin:0 8px;
+    padding:8px 0;
+    padding-left:8px;
+}
+
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-name-input-control_delete-item > .service-name-delete-item_options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 43%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;   
+}
+
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-name-input-control_delete-item > .service-name-delete-item_options-control > .service-name-delete-item_option{
+    padding:8px 0;
+    padding-left:8px;    
+    transition:0.2s;
+    cursor:pointer;   
 }
 
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > #service-price-delete-item_span{
@@ -619,10 +650,10 @@ header h2{
 }
 
 .edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_edit-item > .service-name-edit-item_options-control{
-    display:block;
+    display:none;
     border: 1px solid #969696;
     background-color: #fff;
-    width: 44%;
+    width: 43%;
     border-radius:25px;
     margin-top:33px;
     overflow-y: auto;
@@ -645,4 +676,54 @@ header h2{
     padding-left:8px;
     border:1px solid #969696;
     border-radius:25px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:1.5rem 0;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .button-container button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a91818;
+    width:20%;
+    padding:8px 0;
+    margin:0.7rem 0;
+    cursor: pointer;
+    font-size: 19px;
+    transition:0.2s;    
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .button-container button > i{
+    margin-left:7px;
+    font-size:22px;    
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .button-container #next-step-edit-item-btn{
+    background-color: #0364b3;
+    transition:0.2s;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .button-container #next-step-edit-item-btn:hover{
+    background-color: #0079dc;
+    transition:0.2s;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-type-select_update-item{
+    width:20%;
+    padding-left:8px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-name-input_update-item{
+    width:50%;
+    padding-left:8px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-price-input_update-item{
+    width:30%;
+    padding-left:8px;
 }
