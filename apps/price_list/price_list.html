@@ -113,12 +113,24 @@
         </div>
 
         <div class="title-container">
-            <h3>Insira informações para prosseguir com a pesquisa</h3>
-            <div class="line"></div>
+            <div class="title-control">
+                <div class="line"></div>
+                <h3>Pesquisar item</h3>
+                <div class="line"></div>
+            </div>
+
+            <div class="title-control">
+                <h5>Insira as informações adiante para pesquisar um item especifico na tabela</h5>
+            </div>
         </div>
 
         <div class="search-input-container">
-            <select id="service-type_select-search"></select>
+            <select id="service-type_select-search">
+                <option value=""></option>
+                <option value="HIDRAÚLICO">HIDRAÚLICO</option>
+                <option value="MECÂNICO">MECÂNICO</option>
+                <option value="ELÉTRICO">ELÉTRICO</option>
+            </select>
             <div class="service-name-input-control">
                 <input type="text" id="service-name-input-search" autocomplete="off"/>
                 <div class="service-name-options-control">
