@@ -479,7 +479,7 @@ header h2{
 }
 
 .consult-price-list-section > .search-input-container > .service-name-input-control > .service-name-options-control{
-    display:block;
+    display:none;
     border: 1px solid #969696;
     background-color: #fff;
     width: 55%;

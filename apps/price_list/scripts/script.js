@@ -54,17 +54,17 @@ async function hideHtmlElement([...elements]){
 const consultPriceListSection = document.querySelector(".consult-price-list-section");
 let serviceType_selectSearch = document.querySelector("#service-type_select-search");
 let serviceNameInputSearch = document.querySelector("#service-name-input-search");
-let serviceNameOptionsControl = document.querySelector(".service-name-options-control");
+let optionItemsControl = document.querySelector(".service-name-options-control");
 const consultPriceListBtn = document.querySelector("#consult-price-list_search-btn")
 
 // functions
 
-async function createInputSuggestions(){
+async function createInputSuggestions(typeSelectList,searchInput,optionsControl,optionItem,optionItemClassName){
     let allServices = [];
     let servicesSearched = [];
-    serviceNameOptionsControl.innerHTML = "";
+    optionsControl.innerHTML = "";
 
-    if(serviceType_selectSearch.value !== ""){
+    if(typeSelectList.value !== ""){
         services_array.forEach((element)=>{
             if(serviceType_selectSearch.value === element.type){
                 allServices.push(element.name);
@@ -79,11 +79,11 @@ async function createInputSuggestions(){
 
         console.log(servicesSearched);
 
-    }else{
+    }
+    
+    if(typeSelectList.value === ""){
         services_array.forEach((element)=>{
-            if(serviceType_selectSearch.value === element.type){
-                allServices.push(element.name);
-            }
+            allServices.push(element.name);
         })
 
         for(let i = 0; i < allServices.length ; i++){
@@ -91,37 +91,44 @@ async function createInputSuggestions(){
                 servicesSearched.push(allServices[i]);
             }
         }
+
+        console.log(servicesSearched);
     }
 
     if(servicesSearched.length === 0){
-        serviceNameOptionsControl.innerHTML = "";
-        hideHtmlElement([serviceNameOptionsControl]);
+        optionsControl.innerHTML = "";
+        hideHtmlElement([optionsControl]);
+        return;
+    }
+
+    if(searchInput.value === ""){
+        hideHtmlElement([optionsControl]);
         return;
     }
 
     servicesSearched.forEach((service)=>{
-        let serviceNameOption = document.createElement("div");
+        let optionItem = document.createElement("div");
 
-        serviceNameOption.className = "service-name-option";
-        serviceNameOption.innerHTML = service;
+        optionItem.className = `${optionItemClassName}`
+        optionItem.innerHTML = service;
 
-        serviceNameOptionsControl.appendChild(serviceNameOption);
+        optionsControl.appendChild(optionItem);
     });
 
-    let serviceNameOption = document.querySelectorAll(".service-name-option");
+    let optionItem = document.querySelectorAll(`${optionItemClassName}`);
 
-   for(let i = 0 ; i < serviceNameOption.length ; i++){
-        serviceNameOption[i].addEventListener("click",()=>{
-            serviceNameInputSearch.value = serviceNameOption[i].innerHTML;
-            hideHtmlElement([serviceNameOption]);
+   for(let i = 0 ; i < optionItem.length ; i++){
+        optionItem[i].addEventListener("click",()=>{
+            serviceNameInputSearch.value = optionItem[i].innerHTML;
+            hideHtmlElement([optionsControl]);
         })
    }
 
-   showHtmlElement([serviceNameOptionsControl],"block");
+   showHtmlElement([optionsControl],"block");
 
    document.addEventListener("click",()=>{
-        serviceNameOptionsControl.innerHTML = "";
-        hideHtmlElement([serviceNameOptionsControl]);
+        optionItemsControl.innerHTML = "";
+        hideHtmlElement([optionsControl]);
    })
   
 }
