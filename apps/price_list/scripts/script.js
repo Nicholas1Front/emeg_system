@@ -48,6 +48,33 @@ async function hideHtmlElement([...elements]){
     })
 }
 
+// backHomeProcess and cleanAllInputs
+
+async function backHomeProcess(){
+    await cleanAllInputs();
+
+    const allSections = document.querySelectorAll("section");
+
+    allSections.forEach(async(section)=>{
+        await hideHtmlElement([section]);
+    })
+
+    await showHtmlElement([mainHubSection],"block");
+}
+
+async function cleanAllInputs(){
+    const allInputs = document.querySelectorAll("input");
+    const allSelects = document.querySelectorAll("select");
+
+    allInputs.forEach((element)=>{
+        element.value = "";
+    })
+    
+    allSelects.forEach((element)=>{
+        element.value = "";
+    })
+}
+
 //message popup
 
 //elements
@@ -92,9 +119,132 @@ closeMessagePopupBtn.addEventListener("click", ()=>{
     closeMessagePopup();
 })
 
+// confirmation popup
+
+// elements
+
+const overlay = document.querySelector(".overlay");
+const closeConfirmationPopupBtn = document.querySelector("#close-confirmation-popup-btn");
+const confirmationPasswordInput = document.querySelector("#confirmation-password-input");
+const wrongPasswordSpan = document.querySelector(".wrong-password-span");
+const confirmationPopupBtn = document.querySelector("#confirmation-popup-btn");
+const confirmationPassword = "88320940";
+
+let functionToBeExecutedGlobal;
+let msgPopupContentGlobal;
+
+function showConfirmationPopup(){
+    overlay.style.display = "flex";
+    customerBasePlataformContainer.style.filter = "blur(9px)";
+    wrongPasswordSpan.style.display = "none";
+}
+
+function closeConfirmationPopup(){
+    overlay.style.display="none";
+    customerBasePlataformContainer.style.filter = "blur(0)"
+}
+
+async function clickHandleListener(){
+    if(confirmationPasswordInput.value === confirmationPassword){
+        await callFunction(functionToBeExecutedGlobal, msgPopupContentGlobal);
+
+        await backHomeProcess();
+
+        await clearAllInputs();
+    }else{
+        wrongPasswordSpan.style.display = "block";
+        
+        setTimeout(()=>{
+            wrongPasswordSpan.style.display = "none";
+        },10000);
+
+        confirmationPasswordInput.addEventListener("focus",()=>{
+            wrongPasswordSpan.style.display = "none";
+        })
+
+        return;
+    };
+}
+
+async function keyPressHandleListener(event){
+    if(event.key === "Enter"){
+        if(confirmationPasswordInput.value === confirmationPassword){            
+            await callFunction(functionToBeExecutedGlobal, msgPopupContentGlobal);
+
+            await backHomeProcess();
+
+            await clearAllInputs();
+        }else{
+            wrongPasswordSpan.style.display = "block";
+            
+            setTimeout(()=>{
+                wrongPasswordSpan.style.display = "none";
+            },10000);
+
+            confirmationPasswordInput.addEventListener("focus",()=>{
+                wrongPasswordSpan.style.display = "none";
+            })
+
+            return;
+        };  
+    }
+}
+
+async function verifyPasswordProcess(functionToBeExecuted, msgPopupContent){
+
+    functionToBeExecutedGlobal = functionToBeExecuted;
+    msgPopupContentGlobal = msgPopupContent;
+
+    showConfirmationPopup();
+
+    confirmationPopupBtn.removeEventListener("click", clickHandleListener);
+    confirmationPasswordInput.removeEventListener("keypress",keyPressHandleListener);
+
+    confirmationPopupBtn.addEventListener("click", clickHandleListener);
+    confirmationPasswordInput.addEventListener("keypress",keyPressHandleListener);
+};
+
+async function callFunction(functionToBeExecuted, msgPopupContent){
+    
+    closeConfirmationPopup();
+
+    await functionToBeExecuted();
+
+    services_array.sort((a,b)=>{
+        if(a.name < b.name){
+            return -1;
+        }
+    
+        if(a.name > b.name){
+            return 1; 
+        }
+    
+        return 0;
+    });
+
+    if(msgPopupContent !== undefined){
+        showMessagePopup("sucessMsg", msgPopupContent);
+    }
+}
+
+closeConfirmationPopupBtn.addEventListener("click", ()=>{
+    closeConfirmationPopup();
+})
+
+// main-hub-section
+
+// elements
+const mainHubSection = document.querySelector(".main-hub-section");
+const consultPriceListLink = document.querySelector("#consult-price-list-btn");
+const priceListShowLink = document.querySelector("#price-list-show-btn");
+const editPriceListLink = document.querySelector("#edit-price-list-btn");
+
 // consult-price-list section
 
 // elements
+
+const backHomeBtn = document.querySelectorAll(".back-home-btn");
+
 const consultPriceListSection = document.querySelector(".consult-price-list-section");
 let serviceType_selectSearch = document.querySelector("#service-type_select-search");
 let serviceNameInputSearch = document.querySelector("#service-name-input-search");
@@ -103,7 +253,8 @@ let serviceNameOption = null;
 
 const consultPriceListBtn = document.querySelector("#consult-price-list_search-btn");
 const consultPriceList_resultContainer = document.querySelector(".consult-price-list_result-container");
-const consultPriceList_showControl = document.querySelector(".consult-price-list_show-control")
+const consultPriceList_showControl = document.querySelector(".consult-price-list_show-control");
+
 // functions
 
 async function createInputSuggestions(typeSelectList,searchInput,optionsControl,optionItem,optionItemClassName){
@@ -174,7 +325,7 @@ async function createInputSuggestions(typeSelectList,searchInput,optionsControl,
    document.addEventListener("click",()=>{
         optionsControl.innerHTML = "";
         hideHtmlElement([optionsControl]);
-   })
+   });
   
 }
 
@@ -236,7 +387,9 @@ async function searchItemProcess(){
 
             consultPriceList_showControl.appendChild(item);
         });
-    }else if (servicesSearched.length < 0){ 
+    }
+    
+    if(servicesSearched.length == 0){   
         let item = document.createElement("div");    
 
         item.className = "consult-price-list_show-item";
@@ -261,6 +414,11 @@ async function searchItemProcess(){
 
 // event listerners
 
+consultPriceListLink.addEventListener("click", async()=>{
+    showHtmlElement([consultPriceListSection], "block");
+    hideHtmlElement([mainHubSection]);
+})
+
 serviceType_selectSearch.addEventListener("change", ()=>{
     serviceNameInputSearch.value = "";
 })
@@ -279,4 +437,110 @@ serviceNameInputSearch.addEventListener("input",async()=>{
 
 consultPriceListBtn.addEventListener("click",async()=>{
     await searchItemProcess();
-})   
+});
+
+backHomeBtn.forEach(button => {
+    button.addEventListener("click", async()=>{
+        await backHomeProcess();
+    })
+});
+
+// price-list-show-section
+
+// elements
+
+const priceListShowSection = document.querySelector(".price-list-show-section")
+const priceListShowControl = document.querySelector(".price-list-show-control")
+// functions
+
+async function showWholePriceListProcess(){
+    if(document.querySelectorAll(".price-list-show-item") !== null){
+        let items = document.querySelectorAll(".price-list-show-item");
+
+        for(let i = 0; i < items.length ; i++){
+            items[i].remove();
+        }
+    }
+
+    if(document.querySelector(".end-of-items") !== null){
+        document.querySelector(".end-of-items").remove();
+    }
+
+    services_array.forEach((service)=>{
+        let priceListShowItem = document.createElement("div");
+
+        priceListShowItem.className = "price-list-show-item";
+
+        let priceListItem_serviceType = document.createElement("span");
+        let priceListItem_serviceDescription = document.createElement("span");
+        let priceListItem_servicePrice = document.createElement("span");
+
+        priceListItem_serviceType.className = "price-list-item_service-type";
+        priceListItem_serviceDescription.className = "price-list-item_service-description";
+        priceListItem_servicePrice.className = "price-list-item_service-price";
+
+        priceListItem_serviceType.innerText = service.type;
+        priceListItem_serviceDescription.innerText = service.name;
+        priceListItem_servicePrice.innerText = service.price;
+
+        priceListShowItem.appendChild(priceListItem_serviceType);
+        priceListShowItem.appendChild(priceListItem_serviceDescription);
+        priceListShowItem.appendChild(priceListItem_servicePrice);
+
+        priceListShowControl.appendChild(priceListShowItem);
+    })
+
+    let endOfItems = document.createElement("div");
+    endOfItems.className = "end-of-items";
+    priceListShowControl.appendChild(endOfItems);
+}
+
+// event listeners
+
+priceListShowLink.addEventListener("click", async()=>{
+    showWholePriceListProcess();
+    showHtmlElement([priceListShowSection], "block");
+    hideHtmlElement([mainHubSection]);
+})
+
+// edit-price-list-section
+
+// elements
+
+const editPriceListSection = document.querySelector(".edit-price-list-section");
+const addItemLink = document.querySelector("#add-item-link-btn");
+const deleteItemLink = document.querySelector("#delete-item-link-btn");
+const editItemLink = document.querySelector("#edit-item-link-btn");
+const sendToServerBtn = document.querySelector("#send-to-server-btn");
+
+// functions 
+
+async function backHomeProcess_editPriceListSection(){
+    let allSections = document.querySelectorAll("section");
+
+    allSections.forEach(async (section) => {
+        await hideHtmlElement([section]);
+    })
+}
+
+// event listeners
+
+editPriceListLink.addEventListener("click", async()=>{
+    showHtmlElement([editPriceListSection], "block");
+    hideHtmlElement([mainHubSection]);
+})    
+
+// edit-price-list-section -> add-item-container_edit-price-list
+
+// elements
+
+const addItemContainer_editPriceList = document.querySelector(".add-item-container_edit-price-list");
+
+// functions
+
+// event listerners
+
+addItemLink.addEventListener("click", async()=>{
+    showHtmlElement([addItemContainer_editPriceList], "block");
+    hideHtmlElement([mainHubSection]);
+})  
