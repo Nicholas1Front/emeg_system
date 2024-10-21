@@ -606,6 +606,13 @@ header h2{
     width:30%;
 }
 
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .end-of-items{
+    padding:0.7rem 0;
+    background-color: #d61e1e;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+}
+
 /* price-list-show-section */
 
 .price-list-show-section{

@@ -10,6 +10,16 @@
         "price":"R$4.000,00"
     },
     {
+        "name":"TROCA CRUZETA INTERMEDIÁRIA EIXO CARDAN",
+        "type":"MECÂNICO",
+        "price":"R$132,00"
+    },
+    {
+        "name":"TROCA TRAMBULADOR DE CÂMBIO",
+        "type":"MECÂNICO",
+        "price":"R$100,00"
+    },
+    {
         "name":"TROCA DE ÓLEO (GUINDAUTO ARGOS)",
         "type":"HIDRAÚLICO",
         "price":"R$133,50"
