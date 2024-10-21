@@ -122,7 +122,7 @@ closeMessagePopupBtn.addEventListener("click", ()=>{
 // confirmation popup
 
 // elements
-
+const priceListSystemContainer = document.querySelector(".price-list-system-container");
 const overlay = document.querySelector(".overlay");
 const closeConfirmationPopupBtn = document.querySelector("#close-confirmation-popup-btn");
 const confirmationPasswordInput = document.querySelector("#confirmation-password-input");
@@ -135,20 +135,20 @@ let msgPopupContentGlobal;
 
 function showConfirmationPopup(){
     overlay.style.display = "flex";
-    customerBasePlataformContainer.style.filter = "blur(9px)";
+    priceListSystemContainer.style.filter = "blur(9px)";
     wrongPasswordSpan.style.display = "none";
 }
 
 function closeConfirmationPopup(){
     overlay.style.display="none";
-    customerBasePlataformContainer.style.filter = "blur(0)"
+    priceListSystemContainer.style.filter = "blur(0)"
 }
 
 async function clickHandleListener(){
     if(confirmationPasswordInput.value === confirmationPassword){
         await callFunction(functionToBeExecutedGlobal, msgPopupContentGlobal);
 
-        await backHomeProcess();
+        await backHomeProcess_editPriceListSection();
 
         await clearAllInputs();
     }else{
@@ -171,7 +171,7 @@ async function keyPressHandleListener(event){
         if(confirmationPasswordInput.value === confirmationPassword){            
             await callFunction(functionToBeExecutedGlobal, msgPopupContentGlobal);
 
-            await backHomeProcess();
+            await backHomeProcess_editPriceListSection();
 
             await clearAllInputs();
         }else{
@@ -519,8 +519,13 @@ async function backHomeProcess_editPriceListSection(){
     let allSections = document.querySelectorAll("section");
 
     allSections.forEach(async (section) => {
-        await hideHtmlElement([section]);
-    })
+        await hideHtmlElement([
+            section,
+            addItemContainer_editPriceList
+        ]);
+    });
+
+    await showHtmlElement([editPriceListSection], "block");
 }
 
 // event listeners
@@ -535,12 +540,85 @@ editPriceListLink.addEventListener("click", async()=>{
 // elements
 
 const addItemContainer_editPriceList = document.querySelector(".add-item-container_edit-price-list");
-
+const serviceTypeAddItem_select = document.querySelector("#service-type-add-item_select")
+const serviceNameAddItem_input = document.querySelector("#service-name-add-item_input");
+const servicePriceAddItem_input = document.querySelector("#service-price-add-item_input");
+const serviceAddItem_btn = document.querySelector("#service-add-item_btn");
 // functions
+
+async function addServiceProcess(){
+    if(serviceTypeAddItem_select.value === ""){
+        showMessagePopup("errorMsg", "Selecione um tipo de serviço !");
+        return;
+    }
+
+    if(serviceNameAddItem_input.value === ""){
+        showMessagePopup("errorMsg", "Digite a descrição do serviço !");
+        return;
+    }
+
+    if(servicePriceAddItem_input.value === ""){
+        showMessagePopup("errorMsg", "Digite o preço base do serviço !")
+        return;
+    }
+
+    let allServicesNames = []
+
+    services_array.forEach(async (service) => {
+        allServicesNames.push(service.name);
+    })
+
+    let includesInArray = allServicesNames.includes(serviceNameAddItem_input.value);
+    
+    if(includesInArray){
+        showMessagePopup("errorMsg", "O serviço já existe, verifique as informações e tente novamente !");
+        return;
+    }else{
+        await verifyPasswordProcess(addServiceLogic, "Serviço adicionado com sucesso !");
+    };
+}
+
+async function addServiceLogic(){
+    console.log(services_array)
+    let serviceName = serviceNameAddItem_input.value;
+
+    let servicePrice = `R$ ${servicePriceAddItem_input.value}`;
+
+    let serviceType = serviceTypeAddItem_select.value;
+
+    let newService = {
+        name : serviceName,
+        type : serviceType,
+        price : servicePrice,
+    }
+
+    console.log(newService);
+
+    services_array.push(newService);
+
+    services_array.sort((a,b)=>{
+        if(a.name < b.name){
+            return -1;
+        }
+    
+        if(a.name > b.name){
+            return 1; 
+        }
+    
+        return 0;
+    });
+
+    console.log(services_array)
+
+}
 
 // event listerners
 
 addItemLink.addEventListener("click", async()=>{
     showHtmlElement([addItemContainer_editPriceList], "block");
     hideHtmlElement([mainHubSection]);
-})  
+});
+
+serviceAddItem_btn.addEventListener("click", async()=>{
+    await addServiceProcess();
+})   
