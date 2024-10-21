@@ -54,7 +54,8 @@ async function hideHtmlElement([...elements]){
 const consultPriceListSection = document.querySelector(".consult-price-list-section");
 let serviceType_selectSearch = document.querySelector("#service-type_select-search");
 let serviceNameInputSearch = document.querySelector("#service-name-input-search");
-let optionItemsControl = document.querySelector(".service-name-options-control");
+let serviceNameOptionsControl = document.querySelector(".service-name-options-control");
+let serviceNameOption = null;
 const consultPriceListBtn = document.querySelector("#consult-price-list_search-btn")
 
 // functions
@@ -77,8 +78,6 @@ async function createInputSuggestions(typeSelectList,searchInput,optionsControl,
             }
         }
 
-        console.log(servicesSearched);
-
     }
     
     if(typeSelectList.value === ""){
@@ -91,8 +90,6 @@ async function createInputSuggestions(typeSelectList,searchInput,optionsControl,
                 servicesSearched.push(allServices[i]);
             }
         }
-
-        console.log(servicesSearched);
     }
 
     if(servicesSearched.length === 0){
@@ -107,19 +104,21 @@ async function createInputSuggestions(typeSelectList,searchInput,optionsControl,
     }
 
     servicesSearched.forEach((service)=>{
-        let optionItem = document.createElement("div");
+        let option = document.createElement("div");
 
-        optionItem.className = `${optionItemClassName}`
-        optionItem.innerHTML = service;
+        option.className = `${optionItemClassName}`
+        option.innerHTML = service;
 
-        optionsControl.appendChild(optionItem);
+        optionsControl.appendChild(option);
     });
 
-    let optionItem = document.querySelectorAll(`${optionItemClassName}`);
+    optionItem = document.querySelectorAll(`.${optionItemClassName}`);
+
+    console.log(optionItem);
 
    for(let i = 0 ; i < optionItem.length ; i++){
         optionItem[i].addEventListener("click",()=>{
-            serviceNameInputSearch.value = optionItem[i].innerHTML;
+            searchInput.value = optionItem[i].innerHTML;
             hideHtmlElement([optionsControl]);
         })
    }
@@ -127,7 +126,7 @@ async function createInputSuggestions(typeSelectList,searchInput,optionsControl,
    showHtmlElement([optionsControl],"block");
 
    document.addEventListener("click",()=>{
-        optionItemsControl.innerHTML = "";
+        optionsControl.innerHTML = "";
         hideHtmlElement([optionsControl]);
    })
   
@@ -138,5 +137,11 @@ async function createInputSuggestions(typeSelectList,searchInput,optionsControl,
 serviceNameInputSearch.addEventListener("input",async()=>{
     serviceNameInputSearch.value = serviceNameInputSearch.value.toUpperCase();
 
-    await createInputSuggestions();
+    await createInputSuggestions(
+        serviceType_selectSearch,
+        serviceNameInputSearch,
+        serviceNameOptionsControl,
+        serviceNameOption,
+        "service-name-option"
+    );
 })

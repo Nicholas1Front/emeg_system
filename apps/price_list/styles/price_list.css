@@ -420,21 +420,26 @@ header h2{
     margin-top:1.5rem;
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
     font-size: 25px;   
+}
+
+.consult-price-list-section > .title-container > .line{
+    width:10%;
+    background-color: #d61e1e;
+    height:1px;
 }
 
 .consult-price-list-section > .title-container > .title-control{
     display: flex;
-    justify-content:center;
+    flex-direction: column;
     align-items: center;
+    width: fit-content;
+    margin: 0 1rem;
 }
 
-.consult-price-list-section > .title-container > .title-control > .line{
-    width:10%;
-    background-color: #d61e1e;
-    height:1px;
-    margin:0 1rem;
+.consult-price-list-section > .title-container > .title-control h3{
+    font-size:35px;
 }
 
 .consult-price-list-section > .title-container > .title-control h5{
@@ -513,6 +518,92 @@ header h2{
 .consult-price-list-section > .search-input-container > #consult-price-list_search-btn:hover{
     background-color: #d61e1e;
     transition:0.2s;
+}
+
+/* consult-price-list-section > consult-price-list_result-container */
+
+.consult-price-list-section > .consult-price-list_result-container{
+    margin-top:1.5rem;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:25px;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .title-container > .line{
+    width:9rem;
+    margin-left:18%;
+    height:1px;
+    background-color: #d61e1e;
+    margin-top:2px;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:90%;
+    margin: 2rem auto 0 auto;
+}
+
+/* consult-price-list-section > consult-price-list_result-container > .consult-price-list_label-control */
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_label-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d61e1e;
+    color:#fff;
+    padding:0.7rem 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_label-control h3{
+    font-size:18px;
+    text-align: center;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_label-control > .service-type-label{
+    width:20%;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_label-control > .service-description-label{
+    width:50%;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_label-control > .service-price-label{
+    width:30%;
+}
+
+/* consult-price-list-section > consult-price-list_result-container > consult-price-list_show-control > consult-price-list_show-item */
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_show-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ececec;
+    padding:1rem 0;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_show-item span{
+    font-size:18px;
+    text-align: center;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_show-item > .service-type_span{
+    width:20%;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_show-item > .service-description_span{
+    width:50%;
+}
+
+.consult-price-list-section > .consult-price-list_result-container > .consult-price-list_show-control > .consult-price-list_show-item > .service-price_span{
+    width:30%;
 }
 
 /* price-list-show-section */
@@ -675,7 +766,7 @@ header h2{
 .edit-price-list-section > .add-item-container_edit-price-list > .title-container > .line{
     width:9rem;
     margin-left:18%;
-    height:2px;
+    height:1px;
     background-color: #d61e1e;
 }
 
@@ -763,7 +854,7 @@ header h2{
 .edit-price-list-section > .delete-item-container_edit-price-list > .title-container > .line{
     width:9rem;
     margin-left:18%;
-    height:2px;
+    height:1px;
     background-color: #d61e1e;
 }
 
@@ -885,7 +976,7 @@ header h2{
 .edit-price-list-section > .edit-item-container_edit-price-list > .title-container > .line{
     width:9rem;
     margin-left:18%;
-    height:2px;
+    height:1px;
     background-color: #d61e1e;
 }
 
