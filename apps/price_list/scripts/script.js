@@ -75,6 +75,25 @@ async function cleanAllInputs(){
     })
 }
 
+// values
+
+async function formatToBrl(value){
+    return new Intl.NumberFormat("pt-BR", {
+        style : "currency",
+        currency : "BRL",
+    }).format(value);
+};
+
+async function currencyToFloatNum(value){
+    const number = value.replace(/[^\d,-]/g, '').replace('.', '').replace(',', '.');
+
+    return parseFloat(number);
+}
+
+async function validateOnlyNumbers(param){
+    return param.replace(/[^0-9,]/g,"")
+}
+
 //message popup
 
 //elements
@@ -86,7 +105,7 @@ const messagePopupSpan = document.querySelector(".message-popup-span");
 //functions
 
 async function showMessagePopup(messageType, messageSpan){
-    messagePopupSymbol.className = "";
+    messagePopupSymbol.removeAttribute("className");
 
     if(messageType === "errorMsg"){
         messagePopup.style.backgroundColor = "#d61e1e";
@@ -531,7 +550,7 @@ priceListShowLink.addEventListener("click", async()=>{
     hideHtmlElement([mainHubSection]);
 })
 
-// edit-price-list-section
+// edit-price-list-section -> main-hub-container_edit-price-list
 
 // elements
 
@@ -540,6 +559,8 @@ const addItemLink = document.querySelector("#add-item-link-btn");
 const deleteItemLink = document.querySelector("#delete-item-link-btn");
 const editItemLink = document.querySelector("#edit-item-link-btn");
 const sendToServerBtn = document.querySelector("#send-to-server-btn");
+const backHome_editPriceListBtn = document.querySelectorAll(".back-home_edit-price-list");
+const mainHubContainer_editPriceList  = document.querySelector(".main-hub-container_edit-price-list")
 
 // functions 
 
@@ -549,11 +570,14 @@ async function backHomeProcess_editPriceListSection(){
     allSections.forEach(async (section) => {
         await hideHtmlElement([
             section,
-            addItemContainer_editPriceList
+            addItemContainer_editPriceList,
+            deleteItemContainer_editPriceList
         ]);
     });
 
-    await showHtmlElement([editPriceListSection], "block");
+    await showHtmlElement([editPriceListSection],"block");
+
+    await showHtmlElement([mainHubContainer_editPriceList], "flex");
 }
 
 // event listeners
@@ -562,6 +586,12 @@ editPriceListLink.addEventListener("click", async()=>{
     showHtmlElement([editPriceListSection], "block");
     hideHtmlElement([mainHubSection]);
 })    
+
+for(let i = 0 ; i < backHome_editPriceListBtn.length ; i++){
+    backHome_editPriceListBtn[i].addEventListener("click", async()=>{
+        await backHomeProcess_editPriceListSection();
+    })
+}
 
 // edit-price-list-section -> add-item-container_edit-price-list
 
@@ -610,7 +640,7 @@ async function addServiceLogic(){
     console.log(services_array)
     let serviceName = serviceNameAddItem_input.value;
 
-    let servicePrice = `R$ ${servicePriceAddItem_input.value}`;
+    let servicePrice = servicePriceAddItem_input.value;
 
     let serviceType = serviceTypeAddItem_select.value;
 
@@ -636,7 +666,7 @@ async function addServiceLogic(){
         return 0;
     });
 
-    console.log(services_array)
+    console.log(services_array);
 
 }
 
@@ -644,12 +674,35 @@ async function addServiceLogic(){
 
 addItemLink.addEventListener("click", async()=>{
     showHtmlElement([addItemContainer_editPriceList], "block");
-    hideHtmlElement([mainHubSection]);
 });
 
 serviceAddItem_btn.addEventListener("click", async()=>{
     await addServiceProcess();
-})   
+});
+
+servicePriceAddItem_input.addEventListener("input", async()=>{
+    servicePriceAddItem_input.value = await validateOnlyNumbers(servicePriceAddItem_input.value);
+})
+
+servicePriceAddItem_input.addEventListener("focusin", async()=>{
+    let includesBRL = servicePriceAddItem_input.value.includes("R$");
+
+    if(includesBRL){
+        servicePriceAddItem_input.value = await currencyToFloatNum(servicePriceAddItem_input.value);    
+    }
+})
+
+servicePriceAddItem_input.addEventListener("focusout", async ()=>{
+    let price = servicePriceAddItem_input.value;
+
+    if(price === ""){
+        servicePriceAddItem_input.value = ""
+        return;
+    }
+    price = await currencyToFloatNum(price);
+
+    servicePriceAddItem_input.value = await formatToBrl(price);
+})
 
 // edit-price-list-section -> delete-item-container_edit-price-list
 
@@ -661,10 +714,57 @@ const serviceNameDeleteItem_input = document.querySelector("#service-name-delete
 const serviceNameDeleteItem_optionsControl = document.querySelector(".service-name-delete-item_options-control");
 const serviceNameDeleteItem_option = null;
 const servicePriceDeleteItem_span = document.querySelector("#service-price-delete-item_span");
+const serviceDeleteItemBtn = document.querySelector("#service-delete-item-btn")
 
 // functions
 
+async function deleteItemProcess(){
+    if(serviceTypeDeleteItem_select.value === ""){
+        showMessagePopup("erroMsg","Selecione um tipo de serviço para prosseguir ! Tente novamente !");
+        return;
+    }
+
+    if(serviceNameDeleteItem_input.value === ""){
+        showMessagePopup("errorMsg", "A descrição do serviço não pode estar vazia ! Tente novamente !");
+        return;
+    }
+
+    for(let i = 0; i < services_array.length; i++){
+        if(serviceNameDeleteItem_input.value === services_array[i].name){
+            await verifyPasswordProcess(deleteItemLogic, "Serviço excluído com sucesso !");
+        } 
+    }
+}
+
+async function deleteItemLogic(){
+    console.log(services_array);
+
+    for(let i = 0; i < services_array.length; i++){
+        if(serviceNameDeleteItem_input.value === services_array[i].name){
+            services_array[i].splice(i,1);
+        }
+    }
+
+    services_array.sort((a,b)=>{
+        if(a.name < b.name){
+            return -1;
+        }
+    
+        if(a.name > b.name){
+            return 1; 
+        }
+    
+        return 0;
+    });
+
+    console.log(services_array);
+}
+
 // event listeners
+
+deleteItemLink.addEventListener("click", async ()=>{
+    showHtmlElement([deleteItemContainer_editPriceList],"block");
+})
 
 serviceTypeDeleteItem_select.addEventListener("change",async()=>{
     if(serviceTypeDeleteItem_select.value === ""){
@@ -692,5 +792,9 @@ serviceNameDeleteItem_input.addEventListener("input",async()=>{
         "service-name-delete-item_option",
         servicePriceDeleteItem_span
     )
-})
+});
+
+serviceDeleteItemBtn.addEventListener("click", async ()=>{
+    await deleteItemProcess();
+})    
 

@@ -786,7 +786,7 @@ header h2{
 
 .edit-price-list-section > .add-item-container_edit-price-list{
     margin-top:1.5rem;
-    display: none;
+    display: block;
 }
 
 .edit-price-list-section > .add-item-container_edit-price-list > .title-container{
@@ -874,7 +874,7 @@ header h2{
 
 .edit-price-list-section > .delete-item-container_edit-price-list{
     margin-top:1.5rem;
-    display: block;   
+    display: none;   
 }
 
 .edit-price-list-section > .delete-item-container_edit-price-list > .title-container{
@@ -960,6 +960,7 @@ header h2{
     width:30%;
     padding:8px 0;
     padding-left:8px;
+    background-color: #fafafa;
     cursor:not-allowed;
 }
 
@@ -1073,6 +1074,8 @@ header h2{
     padding-left:8px;
     border:1px solid #969696;
     border-radius:25px;
+    background-color: #fafafa;
+    cursor: not-allowed;
 }
 
 .edit-price-list-section > .edit-item-container_edit-price-list > .button-container{
