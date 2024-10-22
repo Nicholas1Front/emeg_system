@@ -257,20 +257,26 @@ const consultPriceList_showControl = document.querySelector(".consult-price-list
 
 // functions
 
-async function createInputSuggestions(typeSelectList,searchInput,optionsControl,optionItem,optionItemClassName){
+async function createInputSuggestions(
+    typeSelectList,
+    searchInput,
+    optionsControl,
+    optionItem,
+    optionItemClassName,
+    priceSpan){
     let allServices = [];
     let servicesSearched = [];
     optionsControl.innerHTML = "";
 
     if(typeSelectList.value !== ""){
         services_array.forEach((element)=>{
-            if(serviceType_selectSearch.value === element.type){
-                allServices.push(element.name);
+            if(typeSelectList.value === element.type){
+                allServices.push(element);
             }
         })
 
         for(let i = 0; i < allServices.length ; i++){
-            if(allServices[i].includes(serviceNameInputSearch.value)){
+            if(allServices[i].name.includes(searchInput.value)){
                 servicesSearched.push(allServices[i]);
             }
         }
@@ -279,11 +285,11 @@ async function createInputSuggestions(typeSelectList,searchInput,optionsControl,
     
     if(typeSelectList.value === ""){
         services_array.forEach((element)=>{
-            allServices.push(element.name);
+            allServices.push(element);
         })
 
         for(let i = 0; i < allServices.length ; i++){
-            if(allServices[i].includes(serviceNameInputSearch.value)){
+            if(allServices[i].name.includes(searchInput.value)){
                 servicesSearched.push(allServices[i]);
             }
         }
@@ -304,19 +310,41 @@ async function createInputSuggestions(typeSelectList,searchInput,optionsControl,
         let option = document.createElement("div");
 
         option.className = `${optionItemClassName}`
-        option.innerHTML = service;
+        option.innerHTML = service.name;
 
         optionsControl.appendChild(option);
     });
 
     optionItem = document.querySelectorAll(`.${optionItemClassName}`);
 
-    console.log(optionItem);
+    // console.log(optionItem);
 
    for(let i = 0 ; i < optionItem.length ; i++){
         optionItem[i].addEventListener("click",()=>{
             searchInput.value = optionItem[i].innerHTML;
             hideHtmlElement([optionsControl]);
+
+            if(priceSpan !== undefined){
+                let service = null
+
+                for(let j = 0 ; j < services_array.length; j++){
+                    if(searchInput.value === services_array[j].name){
+                        console.log(searchInput.value);
+                        
+                        service = services_array[j];
+                    } 
+                }
+
+                if(service !== null){
+                    console.log(service);
+                    priceSpan.innerText = service.price;
+                }
+                
+                if(service === null){
+                    console.log(service);
+                    priceSpan.innerText = "R$ --" 
+                }
+            }
         })
    }
 
@@ -622,3 +650,47 @@ addItemLink.addEventListener("click", async()=>{
 serviceAddItem_btn.addEventListener("click", async()=>{
     await addServiceProcess();
 })   
+
+// edit-price-list-section -> delete-item-container_edit-price-list
+
+// elements
+
+const deleteItemContainer_editPriceList = document.querySelector(".delete-item-container_edit-price-list");
+const serviceTypeDeleteItem_select = document.querySelector("#service-type-delete-item_select");
+const serviceNameDeleteItem_input = document.querySelector("#service-name-delete-item_input");
+const serviceNameDeleteItem_optionsControl = document.querySelector(".service-name-delete-item_options-control");
+const serviceNameDeleteItem_option = null;
+const servicePriceDeleteItem_span = document.querySelector("#service-price-delete-item_span");
+
+// functions
+
+// event listeners
+
+serviceTypeDeleteItem_select.addEventListener("change",async()=>{
+    if(serviceTypeDeleteItem_select.value === ""){
+        serviceNameDeleteItem_input.setAttribute("disabled", "true");
+        serviceNameDeleteItem_input.style.cursor = "not-allowed";
+        return;
+    }
+
+    if(serviceTypeDeleteItem_select.value !== ""){
+        serviceNameDeleteItem_input.removeAttribute("disabled");
+        serviceNameDeleteItem_input.style.cursor = "auto";
+    }
+})
+
+
+serviceNameDeleteItem_input.addEventListener("input",async()=>{  
+
+    serviceNameDeleteItem_input.value = serviceNameDeleteItem_input.value.toUpperCase();
+
+    await createInputSuggestions(
+        serviceTypeDeleteItem_select,
+        serviceNameDeleteItem_input,
+        serviceNameDeleteItem_optionsControl,
+        serviceNameDeleteItem_option,
+        "service-name-delete-item_option",
+        servicePriceDeleteItem_span
+    )
+})
+

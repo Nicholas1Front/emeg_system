@@ -786,7 +786,7 @@ header h2{
 
 .edit-price-list-section > .add-item-container_edit-price-list{
     margin-top:1.5rem;
-    display: block;
+    display: none;
 }
 
 .edit-price-list-section > .add-item-container_edit-price-list > .title-container{
@@ -874,7 +874,7 @@ header h2{
 
 .edit-price-list-section > .delete-item-container_edit-price-list{
     margin-top:1.5rem;
-    display: none;   
+    display: block;   
 }
 
 .edit-price-list-section > .delete-item-container_edit-price-list > .title-container{
@@ -928,6 +928,7 @@ header h2{
 
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-name-input-control_delete-item input{
     width:100%;
+    cursor:not-allowed;
     border-radius:25px;
     border: 1px solid #969696;
     margin:0 8px;
