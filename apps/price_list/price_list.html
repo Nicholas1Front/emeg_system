@@ -307,7 +307,7 @@
                     <option value="ELÉTRICO">ELÉTRICO</option>
                 </select>
                 <div class="service-name-input-control_edit-item">
-                    <input type="text" id="service-name-select_edit-item" autocomplete="off"/>
+                    <input type="text" id="service-name-input_edit-item" autocomplete="off" disabled/>
                     <div class="service-name-edit-item_options-control">
                         <div class="service-name-edit-item_option">TROCA REPARO</div>
                         <div class="service-name-edit-item_option">MONTAGEM E USINAGEM MOTOR</div>
@@ -320,7 +320,7 @@
                 <button id="next-step-edit-item-btn">Próximo passo <i class="fa-solid fa-turn-down"></i></button>
             </div>
 
-            <div class="input-container">
+            <div id="update-item-input-container" class="input-container">
                 <select id="service-type-select_update-item">
                     <option value=""></option>
                     <option value="HIDRAÚLICO">HIDRAÚLICO</option>
@@ -328,10 +328,10 @@
                     <option value="ELÉTRICO">ELÉTRICO</option>
                 </select>
                 <input type="text" id="service-name-input_update-item" autocomplete="off"/>
-                <input type="number" id="service-price-input_update-item" autocomplete="off"/>
+                <input type="text" id="service-price-input_update-item" autocomplete="off"/>
             </div>
 
-            <div class="button-container">
+            <div id="update-item-btn-container" class="button-container">
                 <button id="edit-item-btn">Editar item<i class="fa-solid fa-square-pen"></i></button>
             </div>
         </div>

@@ -786,7 +786,7 @@ header h2{
 
 .edit-price-list-section > .add-item-container_edit-price-list{
     margin-top:1.5rem;
-    display: block;
+    display: none;
 }
 
 .edit-price-list-section > .add-item-container_edit-price-list > .title-container{
@@ -1044,7 +1044,9 @@ header h2{
 }
 
 .edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_edit-item input{
+    cursor:not-allowed;
     width:100%;
+    padding-left:8px;
 }
 
 .edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_edit-item > .service-name-edit-item_options-control{
@@ -1111,6 +1113,11 @@ header h2{
 .edit-price-list-section > .edit-item-container_edit-price-list > .button-container #next-step-edit-item-btn:hover{
     background-color: #0079dc;
     transition:0.2s;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > #update-item-input-container,
+.edit-price-list-section > .edit-item-container_edit-price-list > #update-item-btn-container{
+    display: none;
 }
 
 .edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-type-select_update-item{
