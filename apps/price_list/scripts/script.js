@@ -7,16 +7,11 @@ async function getServicesData(){
 
         const resultArray = await response.json();
 
-        resultArray.sort((a,b)=>{
-            if(a.name < b.name){
-                return -1;
+        resultArray.sort((a, b) => {
+            if (a.type === b.type) {
+                return a.name.localeCompare(b.name);
             }
-    
-            if(a.name > b.name){
-                return 1; 
-            }
-    
-            return 0;
+            return a.type.localeCompare(b.type);
         });
 
         return resultArray;
@@ -34,14 +29,30 @@ async function initialize_services_array(){
 
 initialize_services_array();
 
+// update services data
+
+async function updateServiceData(){
+
+}
+
 // upperCase inputs
 
+// elements
+const allInputs = document.querySelectorAll("input")
+
+// functions
 async function upperCaseInputs([...inputs]){
     inputs.forEach((input)=>{
         input.addEventListener("input", ()=>{
             input.value = input.value.toUpperCase();
         })
     })
+}
+
+// event listerners
+
+for(let i = 0 ; i < allInputs.length ; i++){
+    upperCaseInputs([allInputs[i]]);
 }
 
 // show or hide elements
@@ -103,6 +114,46 @@ async function currencyToFloatNum(value){
 async function validateOnlyNumbers(param){
     return param.replace(/[^0-9,]/g,"")
 }
+
+// server message popup
+
+// elements
+const serverMessagePopup = document.querySelector(".server-message-popup");
+const closeServerMessagePopupBtn = document.querySelector(".close-server-message-popup-btn")
+const serverMessageSymbol = document.querySelector(".server-message-control i");
+const serverMessageSpan = document.querySelector(".server-message-span");
+
+// functions
+
+async function showServerMessagePopup(messageType, messageSpan){
+    serverMessageSymbol.className = "";
+
+    if(messageType === "errorMsg"){
+        serverMessagePopup.style.backgroundColor = "#d61e1e"; //red color
+        serverMessagePopup.style.color = "#fff";
+        serverMessageSymbol.className = `fa-solid fa-triangle-exclamation`;
+    }
+
+    if(messageType === "sucessMsg"){
+        serverMessagePopup.style.backgroundColor = "#42f55a"; //green color
+        serverMessagePopup.style.color = "#fff"
+        serverMessageSymbol.className = `fa-solid fa-circle-check`;
+    }
+
+    serverMessageSpan.innerText = messageSpan ;
+
+    await showHtmlElement([serverMessagePopup], "block");
+
+    setTimeout(()=>{
+        hideHtmlElement([serverMessagePopup]);
+    },5000);
+}
+
+//event listeners
+
+closeServerMessagePopupBtn.addEventListener("click",()=>{
+    hideHtmlElement([serverMessagePopup]);
+})
 
 //message popup
 
@@ -239,16 +290,11 @@ async function callFunction(functionToBeExecuted, msgPopupContent){
 
     await functionToBeExecuted();
 
-    services_array.sort((a,b)=>{
-        if(a.name < b.name){
-            return -1;
+    services_array.sort((a, b) => {
+        if (a.type === b.type) {
+            return a.name.localeCompare(b.name);
         }
-    
-        if(a.name > b.name){
-            return 1; 
-        }
-    
-        return 0;
+        return a.type.localeCompare(b.type);
     });
 
     if(msgPopupContent !== undefined){
@@ -422,14 +468,14 @@ async function searchItemProcess(){
     let servicesSearched = [];
 
     for(let i = 0 ; i < services_array.length; i++){
-        if(serviceType_selectSearch.value === ""){
+        if(serviceType_selectSearch.value.trim() === ""){
             if(services_array[i].name.includes(serviceNameInputSearch.value)){
                 servicesSearched.push(services_array[i]);   
             }
         }
         
         if(serviceType_selectSearch.value !== ""){
-            if(serviceType_selectSearch.value === services_array[i].type && services_array[i].name.includes(serviceNameInputSearch.value)){
+            if(serviceType_selectSearch.value === services_array[i].type && services_array[i].name.includes(serviceNameInputSearch.value.trim())){
                 servicesSearched.push(services_array[i]);
             }
         }
@@ -592,6 +638,8 @@ const mainHubContainer_editPriceList  = document.querySelector(".main-hub-contai
 async function backHomeProcess_editPriceListSection(){
     let allSections = document.querySelectorAll("section");
 
+    await cleanAllInputs();
+
     allSections.forEach(async (section) => {
         await hideHtmlElement([
             section,
@@ -608,11 +656,79 @@ async function backHomeProcess_editPriceListSection(){
     await showHtmlElement([mainHubContainer_editPriceList], "flex");
 }
 
+async function verifyDataBeforeSend(){
+    let servicesArrayFetched = await getServicesData();
+
+    console.log(services_array);
+    console.log(servicesArrayFetched);
+
+    if(services_array.length < servicesArrayFetched.length || services_array.length > servicesArrayFetched.length){
+        await verifyPasswordProcess(sendToServerProcess);
+        return;
+    }
+
+    let serviceAlreadyExist = null;
+
+    services_array.forEach((service)=>{
+        let servicesArrayFetched_name = [];
+
+        servicesArrayFetched.forEach((service)=>{
+            servicesArrayFetched_name.push(service.name);
+        })
+
+        let includesInArray = servicesArrayFetched_name.includes(service.name);
+
+        if(!includesInArray){
+            serviceAlreadyExist += 1;
+        }
+        
+        console.log(includesInArray); 
+    });
+
+    if(serviceAlreadyExist !== null || serviceAlreadyExist > 0){
+        console.log(serviceAlreadyExist);
+        await verifyPasswordProcess(sendToServerProcess);
+        return;
+    }
+
+    serviceAlreadyExist = null;
+
+    for(let i = 0 ; i < services_array.length ; i++){
+        if(services_array[i].name === servicesArrayFetched[i].name){
+            if(services_array[i].price !== servicesArrayFetched[i].price){
+                serviceAlreadyExist += 1;
+            }
+        }
+    }
+
+    if(serviceAlreadyExist !== null || serviceAlreadyExist > 0){
+        await verifyPasswordProcess(sendToServerProcess);
+        return;
+    }
+    
+    serviceAlreadyExist = null;
+
+    for(let i = 0 ; i < services_array.length ; i++){
+        if(services_array[i].name === servicesArrayFetched[i].name){
+            if(services_array[i].type !== servicesArrayFetched[i].type){
+                serviceAlreadyExist += 1;
+            }
+        }
+    }
+
+    if(serviceAlreadyExist !== null || serviceAlreadyExist > 0){
+        await verifyPasswordProcess(sendToServerProcess);
+        return;
+    }
+
+    console.log("Dados são iguais não podem ser enviados !");
+}
+
 // event listeners
 
 editPriceListLink.addEventListener("click", async()=>{
-    showHtmlElement([editPriceListSection], "block");
-    hideHtmlElement([mainHubSection]);
+    await showHtmlElement([editPriceListSection], "block");
+    await hideHtmlElement([mainHubSection]);
 })    
 
 for(let i = 0 ; i < backHome_editPriceListBtn.length ; i++){
@@ -620,6 +736,10 @@ for(let i = 0 ; i < backHome_editPriceListBtn.length ; i++){
         await backHomeProcess_editPriceListSection();
     })
 }
+
+sendToServerBtn.addEventListener("click", async()=>{
+    await verifyDataBeforeSend();
+})  
 
 // edit-price-list-section -> add-item-container_edit-price-list
 
@@ -677,28 +797,33 @@ async function addServiceProcess(){
         return;
     }
 
-    let allServicesNames = []
-
-    services_array.forEach(async (service) => {
-        allServicesNames.push(service.name);
+    let findInArray = services_array.find((item)=>{
+        if(item.name === serviceNameAddItem_input.value.trim()){
+            return true;
+        }
     })
 
-    let includesInArray = allServicesNames.includes(serviceNameAddItem_input.value);
-    
-    if(includesInArray){
-        showMessagePopup("errorMsg", "O serviço já existe, verifique as informações e tente novamente !");
+    console.log(findInArray);
+
+    if(findInArray === undefined){
+        await verifyPasswordProcess(addServiceLogic, "Serviço adicionado com sucesso !");
         return;
     }else{
-        //await verifyPasswordProcess(addServiceLogic, "Serviço adicionado com sucesso !");
-
-        await addServiceLogic();
-    };
+        await showMessagePopup("errorMsg", "O serviço já existe ! Tente novamente !");
+        return;
+    }
 }
 
 async function addServiceLogic(){
-    let serviceName = serviceNameAddItem_input.value;
+    let serviceName = serviceNameAddItem_input.value.trim();
 
     let servicePrice = servicePriceAddItem_input.value;
+
+    let includesBRL = servicePrice.includes("R$");
+
+    if(!includesBRL){
+        formatToBrl(servicePrice);
+    }
 
     let serviceType = serviceTypeAddItem_select.value;
 
@@ -710,29 +835,22 @@ async function addServiceLogic(){
 
     services_array.push(newService);
 
-    services_array.sort((a,b)=>{
-        if(a.name < b.name){
-            return -1;
+    services_array.sort((a, b) => {
+        if (a.type === b.type) {
+            return a.name.localeCompare(b.name);
         }
-    
-        if(a.name > b.name){
-            return 1; 
-        }
-    
-        return 0;
+        return a.type.localeCompare(b.type);
     });
 
+    console.log(services_array);
 }
 
 // event listerners
 
 addItemLink.addEventListener("click", async()=>{
-    showHtmlElement([addItemContainer_editPriceList], "block");
+    await cleanAllInputs();
+    await showHtmlElement([addItemContainer_editPriceList], "block");
 });
-
-serviceNameAddItem_input.addEventListener("input", ()=>{
-    serviceNameAddItem_input.value = serviceNameAddItem_input.value.toUpperCase();
-})
 
 serviceAddItem_btn.addEventListener("click", async()=>{
     await addServiceProcess();
@@ -784,6 +902,17 @@ async function deleteItemProcess(){
         return;
     }
 
+    let findInArray = services_array.find((item)=>{
+        if(item.name === serviceNameDeleteItem_input.value.trim()){
+            return true;
+        }
+    })
+
+    if(findInArray === undefined){
+        await showMessagePopup("errorMsg", "Serviço não existe ! Tente novamente !");
+        return;
+    }
+
     for(let i = 0; i < services_array.length; i++){
         if(serviceNameDeleteItem_input.value === services_array[i].name){
             await verifyPasswordProcess(deleteItemLogic, "Serviço excluído com sucesso !");
@@ -792,24 +921,18 @@ async function deleteItemProcess(){
 }
 
 async function deleteItemLogic(){
-    console.log(services_array);
 
     for(let i = 0; i < services_array.length; i++){
-        if(serviceNameDeleteItem_input.value === services_array[i].name){
+        if(serviceNameDeleteItem_input.value.trim() === services_array[i].name){
             services_array.splice(i,1);
         }
     }
 
-    services_array.sort((a,b)=>{
-        if(a.name < b.name){
-            return -1;
+    services_array.sort((a, b) => {
+        if (a.type === b.type) {
+            return a.name.localeCompare(b.name);
         }
-    
-        if(a.name > b.name){
-            return 1; 
-        }
-    
-        return 0;
+        return a.type.localeCompare(b.type);
     });
 
     console.log(services_array);
@@ -818,14 +941,13 @@ async function deleteItemLogic(){
 // event listeners
 
 deleteItemLink.addEventListener("click", async ()=>{
-    showHtmlElement([deleteItemContainer_editPriceList],"block");
+    await cleanAllInputs();
+    await showHtmlElement([deleteItemContainer_editPriceList],"block");
 })
 
 allowServiceInput(serviceTypeDeleteItem_select,serviceNameDeleteItem_input,servicePriceDeleteItem_span);
 
 serviceNameDeleteItem_input.addEventListener("input",async()=>{  
-
-    serviceNameDeleteItem_input.value = serviceNameDeleteItem_input.value.toUpperCase();
 
     await createInputSuggestions(
         serviceTypeDeleteItem_select,
@@ -873,14 +995,9 @@ async function verifyEditItem_forNextStep(){
         return;
     }
 
-    let serviceName = serviceNameInput_editItem.value;
-    serviceName = serviceName.trim();
-
     let findInArray = services_array.find((item) => {
-        if(item.name === serviceName){
+        if(item.name === serviceNameInput_editItem.value.trim()){
             return true;
-        }else{
-            return false;
         }
     });
 
@@ -920,8 +1037,6 @@ async function editItemProcess(){
     let findInArray = services_array.find((item)=>{
         if(item.name === serviceName){
             return true;
-        }else{
-            return false;
         }
     });
 
@@ -936,9 +1051,17 @@ async function editItemProcess(){
 async function editItemLogic(){
     let existentItem_name = null;
 
+    let servicePrice = servicePriceInput_updateItem.value;
+
+    let includesBRL = servicePrice.includes("R$");
+
+    if(!includesBRL){
+        formatToBrl(servicePrice);
+    }
+
     let newItem = {
-        name : serviceNameInput_updateItem.value,
-        price : servicePriceInput_updateItem.value,
+        name : serviceNameInput_updateItem.value.trim(),
+        price : servicePrice,
         type : serviceTypeSelect_updateItem.value
     }
 
@@ -956,26 +1079,25 @@ async function editItemLogic(){
         }
     }
 
-    services_array.sort((a,b)=>{
-        if(a.name < b.name){
-            return -1;
+    services_array.sort((a, b) => {
+        if (a.type === b.type) {
+            return a.name.localeCompare(b.name);
         }
-
-        if(a.name > b.name){
-            return 1; 
-        }
-
-        return 0;
+        return a.type.localeCompare(b.type);
     });
 
 }
 
 // event listerners
 
+editItemLink.addEventListener("click", async()=>{
+    await cleanAllInputs();
+    await showHtmlElement([editItemContainer_editPriceList], "block");
+})
+
 allowServiceInput(serviceTypeSelect_editItem,serviceNameInput_editItem,servicePriceSpan_editItem);
 
 serviceNameInput_editItem.addEventListener("input", async()=>{
-    serviceNameInput_editItem.value = serviceNameInput_editItem.value.toUpperCase();
 
     await createInputSuggestions(
         serviceTypeSelect_editItem,
@@ -989,10 +1111,6 @@ serviceNameInput_editItem.addEventListener("input", async()=>{
 
 nextStepEditItemBtn.addEventListener("click", async()=>{
     await verifyEditItem_forNextStep();
-})
-
-serviceNameInput_updateItem.addEventListener("input", ()=>{
-    serviceNameInput_updateItem.value = serviceNameInput_updateItem.value.toUpperCase();
 })
 
 editItemBtn.addEventListener("click", async()=>{
