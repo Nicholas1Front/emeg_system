@@ -124,7 +124,7 @@ async function verifyDataBeforeSend(){
 
 async function updateClientsData() {
     try {
-        const response = await fetch('https://emeg-orc.onrender.com/update-data', { 
+        const response = await fetch('https://emeg-orc.onrender.com/update-clients-equipaments', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

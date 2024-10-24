@@ -3,7 +3,7 @@ let services_array = [];
 
 async function getServicesData(){
     try{
-        const response = await fetch("../backend/data/services.json");
+        const response = await fetch(`https://nicholas1front.github.io/emeg_system/apps/backend/data/services.json?timestamp=${new Date().getTime()}`);
 
         const resultArray = await response.json();
 
@@ -32,7 +32,30 @@ initialize_services_array();
 // update services data
 
 async function updateServiceData(){
+    try {
+        const response = await fetch('https://emeg-orc.onrender.com/update-services', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ services_array }),
+        });
 
+        if (!response.ok) {
+            await showServerMessagePopup("errorMsg", "Erro ao atualizar dados no servidor!");
+            throw new Error('Erro ao atualizar os dados no backend');
+        }
+
+        const result = await response.text();
+
+        console.log('Dados atualizados com sucesso no backend e GitHub Pages:', result);
+
+        return true;
+
+    } catch (error) {
+        console.error('Erro:', error);
+        return false;
+    }
 }
 
 // upperCase inputs
@@ -392,8 +415,6 @@ async function createInputSuggestions(
 
     optionItem = document.querySelectorAll(`.${optionItemClassName}`);
 
-    // console.log(optionItem);
-
    for(let i = 0 ; i < optionItem.length ; i++){
         optionItem[i].addEventListener("click",()=>{
             searchInput.value = optionItem[i].innerHTML;
@@ -527,14 +548,15 @@ async function searchItemProcess(){
 
     consultPriceList_showControl.appendChild(endOfItems);
 
-    showHtmlElement([consultPriceList_resultContainer],"block");
+    await showHtmlElement([consultPriceList_resultContainer],"block");
+    await showHtmlElement([consultPriceList_showControl],"flex");
 }
 
 // event listerners
 
 consultPriceListLink.addEventListener("click", async()=>{
     showHtmlElement([consultPriceListSection], "block");
-    hideHtmlElement([mainHubSection]);
+    hideHtmlElement([mainHubSection,consultPriceList_showControl,consultPriceList_resultContainer]);
 })
 
 serviceType_selectSearch.addEventListener("change", ()=>{
@@ -542,7 +564,6 @@ serviceType_selectSearch.addEventListener("change", ()=>{
 })
 
 serviceNameInputSearch.addEventListener("input",async()=>{
-    serviceNameInputSearch.value = serviceNameInputSearch.value.toUpperCase();
 
     await createInputSuggestions(
         serviceType_selectSearch,
@@ -682,11 +703,9 @@ async function verifyDataBeforeSend(){
             serviceAlreadyExist += 1;
         }
         
-        console.log(includesInArray); 
     });
 
     if(serviceAlreadyExist !== null || serviceAlreadyExist > 0){
-        console.log(serviceAlreadyExist);
         await verifyPasswordProcess(sendToServerProcess);
         return;
     }
@@ -721,7 +740,29 @@ async function verifyDataBeforeSend(){
         return;
     }
 
-    console.log("Dados são iguais não podem ser enviados !");
+    await showServerMessagePopup("errorMsg" , "Dados já existentes ! Tente novamente !");
+
+    services_array = await getServicesData();
+}
+
+async function sendToServerProcess(){
+    await showHtmlElement([overlayForLoading],"flex");
+
+    const response =  await updateServiceData();
+
+    if(!response){
+        await hideHtmlElement([overlayForLoading]);
+        await showServerMessagePopup("errorMsg", "Erro ao enviar os dados ! Tente novamente !");
+    }
+
+    await hideHtmlElement([overlayForLoading]);
+    await showServerMessagePopup("sucessMsg","Dados enviados com sucesso !");
+
+    await showMessagePopup("sucessMsg","Dados atualizados com sucesso !");
+
+    setTimeout(async () => {
+        getClientsData();
+    },1000);
 }
 
 // event listeners
@@ -1085,6 +1126,8 @@ async function editItemLogic(){
         }
         return a.type.localeCompare(b.type);
     });
+
+    console.log(services_array);
 
 }
 

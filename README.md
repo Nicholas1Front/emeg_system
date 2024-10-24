@@ -17,14 +17,14 @@ Sistema para gerenciar as informações dos clientes. As funcionalidades incluem
 
 - [Ajuda com Controle de Clientes](https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/help_customer_base_plataform.html)
 
-### 4. **Controle de Estoque** (em breve)
+### 4. **Tabela de Preços** (em breve)
+Sistema para manter e consultar uma tabela de preços dos serviços e equipamentos oferecidos.
+
+### 5. **Controle de Estoque** (em breve)
 Um sistema para gerenciar o estoque de equipamentos e materiais.
 
-### 5. **Controle de Funcionários** (em breve)
+### 6. **Controle de Funcionários** (em breve)
 Sistema para gerenciar o cadastro e informações dos funcionários da empresa.
-
-### 6. **Tabela de Preços** (em breve)
-Sistema para manter e consultar uma tabela de preços dos serviços e equipamentos oferecidos.
 
 ## Como Instalar e Usar
 
