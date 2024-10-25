@@ -13,6 +13,32 @@ div,section,header{
     width:100%;
 }
 
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a91818;
+    color:#fff;
+    width:30%;
+    padding:10px 0;
+    margin: 0 1rem;
+    cursor: pointer;
+    font-size: 19px;
+    transition:0.2s;
+    border-radius:25px;
+    border:none;
+}
+
+button:hover{
+    transition:0.2s;
+    background-color: #d61e1e;
+}
+
+button > i{
+    margin-left:7px;
+    font-size:22px;
+}
+
 p{
     font-size: 17px;
     font-weight:300;
@@ -117,4 +143,128 @@ header h2{
     font-size: 17px;
     font-weight: normal;
     margin-top:4px;
+}
+
+/* introduction-usage-system-section */
+
+.introduction-usage-system-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:1.5rem;
+}
+
+.introduction-usage-system-section > .container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.introduction-usage-system-section > .container > .title-container h2{
+    font-size:25px;
+}
+
+.introduction-usage-system-section > .container > .title-container h2 > .line{
+    width:11rem;
+    margin:2px 0;
+    margin-left:15%;
+    height:1.5px;
+    background-color: #d61e1e;
+}
+
+.introduction-usage-system-section > .container > p{
+    margin:1rem 0;
+}
+
+.introduction-usage-system-section > .container > p > strong{
+    color:#d61e1e;
+}
+
+/* main-hub-section */
+
+.main-hub-section{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:1.5rem;
+}
+
+.main-hub-section > .container > .title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:3rem 0;
+}
+
+.main-hub-section > .container > .title-container > .line{
+    width:11rem;
+    margin:2px 1rem;
+    height:1.5px;
+    background-color: #d61e1e;
+}
+
+.main-hub-section > .container > .title-container > .title-control{
+    width:fit-content;
+    margin:0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-hub-section > .container > .title-container > .title-control h2{
+    font-size:25px;
+}
+
+.main-hub-section > .container > .title-container > .title-control p{
+    font-size:17px;
+}
+
+.main-hub-section > .container > .button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* consult-item-price-list-section */
+
+.consult-item-price-list-section{
+    display: block;
+    margin-top:2rem;
+}
+
+/* consult-item-price-list-section  -> feature-introduction-section */
+
+/* back-main-hub-control */
+
+.back-main-hub-control{
+    display: flex;
+    align-items:center;
+    justify-content: left;
+    margin-bottom:1rem;
+}
+
+.back-main-hub-control > button{
+    width:15%;
+    margin-left:1rem;
+    font-size: 14px;
+    padding:8px 0;
+    background-color: #a91818;
+    color: #fff;
+    border-radius: 25px;
+    border:none;
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.back-main-hub-control > button:hover{
+    background-color: #d61e1e;
+    transition: 0.2s;
+}
+
+.back-main-hub-control > button > i{
+    margin-right:7px;
+}
+
+.back-main-hub-control > h3{
+    margin-left:10px;
 }
