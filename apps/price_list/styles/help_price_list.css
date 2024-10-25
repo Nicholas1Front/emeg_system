@@ -39,6 +39,10 @@ button > i{
     font-size:22px;
 }
 
+h2,h3{
+    font-size:25px;
+}
+
 p{
     font-size: 17px;
     font-weight:300;
@@ -193,7 +197,6 @@ header h2{
     display: flex;
     justify-content: center;
     align-items: center;
-    margin:3rem 0;
 }
 
 .main-hub-section > .container > .title-container > .line{
@@ -223,16 +226,42 @@ header h2{
     display: flex;
     justify-content: center;
     align-items: center;
+    margin:3rem 0;
 }
 
 /* consult-item-price-list-section */
 
 .consult-item-price-list-section{
     display: block;
-    margin-top:2rem;
+    margin-top:1.5rem;
 }
 
 /* consult-item-price-list-section  -> feature-introduction-section */
+
+.consult-item-price-list-section > .feature-introduction-section{
+    margin:1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.consult-item-price-list-section > .feature-introduction-section > .container > .text-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.consult-item-price-list-section > .feature-introduction-section > .container > .text-container h3{
+    padding: 8px 3rem;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.consult-item-price-list-section > .feature-introduction-section > .container > .text-container p{
+    margin:1rem 0;
+}
 
 /* back-main-hub-control */
 
@@ -267,4 +296,5 @@ header h2{
 
 .back-main-hub-control > h3{
     margin-left:10px;
+    font-size:1.17em;
 }

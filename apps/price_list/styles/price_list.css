@@ -336,7 +336,7 @@ header h2{
 
 .main-hub-section{
     margin:1.5rem 0;
-    display:none;
+    display:block;
 }
 
 .main-hub-section > .main-hub-container{
@@ -718,7 +718,7 @@ header h2{
 
 .edit-price-list-section{
     margin-top:1.5rem;
-    display:block;
+    display:none;
 }
 
 .edit-price-list-section > .main-hub-container_edit-price-list{
