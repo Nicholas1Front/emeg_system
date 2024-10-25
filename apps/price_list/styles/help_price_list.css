@@ -7,6 +7,7 @@
 
 body{
     max-width: 1920px;
+    overflow-x: hidden;
 }
 
 div,section,header{
@@ -236,33 +237,6 @@ header h2{
     margin-top:1.5rem;
 }
 
-/* consult-item-price-list-section  -> feature-introduction-section */
-
-.consult-item-price-list-section > .feature-introduction-section{
-    margin:1.5rem 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.consult-item-price-list-section > .feature-introduction-section > .container > .text-container{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.consult-item-price-list-section > .feature-introduction-section > .container > .text-container h3{
-    padding: 8px 3rem;
-    margin-bottom: 1rem;
-    border-radius: 50px;
-    background-color: #d61e1e;
-    width: fit-content;
-}
-
-.consult-item-price-list-section > .feature-introduction-section > .container > .text-container p{
-    margin:1rem 0;
-}
-
 /* back-main-hub-control */
 
 .back-main-hub-control{
@@ -297,4 +271,61 @@ header h2{
 .back-main-hub-control > h3{
     margin-left:10px;
     font-size:1.17em;
+}
+
+/* consult-item-price-list-section  -> feature-introduction-section */
+
+.consult-item-price-list-section > .feature-introduction-section{
+    margin:1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.consult-item-price-list-section > .feature-introduction-section > .container > .text-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.consult-item-price-list-section > .feature-introduction-section > .container > .text-container h3{
+    padding: 8px 3rem;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.consult-item-price-list-section > .feature-introduction-section > .container > .text-container p{
+    margin:1rem 0;
+}
+
+/* consult-item-price-list-section  -> correct-format-section */
+
+.consult-item-price-list-section > .correct-format-section{
+    padding:1.5rem 0;
+    background-color: #dedede;
+}
+
+.consult-item-price-list-section > .correct-format-section > .container > .text-container h3{
+    padding: 5px 16px 5px 2px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.consult-item-price-list-section > .correct-format-section > .container > .text-container p{
+    padding:1rem 0;
+}
+
+.consult-item-price-list-section > .correct-format-section > .container > .image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:1.5rem 0;
+}
+
+.consult-item-price-list-section > .correct-format-section > .container > .image-container img{
+    width:90%;
+    border-radius: 25px;
+    box-shadow: 0px 1px 13px 8px #d61e1e;
 }
