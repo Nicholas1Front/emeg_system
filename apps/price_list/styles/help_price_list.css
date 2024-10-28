@@ -329,3 +329,35 @@ header h2{
     border-radius: 25px;
     box-shadow: 0px 1px 13px 8px #d61e1e;
 }
+
+/* consult-item-price-list-section -> error-msg-section */
+
+.consult-item-price-list-section > .error-msg-section{
+    margin:1.5rem 0;
+}
+
+.consult-item-price-list-section > .error-msg-section > .container > .title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.consult-item-price-list-section > .error-msg-section > .container > .title-container h3{
+    font-size: 25px;
+    padding: 8px 3rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.consult-item-price-list-section > .error-msg-section > .container > .text-container p{
+    margin:1.5rem 0;
+}
+
+.consult-item-price-list-section > .error-msg-section > .container > .image-container{
+    margin:1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
