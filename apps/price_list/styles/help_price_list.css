@@ -365,7 +365,7 @@ header h2{
 /* whole-price-list-section */
 
 .whole-price-list-section{
-    display: block;
+    display: none;
     margin-top:1.5rem;
 }
 
@@ -378,12 +378,6 @@ header h2{
     justify-content: center;
     align-items: center;
 }
-/* 
-.whole-price-list-section > .feature-introduction-section > .container{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-} */
 
 .whole-price-list-section > .feature-introduction-section > .container > .text-container,
 .whole-price-list-section > .feature-introduction-section > .container > .image-container{
