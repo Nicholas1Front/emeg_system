@@ -233,7 +233,7 @@ header h2{
 /* consult-item-price-list-section */
 
 .consult-item-price-list-section{
-    display: block;
+    display: none;
     margin-top:1.5rem;
 }
 
@@ -360,4 +360,52 @@ header h2{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* whole-price-list-section */
+
+.whole-price-list-section{
+    display: block;
+    margin-top:1.5rem;
+}
+
+/* whole-price-list-section -> feature-introduction-section*/
+
+.whole-price-list-section > .feature-introduction-section{
+    margin:1.5rem 0;
+    padding:1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.whole-price-list-section > .feature-introduction-section > .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.whole-price-list-section > .feature-introduction-section > .container > .text-container,
+.whole-price-list-section > .feature-introduction-section > .container > .image-container{
+    width:50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.whole-price-list-section > .feature-introduction-section > .container > .text-container h3{
+    padding: 8px 3rem;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.whole-price-list-section > .feature-introduction-section > .container > .text-container p{
+    margin:1rem 0;
+}
+
+.whole-price-list-section > .feature-introduction-section > .container > .image-container img{
+    width:90%;
+    border-radius:25px;
 }
