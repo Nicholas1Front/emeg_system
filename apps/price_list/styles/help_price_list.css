@@ -447,7 +447,7 @@ header h2{
 /* edit-price-list-section -> password-system-section */
 
 .edit-price-list-section > .password-system-section{
-    padding:1.5rem 0;
+    padding:4rem 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -487,4 +487,19 @@ header h2{
     width:75%;
     border-radius: 15px;
     box-shadow: 0px 1px 13px 8px #000;
+}
+
+/* edit-price-list-section -> add-service-section */
+
+.edit-price-list-section > .add-service-section{
+    margin:1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-price-list-section > .add-service-section > .container > .title-container{
+    display: flex;
+    justify-content: left;
+    align-items: center;
 }
