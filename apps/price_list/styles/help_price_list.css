@@ -406,3 +406,40 @@ header h2{
     border-radius:25px;
     box-shadow: 0px 1px 13px 8px #d61e1e;
 }
+
+/* edit-price-list-section */
+
+.edit-price-list-section{
+    margin-top:1.5rem;
+    display: block;
+}
+
+/* edit-price-list-section -> feature-introduction-section*/
+
+.edit-price-list-section > .feature-introduction-section{
+    margin:1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-price-list-section > .feature-introduction-section > .container > .text-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.edit-price-list-section > .feature-introduction-section > .container > .text-container h3{
+    padding: 8px 3rem;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.edit-price-list-section > .feature-introduction-section > .container > .text-container p{
+    width:100%;
+    text-align: left;
+    margin:1rem 0;
+}
+
