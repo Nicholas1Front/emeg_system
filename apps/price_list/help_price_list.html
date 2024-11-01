@@ -219,7 +219,7 @@
         <section class="add-service-section">
             <div class="container">
                 <div class="title-container">
-                    <h3>Adicionar item a tabela<i class="fa-solid fa-square-plus"></i></h3>
+                    <h3>Adicionar item a tabela <i class="fa-solid fa-square-plus"></i></h3>
                 </div>
 
                 <div class="text-container">
@@ -231,7 +231,7 @@
                 </div>
 
                 <div class="text-container">
-                    <p>Como a imagem acima mostra, o primeiro campo refere-se ao <redbold>tipo de serviço</redbold> que o item terá, o segundo campo refere-se a <redbold>descrição do serviço</redbold> que o item terá e por fim o terceiro campo refere-se ao <redbold>preço/valor</redbold> que o item terá.</p>
+                    <p>Como a imagem acima mostra, o primeiro campo refere-se ao <redbold>tipo de serviço</redbold> que o item terá, o segundo campo refere-se a <redbold>descrição do serviço</redbold> que o item terá e por fim o terceiro campo refere-se ao <redbold>preço/valor</redbold> que o item terá. Para que o processo de adição do item realmente aconteça <redbold>nenhum destes campos pode estar vazio</redbold></p>
 
                     <p>Quanto a forma de preenchimento da descrição do serviço é estritamente necessário que a mesma siga uma <redbold>estrutura para que as informações sejam padronizadas</redbold>, abaixo segue a forma de estruturação de preenchimento dos dados e um exemplo do mesmo.</p>
 
@@ -256,6 +256,32 @@
                             <span>TROCA REPARO CILINDRO DE ELEVAÇÃO (GUINDASTE SANY)</span>
                         </div>
                     </div>
+
+                    <p>Após todos os campos serem preenchidos corretamente o botão Adicionar item pode ser clicado para dar prosseguimento ao processo de adição. Caso haja algum problema que impeça o sistema de adicionar o item especificado como falta de dados ou item já existente, o mesmo irá retornar uma mensagem de erro apontando onde o erro se encontra.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="delete-service-section">
+            <div class="container">
+                <div class="title-container">
+                    <h3>
+                        Exlcuir item da tabela <i class="fa-solid fa-square-minus"></i>
+                    </h3>
+                </div>
+
+                <div class="image-container">
+                    <img src="../../assets/images/delete_item_pricelist_screenshot.png"/>
+                </div>
+
+                <div class="text-container">
+                    <p>Nesta área do sistema existem 2 campos de inserção, com o primeiro campo sendo o tipo de serviço que o item que se deseja excluir possuí, é estritamente necessário selecionar o tipo de serviço pois somente quando um destes é selecionado o campo seguinte é liberado para inserção de dados.</p>
+
+                    <p>No outro campo temos a descrição do serviço do item que se deseja excluir, este campo conta com um sistema de sugestões da mesma forma que área de pesquisa possuí. Conforme o usuário for digitando as opções com os itens existentes de acordo com a descrição digitada aparecerão para serem clicadas</p>
+
+                    <p>Por fim ao lado do campo de descrição de serviço existe um visualizador de valor/preço dos serviços que, se o item digitado ou selecionado existir no sistema o visualizador mostrará o valor/preço deste item. Entretanto caso a descrição esteja incompleta ou o item não exista o visualizador não mostrará nenhum valor/preço.</p>
+
+                    <p>Com todos os campos preenchidos o botão Excluir item pode ser clicado para dar prosseguimento com o processo de exclusão, porém é importante apontar que caso o item informado não exista ou algum dos campos estiver vazio o sistema irá retornar uma mensagem de erro acusando onde o erro ocorrido se encontra.</p>
 
                 </div>
             </div>
