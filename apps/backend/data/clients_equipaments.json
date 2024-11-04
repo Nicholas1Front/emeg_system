@@ -1,548 +1,814 @@
 [
-        {"name": "ADAO (+55 98 8303-3406/Adao)", "equipaments": [
-                "Caminhão Volkswagen 15-190 PSP-0198"
-        ]},
-        {"name": "ADRIANO (970298025)", "equipaments": [
-                "Caminhão Volkswagen 15-190 PSP-0198"
-        ]},
-        {"name":"ANDERSSON","equipaments": [
-                "Guindauto Argos 20.5"
-        ]},
-        {"name":"AGROSERRA (Vagner / +55 99 8155-1737)","equipaments":[
-                "Guindauto TKA 43700"
-        ]},
-        {"name": "AGROPECUÁRIA ANTAS LTDA (presidencia@hospitalsaodomingos.com.br)", "equipaments": [
-                "Mini Carregadeira MC85",
-                "Caminhão Ford Cargo 1119 PSQ-9647",
-                "Caminhão Volkswagen 15-180 AQA-6908",
-                "Caminhão Volkswagen 26-260 IQR-7880",
-                "Retroescavadeira 416 E",
-                "Toyota Bandeirantes BMG 9208",
-                "Toyota Hilux  OJK-8648",
-                "Carregadeira 924H",
-                "Trator Massey Fergusson 235",
-                "Toyota Hilux MAN-7479",
-                "Pálio PSX-4940",
-                "Trator Massey 4275",
-                "Trator Massey 4282",
-                "Trator Valmet",
-                "Caminhão Atron",
-                "Retroescavadeira Case 580N",
-                "Escavadeira PC318",
-                "Caminhão Mercedes OJP-5756",
-                "Retroesavadeira 416F2",
-                "Caminhonete Toyota Hilux OJJ-7335",
-                "Toyota Hilux PSW-5795",
-                "Toyota Hilux  PSK-5799"
-        ]},
-        {"name": "ALPHA ENGENHARIA  (+55 32 9111-7076/Elder)", "equipaments": []},
-        {"name": "AMPLA MANUTENÇÃO E SERVIÇOS LTDA", "equipaments": ["Caminhão Volkswagen 24.280 ; CM 003 ; KPO7D59"]},
-        {"name": "ARAUJO GUINDASTES (gerencia@araujoguindastes.com.br/Dário)", "equipaments": [
-                "Guindaste Sany STC 75",
-                "Guindaste Sany STC 300",
-                "Guindaste Sany STC 800",
-                "Guindaste XCMGQY 70",
-                "Guindauto Ford Cargo 2429 OJD-7060",
-                "Caminhão Volkswagen 25-370 Tractor NWT-0425",
-                "Guindauto Modelo PHD",
-                "Caminhão Scannia G 420  EJY-5750",
-                "Caminhão Ford 2429 OJB-2538",
-                "Guindaste OIU-2907",
-                "Guindaste OIU-1018",
-                "Guindaste MWC-6049",
-                "Caminhão Ford Cargo 2422 NNH-5708",
-                "Caminhão Ford Cargo 2429 OJJ-2103",
-                "Guindauto Ford Cargo 2429 OJD-3549",
-                "Caminhão Ford Cargo 1729 OXY-2649"
-        ]},
-        {"name": "AST ELEVAÇÕES (diretoria@astelevacoes.com.br / Tássio)", "equipaments": [
-                "Guindauto Ford Cargo 2429 OJI6C68",
-                "Guindauto Mercedes Atron 2324 QFS-4307",
-                "Guindauto Ford Cargo 2429 0JMOJ21",
-                "Caminhão Ford Cargo 2422 NXG-1095",
-                "Caminhão Volkswagen 24.280 OYLGI14",
-                "Retroescavadeira Case 580N",
-                "Caminhão Volkswagen 28.880 OYZ9A16",
-                "Caminhão Ford Cargo 2423 OJI6C68",
-                "Retroescavadeira JCB ",
-                "Caminhão Iveco 24.280 ROG5H61",
-                "Guindaste Sany STC 80"
-        ]},
-        {"name": "BETONPOXI (maxlima@betonpoxi.com.br / Max)", "equipaments": [
-                "Caminhão Basculante Volkswagen 26-280 PGG-3996",
-                "Caminhão Volkswagen PGG-5688",
-                "Caminhão PLD-9795",
-                "Retroescavadeira 416E N° 01",
-                "Retroescavadeira 416E N° 02",
-                "Retroescavadeira 416E N° 04",
-                "Retroescavadeira 416E N° 05",
-                "Retroescavadeira 416E N° 07"
-        ]},
-        {"name": "BRASIL LAU RENT (+55 11 91207-0462 / Jeferson)", "equipaments": [
-                "Guindaste Tadano RT",
-                "Panoramic P 720 MTC-003",
-                "Guindaste Sany 100 ton",
-                "Guindaste Sany QY50C EWR-2190",
-                "Caminhão Volkswagen 25.360 GHPTC06",
-                "Poliguindaste Volkswagen Worker 17-250 ETR-0253",
-                "Caminhão Volkswagen FNB5C53",
-                "Empilhadeira HLI 4.5 TON",
-                "Guindaste Sany 220",
-                "Caminhão Volkswagen 24.260 FGA5F37",
-                "Caminhão Volkswagen 24.260 FDX8H46",
-                "Guindaste Tadano GR-50",
-                "Guindaste Sany 55",
-                "Guindaste Tadano 50 TON"
-        ]},
-        {"name": "CAMPOS MOVIMENTAÇÕES (+55 98 8247-0262 / Lucas)", "equipaments": [
-                "Caminhão Volkswagen 31.280 RXA2D24",
-                "Caminhão Volkswagen 31.280 RWL4I03",
-                "Guindaste Sany STC 75",
-                "Guindaste Madal MD300"
-        ]},
-        {"name": "CARLOS MAGNO", "equipaments": [
-                "Ford Ranger 2.8 Motor Power Stroke"
-        ]},
-        {"name": "CERÂMICA SÃO JOSÉ (+55 98 8532-8348)", "equipaments": [
-                "Carregadeira W20 E",
-                "Carregadeira W20 F"
-        ]},
-        {"name": "CLASI SEGURANÇA (felipe.silva@grupoclasi.com.br / Felipe)", "equipaments": [
-                "Caminhão Mercedes Accelo PTR-6993"
-        ]},
-        {"name": "CONCRENORTE (55639222-9064/ Taís)", "equipaments": [
-                "Guindaste Sany STC 50"
-        ]},
-        {"name": "COSMEPEÇAS (Silvia)", "equipaments": [
-                "Motoniveladora New Holland",
-                "Caminhão Volkswagen HPL-2941",
-                "Ambulância Renault Master PTS5H81",
-                "Carregadeira Case SEMOSP",
-                "Caminhão Volkswagen HPL-7081 CAEMA",
-                "Caminhão Iveco NPM-2164",
-                "Caminhão Ford Cargo PTE-2347 CAEMA",
-                "Caminhão Volkswagen Worker HPO-9544",
-                "Caminhão Volkswagen HPL-2953",
-                "Caminhão Ford Cargo PTD-4354"
-        ]},
-        {"name": "CSS (Juliano/ 9885018952)", "equipaments": [
-                "Caminhão Ford Cargo 2423 NZW4F11"
-        ]},
-        {"name": "CTRL ENGENHARIA E MANUTENÇÃO (+55 98 8157-8519/ Mayara)", "equipaments": [
-                "Guincho Hidráulico Giratório com Cabo de Aço 900kg - LD-E04021W - STROM"
-        ]},
-        {"name": "DESTAK (Davi)", "equipaments": [
-                "Empilhadeira Hyster",
-                "Caminhão OJQ-2221"
-        ]},
-        {"name": "DÍNAMO ENGENHARIA (Livio andrade)", "equipaments": [
-               "Caminhão Volkswagen 15-190 PSW-1647",
-                "Guindaste Sany STC 30",
-                "Trator New Holland TM7040",
-                "Guindaste Mercedes Axor 0DA9F86",
-                "Caminhão Volkswagen 31.330 IWT-1772 / Guindaste Masal 40 ton.",
-                "Caminhão Volvo VM PSC-9750",
-                "Caminhão Ford Cargo OIU-3133"
-        ]},
-        {"name": "E G LIMA TRANSPORTES ('+55 98 8404-2798/egmunck@gmail.com)", "equipaments": [
-                "Caminhão Ford Cargo NHH-2630"
-        ]},
-        {"name": "EBES ENGENHARIA (Lindi / +55 98 8784-4793)", "equipaments": [
-                "Guindaste Zoomlion QY70"
-        ]},
-        {"name": "ECO SUC (Jastel/ jastel@uol.com.br)", "equipaments": [
-                "Caminhonete Dodge RAM HOH6E51",
-                "Caminhão Volkswagen Worker JWE-7051",
-                "Caminhão Ford Cargo 1517 HZAOG47"
-        ]},
-        {"name": "ECOLIMP (999935179/Flávio)", "equipaments": [
-                "Caminhão Ford Cargo OJH-7760"
-        ]},
-        {"name": "EDRO ENGENHARIA (+55 98 8704-5060/Eduardo)", "equipaments": [
-                "Caminhão Ford Cargo  1519 PMJ-9096",
-                "Retroescavadeira JCB",
-                "Rompedor T-Romper",
-                "Retroescavadeira Randon",
-                "Caminhão Volkswagen 24.280 0SH8I43",
-                "Van Sprinter POY-9510",
-                "Caminhonete Nissan Frontier P0K9E33"
-        ]},
-        {"name": "ELIAS (+55 98 8404-2798)", "equipaments": [
-                "Caminhão Ford Cargo NZM-6032"
-        ]},
-        {"name": "ENERGOATO (6230974171)", "equipaments": [
-                "Caminhão Volkswagen 24-260 PRX-1328"
-        ]},
-        {"name": "ENEVA (fabienne.lopes@eneva.com.br /Fabienne)", "equipaments": [
-                "Guindaste Sany STC 600",
-                "Empilhadeira Hyster modelo FT70E de 3.100 ton.",
-                "Empilhadeira Clark modelo C45 de 4.500 ton."
-        ]},
-        {"name": "ENGECOM ENG (gilsonteixeira2216@gmail.com/(31) 3241-1834)", "equipaments": [
-                "Caminhão Volkswagen 13-190 OIV-6178 CM-19",
-                "Caminhão Volkswagen 24.260 OJL-8624",
-                "Caminhão Volkswagen 17-190 QDQ8A05 CM-08",
-                "Caminhonete Ford Ranger PWZ-7127",
-                "Caminhão Ford Cargo 2629 OJL-6418",
-                "Caminhonete Ford PWZ-1480",
-                "Mini Escavadeira Bobcat",
-                "Caminhão Volkswagen 24.260 NOROA7B42",
-                "Mini Escavadeira Bobcat MEHE-06",
-                "Máquina TG-02",
-                "Máquina TF-14",
-                "Máquina MTD-03",
-                "Micronibus Mascarello RNI6E90",
-                "Mini escavadeira Wacker Neuson MEHE-02",
-                "Caminhão Volkswagen CM-30 KRH-3642",
-                "Mini Escavadeira Bobcat MEHE-07",
-                "Mini escavadeira MEHE-03",
-                "Carregadeira Case PCE-02",
-                "Carregadeira W20F PCE-03",
-                "Mini escavadeira MEHE-04",
-                "Mini escavadeira MEHE-01"
-        ]},
-        {"name": "EQUIPAR (98970298025/Adriano)", "equipaments": [
-                "Caminhão Volkswagen 13.180 PSP-0198"
-        ]},
-        {"name": "ESTÊNIO", "equipaments": [
-                "Caminhão Mercedes Atron HOP-7882"
-        ]},
-        {"name": "FARMER SILOS E MONTAGENS (Erika / 9982852045)", "equipaments": [
-                "Guindaste XCMG QY70"
-        ]},
-        {"name": "FONTEK SERVICE ", "equipaments": [
-                "Empilhadeira CMH",
-                "Caminhão Scania 112HW"
-        ]},
-        {"name": "FORMILOC LOCADORA DE VEÍCULOS (fiscal@formiloc.com.br)", "equipaments": [
-                "Guindaste Madal MC23",
-                "Caminhão OJQ-2432",
-                "Caminhão Ford Cargo 1519 KPV-2238 CM-16",
-                "Caminhão Ford Cargo 1419 GCQ4G61 CM-21",
-                "Caminhão Iveco NXY-0190 CM-03",
-                "Caminhão Volkswagen 4-280 JJC-2999 CM-19",
-                "Caminhão Mercedes Atego GGC-9479 CM-22",
-                "Caminhão Volkswagen 24-280 FZP4A30 CM-24",
-                "Caminhão Volkswagen 24-280 OQL-5775 CM-20",
-                "Micronibus Volaire OQM8J66 ON-15",
-                "Caminhão Mercedes ORB-1904",
-                "Caminhão Iveco OWW2H91",
-                "Caminhão Volkswagen PWFG072",
-                "Micronibus Mascarello HNHGJ59",
-                "Guindauto Volkwagen OXJ1E90 LN 12 505 BR",
-                "Microonibus  Mascarello RNY3C00",
-                "Caminhão Volkswagen 24.280 KRH-3642",
-                "Caminhão Mercedes Atego RFW0E97"                
-        ]},
-        {"name": "GALFLEX (comercial@galflex.com.br/Claudemi)", "equipaments": [
-                "Guindaste Sany STC 800"
-        ]},
-        {"name": "HERMONT (hermont@hermont.com.br/Hermes)", "equipaments": [
-                "Caminhão Mercedes 2324  OXZ-1728",
-                "Guindaste Sany STC-75 MWV-8947",
-                "Plataforma elevatória",
-                "Caminhão Mercedes Atron NND-7433",
-                "Caminhão Mercedes L1620 NWR 4377 ",
-                "Caminhão Atron NNE2031",
-                "Caminhão Mercedes NXJ 8893",
-                "Caminhonete Mitsubishi HOX-5341",
-                "Guindaste Sany STC 75 OIV-6346",
-                "Caminhão Mercedes Atego PTN-8366"
-        ]},
-        {"name": "HOSPITAL SÃO DOMINGOS (presidencia@hospitalsaodomingos.com.br/ Murilo)", "equipaments": [
-                "Mini Carregadeira MC85",
-                "Caminhão Ford Cargo 1119 PSQ-9647",
-                "Caminhão Volkswagen 15-180 AQA-6908",
-                "Caminhão Volkswagen 26-260 IQR-7880",
-                "Retroescavadeira 416 E",
-                "Toyota Bandeirantes BMG 9208",
-                "Toyota Hilux  OJK-8648",
-                "Carregadeira 924H",
-                "Trator Massey Fergusson 235",
-                "Toyota Hilux MAN-7479",
-                "Pálio PSX-4940",
-                "Trator massey 4275",
-                "Trator massey 4292",
-                "Trator Valmet",
-                "Caminhão Atron",
-                "Retroescavadeira Case 580N",
-                "Escavadeira PC318",
-                "Caminhão Mercedes OJP-5756",
-                "Retroesavadeira 416F2",
-                "Caminhonete Toyota Hilux OJJ-7335",
-                "Toyota Hilux PSW-5795",
-                "Toyota Hilux  PSK-5799"
-        ]},
-        {"name": "ILUMINAR MATERIAIS ELÉTRICOS (+55 98 8815-5428 / Anderson)", "equipaments": [
-                "Retroescavadeira JCB C+"                
-        ]},
-        {"name": "IVAN", "equipaments": [
-                "Caminhao Volvo CVP-1484"
-        ]},
-        {"name": "JARBAS (+55 9888535609 / Jarbas)", "equipaments": [
-                "Caminhao Volkswagen NHS-2586"
-        ]},
-        {"name": "JCA EMPREENDIMENTOS (983345-1546)", "equipaments": [
-                "Trator de esteira D6T",
-                "Retroescavadeira EH04",
-                "Retroescavadeira EH01",
-                "Escavadeira 320D2L",
-                "Escavadeira 320D2"
-        ]},
-        {"name": "JOEL", "equipaments": [
-                "Caminhao Ford 1519 PS0OJ58",
-                "Caminhao Volkswagen MSL-0688"
-        ]},
-        {"name": "JOHNNY (981150687)", "equipaments": [
-                "Caminhao Volkswagen HWT-6019"
-        ]},
-        {"name": "JPW ENGENHARIA", "equipaments": [
-                "Guindauto Argos 20.6"
-        ]},
-        {"name": "JR (+55 98 9976-5324/Barbosa)", "equipaments": [
-                "Caminhão Volkswagen 19-320 GZV-6950",
-                "Caminhão Mercedes 2425",
-                "Guindaste XCMG QY70"
-        ]},
-        {"name": "LIDER GUINDASTES (+55 98 9142-8991 / Bernardo)", "equipaments": [
-                "Guindaste Sany PGF-0870"                
-        ]},
-        {"name": "LOCAR (fg.andrioli@locar.com.br /Adriano)", "equipaments": [
-                "Guindaste XCMG QY70",
-                "Guindaste Zoomlion QY60",
-                "Guindaste Sany STC 80",
-                "Guindaste Sany STC 800",
-                "Plataforma elevatória JLG"
-        ]},
-        {"name": "LOCARES LOCAÇÕES LTDA (manutencao@locares.com.br / Wagner)", "equipaments": [
-                "Manipulador New Holland LM1745 TAG 12"
-        ]},
-        {"name": "LUA NOVA LTDA (+55 98 84288690 / Paulo)", "equipaments": [
-                "Guindaste XCMG 25 TON.",
-                "Caminhao Ford OJE-5242",
-                "Caminhão Volkswagen Worker NND-9558",
-                "Manipulador JCB 540160",
-                "Trator TL 85E New Holland",
-                "Guindaste XCMG QY25",
-                "Manipulador JCB 540170"
-        ]},
-        {"name": "MACTRON SERVIÇOS (988551699 / Sandro)", "equipaments": [
-                "Caminhão Volkwagen 13.190 PWQ5H92",
-                "Renault Logan RFU5C87",
-                "Micronibus Volare FUB2I13",
-                "Caminhão Volkswagen 26.260 RQQ0F24",
-                "Micronibus Volaire FUB2I13"
-        ]},
-        {"name": "MAMUTH TRANSPORTES DE MÁQUINAS LTDA (Gerson / manutencao@mamuth.com.br)", "equipaments": [
-                "Guindaste Groove 220",
-                "Guindaste XCMG 220 FFN-7963"
-        ]},
-        {"name": "MAXXUM (monike.lopes@maxxumma.com/Monike lopes)", "equipaments": [
-                "Guindaste XCMG QY70",
-                "Empilhadeira Yale 2.5 TON",
-                "Caminhão Volkswagen Worker 24-220 HMR-7340",
-                "Guindauto  Volkswagen 17-190 Frota 20-04-0112",
-                "Guindaste Tadano GT600 HEW-4196"
-        ]},
-        {"name": "MC COMÉRCIO E LOCAÇÃO (+55 99 9203-8661/Romário)", "equipaments": []},
-        {"name": "MECBRUN INDUSTRIAL (katiarocha@mecbrun.com.br)", "equipaments": [
-                "Caminhão Mercedes Axor 3131 QXF-1740"
-        ]},
-        {"name": "METAL MS (deivid.dias@metalurgicams.com / Deivid)", "equipaments": [
-                "Caminhão Volkswagen 24.280 MLD-9788"
-        ]},
-        {"name": "METAL PRATA (9998189-2111)", "equipaments": [
-                "Guindauto Ford Cargo 2422 NVN-2374"
-        ]},
-        {"name": "MINEIRO (+55 63 8405-8007)", "equipaments": []},
-        {"name": "MIP ENGENHARIA (dionleno.nunes@mip.com.br/Dion Lenon)", "equipaments": [
-                "Caminhão Volkswagen 24-280 QPH-8027",
-                "Caminhão Volkswagen 24-250 GZB-5598 Frota 20.04.0056"
-        ]},
-        {"name": "MONTCALM (fernanda.dias@montcalm.com.br/Fernanda dias)", "equipaments": [
-                "Guindaste Sany STC 800"
-        ]},
-        {"name": "MONTEC SILOS E MONTAGENS LTDA", "equipaments": [
-                "Guindaste XCMG QY70K"
-        ]},
-        {"name": "NORTE CARGAS (Roberto Nascimento / +55 98 8300-0136)", "equipaments": [
-                "Empilhadeira Hyster H50CT- BR"
-        ]},
-        {"name": "OMEGA (karla.sanches@omegaservice.com.br / Karla)", "equipaments": [
-                "Guindaste Sany STC 300 OTU-8815",
-                "Guindaste Bantan Telekruiser 18 ton.",
-                "Empilhadeira Yale GLP050VXYVSE084",
-                "Guindaste Sany STC300 QDE-8571",
-                "Manipulador LM1745 TURBO",
-                "Empilhadeira Hyster 155 TAG 09",
-                "Caminhão Mercedes Atego 2426 PTY6J77",
-                "Caminhão Volkswagen 26-320 QDJ-3788",
-                "Caminhao OTM-3896",
-                "Caminhão Volkswagen 26-320 PUV-0773",
-                "Empilhadeira Hyundai"
-        ]},
-        {"name": "P.A.D MONTAGENS E MANUTENÇÃO INDUSTRIAL ", "equipaments": [
-                "Guindaste TEREX LT 1070"
-        ]},
-        {"name": "PAVIRROL", "equipaments" : [
-                "Caminhão Ford OXS-4994"
-        ]},
-        {"name": "PELICANO CONSTRUÇÕES S.A (edinaldo.oliveira@pelicano.eng.br)", "equipaments": [
-                "Caminhão Volkswagen 24-250 Frota CM 225",
-                "Guindauto NRR1291 Frota 101003",
-                "Caminhão Mercedes L1620 Frota 101003",
-                "Guindauto Luna 16.200 Frota 101005",
-                "Guindauto OCU-7024 Frota 101006",
-                "Guindauto Luna Suprema 16.5 OCV-7024",
-                "Caminhão Mercedes Atego ODG-5971 Frota 101008",
-                "Guindauto Argos AGI16.5 ODH3451 Frota 101009",
-                "Caminhão  Volkswagen 25-370 ODH-5961 Frota 101010",
-                "Caminhão Ford 1519 ODI-1479 Frota 101012",
-                "Guindauto Argos 16.5 ODM0512 Frota 101013",
-                "Guindauto Argos 16.5 OCX4526 Frota 101014",
-                "Guindauto Argos 16.5 Frota 101015",
-                "Caminhão Mercedes Atego 2426 OCX-4524 Frota 101017",
-                "Guindauto Mercedes Atego Argos 16.5 MPI 9655 Frota 101018",
-                "Caminhão Mercedes Atego MPI9605 Frota 101018",
-                "Caminhão Mercedes Frota 101019",
-                "Caminhão Mercedes Atego 2426 PPI 4913 Frota 101021",
-                "Guindauto Argos 16.5 MIS-2426 Frota 101021",
-                "Caminhão Mercedes Atego 2426 PPI-6493 Frota 101022",
-                "Caminhão Ford Frota 105004",
-                "Caminhao Mercedes OCX-4525 Frota 101015",
-                "Caminhão RQM-6139 Frota 101024",
-                "Caminhão Volkswagen 24-250 ODG-5971 Frota 101008",
-                "Caminhão Scannia OVJ-4820 Frota 100007",
-                "Caminhão Mercedes Atego MPI-9657 Frota 101019",
-                "Caminhão Scania P310 OVJ-4785 Frota 103010",
-                "Carregadeira Frota 11140017",
-                "KGT Hyundai Frota 11480002",
-                "Mini escavadeira Doosan prefixo 11090058",
-                "Caminhão Ford 1719 Frota 106003",
-                "Guindauto 2.209.0017",
-                "Caminhão Scania 1.100.0067",
-                "Caminhão Scania P310 OVJ-4820",
-                "Caminhão Scania Prefixo 1.100.0069",
-                "Caminhão Mercedes 2729 Prefixo 11000043",
-                "Caminhão Mercedes Axor Prefixo 11050007",
-                "Micronibus Volaire ODQ-5379 Prefixo 126009",
-                "Micronibus Mercedes RBF9C04 Prefixo 11260018",
-                "Mini escavadeira New Holland E27B Prefixo 109057",
-                "Fiat Strada QVY1GI3 Prefixo 124162"
-        ]},
-        {"name": "PETROSUC (98988712811)", "equipaments": [
-                "Caminhão Volkswagen Worker MVX5H85",
-                "Caminhão Volkswagen Worker JWE-7051"
-        ]},
-        {"name": "PHM MECÂNICA (phm.ma@phm.mecanica.com.br/Andreia)", "equipaments": [
-                "Caminhão Volkswagen 15180 Guindauto Palfinger",
-                "Caminhão Volkswagen 24-220 Worker HNE-4220",
-                "Caminhão Volkswagen 15-180 Worker GVQ-3575"
-        ]},
-        {"name": "PREFEITURA DUQUE BACELAR (Emanuelle )", "equipaments": [
-                "Carregadeira Case W20E",
-                "Carregadeira New Holland W130",
-                "Transmissão Clark 28000"
-        ]},
-        {"name": "PREFEITURA IGARAPÉ DO MEIO", "equipaments": [
-                "Motoniveladora Caterpillar 120K"
-        ]},
-        {"name": "PREMIUM LOCAÇOES (ELIVELBER)", "equipaments": [
-                "Guindaste Sany QY100"
-        ]},
-        {"name": "PRESTARE MONTAGEM SERVIÇOS (prestare.balsas@outlook.com)", "equipaments": [
-                "Guindaste Madal MD30"                
-        ]},
-        {"name": "PRO SERVICE (+55 98 8821-8280/ Raiumundo)", "equipaments": [
-                "Guindaste XCMG QY 70"
-        ]},
-        {"name": "PROJEART (Ademar/+55 85 9945-0357)", "equipaments": [
-                "Guindaste Sany STC 600"
-        ]},
-        {"name": "ROMÂNIO (9986074118)", "equipaments": [
-                "Guindauto Volkswagen Placa HOU-5897",
-                "Caminhão Scania 112 H KBB-5010",
-                "Renault Sandero OTM-3015"
-        ]},
-        {"name": "SENTEL (administracao@sentelltda.com.br /Rogério)", "equipaments": [
-                "Caminhão Mercedes Guindauto Argos JLA-3438",
-                "Caminhão Mercedes L1218 LVZ-2108",
-                "Caminhão Mercedes 1620 HOP-1572 Guindauto TKF",
-                "Caminhão Mercedes L1620 LVZ-2106",
-                "Guindaste Lorain Mercedes 1513 JYG-2469",
-                "Guindaste Madal MD 300 Volkswagen HXX-9938",
-                "Guindaste Sany STC 75 NXK-5747",
-                "Guindaste Volkswagen 8-150 AVK-7064",
-                "Guindaste Madal 300 Volkswagen 26-310 HXN-9938",
-                "Caminhão Ford 1519 PSO-5J74 N°31",
-                "Guindaste Tadano 60T",
-                "Guindaste Sany 80T OXV-6494",
-                "Guindaste Tadano 30TON HJI3C15",
-                "Guindaste Sany STC 800"
-        ]},
-        {"name": "SLZLOG EXPRESS LTDA (98 8895-1515 / Sergio)", "equipaments": [
-                "Caminhão Iveco TRUCK 7 ton. OSQ-0904"
-        ]},
-        {"name": "SOUSA RABELO (+55 34 9153-0927/Erick)", "equipaments": [
-                "Guindaste Sany STC 75"
-        ]},
-        {"name": "SUCATA SÃO JOÃO (+55 98 8303-3406/Adao)", "equipaments": [
-                "Caminhao Iveco NXG-9647",
-                "Caminhao Mercedes Atego OLK-9388",
-                "Caminhao Iveco ROE8C94",
-                "Caminhao Iveco NXI-2294",
-                "Caminhão Mercedes Atron PIP3A02",
-                "Empilhadeira Clark C50"
-        ]},
-        {"name": "TECNOVITA (Ivan)", "equipaments": [
-                "Caminhão Volkswagen Worker PSX-1730"
-        ]},
-        {"name": "TRANSUL (8132264685)", "equipaments": [
-                "Guindaste IMAP IMK 30.5 NHM-5128",
-                "Empilhadeira Yale 2.5 TON C025L Tipo LP",
-                "Empilhadeira Clark",
-                "Guindaste Tadano"
-        ]},
-        {"name": "USIMIG MANUTENÇÃO E SERVIÇOS (Ângelo / 9491347805)", "equipaments": [
-                "Caminhão Volkswagen 31.280 RXA2D24",
-                "Caminhão Volkswagen 31.280 RWL4I03",
-                "Guindaste Sany STC 75",
-                "Guindaste Madal MD300"
-        ]},
-        {"name":"VIRT (lucianacristinapinheiro@gmail.com/Luciana)" , "equipaments":[
-                "Carregadeira SEM 638 QC"
-        ]},
-        {"name":"Zezé (991390001)" , "equipaments":[
-                "Caminhão Mercedes HPC-2437"
-        ]},
-        {"name":"ZIRANLOG TRANSPORTES (559192006731/Maurício)" , "equipaments":[
-                "Empilhadeira Yale NP-O5",
-                "Contra-pesos da Empilhadeira Yale NP-O5",
-                "Caminhão Volkswagen 28.880 LQN4G07",
-                "Caminhão Volkswagen 19-320 TITAN LLI-2510",
-                "Empilhadeira Reach Stacker"
-        ]},
-        {"name":"ZORTEA CONSTRUÇÕES LTDA (talita.santos@zortea.com.br / Talita)" , "equipaments":[
-                "Retroescavadeira JCB 0005",
-                "Guindaste Sany STC 800 GDH 0016",
-                "Escavadeira Hidraúlica EHI00016",
-                "Retroescavadeira RET 00013",
-                "Manipuladora JCB MTE000014",
-                "Manipuladora JCB MTE000012",
-                "Carregadeira 000020",
-                "Caminhão Volvo CME-0005 HRO-7729",
-                "Caminhão F12 CM-0003 JZH-1267",
-                "Guindauto BAF-9286",
-                "Guindaste Groove GDH00020",
-                "Caminhão Volkswagen 17-230 CBO-00003 BDD8D66",
-                "Mini-escavadeira Doosy",
-                "Caminhão Volkswagen Worker 15.190 BAB-6366",
-                "Tanque de combustível TCO0009",
-                "Carregadeira PCA 000024",
-                "Guindaste XCMG BR800 GDH 00022",
-                "Rompedor ROH 00008",
-                "Manipulador JCB MTE-00023",
-                "Caminhão Volkswagen FHN2E64 CME-00012",
-                "Caminhão Volkswagen 19-320 TRACTOR DVT2B35 CME-00016"
-        ]}
+  {
+    "name": "ADAO (+55 98 8303-3406/ADAO)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 15-190 PSP-0198"
+    ]
+  },
+  {
+    "name": "ADRIANO (970298025)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 15-190 PSP-0198"
+    ]
+  },
+  {
+    "name": "AGROPECUÁRIA ANTAS LTDA (PRESIDENCIA@HOSPITALSAODOMINGOS.COM.BR)",
+    "equipaments": [
+      "MINI CARREGADEIRA MC85",
+      "CAMINHÃO FORD CARGO 1119 PSQ-9647",
+      "CAMINHÃO VOLKSWAGEN 15-180 AQA-6908",
+      "CAMINHÃO VOLKSWAGEN 26-260 IQR-7880",
+      "RETROESCAVADEIRA 416 E",
+      "TOYOTA BANDEIRANTES BMG 9208",
+      "TOYOTA HILUX  OJK-8648",
+      "CARREGADEIRA 924H",
+      "TRATOR MASSEY FERGUSSON 235",
+      "TOYOTA HILUX MAN-7479",
+      "PÁLIO PSX-4940",
+      "TRATOR MASSEY 4275",
+      "TRATOR MASSEY 4282",
+      "TRATOR VALMET",
+      "CAMINHÃO ATRON",
+      "RETROESCAVADEIRA CASE 580N",
+      "ESCAVADEIRA PC318",
+      "CAMINHÃO MERCEDES OJP-5756",
+      "RETROESAVADEIRA 416F2",
+      "CAMINHONETE TOYOTA HILUX OJJ-7335",
+      "TOYOTA HILUX PSW-5795",
+      "TOYOTA HILUX  PSK-5799"
+    ]
+  },
+  {
+    "name": "AGROSERRA (VAGNER / +55 99 8155-1737)",
+    "equipaments": [
+      "GUINDAUTO TKA 43700"
+    ]
+  },
+  {
+    "name": "ALPHA ENGENHARIA  (+55 32 9111-7076/ELDER)",
+    "equipaments": []
+  },
+  {
+    "name": "AMPLA MANUTENÇÃO E SERVIÇOS LTDA",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 24.280 ; CM 003 ; KPO7D59"
+    ]
+  },
+  {
+    "name": "ANDERSSON",
+    "equipaments": [
+      "GUINDAUTO ARGOS 20.5"
+    ]
+  },
+  {
+    "name": "ARAUJO GUINDASTES (GERENCIA@ARAUJOGUINDASTES.COM.BR/DÁRIO)",
+    "equipaments": [
+      "GUINDASTE SANY STC 75",
+      "GUINDASTE SANY STC 300",
+      "GUINDASTE SANY STC 800",
+      "GUINDASTE XCMGQY 70",
+      "GUINDAUTO FORD CARGO 2429 OJD-7060",
+      "CAMINHÃO VOLKSWAGEN 25-370 TRACTOR NWT-0425",
+      "GUINDAUTO MODELO PHD",
+      "CAMINHÃO SCANNIA G 420  EJY-5750",
+      "CAMINHÃO FORD 2429 OJB-2538",
+      "GUINDASTE OIU-2907",
+      "GUINDASTE OIU-1018",
+      "GUINDASTE MWC-6049",
+      "CAMINHÃO FORD CARGO 2422 NNH-5708",
+      "CAMINHÃO FORD CARGO 2429 OJJ-2103",
+      "GUINDAUTO FORD CARGO 2429 OJD-3549",
+      "CAMINHÃO FORD CARGO 1729 OXY-2649"
+    ]
+  },
+  {
+    "name": "AST ELEVAÇÕES (DIRETORIA@ASTELEVACOES.COM.BR / TÁSSIO)",
+    "equipaments": [
+      "GUINDAUTO FORD CARGO 2429 OJI6C68",
+      "GUINDAUTO MERCEDES ATRON 2324 QFS-4307",
+      "GUINDAUTO FORD CARGO 2429 0JMOJ21",
+      "CAMINHÃO FORD CARGO 2422 NXG-1095",
+      "CAMINHÃO VOLKSWAGEN 24.280 OYLGI14",
+      "RETROESCAVADEIRA CASE 580N",
+      "CAMINHÃO VOLKSWAGEN 28.880 OYZ9A16",
+      "CAMINHÃO FORD CARGO 2423 OJI6C68",
+      "RETROESCAVADEIRA JCB ",
+      "CAMINHÃO IVECO 24.280 ROG5H61",
+      "GUINDASTE SANY STC 80"
+    ]
+  },
+  {
+    "name": "BETONPOXI (MAXLIMA@BETONPOXI.COM.BR / MAX)",
+    "equipaments": [
+      "CAMINHÃO BASCULANTE VOLKSWAGEN 26-280 PGG-3996",
+      "CAMINHÃO VOLKSWAGEN PGG-5688",
+      "CAMINHÃO PLD-9795",
+      "RETROESCAVADEIRA 416E N° 01",
+      "RETROESCAVADEIRA 416E N° 02",
+      "RETROESCAVADEIRA 416E N° 04",
+      "RETROESCAVADEIRA 416E N° 05",
+      "RETROESCAVADEIRA 416E N° 07"
+    ]
+  },
+  {
+    "name": "BRASIL LAU RENT (+55 11 91207-0462 / JEFERSON)",
+    "equipaments": [
+      "GUINDASTE TADANO RT",
+      "PANORAMIC P 720 MTC-003",
+      "GUINDASTE SANY 100 TON",
+      "GUINDASTE SANY QY50C EWR-2190",
+      "CAMINHÃO VOLKSWAGEN 25.360 GHPTC06",
+      "POLIGUINDASTE VOLKSWAGEN WORKER 17-250 ETR-0253",
+      "CAMINHÃO VOLKSWAGEN FNB5C53",
+      "EMPILHADEIRA HLI 4.5 TON",
+      "GUINDASTE SANY 220",
+      "CAMINHÃO VOLKSWAGEN 24.260 FGA5F37",
+      "CAMINHÃO VOLKSWAGEN 24.260 FDX8H46",
+      "GUINDASTE TADANO GR-50",
+      "GUINDASTE SANY 55",
+      "GUINDASTE TADANO 50 TON"
+    ]
+  },
+  {
+    "name": "CAMPOS MOVIMENTAÇÕES (+55 98 8247-0262 / LUCAS)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 31.280 RXA2D24",
+      "CAMINHÃO VOLKSWAGEN 31.280 RWL4I03",
+      "GUINDASTE SANY STC 75",
+      "GUINDASTE MADAL MD300"
+    ]
+  },
+  {
+    "name": "CARLOS MAGNO",
+    "equipaments": [
+      "FORD RANGER 2.8 MOTOR POWER STROKE"
+    ]
+  },
+  {
+    "name": "CERÂMICA SÃO JOSÉ (+55 98 8532-8348)",
+    "equipaments": [
+      "CARREGADEIRA W20 E",
+      "CARREGADEIRA W20 F"
+    ]
+  },
+  {
+    "name": "CLASI SEGURANÇA (FELIPE.SILVA@GRUPOCLASI.COM.BR / FELIPE)",
+    "equipaments": [
+      "CAMINHÃO MERCEDES ACCELO PTR-6993"
+    ]
+  },
+  {
+    "name": "CONCRENORTE (55639222-9064/ TAÍS)",
+    "equipaments": [
+      "GUINDASTE SANY STC 50"
+    ]
+  },
+  {
+    "name": "COSMEPEÇAS (SILVIA)",
+    "equipaments": [
+      "MOTONIVELADORA NEW HOLLAND",
+      "CAMINHÃO VOLKSWAGEN HPL-2941",
+      "AMBULÂNCIA RENAULT MASTER PTS5H81",
+      "CARREGADEIRA CASE SEMOSP",
+      "CAMINHÃO VOLKSWAGEN HPL-7081 CAEMA",
+      "CAMINHÃO IVECO NPM-2164",
+      "CAMINHÃO FORD CARGO PTE-2347 CAEMA",
+      "CAMINHÃO VOLKSWAGEN WORKER HPO-9544",
+      "CAMINHÃO VOLKSWAGEN HPL-2953",
+      "CAMINHÃO FORD CARGO PTD-4354"
+    ]
+  },
+  {
+    "name": "CSS (JULIANO/ 9885018952)",
+    "equipaments": [
+      "CAMINHÃO FORD CARGO 2423 NZW4F11"
+    ]
+  },
+  {
+    "name": "CTRL ENGENHARIA E MANUTENÇÃO (+55 98 8157-8519/ MAYARA)",
+    "equipaments": [
+      "GUINCHO HIDRÁULICO GIRATÓRIO COM CABO DE AÇO 900KG - LD-E04021W - STROM"
+    ]
+  },
+  {
+    "name": "DESTAK (DAVI)",
+    "equipaments": [
+      "EMPILHADEIRA HYSTER",
+      "CAMINHÃO OJQ-2221"
+    ]
+  },
+  {
+    "name": "DÍNAMO ENGENHARIA (LIVIO ANDRADE)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 15-190 PSW-1647",
+      "GUINDASTE SANY STC 30",
+      "TRATOR NEW HOLLAND TM7040",
+      "GUINDASTE MERCEDES AXOR 0DA9F86",
+      "CAMINHÃO VOLKSWAGEN 31.330 IWT-1772 / GUINDASTE MASAL 40 TON.",
+      "CAMINHÃO VOLVO VM PSC-9750",
+      "CAMINHÃO FORD CARGO OIU-3133"
+    ]
+  },
+  {
+    "name": "E G LIMA TRANSPORTES ('+55 98 8404-2798/EGMUNCK@GMAIL.COM)",
+    "equipaments": [
+      "CAMINHÃO FORD CARGO NHH-2630"
+    ]
+  },
+  {
+    "name": "EBES ENGENHARIA (LINDI / +55 98 8784-4793)",
+    "equipaments": [
+      "GUINDASTE ZOOMLION QY70"
+    ]
+  },
+  {
+    "name": "ECO SUC (JASTEL/ JASTEL@UOL.COM.BR)",
+    "equipaments": [
+      "CAMINHONETE DODGE RAM HOH6E51",
+      "CAMINHÃO VOLKSWAGEN WORKER JWE-7051",
+      "CAMINHÃO FORD CARGO 1517 HZAOG47"
+    ]
+  },
+  {
+    "name": "ECOLIMP (999935179/FLÁVIO)",
+    "equipaments": [
+      "CAMINHÃO FORD CARGO OJH-7760"
+    ]
+  },
+  {
+    "name": "EDRO ENGENHARIA (+55 98 8704-5060/EDUARDO)",
+    "equipaments": [
+      "CAMINHÃO FORD CARGO  1519 PMJ-9096",
+      "RETROESCAVADEIRA JCB",
+      "ROMPEDOR T-ROMPER",
+      "RETROESCAVADEIRA RANDON",
+      "CAMINHÃO VOLKSWAGEN 24.280 0SH8I43",
+      "VAN SPRINTER POY-9510",
+      "CAMINHONETE NISSAN FRONTIER P0K9E33"
+    ]
+  },
+  {
+    "name": "ELIAS (+55 98 8404-2798)",
+    "equipaments": [
+      "CAMINHÃO FORD CARGO NZM-6032"
+    ]
+  },
+  {
+    "name": "ENERGOATO (6230974171)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 24-260 PRX-1328"
+    ]
+  },
+  {
+    "name": "ENEVA (FABIENNE.LOPES@ENEVA.COM.BR /FABIENNE)",
+    "equipaments": [
+      "GUINDASTE SANY STC 600",
+      "EMPILHADEIRA HYSTER MODELO FT70E DE 3.100 TON.",
+      "EMPILHADEIRA CLARK MODELO C45 DE 4.500 TON."
+    ]
+  },
+  {
+    "name": "ENGECOM ENG (GILSONTEIXEIRA2216@GMAIL.COM/(31) 3241-1834)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 13-190 OIV-6178 CM-19",
+      "CAMINHÃO VOLKSWAGEN 24.260 OJL-8624",
+      "CAMINHÃO VOLKSWAGEN 17-190 QDQ8A05 CM-08",
+      "CAMINHONETE FORD RANGER PWZ-7127",
+      "CAMINHÃO FORD CARGO 2629 OJL-6418",
+      "CAMINHONETE FORD PWZ-1480",
+      "MINI ESCAVADEIRA BOBCAT",
+      "CAMINHÃO VOLKSWAGEN 24.260 NOROA7B42",
+      "MINI ESCAVADEIRA BOBCAT MEHE-06",
+      "MÁQUINA TG-02",
+      "MÁQUINA TF-14",
+      "MÁQUINA MTD-03",
+      "MICRONIBUS MASCARELLO RNI6E90",
+      "MINI ESCAVADEIRA WACKER NEUSON MEHE-02",
+      "CAMINHÃO VOLKSWAGEN CM-30 KRH-3642",
+      "MINI ESCAVADEIRA BOBCAT MEHE-07",
+      "MINI ESCAVADEIRA MEHE-03",
+      "CARREGADEIRA CASE PCE-02",
+      "CARREGADEIRA W20F PCE-03",
+      "MINI ESCAVADEIRA MEHE-04",
+      "MINI ESCAVADEIRA MEHE-01"
+    ]
+  },
+  {
+    "name": "EQUIPAR (98970298025/ADRIANO)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 13.180 PSP-0198"
+    ]
+  },
+  {
+    "name": "ESTÊNIO",
+    "equipaments": [
+      "CAMINHÃO MERCEDES ATRON HOP-7882"
+    ]
+  },
+  {
+    "name": "FARMER SILOS E MONTAGENS (ERIKA / 9982852045)",
+    "equipaments": [
+      "GUINDASTE XCMG QY70"
+    ]
+  },
+  {
+    "name": "FONTEK SERVICE ",
+    "equipaments": [
+      "EMPILHADEIRA CMH",
+      "CAMINHÃO SCANIA 112HW"
+    ]
+  },
+  {
+    "name": "FORMILOC LOCADORA DE VEÍCULOS (FISCAL@FORMILOC.COM.BR)",
+    "equipaments": [
+      "GUINDASTE MADAL MC23",
+      "CAMINHÃO OJQ-2432",
+      "CAMINHÃO FORD CARGO 1519 KPV-2238 CM-16",
+      "CAMINHÃO FORD CARGO 1419 GCQ4G61 CM-21",
+      "CAMINHÃO IVECO NXY-0190 CM-03",
+      "CAMINHÃO VOLKSWAGEN 4-280 JJC-2999 CM-19",
+      "CAMINHÃO MERCEDES ATEGO GGC-9479 CM-22",
+      "CAMINHÃO VOLKSWAGEN 24-280 FZP4A30 CM-24",
+      "CAMINHÃO VOLKSWAGEN 24-280 OQL-5775 CM-20",
+      "MICRONIBUS VOLAIRE OQM8J66 ON-15",
+      "CAMINHÃO MERCEDES ORB-1904",
+      "CAMINHÃO IVECO OWW2H91",
+      "CAMINHÃO VOLKSWAGEN PWFG072",
+      "MICRONIBUS MASCARELLO HNHGJ59",
+      "GUINDAUTO VOLKWAGEN OXJ1E90 LN 12 505 BR",
+      "MICROONIBUS  MASCARELLO RNY3C00",
+      "CAMINHÃO VOLKSWAGEN 24.280 KRH-3642",
+      "CAMINHÃO MERCEDES ATEGO RFW0E97"
+    ]
+  },
+  {
+    "name": "GALFLEX (COMERCIAL@GALFLEX.COM.BR/CLAUDEMI)",
+    "equipaments": [
+      "GUINDASTE SANY STC 800"
+    ]
+  },
+  {
+    "name": "HERMONT (HERMONT@HERMONT.COM.BR/HERMES)",
+    "equipaments": [
+      "CAMINHÃO MERCEDES 2324  OXZ-1728",
+      "GUINDASTE SANY STC-75 MWV-8947",
+      "PLATAFORMA ELEVATÓRIA",
+      "CAMINHÃO MERCEDES ATRON NND-7433",
+      "CAMINHÃO MERCEDES L1620 NWR 4377 ",
+      "CAMINHÃO ATRON NNE2031",
+      "CAMINHÃO MERCEDES NXJ 8893",
+      "CAMINHONETE MITSUBISHI HOX-5341",
+      "GUINDASTE SANY STC 75 OIV-6346",
+      "CAMINHÃO MERCEDES ATEGO PTN-8366"
+    ]
+  },
+  {
+    "name": "HOSPITAL SÃO DOMINGOS (PRESIDENCIA@HOSPITALSAODOMINGOS.COM.BR/ MURILO)",
+    "equipaments": [
+      "MINI CARREGADEIRA MC85",
+      "CAMINHÃO FORD CARGO 1119 PSQ-9647",
+      "CAMINHÃO VOLKSWAGEN 15-180 AQA-6908",
+      "CAMINHÃO VOLKSWAGEN 26-260 IQR-7880",
+      "RETROESCAVADEIRA 416 E",
+      "TOYOTA BANDEIRANTES BMG 9208",
+      "TOYOTA HILUX  OJK-8648",
+      "CARREGADEIRA 924H",
+      "TRATOR MASSEY FERGUSSON 235",
+      "TOYOTA HILUX MAN-7479",
+      "PÁLIO PSX-4940",
+      "TRATOR MASSEY 4275",
+      "TRATOR MASSEY 4292",
+      "TRATOR VALMET",
+      "CAMINHÃO ATRON",
+      "RETROESCAVADEIRA CASE 580N",
+      "ESCAVADEIRA PC318",
+      "CAMINHÃO MERCEDES OJP-5756",
+      "RETROESAVADEIRA 416F2",
+      "CAMINHONETE TOYOTA HILUX OJJ-7335",
+      "TOYOTA HILUX PSW-5795",
+      "TOYOTA HILUX  PSK-5799"
+    ]
+  },
+  {
+    "name": "ILUMINAR MATERIAIS ELÉTRICOS (+55 98 8815-5428 / ANDERSON)",
+    "equipaments": [
+      "RETROESCAVADEIRA JCB C+"
+    ]
+  },
+  {
+    "name": "IVAN",
+    "equipaments": [
+      "CAMINHAO VOLVO CVP-1484"
+    ]
+  },
+  {
+    "name": "JARBAS (+55 9888535609 / JARBAS)",
+    "equipaments": [
+      "CAMINHAO VOLKSWAGEN NHS-2586"
+    ]
+  },
+  {
+    "name": "JCA EMPREENDIMENTOS (983345-1546)",
+    "equipaments": [
+      "TRATOR DE ESTEIRA D6T",
+      "RETROESCAVADEIRA EH04",
+      "RETROESCAVADEIRA EH01",
+      "ESCAVADEIRA 320D2L",
+      "ESCAVADEIRA 320D2"
+    ]
+  },
+  {
+    "name": "JOEL",
+    "equipaments": [
+      "CAMINHAO FORD 1519 PS0OJ58",
+      "CAMINHAO VOLKSWAGEN MSL-0688"
+    ]
+  },
+  {
+    "name": "JOHNNY (981150687)",
+    "equipaments": [
+      "CAMINHAO VOLKSWAGEN HWT-6019"
+    ]
+  },
+  {
+    "name": "JPW ENGENHARIA",
+    "equipaments": [
+      "GUINDAUTO ARGOS 20.6"
+    ]
+  },
+  {
+    "name": "JR (+55 98 9976-5324/BARBOSA)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 19-320 GZV-6950",
+      "CAMINHÃO MERCEDES 2425",
+      "GUINDASTE XCMG QY70"
+    ]
+  },
+  {
+    "name": "L M M PIRES ( EVERTON / +55 99 8837-6021 )",
+    "equipaments": [
+      "GUINDASTE SANY STC 600"
+    ]
+  },
+  {
+    "name": "LIDER GUINDASTES (+55 98 9142-8991 / BERNARDO)",
+    "equipaments": [
+      "GUINDASTE SANY PGF-0870"
+    ]
+  },
+  {
+    "name": "LOCAR (FG.ANDRIOLI@LOCAR.COM.BR /ADRIANO)",
+    "equipaments": [
+      "GUINDASTE XCMG QY70",
+      "GUINDASTE ZOOMLION QY60",
+      "GUINDASTE SANY STC 80",
+      "GUINDASTE SANY STC 800",
+      "PLATAFORMA ELEVATÓRIA JLG"
+    ]
+  },
+  {
+    "name": "LOCARES LOCAÇÕES LTDA (MANUTENCAO@LOCARES.COM.BR / WAGNER)",
+    "equipaments": [
+      "MANIPULADOR NEW HOLLAND LM1745 TAG 12"
+    ]
+  },
+  {
+    "name": "LUA NOVA LTDA (+55 98 84288690 / PAULO)",
+    "equipaments": [
+      "GUINDASTE XCMG 25 TON.",
+      "CAMINHAO FORD OJE-5242",
+      "CAMINHÃO VOLKSWAGEN WORKER NND-9558",
+      "MANIPULADOR JCB 540160",
+      "TRATOR TL 85E NEW HOLLAND",
+      "GUINDASTE XCMG QY25",
+      "MANIPULADOR JCB 540170"
+    ]
+  },
+  {
+    "name": "MACTRON SERVIÇOS (988551699 / SANDRO)",
+    "equipaments": [
+      "CAMINHÃO VOLKWAGEN 13.190 PWQ5H92",
+      "RENAULT LOGAN RFU5C87",
+      "MICRONIBUS VOLARE FUB2I13",
+      "CAMINHÃO VOLKSWAGEN 26.260 RQQ0F24",
+      "MICRONIBUS VOLAIRE FUB2I13"
+    ]
+  },
+  {
+    "name": "MAMUTH TRANSPORTES DE MÁQUINAS LTDA (GERSON / MANUTENCAO@MAMUTH.COM.BR)",
+    "equipaments": [
+      "GUINDASTE GROOVE 220",
+      "GUINDASTE XCMG 220 FFN-7963"
+    ]
+  },
+  {
+    "name": "MAXXUM (MONIKE.LOPES@MAXXUMMA.COM/MONIKE LOPES)",
+    "equipaments": [
+      "GUINDASTE XCMG QY70",
+      "EMPILHADEIRA YALE 2.5 TON",
+      "CAMINHÃO VOLKSWAGEN WORKER 24-220 HMR-7340",
+      "GUINDAUTO  VOLKSWAGEN 17-190 FROTA 20-04-0112",
+      "GUINDASTE TADANO GT600 HEW-4196"
+    ]
+  },
+  {
+    "name": "MC COMÉRCIO E LOCAÇÃO (+55 99 9203-8661/ROMÁRIO)",
+    "equipaments": []
+  },
+  {
+    "name": "MECBRUN INDUSTRIAL (KATIAROCHA@MECBRUN.COM.BR)",
+    "equipaments": [
+      "CAMINHÃO MERCEDES AXOR 3131 QXF-1740"
+    ]
+  },
+  {
+    "name": "METAL MS (DEIVID.DIAS@METALURGICAMS.COM / DEIVID)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 24.280 MLD-9788"
+    ]
+  },
+  {
+    "name": "METAL PRATA (9998189-2111)",
+    "equipaments": [
+      "GUINDAUTO FORD CARGO 2422 NVN-2374"
+    ]
+  },
+  {
+    "name": "MINEIRO (+55 63 8405-8007)",
+    "equipaments": []
+  },
+  {
+    "name": "MIP ENGENHARIA (DIONLENO.NUNES@MIP.COM.BR/DION LENON)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 24-280 QPH-8027",
+      "CAMINHÃO VOLKSWAGEN 24-250 GZB-5598 FROTA 20.04.0056"
+    ]
+  },
+  {
+    "name": "MONTCALM (FERNANDA.DIAS@MONTCALM.COM.BR/FERNANDA DIAS)",
+    "equipaments": [
+      "GUINDASTE SANY STC 800"
+    ]
+  },
+  {
+    "name": "MONTEC SILOS E MONTAGENS LTDA",
+    "equipaments": [
+      "GUINDASTE XCMG QY70K"
+    ]
+  },
+  {
+    "name": "NORTE CARGAS (ROBERTO NASCIMENTO / +55 98 8300-0136)",
+    "equipaments": [
+      "EMPILHADEIRA HYSTER H50CT- BR"
+    ]
+  },
+  {
+    "name": "OMEGA (KARLA.SANCHES@OMEGASERVICE.COM.BR / KARLA)",
+    "equipaments": [
+      "GUINDASTE SANY STC 300 OTU-8815",
+      "GUINDASTE BANTAN TELEKRUISER 18 TON.",
+      "EMPILHADEIRA YALE GLP050VXYVSE084",
+      "GUINDASTE SANY STC300 QDE-8571",
+      "MANIPULADOR LM1745 TURBO",
+      "EMPILHADEIRA HYSTER 155 TAG 09",
+      "CAMINHÃO MERCEDES ATEGO 2426 PTY6J77",
+      "CAMINHÃO VOLKSWAGEN 26-320 QDJ-3788",
+      "CAMINHAO OTM-3896",
+      "CAMINHÃO VOLKSWAGEN 26-320 PUV-0773",
+      "EMPILHADEIRA HYUNDAI"
+    ]
+  },
+  {
+    "name": "P.A.D MONTAGENS E MANUTENÇÃO INDUSTRIAL ",
+    "equipaments": [
+      "GUINDASTE TEREX LT 1070"
+    ]
+  },
+  {
+    "name": "PAVIRROL",
+    "equipaments": [
+      "CAMINHÃO FORD OXS-4994"
+    ]
+  },
+  {
+    "name": "PELICANO CONSTRUÇÕES S.A (EDINALDO.OLIVEIRA@PELICANO.ENG.BR)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 24-250 FROTA CM 225",
+      "GUINDAUTO NRR1291 FROTA 101003",
+      "CAMINHÃO MERCEDES L1620 FROTA 101003",
+      "GUINDAUTO LUNA 16.200 FROTA 101005",
+      "GUINDAUTO OCU-7024 FROTA 101006",
+      "GUINDAUTO LUNA SUPREMA 16.5 OCV-7024",
+      "CAMINHÃO MERCEDES ATEGO ODG-5971 FROTA 101008",
+      "GUINDAUTO ARGOS AGI16.5 ODH3451 FROTA 101009",
+      "CAMINHÃO  VOLKSWAGEN 25-370 ODH-5961 FROTA 101010",
+      "CAMINHÃO FORD 1519 ODI-1479 FROTA 101012",
+      "GUINDAUTO ARGOS 16.5 ODM0512 FROTA 101013",
+      "GUINDAUTO ARGOS 16.5 OCX4526 FROTA 101014",
+      "GUINDAUTO ARGOS 16.5 FROTA 101015",
+      "CAMINHÃO MERCEDES ATEGO 2426 OCX-4524 FROTA 101017",
+      "GUINDAUTO MERCEDES ATEGO ARGOS 16.5 MPI 9655 FROTA 101018",
+      "CAMINHÃO MERCEDES ATEGO MPI9605 FROTA 101018",
+      "CAMINHÃO MERCEDES FROTA 101019",
+      "CAMINHÃO MERCEDES ATEGO 2426 PPI 4913 FROTA 101021",
+      "GUINDAUTO ARGOS 16.5 MIS-2426 FROTA 101021",
+      "CAMINHÃO MERCEDES ATEGO 2426 PPI-6493 FROTA 101022",
+      "CAMINHÃO FORD FROTA 105004",
+      "CAMINHAO MERCEDES OCX-4525 FROTA 101015",
+      "CAMINHÃO RQM-6139 FROTA 101024",
+      "CAMINHÃO VOLKSWAGEN 24-250 ODG-5971 FROTA 101008",
+      "CAMINHÃO SCANNIA OVJ-4820 FROTA 100007",
+      "CAMINHÃO MERCEDES ATEGO MPI-9657 FROTA 101019",
+      "CAMINHÃO SCANIA P310 OVJ-4785 FROTA 103010",
+      "CARREGADEIRA FROTA 11140017",
+      "KGT HYUNDAI FROTA 11480002",
+      "MINI ESCAVADEIRA DOOSAN PREFIXO 11090058",
+      "CAMINHÃO FORD 1719 FROTA 106003",
+      "GUINDAUTO 2.209.0017",
+      "CAMINHÃO SCANIA 1.100.0067",
+      "CAMINHÃO SCANIA P310 OVJ-4820",
+      "CAMINHÃO SCANIA PREFIXO 1.100.0069",
+      "CAMINHÃO MERCEDES 2729 PREFIXO 11000043",
+      "CAMINHÃO MERCEDES AXOR PREFIXO 11050007",
+      "MICRONIBUS VOLAIRE ODQ-5379 PREFIXO 126009",
+      "MICRONIBUS MERCEDES RBF9C04 PREFIXO 11260018",
+      "MINI ESCAVADEIRA NEW HOLLAND E27B PREFIXO 109057",
+      "FIAT STRADA QVY1GI3 PREFIXO 124162"
+    ]
+  },
+  {
+    "name": "PETROSUC (98988712811)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN WORKER MVX5H85",
+      "CAMINHÃO VOLKSWAGEN WORKER JWE-7051"
+    ]
+  },
+  {
+    "name": "PHM MECÂNICA (PHM.MA@PHM.MECANICA.COM.BR/ANDREIA)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 15180 GUINDAUTO PALFINGER",
+      "CAMINHÃO VOLKSWAGEN 24-220 WORKER HNE-4220",
+      "CAMINHÃO VOLKSWAGEN 15-180 WORKER GVQ-3575"
+    ]
+  },
+  {
+    "name": "PREFEITURA DUQUE BACELAR (EMANUELLE )",
+    "equipaments": [
+      "CARREGADEIRA CASE W20E",
+      "CARREGADEIRA NEW HOLLAND W130",
+      "TRANSMISSÃO CLARK 28000"
+    ]
+  },
+  {
+    "name": "PREFEITURA IGARAPÉ DO MEIO",
+    "equipaments": [
+      "MOTONIVELADORA CATERPILLAR 120K"
+    ]
+  },
+  {
+    "name": "PREMIUM LOCAÇOES (ELIVELBER)",
+    "equipaments": [
+      "GUINDASTE SANY QY100"
+    ]
+  },
+  {
+    "name": "PRESTARE MONTAGEM SERVIÇOS (PRESTARE.BALSAS@OUTLOOK.COM)",
+    "equipaments": [
+      "GUINDASTE MADAL MD30"
+    ]
+  },
+  {
+    "name": "PRO SERVICE (+55 98 8821-8280/ RAIUMUNDO)",
+    "equipaments": [
+      "GUINDASTE XCMG QY 70"
+    ]
+  },
+  {
+    "name": "PROJEART (ADEMAR/+55 85 9945-0357)",
+    "equipaments": [
+      "GUINDASTE SANY STC 600"
+    ]
+  },
+  {
+    "name": "ROMÂNIO (9986074118)",
+    "equipaments": [
+      "GUINDAUTO VOLKSWAGEN PLACA HOU-5897",
+      "CAMINHÃO SCANIA 112 H KBB-5010",
+      "RENAULT SANDERO OTM-3015"
+    ]
+  },
+  {
+    "name": "SENTEL (ADMINISTRACAO@SENTELLTDA.COM.BR /ROGÉRIO)",
+    "equipaments": [
+      "CAMINHÃO MERCEDES GUINDAUTO ARGOS JLA-3438",
+      "CAMINHÃO MERCEDES L1218 LVZ-2108",
+      "CAMINHÃO MERCEDES 1620 HOP-1572 GUINDAUTO TKF",
+      "CAMINHÃO MERCEDES L1620 LVZ-2106",
+      "GUINDASTE LORAIN MERCEDES 1513 JYG-2469",
+      "GUINDASTE MADAL MD 300 VOLKSWAGEN HXX-9938",
+      "GUINDASTE SANY STC 75 NXK-5747",
+      "GUINDASTE VOLKSWAGEN 8-150 AVK-7064",
+      "GUINDASTE MADAL 300 VOLKSWAGEN 26-310 HXN-9938",
+      "CAMINHÃO FORD 1519 PSO-5J74 N°31",
+      "GUINDASTE TADANO 60T",
+      "GUINDASTE SANY 80T OXV-6494",
+      "GUINDASTE TADANO 30TON HJI3C15",
+      "GUINDASTE SANY STC 800"
+    ]
+  },
+  {
+    "name": "SLZLOG EXPRESS LTDA (98 8895-1515 / SERGIO)",
+    "equipaments": [
+      "CAMINHÃO IVECO TRUCK 7 TON. OSQ-0904"
+    ]
+  },
+  {
+    "name": "SOUSA RABELO (+55 34 9153-0927/ERICK)",
+    "equipaments": [
+      "GUINDASTE SANY STC 75"
+    ]
+  },
+  {
+    "name": "SUCATA SÃO JOÃO (+55 98 8303-3406/ADAO)",
+    "equipaments": [
+      "CAMINHAO IVECO NXG-9647",
+      "CAMINHAO MERCEDES ATEGO OLK-9388",
+      "CAMINHAO IVECO ROE8C94",
+      "CAMINHAO IVECO NXI-2294",
+      "CAMINHÃO MERCEDES ATRON PIP3A02",
+      "EMPILHADEIRA CLARK C50"
+    ]
+  },
+  {
+    "name": "TECNOVITA (IVAN)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN WORKER PSX-1730"
+    ]
+  },
+  {
+    "name": "TRANSUL (8132264685)",
+    "equipaments": [
+      "GUINDASTE IMAP IMK 30.5 NHM-5128",
+      "EMPILHADEIRA YALE 2.5 TON C025L TIPO LP",
+      "EMPILHADEIRA CLARK",
+      "GUINDASTE TADANO"
+    ]
+  },
+  {
+    "name": "USIMIG MANUTENÇÃO E SERVIÇOS (ÂNGELO / 9491347805)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 31.280 RXA2D24",
+      "CAMINHÃO VOLKSWAGEN 31.280 RWL4I03",
+      "GUINDASTE SANY STC 75",
+      "GUINDASTE MADAL MD300"
+    ]
+  },
+  {
+    "name": "VIRT (LUCIANACRISTINAPINHEIRO@GMAIL.COM/LUCIANA)",
+    "equipaments": [
+      "CARREGADEIRA SEM 638 QC"
+    ]
+  },
+  {
+    "name": "ZEZÉ (991390001)",
+    "equipaments": [
+      "CAMINHÃO MERCEDES HPC-2437"
+    ]
+  },
+  {
+    "name": "ZIRANLOG TRANSPORTES (559192006731/MAURÍCIO)",
+    "equipaments": [
+      "EMPILHADEIRA YALE NP-O5",
+      "CONTRA-PESOS DA EMPILHADEIRA YALE NP-O5",
+      "CAMINHÃO VOLKSWAGEN 28.880 LQN4G07",
+      "CAMINHÃO VOLKSWAGEN 19-320 TITAN LLI-2510",
+      "EMPILHADEIRA REACH STACKER"
+    ]
+  },
+  {
+    "name": "ZORTEA CONSTRUÇÕES LTDA (TALITA.SANTOS@ZORTEA.COM.BR / TALITA)",
+    "equipaments": [
+      "RETROESCAVADEIRA JCB 0005",
+      "GUINDASTE SANY STC 800 GDH 0016",
+      "ESCAVADEIRA HIDRAÚLICA EHI00016",
+      "RETROESCAVADEIRA RET 00013",
+      "MANIPULADORA JCB MTE000014",
+      "MANIPULADORA JCB MTE000012",
+      "CARREGADEIRA 000020",
+      "CAMINHÃO VOLVO CME-0005 HRO-7729",
+      "CAMINHÃO F12 CM-0003 JZH-1267",
+      "GUINDAUTO BAF-9286",
+      "GUINDASTE GROOVE GDH00020",
+      "CAMINHÃO VOLKSWAGEN 17-230 CBO-00003 BDD8D66",
+      "MINI-ESCAVADEIRA DOOSY",
+      "CAMINHÃO VOLKSWAGEN WORKER 15.190 BAB-6366",
+      "TANQUE DE COMBUSTÍVEL TCO0009",
+      "CARREGADEIRA PCA 000024",
+      "GUINDASTE XCMG BR800 GDH 00022",
+      "ROMPEDOR ROH 00008",
+      "MANIPULADOR JCB MTE-00023",
+      "CAMINHÃO VOLKSWAGEN FHN2E64 CME-00012",
+      "CAMINHÃO VOLKSWAGEN 19-320 TRACTOR DVT2B35 CME-00016"
+    ]
+  }
 ]
