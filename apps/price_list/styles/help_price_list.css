@@ -683,7 +683,7 @@ header h2{
 
 .edit-price-list-section > .send-server-steps-section > .container > .title-container{
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
 }
 
@@ -753,4 +753,41 @@ header h2{
 .edit-price-list-section > .send-server-steps-section > .container > .arrow-symbol-container i{
     font-size:35px;
     color: #d61e1e;
+}
+
+/* edit-price-list-section -> error-msg-section */
+
+.edit-price-list-section > .error-msg-section{
+    margin:1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-price-list-section > .error-msg-section > .container > .title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-price-list-section > .error-msg-section > .container > .title-container h3{
+    font-size: 25px;
+    padding: 8px 3rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.edit-price-list-section > .error-msg-section > .container > .text-container{
+    margin: 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-price-list-section > .error-msg-section > .container > .image-container{
+    margin:1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
