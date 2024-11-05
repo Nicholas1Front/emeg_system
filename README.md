@@ -17,8 +17,10 @@ Sistema para gerenciar as informações dos clientes. As funcionalidades incluem
 
 - [Ajuda com Controle de Clientes](https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/help_customer_base_plataform.html)
 
-### 4. **Tabela de Preços** (em breve)
-Sistema para manter e consultar uma tabela de preços dos serviços e equipamentos oferecidos.
+### 4. **Tabela de Preços** (já desenvolvido)
+Sistema para manter e consultar uma tabela de preços dos serviços e equipamentos oferecidos. As funcionalidades incluem : pesquisa de serviços especifícos, consulta de todos os serviços existentes, **adição, exclusão e edição de dados de serviços**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `services.json` usando a API do GitHub.
+
+- [Ajuda com Tabela de Preços](https://nicholas1front.github.io/emeg_system/apps/price_list/help_price_list.html)
 
 ### 5. **Controle de Estoque** (em breve)
 Um sistema para gerenciar o estoque de equipamentos e materiais.

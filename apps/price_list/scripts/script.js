@@ -847,7 +847,9 @@ async function addServiceProcess(){
     console.log(findInArray);
 
     if(findInArray === undefined){
-        await verifyPasswordProcess(addServiceLogic, "Serviço adicionado com sucesso !");
+        /* in a near future the confirmation process in this function will be implemented */
+        await addServiceLogic();
+        await showMessagePopup("sucessMsg", "Serviço adicionado com sucesso !");
         return;
     }else{
         await showMessagePopup("errorMsg", "O serviço já existe ! Tente novamente !");
