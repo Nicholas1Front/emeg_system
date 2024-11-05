@@ -492,6 +492,7 @@ header h2{
 /* footer */
 
 footer{
+    z-index: -4;
     width:100%;
     background-color: #d61e1e;
     position:absolute;

@@ -336,7 +336,7 @@ header h2{
 
 .main-hub-section{
     margin:1.5rem 0;
-    display:none;
+    display:block;
 }
 
 .main-hub-section > .main-hub-container{
@@ -718,7 +718,7 @@ header h2{
 
 .edit-price-list-section{
     margin-top:1.5rem;
-    display:block;
+    display:none;
 }
 
 .edit-price-list-section > .main-hub-container_edit-price-list{
@@ -1133,4 +1133,23 @@ header h2{
 .edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-price-input_update-item{
     width:30%;
     padding-left:8px;
+}
+
+/* footer */
+
+footer{
+    z-index: -4;
+    width:100%;
+    background-color: #d61e1e;
+    position:absolute;
+    margin-top:28%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer h3{
+    font-size:14px;
+    font-weight: normal;
+    padding:0.9rem 0;
 }
