@@ -35,6 +35,7 @@ Esses sistemas foram projetados para serem utilizados por meio de download das p
 - [Hub Principal de Apps](https://nicholas1front.github.io/emeg_system/apps/main_hub/main_hub.html)
 - [Criação de Orçamentos](https://nicholas1front.github.io/emeg_system/apps/budget_plataform/budget_plataform.html)
 - [Controle de Clientes](https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/customer_base_plataform.html)
+- [Tabela de Preços](https://nicholas1front.github.io/emeg_system/apps/price_list/price_list.html)
 
 ### Requisitos
 Para usar o sistema, você só precisa de um navegador moderno.
