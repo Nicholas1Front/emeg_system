@@ -411,7 +411,7 @@ header h2{
 
 .edit-price-list-section{
     margin-top:1.5rem;
-    display: block;
+    display: none;
 }
 
 /* edit-price-list-section -> feature-introduction-section*/
@@ -790,4 +790,22 @@ header h2{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+/* footer */
+
+footer{
+    width:100%;
+    background-color: #d61e1e;
+    position:absolute;
+    margin-top:0.5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer h3{
+    font-size:14px;
+    font-weight: normal;
+    padding:0.9rem 0;
 }
