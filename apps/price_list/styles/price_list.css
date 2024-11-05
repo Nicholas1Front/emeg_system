@@ -1134,3 +1134,22 @@ header h2{
     width:30%;
     padding-left:8px;
 }
+
+/* footer */
+
+footer{
+    z-index: -4;
+    width:100%;
+    background-color: #d61e1e;
+    position:absolute;
+    margin-top:28%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer h3{
+    font-size:14px;
+    font-weight: normal;
+    padding:0.9rem 0;
+}

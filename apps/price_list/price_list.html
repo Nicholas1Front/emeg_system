@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabela de preços</title>
-    <link rel="stylesheet" href="../price_list/styles/price_list.css">
+    <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/price_list/styles/price_list.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,276 +67,280 @@
 
 
     <div class="price-list-system-container">
-    <header>
-        <div class="back-hub-apps-control">
-            <a href="https://nicholas1front.github.io/emeg_system/apps/main_hub/main_hub.html">
-                <i class="fa-solid fa-house"></i>
-                <span>Voltar para o hub de apps</span>
-            </a>
-        </div>
-
-        <img src="https://nicholas1front.github.io/emeg_system/assets/images/emeg_symbol_white.png">
-
-        <h2>Tabela de preços</h2>
-
-        <div class="help-page-link-control">
-            <a href="https://nicholas1front.github.io/emeg_system/apps/price_list/help_price_list.html">
-                <i class="fa-solid fa-circle-question"></i>
-                <span>Ajuda</span>
-            </a>
-        </div>
-    </header>
-
-    <section class="main-hub-section">
-        <div class="main-hub-container">
-            <button id="consult-price-list-btn">
-                Pesquisar item especifico da tabela
-                <i class="fa-solid fa-magnifying-glass-dollar"></i>
-            </button>
-
-            <button id="price-list-show-btn">
-                Mostrar tabela completa
-                <i class="fa-solid fa-clipboard-list"></i>
-            </button>
-
-            <button id="edit-price-list-btn">
-                Editar tabela
-                <i class="fa-solid fa-pen-to-square"></i>
-            </button>
-
-        </div>
-    </section>
-
-    <section class="consult-price-list-section">
-
-        <div class="back-home-control">
-            <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
-            <h3>// Pesquisar item especifico da tabela</h3>
-        </div>
-
-        <div class="title-container">
-            <div class="line"></div>
-            
-            <div class="title-control">
-                <h3>Pesquisar item</h3>
-                <h5>Insira as informações adiante para pesquisar um item especifico na tabela</h5>
+        <header>
+            <div class="back-hub-apps-control">
+                <a href="https://nicholas1front.github.io/emeg_system/apps/main_hub/main_hub.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Voltar para o hub de apps</span>
+                </a>
             </div>
 
-            <div class="line"></div>
-        </div>
+            <img src="https://nicholas1front.github.io/emeg_system/assets/images/emeg_symbol_white.png">
 
-        <div class="search-input-container">
-            <select id="service-type_select-search">
-                <option value=""></option>
-                <option value="HIDRAÚLICO">HIDRAÚLICO</option>
-                <option value="MECÂNICO">MECÂNICO</option>
-                <option value="ELÉTRICO">ELÉTRICO</option>
-            </select>
-            <div class="service-name-input-control">
-                <input type="text" id="service-name-input-search" autocomplete="off"/>
-                <div class="service-name-options-control">
-                    <div class="service-name-option">TROCA REPARO</div>
-                    <div class="service-name-option">MONTAGEM E USINAGEM MOTOR</div>
-                </div>
+            <h2>Tabela de preços</h2>
+
+            <div class="help-page-link-control">
+                <a href="https://nicholas1front.github.io/emeg_system/apps/price_list/help_price_list.html">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Ajuda</span>
+                </a>
             </div>
-            <button id="consult-price-list_search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
+        </header>
 
-        <div class="consult-price-list_result-container">
-            <div class="title-container">
-                <h3>Resultados da pesquisa</h3>
-                <div class="line"></div>
-            </div>
+        <section class="main-hub-section">
+            <div class="main-hub-container">
+                <button id="consult-price-list-btn">
+                    Pesquisar item especifico da tabela
+                    <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                </button>
 
-            <div class="consult-price-list_show-control">
-                <div class="consult-price-list_label-control">
-                    <h3 class="service-type-label">Tipo de serviço</h3>
-                    <h3 class="service-description-label">Descrição do serviço</h3>
-                    <h3 class="service-price-label">Preço base</h3>
-                </div>
+                <button id="price-list-show-btn">
+                    Mostrar tabela completa
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </button>
 
-                <div class="consult-price-list_show-item">
-                    <span class="service-type_span">HIDRAÚLICO</span>
-                    <span class="service-description_span">TROCA REPARO CILINDRO DE ELEVAÇÃO</span>
-                    <span class="service-price_span">R4 435</span>
-                </div>
+                <button id="edit-price-list-btn">
+                    Editar tabela
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
 
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section class="price-list-show-section">
-
-        <div class="back-home-control">
-            <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
-            <h3>// Mostrar tabela completa</h3>
-        </div>
-
-        <div class="price-list-show-container">
-            <div class="title-container">
-                <div class="line"></div>
-
-                <div class="title-control">
-                    <h3>Tabela de preços completa</h3>
-                    <h5>Todos os serviços presentes nesta tabela de preço estão disponíveis abaixo</h5>
-                </div>
-
-                <div class="line"></div>
-            </div>
-
-            <div class="price-list-show-control">
-
-                <div class="price-list-show-label">
-                    <h3 class="service-type-label">Tipo de serviço</h3>
-                    <h3 class="service-description-label">Descrição do serviço</h3>
-                    <h3 class="service-price-label">Preço base</h3>
-                </div>
-
-                <div class="price-list-show-item">
-                    <span class="price-list-item_service-type">HIDRAÚLICO</span>
-                    <span class="price-list-item_service-description">TROCA REPARO CILINDRO DE ELEVAÇÃO (GUINDASTE)</span>
-                    <span class="price-list-item_service-price">R$ 350</span>
-                </div>
-
-                <div class="price-list-show-item">
-                    <span class="price-list-item_service-type">ELÉTRICO</span>
-                    <span class="price-list-item_service-description">REPARO PLACA DE CIRCUITO (CAMINHÃO)</span>
-                    <span class="price-list-item_service-price">R$ 1.000</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="edit-price-list-section">
-
-        <div class="main-hub-container_edit-price-list">
+        <section class="consult-price-list-section">
 
             <div class="back-home-control">
                 <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
-                <h3>// Editar tabela</h3>
-            </div>
-
-            <button id="add-item-link-btn">Adicionar item a tabela <i class="fa-solid fa-square-plus"></i></button>
-
-            <button id="delete-item-link-btn">Excluir item da tabela <i class="fa-solid fa-square-minus"></i></button>
-
-            <button id="edit-item-link-btn">Editar item da tabela <i class="fa-solid fa-square-pen"></i></button>
-
-            <button id="send-to-server-btn">Enviar alterações para o servidor <i class="fa-solid fa-paper-plane"></i></button>
-        </div>
-
-        <div class="add-item-container_edit-price-list">
-            <div class="back-home-control">
-                <button class="back-home_edit-price-list"><i class="fa-solid fa-arrow-left-long"></i> Voltar para edição da tabela</button>
-                <h3>// Editar tabela / Adicionar item a tabela</h3>
+                <h3>// Pesquisar item especifico da tabela</h3>
             </div>
 
             <div class="title-container">
-                <h3>Adicionar item a tabela</h3>
+                <div class="line"></div>
+                
+                <div class="title-control">
+                    <h3>Pesquisar item</h3>
+                    <h5>Insira as informações adiante para pesquisar um item especifico na tabela</h5>
+                </div>
+
                 <div class="line"></div>
             </div>
 
-            <div class="input-container">
-                <select id="service-type-add-item_select">
+            <div class="search-input-container">
+                <select id="service-type_select-search">
                     <option value=""></option>
                     <option value="HIDRAÚLICO">HIDRAÚLICO</option>
                     <option value="MECÂNICO">MECÂNICO</option>
                     <option value="ELÉTRICO">ELÉTRICO</option>
                 </select>
-                <input type="text" id="service-name-add-item_input" placeholder="Digite a descrição completa do serviço e o equipamento..." autocomplete="off"/>
-                <input type="text" id="service-price-add-item_input" placeholder="Digite o preço do serviço..." autocomplete="off">
+                <div class="service-name-input-control">
+                    <input type="text" id="service-name-input-search" autocomplete="off"/>
+                    <div class="service-name-options-control">
+                        <div class="service-name-option">TROCA REPARO</div>
+                        <div class="service-name-option">MONTAGEM E USINAGEM MOTOR</div>
+                    </div>
+                </div>
+                <button id="consult-price-list_search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
 
-            <div class="button-container">
-                <button id="service-add-item_btn">Adicionar item <i class="fa-solid fa-square-plus"></i></button>
-            </div>
-        </div>
+            <div class="consult-price-list_result-container">
+                <div class="title-container">
+                    <h3>Resultados da pesquisa</h3>
+                    <div class="line"></div>
+                </div>
 
-        <div class="delete-item-container_edit-price-list">
-            <div class="back-home-control">
-                <button class="back-home_edit-price-list"><i class="fa-solid fa-arrow-left-long"></i> Voltar para edição da tabela</button>
-                <h3>// Editar tabela / Excluir item da tabela</h3>
-            </div>
+                <div class="consult-price-list_show-control">
+                    <div class="consult-price-list_label-control">
+                        <h3 class="service-type-label">Tipo de serviço</h3>
+                        <h3 class="service-description-label">Descrição do serviço</h3>
+                        <h3 class="service-price-label">Preço base</h3>
+                    </div>
 
-            <div class="title-container">
-                <h3>Excluir item da tabela</h3>
-                <div class="line"></div>
-            </div>
-
-            <div class="input-container">
-                <select id="service-type-delete-item_select">
-                    <option value=""></option>
-                    <option value="HIDRAÚLICO">HIDRAÚLICO</option>
-                    <option value="MECÂNICO">MECÂNICO</option>
-                    <option value="ELÉTRICO">ELÉTRICO</option>
-                </select>
-
-                <div class="service-name-input-control_delete-item">
-                    <input type="text" id="service-name-delete-item_input" autocomplete="off" disabled />
-                    <div class="service-name-delete-item_options-control">
-                        <div class="service-name-delete-item_option">TROCA REPARO...</div>
-                        <div class="service-name-delete-item_option">MONTAGEM DO MOTOR...</div>
+                    <div class="consult-price-list_show-item">
+                        <span class="service-type_span">HIDRAÚLICO</span>
+                        <span class="service-description_span">TROCA REPARO CILINDRO DE ELEVAÇÃO</span>
+                        <span class="service-price_span">R4 435</span>
                     </div>
 
                 </div>
-
-                <span id="service-price-delete-item_span">R$ --</span>
             </div>
+        </section>
 
-            <div class="button-container">
-                <button id="service-delete-item-btn">Excluir item <i class="fa-solid fa-square-minus"></i></button>
-            </div>
-        </div>
+        <section class="price-list-show-section">
 
-        <div class="edit-item-container_edit-price-list">
             <div class="back-home-control">
-                <button class="back-home_edit-price-list"><i class="fa-solid fa-arrow-left-long"></i> Voltar para edição da tabela</button>
-                <h3>// Editar tabela / Editar item da tabela</h3>
+                <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Mostrar tabela completa</h3>
             </div>
 
-            <div class="title-container">
-                <h3>Editar item da tabela</h3>
-                <div class="line"></div>
-            </div>
+            <div class="price-list-show-container">
+                <div class="title-container">
+                    <div class="line"></div>
 
-            <div class="input-container">
-                <select id="service-type-select_edit-item">
-                    <option value=""></option>
-                    <option value="HIDRAÚLICO">HIDRAÚLICO</option>
-                    <option value="MECÂNICO">MECÂNICO</option>
-                    <option value="ELÉTRICO">ELÉTRICO</option>
-                </select>
-                <div class="service-name-input-control_edit-item">
-                    <input type="text" id="service-name-input_edit-item" autocomplete="off" disabled/>
-                    <div class="service-name-edit-item_options-control">
-                        <div class="service-name-edit-item_option">TROCA REPARO</div>
-                        <div class="service-name-edit-item_option">MONTAGEM E USINAGEM MOTOR</div>
+                    <div class="title-control">
+                        <h3>Tabela de preços completa</h3>
+                        <h5>Todos os serviços presentes nesta tabela de preço estão disponíveis abaixo</h5>
+                    </div>
+
+                    <div class="line"></div>
+                </div>
+
+                <div class="price-list-show-control">
+
+                    <div class="price-list-show-label">
+                        <h3 class="service-type-label">Tipo de serviço</h3>
+                        <h3 class="service-description-label">Descrição do serviço</h3>
+                        <h3 class="service-price-label">Preço base</h3>
+                    </div>
+
+                    <div class="price-list-show-item">
+                        <span class="price-list-item_service-type">HIDRAÚLICO</span>
+                        <span class="price-list-item_service-description">TROCA REPARO CILINDRO DE ELEVAÇÃO (GUINDASTE)</span>
+                        <span class="price-list-item_service-price">R$ 350</span>
+                    </div>
+
+                    <div class="price-list-show-item">
+                        <span class="price-list-item_service-type">ELÉTRICO</span>
+                        <span class="price-list-item_service-description">REPARO PLACA DE CIRCUITO (CAMINHÃO)</span>
+                        <span class="price-list-item_service-price">R$ 1.000</span>
                     </div>
                 </div>
-                <span id="service-price-span_edit-item">R$ --</span>
+            </div>
+        </section>
+
+        <section class="edit-price-list-section">
+
+            <div class="main-hub-container_edit-price-list">
+
+                <div class="back-home-control">
+                    <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                    <h3>// Editar tabela</h3>
+                </div>
+
+                <button id="add-item-link-btn">Adicionar item a tabela <i class="fa-solid fa-square-plus"></i></button>
+
+                <button id="delete-item-link-btn">Excluir item da tabela <i class="fa-solid fa-square-minus"></i></button>
+
+                <button id="edit-item-link-btn">Editar item da tabela <i class="fa-solid fa-square-pen"></i></button>
+
+                <button id="send-to-server-btn">Enviar alterações para o servidor <i class="fa-solid fa-paper-plane"></i></button>
             </div>
 
-            <div class="button-container">
-                <button id="next-step-edit-item-btn">Próximo passo <i class="fa-solid fa-turn-down"></i></button>
+            <div class="add-item-container_edit-price-list">
+                <div class="back-home-control">
+                    <button class="back-home_edit-price-list"><i class="fa-solid fa-arrow-left-long"></i> Voltar para edição da tabela</button>
+                    <h3>// Editar tabela / Adicionar item a tabela</h3>
+                </div>
+
+                <div class="title-container">
+                    <h3>Adicionar item a tabela</h3>
+                    <div class="line"></div>
+                </div>
+
+                <div class="input-container">
+                    <select id="service-type-add-item_select">
+                        <option value=""></option>
+                        <option value="HIDRAÚLICO">HIDRAÚLICO</option>
+                        <option value="MECÂNICO">MECÂNICO</option>
+                        <option value="ELÉTRICO">ELÉTRICO</option>
+                    </select>
+                    <input type="text" id="service-name-add-item_input" placeholder="Digite a descrição completa do serviço e o equipamento..." autocomplete="off"/>
+                    <input type="text" id="service-price-add-item_input" placeholder="Digite o preço do serviço..." autocomplete="off">
+                </div>
+
+                <div class="button-container">
+                    <button id="service-add-item_btn">Adicionar item <i class="fa-solid fa-square-plus"></i></button>
+                </div>
             </div>
 
-            <div id="update-item-input-container" class="input-container">
-                <select id="service-type-select_update-item">
-                    <option value=""></option>
-                    <option value="HIDRAÚLICO">HIDRAÚLICO</option>
-                    <option value="MECÂNICO">MECÂNICO</option>
-                    <option value="ELÉTRICO">ELÉTRICO</option>
-                </select>
-                <input type="text" id="service-name-input_update-item" autocomplete="off"/>
-                <input type="text" id="service-price-input_update-item" autocomplete="off"/>
+            <div class="delete-item-container_edit-price-list">
+                <div class="back-home-control">
+                    <button class="back-home_edit-price-list"><i class="fa-solid fa-arrow-left-long"></i> Voltar para edição da tabela</button>
+                    <h3>// Editar tabela / Excluir item da tabela</h3>
+                </div>
+
+                <div class="title-container">
+                    <h3>Excluir item da tabela</h3>
+                    <div class="line"></div>
+                </div>
+
+                <div class="input-container">
+                    <select id="service-type-delete-item_select">
+                        <option value=""></option>
+                        <option value="HIDRAÚLICO">HIDRAÚLICO</option>
+                        <option value="MECÂNICO">MECÂNICO</option>
+                        <option value="ELÉTRICO">ELÉTRICO</option>
+                    </select>
+
+                    <div class="service-name-input-control_delete-item">
+                        <input type="text" id="service-name-delete-item_input" autocomplete="off" disabled />
+                        <div class="service-name-delete-item_options-control">
+                            <div class="service-name-delete-item_option">TROCA REPARO...</div>
+                            <div class="service-name-delete-item_option">MONTAGEM DO MOTOR...</div>
+                        </div>
+
+                    </div>
+
+                    <span id="service-price-delete-item_span">R$ --</span>
+                </div>
+
+                <div class="button-container">
+                    <button id="service-delete-item-btn">Excluir item <i class="fa-solid fa-square-minus"></i></button>
+                </div>
             </div>
 
-            <div id="update-item-btn-container" class="button-container">
-                <button id="edit-item-btn">Editar item<i class="fa-solid fa-square-pen"></i></button>
+            <div class="edit-item-container_edit-price-list">
+                <div class="back-home-control">
+                    <button class="back-home_edit-price-list"><i class="fa-solid fa-arrow-left-long"></i> Voltar para edição da tabela</button>
+                    <h3>// Editar tabela / Editar item da tabela</h3>
+                </div>
+
+                <div class="title-container">
+                    <h3>Editar item da tabela</h3>
+                    <div class="line"></div>
+                </div>
+
+                <div class="input-container">
+                    <select id="service-type-select_edit-item">
+                        <option value=""></option>
+                        <option value="HIDRAÚLICO">HIDRAÚLICO</option>
+                        <option value="MECÂNICO">MECÂNICO</option>
+                        <option value="ELÉTRICO">ELÉTRICO</option>
+                    </select>
+                    <div class="service-name-input-control_edit-item">
+                        <input type="text" id="service-name-input_edit-item" autocomplete="off" disabled/>
+                        <div class="service-name-edit-item_options-control">
+                            <div class="service-name-edit-item_option">TROCA REPARO</div>
+                            <div class="service-name-edit-item_option">MONTAGEM E USINAGEM MOTOR</div>
+                        </div>
+                    </div>
+                    <span id="service-price-span_edit-item">R$ --</span>
+                </div>
+
+                <div class="button-container">
+                    <button id="next-step-edit-item-btn">Próximo passo <i class="fa-solid fa-turn-down"></i></button>
+                </div>
+
+                <div id="update-item-input-container" class="input-container">
+                    <select id="service-type-select_update-item">
+                        <option value=""></option>
+                        <option value="HIDRAÚLICO">HIDRAÚLICO</option>
+                        <option value="MECÂNICO">MECÂNICO</option>
+                        <option value="ELÉTRICO">ELÉTRICO</option>
+                    </select>
+                    <input type="text" id="service-name-input_update-item" autocomplete="off"/>
+                    <input type="text" id="service-price-input_update-item" autocomplete="off"/>
+                </div>
+
+                <div id="update-item-btn-container" class="button-container">
+                    <button id="edit-item-btn">Editar item<i class="fa-solid fa-square-pen"></i></button>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <footer>
+            <h3>© EMEG Guindaste - Todos os Direitos Reservados.</h3>
+        </footer>
     </div>
-    <script src="scripts/script.js"></script>
+    <script src="https://nicholas1front.github.io/emeg_system/apps/price_list/scripts/script.js"></script>
 </body>
 </html>
