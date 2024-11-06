@@ -892,6 +892,7 @@ async function addServiceLogic(){
 
 addItemLink.addEventListener("click", async()=>{
     await cleanAllInputs();
+    await hideHtmlElement([mainHubContainer_editPriceList]);
     await showHtmlElement([addItemContainer_editPriceList], "block");
 });
 
@@ -985,6 +986,7 @@ async function deleteItemLogic(){
 
 deleteItemLink.addEventListener("click", async ()=>{
     await cleanAllInputs();
+    await hideHtmlElement([mainHubContainer_editPriceList]);
     await showHtmlElement([deleteItemContainer_editPriceList],"block");
 })
 
@@ -1137,6 +1139,7 @@ async function editItemLogic(){
 
 editItemLink.addEventListener("click", async()=>{
     await cleanAllInputs();
+    await hideHtmlElement([mainHubContainer_editPriceList]);
     await showHtmlElement([editItemContainer_editPriceList], "block");
 })
 
