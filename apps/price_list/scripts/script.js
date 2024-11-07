@@ -253,7 +253,7 @@ async function clickHandleListener(){
 
         await backHomeProcess_editPriceListSection();
 
-        await clearAllInputs();
+        await cleanAllInputs();
     }else{
         wrongPasswordSpan.style.display = "block";
         
@@ -276,7 +276,7 @@ async function keyPressHandleListener(event){
 
             await backHomeProcess_editPriceListSection();
 
-            await clearAllInputs();
+            await cleanAllInputs();
         }else{
             wrongPasswordSpan.style.display = "block";
             
