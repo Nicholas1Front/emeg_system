@@ -40,7 +40,7 @@ const dateInput = document.querySelector("#date-input");
 const completionDeadlineInput = document.querySelector("#completion-deadline-input");
 const paymentTermsInput = document.querySelector("#payment-terms-input");
 const guaranteeInput = document.querySelector("#guarantee-input");
-const NextStepContainer = document.querySelector(".next-step-container");
+const nextStepContainer = document.querySelector(".next-step-container");
 const infosNextStepBtn = document.querySelector("#infos-next-step-btn");
 
 //functions
@@ -150,8 +150,8 @@ async function validateSelectsProcess(){
         await showPopupMsg("Alguns campos estão vazios !", "adviceMsg");
     };
 
-    await showHtmlElement(partsSection,servicesSection,totalBudgetProdSecion,observationsSection,generateBudgetSection);
-    await hideHtmlElement(NextStepContainer);
+    await showHtmlElement([partsSection,servicesSection,totalBudgetProdSection,observationsSection,generateBudgetSection], "block");
+    await hideHtmlElement([nextStepContainer]);
 }
 
 
@@ -186,17 +186,17 @@ async function showPopupMsg(message , messageType ){
 async function closePopupMsg(){
     msgControl.style.marginTop = "43%";
     msgControl.style.transition = "0.5s";
-    hideHtmlElement([msgControl],);
+    hideHtmlElement([msgControl]);
 }
 
 async function showHtmlElement([...elements], displayType){
-    elements.forEach(element =>{
+    elements.forEach((element) =>{
         element.style.display = `${displayType}`;
     })
 }
 
 async function hideHtmlElement([...elements]){
-    elements.forEach(element =>{
+    elements.forEach((element) =>{
         element.style.display = "none";
     })
 }
@@ -217,10 +217,7 @@ upperCaseInputs([
     notIdentifiedInput,
     guaranteeInput,
     paymentTermsInput,
-    completionDeadlineInput,
-    partDescriptionInput,
-    serviceDescriptionInput,
-    observationsTextarea
+    completionDeadlineInput
 ])
 
 //event listeners
@@ -451,6 +448,14 @@ async function addPartItemProcess(){
 
 }
 
+//booting
+
+partsItems_handleEventListeners();
+
+upperCaseInputs([
+    partDescriptionInput
+])
+
 // event listerers
 
 partAddItemBtn.addEventListener("click", async ()=>{
@@ -597,6 +602,14 @@ async function addServiceItemProcess(){
     ]);
 }
 
+//booting
+
+servicesItems_handleEventListeners();
+
+upperCaseInputs([
+    serviceDescriptionInput
+])
+
 // event listeners
 
 serviceAddItemBtn.addEventListener("click", ()=>{
@@ -620,7 +633,7 @@ serviceUnitValueInput.addEventListener('keydown',(event)=>{
 //total-budget-prod-section
 
 //elements
-const totalBudgetProdSecion = document.querySelector(".total-budget-prod-section");
+const totalBudgetProdSection = document.querySelector(".total-budget-prod-section");
 
 //observations-section
 
