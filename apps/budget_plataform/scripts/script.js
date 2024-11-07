@@ -635,7 +635,92 @@ serviceUnitValueInput.addEventListener('keydown',(event)=>{
 //elements
 const totalBudgetProdSection = document.querySelector(".total-budget-prod-section");
 
-//observations-section
+// server message popup
+
+// elements
+const serverMessagePopup = document.querySelector(".server-message-popup");
+const closeServerMessagePopupBtn = document.querySelector(".close-server-message-popup-btn")
+const serverMessageSymbol = document.querySelector(".server-message-control i");
+const serverMessageSpan = document.querySelector(".server-message-span");
+
+// functions
+
+async function showServerMessagePopup(messageType, messageSpan){
+    serverMessageSymbol.className = "";
+
+    if(messageType === "errorMsg"){
+        serverMessagePopup.style.backgroundColor = "#d61e1e"; //red color
+        serverMessagePopup.style.color = "#fff";
+        serverMessageSymbol.className = `fa-solid fa-triangle-exclamation`;
+    }
+
+    if(messageType === "sucessMsg"){
+        serverMessagePopup.style.backgroundColor = "#42f55a"; //green color
+        serverMessagePopup.style.color = "#fff"
+        serverMessageSymbol.className = `fa-solid fa-circle-check`;
+    }
+
+    serverMessageSpan.innerText = messageSpan ;
+
+    await showHtmlElement([serverMessagePopup], "block");
+
+    setTimeout(()=>{
+        hideHtmlElement([serverMessagePopup]);
+    },5000);
+}
+
+//event listeners
+
+closeServerMessagePopupBtn.addEventListener("click",()=>{
+    hideHtmlElement([serverMessagePopup]);
+});
+
+// confirmation popup
+
+// elements
+const overlay = document.querySelector(".overlay");
+const closeConfirmationPopupBtn = document.querySelector("#close-confirmation-popup-btn");
+const confirmationPasswordInput = document.querySelector("#confirmation-password-input");
+const wrongPasswordSpan = document.querySelector(".wrong-password-span");
+const confirmationPopupBtn = document.querySelector("#confirmation-popup-btn");
+const confirmationPassword = "88320940";
+
+function showConfirmationPopup(){
+    overlay.style.display = "flex";
+    priceListSystemContainer.style.filter = "blur(9px)";
+    wrongPasswordSpan.style.display = "none";
+}
+
+function closeConfirmationPopup(){
+    overlay.style.display="none";
+    priceListSystemContainer.style.filter = "blur(0)"
+}
+
+async function confirmationProcess(){
+    showConfirmationPopup();
+
+    confirmationPopupBtn.addEventListener("click",()=>{
+        if(confirmationPasswordInput.value === confirmationPassword){
+            // calculate and show budget number
+            displayBudgetProcess();
+            //send new number to server
+        }else{
+            wrongPasswordSpan.style.display = "block";
+        
+            setTimeout(()=>{
+                wrongPasswordSpan.style.display = "none";
+            },10000);
+
+            confirmationPasswordInput.addEventListener("focus",()=>{
+                wrongPasswordSpan.style.display = "none";
+            })
+
+            return;
+        }
+    })
+}
+
+// observations-section
 
 //elements
 
@@ -648,6 +733,19 @@ const observationsTextarea = document.querySelector("#observations-textarea");
 const generateBudgetSection = document.querySelector(".generate-budget-section");
 const generateBudgetBtn = document.querySelector("#generate-budget-btn");
 
+// functions
+
+async function verifyBudgetCode(){
+    if(budgetCodeSpan === ""){
+        console.log("pedir senha");
+        console.log("adicionar mais um ao numero do orçamento e subir para o servidor");
+        return;
+    }
+
+
+}
+
+
 //budget finished 
 
 //elements
@@ -656,8 +754,6 @@ const budgetFinishedContent = document.querySelector(".budget-finished-content-c
 
 const clientSpanResult = document.querySelector("#client-span-result");
 const equipamentSpanResult = document.querySelector("#equipament-span-result");
-let budgetCodeValue = "";
-let budgetNameArchive = null;
 const budgetCodeSpan = document.querySelector("#budget-code-span"); 
 const paymentTermsSpanResult = document.querySelector("#payment-terms-span-result");
 const completionDeadlineSpanResult = document.querySelector("#completion-deadline-span-result");
@@ -682,13 +778,14 @@ const backBudgetBtn = document.querySelector("#back-budget-btn");
 //functions
 
 function addHeaderFinishedProcess(){
-    clientSpanResult.innerHTML = "";
-    equipamentSpanResult.innerHTML = "";
-    addBudgetCodeFinishedProcess(); // generate and add budget number in html code
-    paymentTermsSpanResult.innerHTML = "";
-    guaranteeSpanResult.innerHTML = "";
-    dateSpanResult.innerHTML = "";
-    completionDeadlineSpanResult.innerHTML = "";    
+    clearHtmlElement([
+        clientSpanResult,
+        equipamentSpanResult,
+        paymentTermsSpanResult,
+        guaranteeSpanResult,
+        dateSpanResult,
+        completionDeadlineSpanResult
+    ])
 
     clientSpanResult.innerText = clientsSelectList.value;
 
@@ -723,66 +820,6 @@ function addHeaderFinishedProcess(){
 
     document.querySelector("title").textContent = budgetName;
 }
-
-function addBudgetCodeFinishedProcess(){
-    budgetCodeSpan.innerText = "";
-
-    if(budgetCodeValue.length == 10){
-        budgetCodeSpan.innerText = budgetCodeValue;
-        return;
-    }
-
-    budgetCodeValue = createBudgetCode();
-    budgetCodeSpan.innerText = budgetCodeValue;
-}
-
-function createBudgetCode(){
-    let dateToday = new Date();
-    let month = dateToday.getMonth() + 1;
-    let year = dateToday.getFullYear();
-    dateToday = `${month}${year}`;
-
-    function generateFourAleatoryNumbers(){
-        let digits = "";
-
-        for (let i = 1; i <= 4 ; i++){
-            let number = Math.floor(Math.random() * 9);
-
-            number = number.toString();
-
-            digits += number;
-        }
-
-        return digits; 
-    }
-    
-    budgetCodeValue = `#${dateToday}${generateFourAleatoryNumbers()}`;
-
-    return budgetCodeValue;
-}
-
-
-function createBudgetName(){
-    clientName = clientSpanResult.innerText;
-    clientName = clientName.split("(");
-    clientName = clientName[0].trim();
-
-    equipamentName = equipamentSpanResult.innerText;
-
-    budgetCodeValue = budgetCodeValue.replace("#","");
-
-    clientName = clientName.trim();
-    equipamentName = equipamentName.trim();
-    budgetCodeValue = budgetCodeValue.trim();
-
-    clientName = clientName.split(" ");
-    clientName = clientName[0];
-
-    budgetNameArchive = `ORÇAMENTO ${budgetCodeValue} ${clientName} ${equipamentName}`
-
-    return budgetNameArchive;
-}
-
 
 function createPartItemFinished(numberItem, quant , description , unitValue , totalValue){
     const itemString = 
@@ -957,8 +994,8 @@ function addObservationsFinishedProcess(){
 
 function displayBudgetProcess(){
     //show budget finished and hide budget production
-    showHtmlElement(budgetFinished);
-    hideHtmlElement(budgetProduction)
+    showHtmlElement([budgetFinished],"block");
+    hideHtmlElement([budgetProduction])
     //display header informations
     
     addHeaderFinishedProcess();
@@ -1011,14 +1048,9 @@ function backHomeProcess(){
         guaranteeInput.value = "";
     }
 
-    showHtmlElement(budgetProduction);
-    hideHtmlElement(budgetFinished);
-    document.querySelector("title").textContent = "Criar orçamento EMEG"
-
-    paymentTermsSpanResult.innerHTML = "";
-    completionDeadlineSpanResult.innerHTML = "";
-    dateSpanResult.innerHTML = "";
-    guaranteeSpanResult.innerHTML= "";
+    showHtmlElement([budgetProduction],"block");
+    hideHtmlElement([budgetFinished]);
+    document.querySelector("title").textContent = "Criar orçamento EMEG";
 }
 
 
