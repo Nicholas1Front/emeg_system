@@ -159,7 +159,7 @@ function showPopupMsg(message , messageType ){
     msgSpan.innerText = message;
 
     if(messageType === "errorMsg"){
-        msgControl.style.backgroundColor = "##d61e1e";//red color
+        msgControl.style.backgroundColor = "#d61e1e";//red color
         msgControl.style.color = "white"; 
         closeMsgBtn.style.color = "white";
     }else if (messageType === "adviceMsg"){
@@ -183,18 +183,18 @@ function showPopupMsg(message , messageType ){
 }
 
 function closePopupMsg(){
-    msgControl.style.margintTop = "43%";
+    msgControl.style.marginTop = "43%";
     msgControl.style.transition = "0.5s";
     msgControl.style.display = "none";
 }
 
-function showHtmlElement(...elements){
+async function showHtmlElement([...elements], displayType){
     elements.forEach(element =>{
-        element.style.display = "block";
+        element.style.display = `${displayType}`;
     })
 }
 
-function hideHtmlElement(...elements){
+async function hideHtmlElement([...elements]){
     elements.forEach(element =>{
         element.style.display = "none";
     })
@@ -236,10 +236,10 @@ function validateOnlyNumbers(param){
     return param.replace(/[^0-9,]/g,"")
 }
 
-function clearPartsInputs(){
-    partQuantInput.value = "";
-    partDescriptionInput.value = "";
-    partUnitValueInput.value = "";
+async function clearInputs([...inputs]){
+    inputs.forEach((input)=>{
+        input.value = "";
+    })
 }
 
 function updateTotalSpan(spanGroupHtml, spanResultHtml){
@@ -267,7 +267,7 @@ function updateTotalSpan(spanGroupHtml, spanResultHtml){
 
 }
 
-function updateTotalSpans_BudgetProdSection(){
+async function updateTotalSpans_BudgetProdSection(){
     const partsItemTotalSpan = document.querySelector(".parts-item-total-span");
     const servicesItemTotalSpan = document.querySelector(".services-item-total-span");
     let partsItemsValue = 0;
@@ -360,72 +360,85 @@ function createPartItem(quantString, descriptionString, unitValueString){
     partsAddedItemsControl.appendChild(itemHtml);
 };
 
+async function partsItems_handleEventListeners(){
+    /*get itens all time this function is called*/
 
-function addPartItemProcess(){
+    let partsItem = document.querySelectorAll(".parts-item");
+    let editBtnOfParts = document.querySelectorAll(".edit-btn-of-parts");
+    let deleteBtnOfParts = document.querySelectorAll('.delete-btn-of-parts');
+
+    //event listeners to delete itens
+    for(let i = 0 ; i < partsItem.length ; i++){
+        deleteBtnOfParts[i].addEventListener("click", ()=>{
+            partsItem[i].remove();
+            updateTotalSpan("parts-total-value-span", "parts-item-total-span");
+            updateTotalSpans_BudgetProdSection();
+        })   
+    };
+
+    //event listeners to edit itens
+
+    for(let i = 0 ; i < partsItem.length ; i++){
+       editBtnOfParts[i].addEventListener("click", ()=>{
+            let partsQuantSpan = document.querySelectorAll(".parts-quant-span");
+            let partsDescriptionSpan = document.querySelectorAll(".parts-description-span");
+            let partsUnitValueSpan = document.querySelectorAll(".parts-unit-value-span");
+
+            partQuantInput.value = partsQuantSpan[i].innerText;
+            partDescriptionInput.value = partsDescriptionSpan[i].innerText;
+            
+            let unitValueUpdated = partsUnitValueSpan[i].innerText.slice(2); // took off the R$
+
+            partUnitValueInput.value = unitValueUpdated;
+
+            partsItem[i].remove();
+
+            updateTotalSpan("parts-total-value-span", "parts-item-total-span");
+            updateTotalSpans_BudgetProdSection();
+       })   
+    };
+}
+
+async function addPartItemProcess(){
     //input validation
     if(partQuantInput.value === "" && partDescriptionInput.value === "" && partUnitValueInput.value === ""){
-        showPopupMsg("Insira as informações das peças aplicadas antes de prosseguir !" , "errorMsg")
+        showPopupMsg("Insira as informações das peças aplicadas antes de prosseguir !" , "errorMsg");
+        return;
     }
-    else if(partQuantInput.value ===""){
+
+    if(partQuantInput.value ===""){
         showPopupMsg("Insira a quantidade de peças !", "errorMsg");
         return;
-    }else if(partDescriptionInput.value ===""){
+    }
+
+    if(partDescriptionInput.value ===""){
         showPopupMsg("Insira a descrição da peça !", "errorMsg");
         return;
-    }else if(partUnitValueInput.value ===""){
+    }
+
+    if(partUnitValueInput.value ===""){
         showPopupMsg("Insira um valor unitário !" , "errorMsg");
         return;
-    }else{
-        createPartItem(partQuantInput.value, partDescriptionInput.value, partUnitValueInput.value)
-        updateTotalSpan("parts-total-value-span", "parts-item-total-span");
-        clearPartsInputs();
-
-        /*get itens all time this function is called*/
-
-        let partsItem = document.querySelectorAll(".parts-item");
-        let editBtnOfParts = document.querySelectorAll(".edit-btn-of-parts");
-        let deleteBtnOfParts = document.querySelectorAll('.delete-btn-of-parts');
-    
-        //event listeners to delete itens
-        for(let i = 0 ; i < partsItem.length ; i++){
-            deleteBtnOfParts[i].addEventListener("click", ()=>{
-                partsItem[i].remove();
-                updateTotalSpan("parts-total-value-span", "parts-item-total-span");
-                updateTotalSpans_BudgetProdSection();
-            })   
-        };
-
-        //event listeners to edit itens
-
-        for(let i = 0 ; i < partsItem.length ; i++){
-           editBtnOfParts[i].addEventListener("click", ()=>{
-                let partsQuantSpan = document.querySelectorAll(".parts-quant-span");
-                let partsDescriptionSpan = document.querySelectorAll(".parts-description-span");
-                let partsUnitValueSpan = document.querySelectorAll(".parts-unit-value-span");
-
-                partQuantInput.value = partsQuantSpan[i].innerText;
-                partDescriptionInput.value = partsDescriptionSpan[i].innerText;
-                
-                let unitValueUpdated = partsUnitValueSpan[i].innerText.slice(2); // took off the R$
-
-                partUnitValueInput.value = unitValueUpdated;
-
-                partsItem[i].remove();
-
-                updateTotalSpan("parts-total-value-span", "parts-item-total-span");
-                updateTotalSpans_BudgetProdSection();
-           })   
-        };
-
-
     }
+
+    createPartItem(partQuantInput.value, partDescriptionInput.value, partUnitValueInput.value)
+    updateTotalSpan("parts-total-value-span", "parts-item-total-span");
+
+    await partsItems_handleEventListeners();
+
+    await clearInputs([
+        partQuantInput,
+        partDescriptionInput,
+        partUnitValueInput
+    ]);
+
 }
 
 // event listerers
 
-partAddItemBtn.addEventListener("click", ()=>{
-    addPartItemProcess();
-    updateTotalSpans_BudgetProdSection();
+partAddItemBtn.addEventListener("click", async ()=>{
+    await addPartItemProcess();
+    await updateTotalSpans_BudgetProdSection();
 });
 
 partUnitValueInput.addEventListener('input', (event)=>{
@@ -434,10 +447,10 @@ partUnitValueInput.addEventListener('input', (event)=>{
     event.target.value = updateValue;
 })
 
-partUnitValueInput.addEventListener('keydown',(event)=>{
+partUnitValueInput.addEventListener('keydown',async (event)=>{
     if(event.key === "Enter"){
-        addPartItemProcess();
-        updateTotalSpans_BudgetProdSection();
+        await addPartItemProcess();
+        await updateTotalSpans_BudgetProdSection();
     }
 })
 
@@ -499,63 +512,72 @@ function createServiceItem(quantString , descriptionString , unitValueString){
     servicesAddedItemsControl.appendChild(itemHtml);
 }
 
-function addServiceItemProcess(){
+async function servicesItems_handleEventListeners(){
+    let servicesItem = document.querySelectorAll(".services-item");
+    let editBtnOfServices = document.querySelectorAll(".edit-btn-of-services");
+    let deleteBtnOfServices = document.querySelectorAll(".delete-btn-of-services");
+
+    for(let i = 0 ; i < servicesItem.length ; i++){
+        deleteBtnOfServices[i].addEventListener('click', ()=>{
+            servicesItem[i].remove();
+            updateTotalSpan("service-total-value-span", "services-item-total-span");
+            updateTotalSpans_BudgetProdSection();
+        });
+    }
+
+    for(let i = 0 ; i < servicesItem.length ; i++){
+        editBtnOfServices[i].addEventListener("click", ()=>{
+            let serviceQuantSpan = document.querySelectorAll(".service-quant-span");
+            let serviceDescriptionSpan = document.querySelectorAll(".service-description-span");
+            let serviceUnitValueSpan = document.querySelectorAll(".service-unit-value-span");
+
+            let unitValue = serviceUnitValueSpan[i].innerText.slice(2);
+
+            serviceQuantInput.value = serviceQuantSpan[i].innerText;
+            serviceDescriptionInput.value = serviceDescriptionSpan[i].innerText;
+            serviceUnitValueInput.value = unitValue;
+
+            servicesItem[i].remove();
+
+            updateTotalSpan("service-total-value-span", "services-item-total-span");
+            updateTotalSpans_BudgetProdSection();
+        })
+    }
+}
+
+async function addServiceItemProcess(){
     //validation inputs
 
     if(serviceQuantInput.value === "" && serviceDescriptionInput.value === "" && serviceUnitValueInput.value === ""){
         showPopupMsg("Insira as informações do serviços executados antes de prosseguir !" , "errorMsg");
         return;
-    }else if(serviceQuantInput.value === ""){
+    }
+    if(serviceQuantInput.value === ""){
         showPopupMsg("Insira a quantidade de serviços executados !", "errorMsg");
         return;
-    }else if(serviceDescriptionInput.value === ""){
+    }
+
+    if(serviceDescriptionInput.value === ""){
         showPopupMsg("Insira a descrição dos serviços executados !", "errorMsg");
         return;
-    }else if(serviceUnitValueInput.value === ""){
-        showPopupMsg("Insira o valor unitário do serviço executado !", "errorMsg");
-        return
-    }else{
-        createServiceItem(serviceQuantInput.value, serviceDescriptionInput.value , serviceUnitValueInput.value);
-        updateTotalSpan("service-total-value-span", "services-item-total-span");
-        clearServicesInputs();
-
-        let servicesItem = document.querySelectorAll(".services-item");
-        let editBtnOfServices = document.querySelectorAll(".edit-btn-of-services");
-        let deleteBtnOfServices = document.querySelectorAll(".delete-btn-of-services");
-
-        for(let i = 0 ; i < servicesItem.length ; i++){
-            deleteBtnOfServices[i].addEventListener('click', ()=>{
-                servicesItem[i].remove();
-                updateTotalSpan("service-total-value-span", "services-item-total-span");
-                updateTotalSpans_BudgetProdSection();
-            });
-        }
-
-        for(let i = 0 ; i < servicesItem.length ; i++){
-            editBtnOfServices[i].addEventListener("click", ()=>{
-                let serviceQuantSpan = document.querySelectorAll(".service-quant-span");
-                let serviceDescriptionSpan = document.querySelectorAll(".service-description-span");
-                let serviceUnitValueSpan = document.querySelectorAll(".service-unit-value-span");
-
-                let unitValue = serviceUnitValueSpan[i].innerText.slice(2);
-
-                serviceQuantInput.value = serviceQuantSpan[i].innerText;
-                serviceDescriptionInput.value = serviceDescriptionSpan[i].innerText;
-                serviceUnitValueInput.value = unitValue;
-
-                servicesItem[i].remove();
-
-                updateTotalSpan("service-total-value-span", "services-item-total-span");
-                updateTotalSpans_BudgetProdSection();
-            })
-        }
     }
-}
 
-function clearServicesInputs(){
-    serviceQuantInput.value = "";
-    serviceDescriptionInput.value = "";
-    serviceUnitValueInput.value = "";
+    if(serviceUnitValueInput.value === ""){
+        showPopupMsg("Insira o valor unitário do serviço executado !", "errorMsg");
+        return;
+    }
+    
+    createServiceItem(serviceQuantInput.value, serviceDescriptionInput.value , serviceUnitValueInput.value);
+    updateTotalSpan("service-total-value-span", "services-item-total-span");
+    clearServicesInputs();
+
+    await servicesItems_handleEventListeners(); 
+    
+    await clearInputs([
+        serviceQuantInput,
+        serviceDescriptionInput,
+        serviceUnitValueInput
+    ]);
 }
 
 // event listeners
