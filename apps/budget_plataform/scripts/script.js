@@ -1,3 +1,4 @@
+const clientsEquipamentsArray = []
 
 // clients_equipaments.json
 async function getClientsData(){
@@ -16,6 +17,10 @@ async function getClientsData(){
     catch(error){
         console.log(`Failed to load json : ${error}`);
     }
+}
+
+async function initialize_clients_arary(){
+    clientsEquipamentsArray = await getClientsData();
 }
 
 //budget-production
@@ -40,31 +45,17 @@ const infosNextStepBtn = document.querySelector("#infos-next-step-btn");
 
 //functions
 
-function createClientsList(){
-    getClientsData().then(clients =>{
+async function createClientsList(){
+    clientsEquipamentsArray = await getClientsData();
 
-        let clientsData = [];
+    clientsEquipamentsArray.forEach(clients => {
+        let option = document.createElement("option");
 
-        clients.forEach(client =>{
-            clientsData.push(client.name.toUpperCase());
-        });
+        option.textContent = clients;
+        option.value = clients;
 
-        clientsData = clientsData.sort();
-
-        clientsData.forEach(clients => {
-            let option = document.createElement("option");
-
-            option.textContent = clients;
-            option.value = clients;
-
-            clientsSelectList.appendChild(option);
-        });
-
-        return clientsData;
-
-    }).catch(error =>{
-        console.error(`An error occured : ${error}`);
-    })
+        clientsSelectList.appendChild(option);
+    });
 }
 
 function createEquipamentsList(){
@@ -135,26 +126,32 @@ function currencyToFloatNum(value){
     return parseFloat(number);
 }
 
-function validateSelectsProcess(){
+async function validateSelectsProcess(){
     if(clientsSelectList.value === ""){
-        showPopupMsg("Selecione um cliente !", "errorMsg");
+        await showPopupMsg("Selecione um cliente !", "errorMsg");
         return;
-    }else if(equipamentsSelectList.style.display === "block" && equipamentsSelectList.value === ""){
-        showPopupMsg("Selecione um equipamento !", "errorMsg");
-        return;
-    }else if(clientsSelectList.value === "(NÃO IDENTIFICADO)" && notIdentifiedInput.style.display === "block" && notIdentifiedInput.value === ""){
-        showPopupMsg("Digite o modelo do equipamento !", "errorMsg");
-        return;
-    }else{
-        if(dateInput.value === "" || completionDeadlineInput.value === "" || paymentTermsInput.value === "" || guaranteeInput.value === ""){
-            showPopupMsg("Alguns campos estão vazios !", "adviceMsg");
-        };
-        showHtmlElement(partsSection,servicesSection,totalBudgetProdSecion,observationsSection,generateBudgetSection);
-        hideHtmlElement(NextStepContainer);
     }
+
+    if(equipamentsSelectList.style.display === "block" && equipamentsSelectList.value === ""){
+        await showPopupMsg("Selecione um equipamento !", "errorMsg");
+        return;
+    }
+
+    if(clientsSelectList.value === "(NÃO IDENTIFICADO)" && notIdentifiedInput.style.display === "block" && notIdentifiedInput.value === ""){
+        await showPopupMsg("Digite o modelo do equipamento !", "errorMsg");
+        return;
+    }
+
+    if(dateInput.value === "" || completionDeadlineInput.value === "" || paymentTermsInput.value === "" || guaranteeInput.value === ""){
+        await showPopupMsg("Alguns campos estão vazios !", "adviceMsg");
+    };
+
+    await showHtmlElement(partsSection,servicesSection,totalBudgetProdSecion,observationsSection,generateBudgetSection);
+    await hideHtmlElement(NextStepContainer);
 }
 
-function showPopupMsg(message , messageType ){
+
+async function showPopupMsg(message , messageType ){
     msgSpan.innerHTML = "";
     msgSpan.innerText = message;
 
@@ -172,7 +169,7 @@ function showPopupMsg(message , messageType ){
         closeMsgBtn.style.color = "white";
     }
 
-    msgControl.style.display = "block";
+    showHtmlElement([msgControl],"block");
     msgControl.style.transition = "0.5s";
     msgControl.style.marginTop = "37%";
 
@@ -182,10 +179,10 @@ function showPopupMsg(message , messageType ){
 
 }
 
-function closePopupMsg(){
+async function closePopupMsg(){
     msgControl.style.marginTop = "43%";
     msgControl.style.transition = "0.5s";
-    msgControl.style.display = "none";
+    hideHtmlElement([msgControl],);
 }
 
 async function showHtmlElement([...elements], displayType){
@@ -202,8 +199,8 @@ async function hideHtmlElement([...elements]){
 
 //booting
 
-window.addEventListener("DOMContentLoaded",()=>{
-    createClientsList();
+window.addEventListener("DOMContentLoaded",async ()=>{
+    await createClientsList();
 })
 
 //event listeners
@@ -402,22 +399,22 @@ async function partsItems_handleEventListeners(){
 async function addPartItemProcess(){
     //input validation
     if(partQuantInput.value === "" && partDescriptionInput.value === "" && partUnitValueInput.value === ""){
-        showPopupMsg("Insira as informações das peças aplicadas antes de prosseguir !" , "errorMsg");
+        await showPopupMsg("Insira as informações das peças aplicadas antes de prosseguir !" , "errorMsg");
         return;
     }
 
     if(partQuantInput.value ===""){
-        showPopupMsg("Insira a quantidade de peças !", "errorMsg");
+        await showPopupMsg("Insira a quantidade de peças !", "errorMsg");
         return;
     }
 
     if(partDescriptionInput.value ===""){
-        showPopupMsg("Insira a descrição da peça !", "errorMsg");
+        await showPopupMsg("Insira a descrição da peça !", "errorMsg");
         return;
     }
 
     if(partUnitValueInput.value ===""){
-        showPopupMsg("Insira um valor unitário !" , "errorMsg");
+        await showPopupMsg("Insira um valor unitário !" , "errorMsg");
         return;
     }
 
@@ -549,21 +546,21 @@ async function addServiceItemProcess(){
     //validation inputs
 
     if(serviceQuantInput.value === "" && serviceDescriptionInput.value === "" && serviceUnitValueInput.value === ""){
-        showPopupMsg("Insira as informações do serviços executados antes de prosseguir !" , "errorMsg");
+        await showPopupMsg("Insira as informações do serviços executados antes de prosseguir !" , "errorMsg");
         return;
     }
     if(serviceQuantInput.value === ""){
-        showPopupMsg("Insira a quantidade de serviços executados !", "errorMsg");
+        await showPopupMsg("Insira a quantidade de serviços executados !", "errorMsg");
         return;
     }
 
     if(serviceDescriptionInput.value === ""){
-        showPopupMsg("Insira a descrição dos serviços executados !", "errorMsg");
+        await showPopupMsg("Insira a descrição dos serviços executados !", "errorMsg");
         return;
     }
 
     if(serviceUnitValueInput.value === ""){
-        showPopupMsg("Insira o valor unitário do serviço executado !", "errorMsg");
+        await showPopupMsg("Insira o valor unitário do serviço executado !", "errorMsg");
         return;
     }
     
