@@ -754,6 +754,7 @@ async function confirmationProcess(){
 //elements
 const generateBudgetSection = document.querySelector(".generate-budget-section");
 const generateBudgetBtn = document.querySelector("#generate-budget-btn");
+let latest_budget_number = null;
 
 // functions
 
@@ -778,15 +779,15 @@ async function getBudgetLatestNumber(){
 
 async function updateBudgetNumberData(){
     try {
-        let budgetNumber = budgetNumberSpan.innerText;
-        budgetNumber = budgetNumber.slice(0,1);
+        latest_budget_number = budgetNumberSpan.innerText;
+        latest_budget_number = latest_budget_number.slice(0,1);
 
-        const response = await fetch('https://emeg-orc.onrender.com', { 
+        const response = await fetch('https://emeg-orc.onrender.com/update-latest-budget-number', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ budgetNumber }),
+            body: JSON.stringify({ latest_budget_number }),
         });
 
         if (!response.ok) {
