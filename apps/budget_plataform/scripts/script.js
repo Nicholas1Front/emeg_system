@@ -735,15 +735,27 @@ const generateBudgetBtn = document.querySelector("#generate-budget-btn");
 
 // functions
 
-async function verifyBudgetCode(){
-    if(budgetCodeSpan === ""){
-        console.log("pedir senha");
-        console.log("adicionar mais um ao numero do orçamento e subir para o servidor");
-        return;
+async function getBudgetLatestNumber(){
+    try{
+        const response = await fetch(`https://nicholas1front.github.io/emeg_system/apps/backend/data/latest_budget_number.json?timestamp=${new Date().getTime()}`);
+
+        if (!response.ok){
+            throw new Error(`HTTP Error ! Status : ${response.status}`);
+        }
+
+        const latest = await response.json();
+
+        console.log(latest);
+
+        return latest;
+    }catch(error){
+        console.error(error);
     }
-
-
 }
+
+setTimeout(()=>{
+    getBudgetLatestNumber();
+},2000)
 
 
 //budget finished 
