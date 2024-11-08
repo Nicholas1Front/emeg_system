@@ -23,6 +23,154 @@ async function initialize_clients_arary(){
     clientsEquipamentsArray = await getClientsData();
 }
 
+
+// message popup
+
+async function showPopupMsg(message , messageType ){
+    msgSpan.innerHTML = "";
+    msgSpan.innerText = message;
+
+    if(messageType === "errorMsg"){
+        msgControl.style.backgroundColor = "#d61e1e";//red color
+        msgControl.style.color = "white"; 
+        closeMsgBtn.style.color = "white";
+    }else if (messageType === "adviceMsg"){
+        msgControl.style.backgroundColor = "#fcba03";  //yellow color
+        msgControl.style.color = "black";
+        closeMsgBtn.style.color = "black";
+    }else if(messageType === "successMsg"){
+        msgControl.style.backgroundColor = "#42f55a" //green color
+        msgControl.style.color = "white";
+        closeMsgBtn.style.color = "white";
+    }
+
+    showHtmlElement([msgControl],"block");
+    msgControl.style.transition = "0.5s";
+    msgControl.style.marginTop = "37%";
+
+    setTimeout(() => {
+        closePopupMsg();
+    }, 6000);
+
+}
+
+async function closePopupMsg(){
+    msgControl.style.marginTop = "43%";
+    msgControl.style.transition = "0.5s";
+    hideHtmlElement([msgControl]);
+}
+
+// server message popup
+
+// elements
+const serverMessagePopup = document.querySelector(".server-message-popup");
+const closeServerMessagePopupBtn = document.querySelector(".close-server-message-popup-btn")
+const serverMessageSymbol = document.querySelector(".server-message-control i");
+const serverMessageSpan = document.querySelector(".server-message-span");
+
+// functions
+
+async function showServerMessagePopup(messageType, messageSpan){
+    serverMessageSymbol.className = "";
+
+    if(messageType === "errorMsg"){
+        serverMessagePopup.style.backgroundColor = "#d61e1e"; //red color
+        serverMessagePopup.style.color = "#fff";
+        serverMessageSymbol.className = `fa-solid fa-triangle-exclamation`;
+    }
+
+    if(messageType === "sucessMsg"){
+        serverMessagePopup.style.backgroundColor = "#42f55a"; //green color
+        serverMessagePopup.style.color = "#fff"
+        serverMessageSymbol.className = `fa-solid fa-circle-check`;
+    }
+
+    serverMessageSpan.innerText = messageSpan ;
+
+    await showHtmlElement([serverMessagePopup], "block");
+
+    setTimeout(()=>{
+        hideHtmlElement([serverMessagePopup]);
+    },5000);
+}
+
+//event listeners
+
+closeServerMessagePopupBtn.addEventListener("click",()=>{
+    hideHtmlElement([serverMessagePopup]);
+});
+
+// show or hide html element
+
+async function showHtmlElement([...elements], displayType){
+    elements.forEach((element) =>{
+        element.style.display = `${displayType}`;
+    })
+}
+
+async function hideHtmlElement([...elements]){
+    elements.forEach((element) =>{
+        element.style.display = "none";
+    })
+}
+
+
+// clear html element
+
+async function clearHtmlElement([...elements]){
+    elements.forEach((element)=>{
+        element.innerHTML = "";
+    }) 
+}
+
+// upperCase inputs
+function upperCaseInputs([...inputs]){
+    inputs.forEach((input)=>{
+        input.addEventListener("input",()=>{
+            input.value = input.value.toUpperCase();
+        })
+    })
+}
+
+// javascript date to brasil date
+
+function JsDate_to_BrDate(){
+    let date = dateInput.value;
+
+    let dateArray = date.split("-");
+
+    let newDate = `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
+
+    return newDate;    
+}
+
+// brasil date to javascript date
+
+function brDate_to_JsDate(dateElement){
+    let dateString = dateElement.replace(/\//g,"-"); // all occurrences of the bar
+    let dateArray = dateString.split("-");
+    dateString = `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`
+
+    return dateString;
+}
+
+// format to BRL
+
+function formatToBrl(value){
+    return new Intl.NumberFormat("pt-BR", {
+        style : "currency",
+        currency : "BRL",
+    }).format(value);
+};
+
+// formato BRL to float
+
+function currencyToFloatNum(value){
+    const number = value.replace(/[^\d,-]/g, '').replace('.', '').replace(',', '.');
+
+    return parseFloat(number);
+}
+
 //budget-production
 
 //header
@@ -90,46 +238,6 @@ function createEquipamentsList(){
     })
 };
 
-function upperCaseInputs([...inputs]){
-    inputs.forEach((input)=>{
-        input.addEventListener("input",()=>{
-            input.value = input.value.toUpperCase();
-        })
-    })
-}
-
-function JsDate_to_BrDate(){
-    let date = dateInput.value;
-
-    let dateArray = date.split("-");
-
-    let newDate = `${dateArray[2]}/${dateArray[1]}/${dateArray[0]}`;
-
-    return newDate;    
-}
-
-
-function brDate_to_JsDate(dateElement){
-    let dateString = dateElement.replace(/\//g,"-"); // all occurrences of the bar
-    let dateArray = dateString.split("-");
-    dateString = `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}`
-
-    return dateString;
-}
-
-function formatToBrl(value){
-    return new Intl.NumberFormat("pt-BR", {
-        style : "currency",
-        currency : "BRL",
-    }).format(value);
-};
-
-function currencyToFloatNum(value){
-    const number = value.replace(/[^\d,-]/g, '').replace('.', '').replace(',', '.');
-
-    return parseFloat(number);
-}
-
 async function validateSelectsProcess(){
     if(clientsSelectList.value === ""){
         await showPopupMsg("Selecione um cliente !", "errorMsg");
@@ -155,57 +263,6 @@ async function validateSelectsProcess(){
 }
 
 
-async function showPopupMsg(message , messageType ){
-    msgSpan.innerHTML = "";
-    msgSpan.innerText = message;
-
-    if(messageType === "errorMsg"){
-        msgControl.style.backgroundColor = "#d61e1e";//red color
-        msgControl.style.color = "white"; 
-        closeMsgBtn.style.color = "white";
-    }else if (messageType === "adviceMsg"){
-        msgControl.style.backgroundColor = "#fcba03";  //yellow color
-        msgControl.style.color = "black";
-        closeMsgBtn.style.color = "black";
-    }else if(messageType === "successMsg"){
-        msgControl.style.backgroundColor = "#42f55a" //green color
-        msgControl.style.color = "white";
-        closeMsgBtn.style.color = "white";
-    }
-
-    showHtmlElement([msgControl],"block");
-    msgControl.style.transition = "0.5s";
-    msgControl.style.marginTop = "37%";
-
-    setTimeout(() => {
-        closePopupMsg();
-    }, 6000);
-
-}
-
-async function closePopupMsg(){
-    msgControl.style.marginTop = "43%";
-    msgControl.style.transition = "0.5s";
-    hideHtmlElement([msgControl]);
-}
-
-async function showHtmlElement([...elements], displayType){
-    elements.forEach((element) =>{
-        element.style.display = `${displayType}`;
-    })
-}
-
-async function hideHtmlElement([...elements]){
-    elements.forEach((element) =>{
-        element.style.display = "none";
-    })
-}
-
-async function clearHtmlElement([...elements]){
-    elements.forEach((element)=>{
-        element.innerHTML = "";
-    }) 
-}
 
 //booting
 
@@ -635,45 +692,12 @@ serviceUnitValueInput.addEventListener('keydown',(event)=>{
 //elements
 const totalBudgetProdSection = document.querySelector(".total-budget-prod-section");
 
-// server message popup
+// observations-section
 
-// elements
-const serverMessagePopup = document.querySelector(".server-message-popup");
-const closeServerMessagePopupBtn = document.querySelector(".close-server-message-popup-btn")
-const serverMessageSymbol = document.querySelector(".server-message-control i");
-const serverMessageSpan = document.querySelector(".server-message-span");
+//elements
 
-// functions
-
-async function showServerMessagePopup(messageType, messageSpan){
-    serverMessageSymbol.className = "";
-
-    if(messageType === "errorMsg"){
-        serverMessagePopup.style.backgroundColor = "#d61e1e"; //red color
-        serverMessagePopup.style.color = "#fff";
-        serverMessageSymbol.className = `fa-solid fa-triangle-exclamation`;
-    }
-
-    if(messageType === "sucessMsg"){
-        serverMessagePopup.style.backgroundColor = "#42f55a"; //green color
-        serverMessagePopup.style.color = "#fff"
-        serverMessageSymbol.className = `fa-solid fa-circle-check`;
-    }
-
-    serverMessageSpan.innerText = messageSpan ;
-
-    await showHtmlElement([serverMessagePopup], "block");
-
-    setTimeout(()=>{
-        hideHtmlElement([serverMessagePopup]);
-    },5000);
-}
-
-//event listeners
-
-closeServerMessagePopupBtn.addEventListener("click",()=>{
-    hideHtmlElement([serverMessagePopup]);
-});
+const observationsSection = document.querySelector(".observations-section");
+const observationsTextarea = document.querySelector("#observations-textarea");
 
 // loading screen
 
@@ -704,11 +728,11 @@ function closeConfirmationPopup(){
 async function confirmationProcess(){
     showConfirmationPopup();
 
-    confirmationPopupBtn.addEventListener("click",()=>{
+    confirmationPopupBtn.addEventListener("click",async ()=>{
         if(confirmationPasswordInput.value === confirmationPassword){
-            // calculate and show budget number
-            //send new number to server
-            displayBudgetProcess();
+            await displayBudgetNumber();
+            await sendToServerProcess();
+            await displayBudgetProcess();
         }else{
             wrongPasswordSpan.style.display = "block";
         
@@ -724,13 +748,6 @@ async function confirmationProcess(){
         }
     })
 }
-
-// observations-section
-
-//elements
-
-const observationsSection = document.querySelector(".observations-section");
-const observationsTextarea = document.querySelector("#observations-textarea");
 
 //generate budget section
 
@@ -788,6 +805,7 @@ async function updateBudgetNumberData(){
         return false;
     }
 }
+
 async function sendToServerProcess(){
     await showHtmlElement([overlayForLoading]);
 
@@ -795,31 +813,24 @@ async function sendToServerProcess(){
 
     if(!response){
         await hideHtmlElement([overlayForLoading]);
-        await showServerMessagePopup("errorMsg","Numeração não atualizada !");
+        await showServerMessagePopup("errorMsg", "Erro ao enviar os dados ! Tente novamente !");
         return;
     }
 
     await hideHtmlElement([overlayForLoading]);
+    await showServerMessagePopup("sucessMsg","Dados enviados com sucesso !");
 
-    await showServerMessagePopup("sucessMsg","Numeração atualizada com sucesso !")
+    await showMessagePopup("sucessMsg","Dados atualizados com sucesso !");
 }
 
 async function displayBudgetNumber(){
-
     let number = await getBudgetLatestNumber();
     number = parseInt(number) + 1;
     let year = new Date().getFullYear();
 
     budgetNumberSpan.innerHTML = `${number}${year}`;
 
-    let test = budgetNumberSpan.innerText;
-    test = test.slice(0,1);
-    console.log(test);
 }
-
-setTimeout(()=>{
-    displayBudgetNumber();
-},2000)
 
 //budget finished 
 
@@ -852,7 +863,7 @@ const backBudgetBtn = document.querySelector("#back-budget-btn");
 
 //functions
 
-function addHeaderFinishedProcess(){
+async function addHeaderFinishedProcess(){
     clearHtmlElement([
         clientSpanResult,
         equipamentSpanResult,
@@ -968,7 +979,7 @@ function createNoContentServicesSpan(spanHTML, spanMsg){
     servicesPerformedItemsContainer.appendChild(itemHtml);
 }
 
-function addServiceItemFinishedProcess(){
+async function addServiceItemFinishedProcess(){
    const servicesItem = document.querySelectorAll(".services-item");
    const serviceQuantSpan = document.querySelectorAll(".service-quant-span");
    const serviceDescriptionSpan = document.querySelectorAll(".service-description-span");
@@ -994,7 +1005,7 @@ function addServiceItemFinishedProcess(){
    }
 }
 
-function addPartItemFinishedProcess(){
+async function addPartItemFinishedProcess(){
     const partsItem = document.querySelectorAll(".parts-item");
     const partsQuantSpan = document.querySelectorAll(".parts-quant-span"); 
     const partsDescriptionSpan = document.querySelectorAll(".parts-description-span");
@@ -1020,7 +1031,7 @@ function addPartItemFinishedProcess(){
     }
 }
 
-function addAllItemsTotalFinished(){
+async function addAllItemsTotalFinished(){
     const partsItemTotalSpan = document.querySelector(".parts-item-total-span");
     const servicesItemTotalSpan = document.querySelector(".services-item-total-span");
     const totalOfBudgetDisplaySpan = document.querySelector(".total-of-budget-display-span");
@@ -1056,7 +1067,7 @@ function addAllItemsTotalFinished(){
     };
 }
 
-function addObservationsFinishedProcess(){
+async function addObservationsFinishedProcess(){
     observationsMadeSpan.innerHTML = "";
 
     if(observationsTextarea.value === ""){
@@ -1067,26 +1078,26 @@ function addObservationsFinishedProcess(){
     observationsMadeSpan.innerText = observationsTextarea.value;
 }
 
-function displayBudgetProcess(){
+async function displayBudgetProcess(){
     //show budget finished and hide budget production
-    showHtmlElement([budgetFinished],"block");
-    hideHtmlElement([budgetProduction])
+    await showHtmlElement([budgetFinished],"block");
+    await hideHtmlElement([budgetProduction])
     //display header informations
     
-    addHeaderFinishedProcess();
+    await addHeaderFinishedProcess();
 
     //display parts and services informations
 
-    addPartItemFinishedProcess();
-    addServiceItemFinishedProcess();
+    await addPartItemFinishedProcess();
+    await addServiceItemFinishedProcess();
 
     //display total informations
 
-    addAllItemsTotalFinished();
+    await addAllItemsTotalFinished();
 
     //display observations informations
 
-    addObservationsFinishedProcess();
+    await addObservationsFinishedProcess();
 }
 
 function saveAsHtml(){
@@ -1131,8 +1142,13 @@ function backHomeProcess(){
 
 //event listerner
 
-generateBudgetBtn.addEventListener("click", ()=>{
-    displayBudgetProcess();
+generateBudgetBtn.addEventListener("click", async ()=>{
+    if(budgetNumberSpan.innerText === ""){
+        await confirmationProcess();
+        return;
+    }
+
+    await displayBudgetProcess();
 })
 
 saveHtmlBtn.addEventListener("click", ()=>{
