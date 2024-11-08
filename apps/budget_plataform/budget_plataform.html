@@ -15,60 +15,61 @@
     <script src="https://kit.fontawesome.com/8bf43e84bd.js" crossorigin="anonymous"></script><!--Font awesome-->
 </head>
 <body>
-    <div id="budget-production">
+    
+    <div class="overlay-for-loading">
+        <div class="loading-container">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <span>Carregando...</span>
+        </div>
+    </div>
 
-        <div class="overlay-for-loading">
-            <div class="loading-container">
-                <i class="fa-solid fa-circle-notch fa-spin"></i>
-                <span>Carregando...</span>
-            </div>
-        </div>
-    
-        <div class="overlay">
-    
-            <div class="confirmation-popup">
-    
-                <button id="close-confirmation-popup-btn">
-                    <i class="fa-solid fa-xmark"></i>
-                </button>
-    
-                <div class="title-control">
-                    <i class="fa-solid fa-unlock"></i>
-                    <h2>Digite a senha para continuar !</h2>
-                </div>
-    
-                <div class="input-control">
-                    <input type="password" name="confirmation-password-input" id="confirmation-password-input" placeholder="Digite a senha aqui...">
-                    <span class="wrong-password-span">Senha incorreta !</span>
-                    <button id="confirmation-popup-btn">CONFIRMAR</button>
-                </div>
-    
-            </div>
-    
-        </div>
-    
-        <div class="server-message-popup">
-            <button class="close-server-message-popup-btn">
+    <div class="overlay">
+
+        <div class="confirmation-popup">
+
+            <button id="close-confirmation-popup-btn">
                 <i class="fa-solid fa-xmark"></i>
             </button>
+
+            <div class="title-control">
+                <i class="fa-solid fa-unlock"></i>
+                <h2>Digite a senha para continuar !</h2>
+            </div>
+
+            <div class="input-control">
+                <input type="password" name="confirmation-password-input" id="confirmation-password-input" placeholder="Digite a senha aqui...">
+                <span class="wrong-password-span">Senha incorreta !</span>
+                <button id="confirmation-popup-btn">CONFIRMAR</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="server-message-popup">
+        <button class="close-server-message-popup-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="server-message-control">
+            <i class="fa-solid fa-circle-check"></i>
+            <span class="server-message-span">Dados enviados com sucesso !</span>
+        </div>
+    </div>
+
+    <div class="msg-control">
+        <div class="msg-close-control">
+            <button id="close-msg-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="msg-content-control">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <span class="msg-span">Selecione um cliente !</span>
+        </div>
+    </div>
     
-            <div class="server-message-control">
-                <i class="fa-solid fa-circle-check"></i>
-                <span class="server-message-span">Dados enviados com sucesso !</span>
-            </div>
-        </div>
-
-        <div class="msg-control">
-            <div class="msg-close-control">
-                <button id="close-msg-btn"><i class="fa-solid fa-xmark"></i></button>
-            </div>
-
-            <div class="msg-content-control">
-                <i class="fa-solid fa-triangle-exclamation"></i>
-
-                <span class="msg-span">Selecione um cliente !</span>
-            </div>
-        </div>
+    <div id="budget-production">
 
         <header>
             
@@ -464,7 +465,7 @@
                     <div class="header-logo-container">
                         <div class="header-logo-control-of-budget-finished">
                             <img src="https://nicholas1front.github.io/emeg_system/assets/images/emeg_symbol_white.png"/>
-                            <h3>ORÇAMENTO <span id="budget-code-span"></span></h3>
+                            <h3>ORÇAMENTO <span id="budget-number-span"></span></h3>
                         </div>
                     </div>
 

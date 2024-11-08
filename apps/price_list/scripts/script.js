@@ -222,6 +222,12 @@ closeMessagePopupBtn.addEventListener("click", ()=>{
     closeMessagePopup();
 })
 
+// loading screen
+
+//elements
+const overlayForLoading = document.querySelector(".overlay-for-loading");
+
+
 // confirmation popup
 
 // elements
@@ -753,6 +759,7 @@ async function sendToServerProcess(){
     if(!response){
         await hideHtmlElement([overlayForLoading]);
         await showServerMessagePopup("errorMsg", "Erro ao enviar os dados ! Tente novamente !");
+        return;
     }
 
     await hideHtmlElement([overlayForLoading]);

@@ -675,6 +675,11 @@ closeServerMessagePopupBtn.addEventListener("click",()=>{
     hideHtmlElement([serverMessagePopup]);
 });
 
+// loading screen
+
+//elements
+const overlayForLoading = document.querySelector(".overlay-for-loading");
+
 // confirmation popup
 
 // elements
@@ -702,8 +707,8 @@ async function confirmationProcess(){
     confirmationPopupBtn.addEventListener("click",()=>{
         if(confirmationPasswordInput.value === confirmationPassword){
             // calculate and show budget number
-            displayBudgetProcess();
             //send new number to server
+            displayBudgetProcess();
         }else{
             wrongPasswordSpan.style.display = "block";
         
@@ -743,20 +748,78 @@ async function getBudgetLatestNumber(){
             throw new Error(`HTTP Error ! Status : ${response.status}`);
         }
 
-        const latest = await response.json();
+        let number = await response.json();
+        number = number.latest; 
 
-        console.log(latest);
+        console.log(number);
 
-        return latest;
+        return number;
     }catch(error){
         console.error(error);
     }
 }
 
-setTimeout(()=>{
-    getBudgetLatestNumber();
-},2000)
+async function updateBudgetNumberData(){
+    try {
+        let budgetNumber = budgetNumberSpan.innerText;
+        budgetNumber = budgetNumber.slice(0,1);
 
+        const response = await fetch('https://emeg-orc.onrender.com', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ budgetNumber }),
+        });
+
+        if (!response.ok) {
+            await showServerMessagePopup("errorMsg", "Erro ao atualizar dados no servidor!");
+            throw new Error('Erro ao atualizar os dados no backend');
+        }
+
+        const result = await response.text();
+
+        console.log('Dados atualizados com sucesso no backend e GitHub Pages:', result);
+
+        return true;
+
+    } catch (error) {
+        console.error('Erro:', error);
+        return false;
+    }
+}
+async function sendToServerProcess(){
+    await showHtmlElement([overlayForLoading]);
+
+    const response = await updateBudgetNumberData();
+
+    if(!response){
+        await hideHtmlElement([overlayForLoading]);
+        await showServerMessagePopup("errorMsg","Numeração não atualizada !");
+        return;
+    }
+
+    await hideHtmlElement([overlayForLoading]);
+
+    await showServerMessagePopup("sucessMsg","Numeração atualizada com sucesso !")
+}
+
+async function displayBudgetNumber(){
+
+    let number = await getBudgetLatestNumber();
+    number = parseInt(number) + 1;
+    let year = new Date().getFullYear();
+
+    budgetNumberSpan.innerHTML = `${number}${year}`;
+
+    let test = budgetNumberSpan.innerText;
+    test = test.slice(0,1);
+    console.log(test);
+}
+
+setTimeout(()=>{
+    displayBudgetNumber();
+},2000)
 
 //budget finished 
 
@@ -766,7 +829,7 @@ const budgetFinishedContent = document.querySelector(".budget-finished-content-c
 
 const clientSpanResult = document.querySelector("#client-span-result");
 const equipamentSpanResult = document.querySelector("#equipament-span-result");
-const budgetCodeSpan = document.querySelector("#budget-code-span"); 
+const budgetNumberSpan = document.querySelector("#budget-number-span"); 
 const paymentTermsSpanResult = document.querySelector("#payment-terms-span-result");
 const completionDeadlineSpanResult = document.querySelector("#completion-deadline-span-result");
 const guaranteeSpanResult = document.querySelector("#guarantee-span-result");
