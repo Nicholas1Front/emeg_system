@@ -648,7 +648,6 @@ async function addServiceItemProcess(){
     
     createServiceItem(serviceQuantInput.value, serviceDescriptionInput.value , serviceUnitValueInput.value);
     updateTotalSpan("service-total-value-span", "services-item-total-span");
-    clearServicesInputs();
 
     await servicesItems_handleEventListeners(); 
     
@@ -714,23 +713,25 @@ const wrongPasswordSpan = document.querySelector(".wrong-password-span");
 const confirmationPopupBtn = document.querySelector("#confirmation-popup-btn");
 const confirmationPassword = "88320940";
 
-function showConfirmationPopup(){
+async function showConfirmationPopup(){
     overlay.style.display = "flex";
-    priceListSystemContainer.style.filter = "blur(9px)";
+    budgetProduction.style.filter = "blur(9px)";
     wrongPasswordSpan.style.display = "none";
 }
 
-function closeConfirmationPopup(){
+async function closeConfirmationPopup(){
     overlay.style.display="none";
-    priceListSystemContainer.style.filter = "blur(0)"
+    budgetProduction.style.filter = "blur(0)"
 }
 
 async function confirmationProcess(){
-    showConfirmationPopup();
+    await showConfirmationPopup();
 
     confirmationPopupBtn.addEventListener("click",async ()=>{
         if(confirmationPasswordInput.value === confirmationPassword){
             await displayBudgetNumber();
+            await hideHtmlElement([overlay]);
+            await closeConfirmationPopup();
             await sendToServerProcess();
             await displayBudgetProcess();
         }else{
@@ -747,7 +748,38 @@ async function confirmationProcess(){
             return;
         }
     })
+
+    confirmationPasswordInput.addEventListener("keypress", async (event)=>{
+        if(event.key === "Enter"){
+            if(confirmationPasswordInput.value === confirmationPassword){
+                await displayBudgetNumber();
+                await hideHtmlElement([overlay]);
+                await closeConfirmationPopup();
+                await sendToServerProcess();
+                await displayBudgetProcess();
+                
+            }else{
+                wrongPasswordSpan.style.display = "block";
+            
+                setTimeout(()=>{
+                    wrongPasswordSpan.style.display = "none";
+                },10000);
+    
+                confirmationPasswordInput.addEventListener("focus",()=>{
+                    wrongPasswordSpan.style.display = "none";
+                })
+    
+                return;
+            }
+        }
+    })
 }
+
+// event listerners
+
+closeConfirmationPopupBtn.addEventListener("click",async ()=>{
+    await closeConfirmationPopup();
+})
 
 //generate budget section
 
@@ -779,8 +811,12 @@ async function getBudgetLatestNumber(){
 
 async function updateBudgetNumberData(){
     try {
-        latest_budget_number = budgetNumberSpan.innerText;
-        latest_budget_number = latest_budget_number.slice(0,1);
+        let number = budgetNumberSpan.innerText;
+        number = number.slice(0,1);
+
+        latest_budget_number = {
+            latestNumber : number
+        }
 
         const response = await fetch('https://emeg-orc.onrender.com/update-latest-budget-number', { 
             method: 'POST',
@@ -903,9 +939,7 @@ async function addHeaderFinishedProcess(){
         dateSpanResult.innerText = "###"
     }
 
-    let budgetName = createBudgetName();
-
-    document.querySelector("title").textContent = budgetName;
+    document.querySelector("title").textContent = `ORÇAMENTO ${budgetNumberSpan.innerText} ${clientSpanResult.innerText} ${equipamentSpanResult.innerText}`;
 }
 
 function createPartItemFinished(numberItem, quant , description , unitValue , totalValue){
