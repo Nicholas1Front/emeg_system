@@ -784,7 +784,9 @@ closeConfirmationPopupBtn.addEventListener("click",async ()=>{
 //elements
 const generateBudgetSection = document.querySelector(".generate-budget-section");
 const generateBudgetBtn = document.querySelector("#generate-budget-btn");
-let latest_budget_number = {};
+let latest_budget_number = {
+    latestNumber : null
+};
 
 // functions
 
@@ -812,9 +814,7 @@ async function updateBudgetNumberData(){
         let number = budgetNumberSpan.innerText;
         number = number.slice(0,1);
 
-        latest_budget_number = {
-            latestNumber : number
-        }
+        latest_budget_number.latestNumber = number; 
 
         const response = await fetch('https://emeg-orc.onrender.com/update-latest-budget-number', { 
             method: 'POST',
