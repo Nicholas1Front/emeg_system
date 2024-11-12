@@ -20,7 +20,7 @@ const REPO_OWNER = 'Nicholas1Front';
 const REPO_NAME = 'emeg_system';
 const CLIENTS_EQUIPAMENTS_FILE_PATH = 'apps/backend/data/clients_equipaments.json';
 const SERVICES_FILE_PATH = 'apps/backend/data/services.json';
-const LATEST_BUDGET_FILE_PATH = `apps/backend/latest_budget_number.json`;
+const LATEST_BUDGET_FILE_PATH = `apps/backend/data/latest_budget_number.json`;
 const BRANCH = 'main';
 
 // Função auxiliar para verificar atualização do GitHub Pages

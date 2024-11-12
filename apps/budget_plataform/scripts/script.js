@@ -730,7 +730,6 @@ async function confirmationProcess(){
     confirmationPopupBtn.addEventListener("click",async ()=>{
         if(confirmationPasswordInput.value === confirmationPassword){
             await displayBudgetNumber();
-            await hideHtmlElement([overlay]);
             await closeConfirmationPopup();
             await sendToServerProcess();
             await displayBudgetProcess();
@@ -753,7 +752,6 @@ async function confirmationProcess(){
         if(event.key === "Enter"){
             if(confirmationPasswordInput.value === confirmationPassword){
                 await displayBudgetNumber();
-                await hideHtmlElement([overlay]);
                 await closeConfirmationPopup();
                 await sendToServerProcess();
                 await displayBudgetProcess();
@@ -786,7 +784,7 @@ closeConfirmationPopupBtn.addEventListener("click",async ()=>{
 //elements
 const generateBudgetSection = document.querySelector(".generate-budget-section");
 const generateBudgetBtn = document.querySelector("#generate-budget-btn");
-let latest_budget_number = null;
+let latest_budget_number = {};
 
 // functions
 
@@ -799,7 +797,7 @@ async function getBudgetLatestNumber(){
         }
 
         let number = await response.json();
-        number = number.latest; 
+        number = number.latestNumber; 
 
         console.log(number);
 
@@ -844,7 +842,7 @@ async function updateBudgetNumberData(){
 }
 
 async function sendToServerProcess(){
-    await showHtmlElement([overlayForLoading]);
+    await showHtmlElement([overlayForLoading], "flex");
 
     const response = await updateBudgetNumberData();
 
