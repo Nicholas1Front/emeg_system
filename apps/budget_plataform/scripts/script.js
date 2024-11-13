@@ -26,7 +26,7 @@ async function initialize_clients_arary(){
 
 // message popup
 
-async function showPopupMsg(message , messageType ){
+async function showMessagePopup(message , messageType ){
     msgSpan.innerHTML = "";
     msgSpan.innerText = message;
 
@@ -34,11 +34,13 @@ async function showPopupMsg(message , messageType ){
         msgControl.style.backgroundColor = "#d61e1e";//red color
         msgControl.style.color = "white"; 
         closeMsgBtn.style.color = "white";
-    }else if (messageType === "adviceMsg"){
+    }
+    if (messageType === "adviceMsg"){
         msgControl.style.backgroundColor = "#fcba03";  //yellow color
         msgControl.style.color = "black";
         closeMsgBtn.style.color = "black";
-    }else if(messageType === "successMsg"){
+    }
+    if(messageType === "sucessMsg"){
         msgControl.style.backgroundColor = "#42f55a" //green color
         msgControl.style.color = "white";
         closeMsgBtn.style.color = "white";
@@ -49,12 +51,12 @@ async function showPopupMsg(message , messageType ){
     msgControl.style.marginTop = "37%";
 
     setTimeout(() => {
-        closePopupMsg();
+        closeMessagePopup();
     }, 6000);
 
 }
 
-async function closePopupMsg(){
+async function closeMessagePopup(){
     msgControl.style.marginTop = "43%";
     msgControl.style.transition = "0.5s";
     hideHtmlElement([msgControl]);
@@ -240,22 +242,22 @@ function createEquipamentsList(){
 
 async function validateSelectsProcess(){
     if(clientsSelectList.value === ""){
-        await showPopupMsg("Selecione um cliente !", "errorMsg");
+        await showMessagePopup("Selecione um cliente !", "errorMsg");
         return;
     }
 
     if(equipamentsSelectList.style.display === "block" && equipamentsSelectList.value === ""){
-        await showPopupMsg("Selecione um equipamento !", "errorMsg");
+        await showMessagePopup("Selecione um equipamento !", "errorMsg");
         return;
     }
 
     if(clientsSelectList.value === "(NÃO IDENTIFICADO)" && notIdentifiedInput.style.display === "block" && notIdentifiedInput.value === ""){
-        await showPopupMsg("Digite o modelo do equipamento !", "errorMsg");
+        await showMessagePopup("Digite o modelo do equipamento !", "errorMsg");
         return;
     }
 
     if(dateInput.value === "" || completionDeadlineInput.value === "" || paymentTermsInput.value === "" || guaranteeInput.value === ""){
-        await showPopupMsg("Alguns campos estão vazios !", "adviceMsg");
+        await showMessagePopup("Alguns campos estão vazios !", "adviceMsg");
     };
 
     await showHtmlElement([partsSection,servicesSection,totalBudgetProdSection,observationsSection,generateBudgetSection], "block");
@@ -288,7 +290,7 @@ infosNextStepBtn.addEventListener("click", ()=>{
 });
 
 closeMsgBtn.addEventListener("click", ()=>{
-    closePopupMsg();
+    closeMessagePopup();
 })
 
 //parts section
@@ -473,22 +475,22 @@ async function partsItems_handleEventListeners(){
 async function addPartItemProcess(){
     //input validation
     if(partQuantInput.value === "" && partDescriptionInput.value === "" && partUnitValueInput.value === ""){
-        await showPopupMsg("Insira as informações das peças aplicadas antes de prosseguir !" , "errorMsg");
+        await showMessagePopup("Insira as informações das peças aplicadas antes de prosseguir !" , "errorMsg");
         return;
     }
 
     if(partQuantInput.value ===""){
-        await showPopupMsg("Insira a quantidade de peças !", "errorMsg");
+        await showMessagePopup("Insira a quantidade de peças !", "errorMsg");
         return;
     }
 
     if(partDescriptionInput.value ===""){
-        await showPopupMsg("Insira a descrição da peça !", "errorMsg");
+        await showMessagePopup("Insira a descrição da peça !", "errorMsg");
         return;
     }
 
     if(partUnitValueInput.value ===""){
-        await showPopupMsg("Insira um valor unitário !" , "errorMsg");
+        await showMessagePopup("Insira um valor unitário !" , "errorMsg");
         return;
     }
 
@@ -628,21 +630,21 @@ async function addServiceItemProcess(){
     //validation inputs
 
     if(serviceQuantInput.value === "" && serviceDescriptionInput.value === "" && serviceUnitValueInput.value === ""){
-        await showPopupMsg("Insira as informações do serviços executados antes de prosseguir !" , "errorMsg");
+        await showMessagePopup("Insira as informações do serviços executados antes de prosseguir !" , "errorMsg");
         return;
     }
     if(serviceQuantInput.value === ""){
-        await showPopupMsg("Insira a quantidade de serviços executados !", "errorMsg");
+        await showMessagePopup("Insira a quantidade de serviços executados !", "errorMsg");
         return;
     }
 
     if(serviceDescriptionInput.value === ""){
-        await showPopupMsg("Insira a descrição dos serviços executados !", "errorMsg");
+        await showMessagePopup("Insira a descrição dos serviços executados !", "errorMsg");
         return;
     }
 
     if(serviceUnitValueInput.value === ""){
-        await showPopupMsg("Insira o valor unitário do serviço executado !", "errorMsg");
+        await showMessagePopup("Insira o valor unitário do serviço executado !", "errorMsg");
         return;
     }
     
@@ -799,7 +801,7 @@ async function getBudgetLatestNumber(){
         }
 
         let number = await response.json();
-        number = number.latestNumber; 
+        number = number.latest_budget_number.latestNumber; 
 
         console.log(number);
 
@@ -855,7 +857,7 @@ async function sendToServerProcess(){
     await hideHtmlElement([overlayForLoading]);
     await showServerMessagePopup("sucessMsg","Dados enviados com sucesso !");
 
-    await showMessagePopup("sucessMsg","Dados atualizados com sucesso !");
+    await showMessagePopup("Dados atualizados com sucesso !","sucessMsg");
 }
 
 async function displayBudgetNumber(){
