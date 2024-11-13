@@ -1136,7 +1136,7 @@ async function displayBudgetProcess(){
 }
 
 function saveAsHtml(){
-    budgetNameArchive = createBudgetName();
+    let budgetNameArchive = `ORÇAMENTO ${budgetNumberSpan.innerText} ${clientSpanResult.innerText} ${equipamentSpanResult.innerText}`
 
     const blob = new Blob([document.documentElement.outerHTML], { type: 'text/html' });
     const link = document.createElement("a");
