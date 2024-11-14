@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajuda para Criação de Orçamento</title>
-    <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/budget_plataform/styles/help_budget_plataform.css"/>
+    <link rel="stylesheet" href="styles/help_budget_plataform.css"/>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -220,6 +220,8 @@
 
             <div class="text-container">
                 <p>Após verificar se todas as informações estão corretas, o <strong>botão "Gerar Orçamento"</strong> deve ser clicado para que o mesmo seja gerado com êxito. A numeração ou código do orçamento é feita de maneira automática, e as informações anteriormente inseridas nos campos de todo o orçamento são exibidas no documento gerado. É importante pontuar que orçamentos sem nenhum tipo de item (sejam peças ou serviços) podem ser gerados.</p>
+
+                <p>Para manter o controle sobre a numeração automática dos orçamentos, foi criado um <strong>servidor responsável por receber e processar as numerações de cada novo orçamento.</strong> Quando um novo orçamento é gerado, o sistema precisa completar o carregamento dessa numeração antes de exibi-la e enviá-la ao servidor, <strong>evitando erros de sincronização</strong>. É essencial <strong>aguardar a conclusão desse processo</strong> para garantir que a numeração correta seja exibida e enviada. Caso ocorra algum problema durante a exibição ou o envio, <strong>o sistema exibirá uma mensagem de erro</strong> detalhando a causa.</p>
 
                 <p>Uma vez gerado o orçamento, são liberadas três opções: <strong>Salvar em HTML</strong>, <strong>Salvar em PDF</strong> e <strong>Voltar para a Página Inicial</strong>.</p>
             </div>
