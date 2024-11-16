@@ -207,7 +207,8 @@
       "CAMINHÃO VOLKSWAGEN 31.330 IWT-1772 / GUINDASTE MASAL 40 TON.",
       "CAMINHÃO VOLVO VM PSC-9750",
       "CAMINHÃO FORD CARGO OIU-3133",
-      "CAMINHÃO FORD CARGO 1317 AREINHA"
+      "CAMINHÃO FORD CARGO 1317 AREINHA",
+      "TRATOR VALTRA BN 110"
     ]
   },
   {
@@ -692,7 +693,9 @@
   },
   {
     "name": "RAIMUNDO SANTA RITA (+55 98 9139-0001)",
-    "equipaments": []
+    "equipaments": [
+      "CAMINHÃO MERCEDES ATRON HPC2E37"
+    ]
   },
   {
     "name": "ROMÂNIO (9986074118)",
