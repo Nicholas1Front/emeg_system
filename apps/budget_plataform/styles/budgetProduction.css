@@ -1153,7 +1153,57 @@ header{
     font-style:italic;
 }
 
+.expenses-item{
+    width:100%;
+    padding:10px 0;
+}
 
+.expenses-item-content{
+    width:100%;
+    padding: 1rem 0;
+    margin-bottom: 0.3rem;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #e7e7e7;
+}
+
+.expense-quant-span,
+.expense-unit-value-span,
+.expense-total-value-span{
+    width:12%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+
+.expense-description-span{
+    width:40%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    font-size:15px;
+}
+
+.expenses-item-total{
+    width:100%;
+    margin-top:0.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d61e1e;
+    color:#fff;
+    border-radius: 25px;
+    padding:5px;
+}
+
+.expenses-item-total h3,
+.expenses-item-total span{
+    width:30%;
+    font-size:1.17em;
+    text-align: center;
+}
 
 /* generate-budget-section */
 
