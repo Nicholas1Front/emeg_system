@@ -700,6 +700,12 @@ const totalBudgetProdSection = document.querySelector(".total-budget-prod-sectio
 const observationsSection = document.querySelector(".observations-section");
 const observationsTextarea = document.querySelector("#observations-textarea");
 
+// booting
+
+upperCaseInputs([
+    observationsTextarea
+])
+
 // expenses-section
 
 // elements 
