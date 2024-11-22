@@ -260,7 +260,7 @@ async function validateSelectsProcess(){
         await showMessagePopup("Alguns campos estão vazios !", "adviceMsg");
     };
 
-    await showHtmlElement([partsSection,servicesSection,totalBudgetProdSection,observationsSection,generateBudgetSection], "block");
+    await showHtmlElement([partsSection,servicesSection,totalBudgetProdSection,observationsSection,expensesSection,generateBudgetSection], "block");
     await hideHtmlElement([nextStepContainer]);
 }
 
@@ -767,8 +767,23 @@ async function expensesItem_handleEventListeners(){
         })
     }
 
-    for(let i = 0; i < expensesItem.length  i++){
-        editBtnOfExpenses[i].addEventListener("click",)
+    for(let i = 0; i < expensesItem.length;  i++){
+        editBtnOfExpenses[i].addEventListener("click", ()=>{
+            let expenseQuantSpan = document.querySelectorAll(".expense-quant-span");
+            let expenseDescriptionSpan = document.querySelectorAll(".expense-description-span");
+            let expenseUnitValueSpan = document.querySelectorAll(".expense-unit-value-span");
+
+            expenseQuantInput.value = expenseQuantSpan[i].innerText;
+            expenseDescriptionInput.value = expenseDescriptionSpan[i].innerText;
+
+            let unitValueUpdated = expenseUnitValueSpan[i].innerText.slice(2);
+
+            expenseUnitValueInput.value = unitValueUpdated;
+
+            expensesItem[i].remove();
+
+            updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+        })
     }
 
 }
@@ -799,7 +814,7 @@ async function addExpenseItemProcess(){
     createExpenseItem(expenseQuantInput.value,expenseDescriptionInput.value,expenseUnitValueInput.value);
     updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
 
-    // handleEvent listeners of delete and edit buttons
+    await expensesItem_handleEventListeners();
 
     await clearInputs([
         expenseQuantInput,
@@ -812,7 +827,9 @@ async function addExpenseItemProcess(){
 
 upperCaseInputs([
     expenseDescriptionInput
-])
+]);
+
+expensesItem_handleEventListeners();
 
 // event listeners
 
@@ -1280,6 +1297,21 @@ function saveAsHtml(){
 
 function backHomeProcess(){
     clientsSelectList.value = clientSpanResult.innerText;
+
+    if(clientSpanResult.innerText === "(NÃO IDENTIFICADO)"){
+        showHtmlElement([notIdentifiedInput], "block");
+        hideHtmlElement([equipamentsSelectList]);
+
+        notIdentifiedInput.value = equipamentSpanResult.innerText;
+    }
+
+    if(clientSpanResult.innerText !== "(NÃO IDENTIFICADO)"){
+        showHtmlElement([equipamentsSelectList], "block");
+        hideHtmlElement([notIdentifiedInput]);
+
+        equipamentsSelectList.value  = equipamentSpanResult.innerText
+    }
+
     paymentTermsInput.value = paymentTermsSpanResult.innerText;
     completionDeadlineInput.value = completionDeadlineSpanResult.innerText;
     guaranteeInput.value = guaranteeSpanResult.innerText;

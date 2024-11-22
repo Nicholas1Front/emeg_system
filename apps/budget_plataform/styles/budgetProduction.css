@@ -549,7 +549,7 @@ header{
 /* parts-section */
 
 .parts-section{
-    display:block;
+    display:none;
     width: 100%;
     padding:10px 0;
 }
@@ -770,7 +770,7 @@ header{
 /* services-section */
 
 .services-section{
-    display:block;
+    display:none;
     width:100%;
     margin-top:5rem;
     padding:10px 0;
@@ -950,7 +950,7 @@ header{
 /* total-budget-prod-section */
 
 .total-budget-prod-section{
-    display:block;
+    display:none;
     width:100%;
     margin-top:5rem;
 }
@@ -1028,7 +1028,7 @@ header{
 /* observations-section */
 
 .observations-section{
-    display:block;
+    display:none;
     width:100%;
     margin-top:5rem;
     padding:10px 0;
@@ -1080,7 +1080,7 @@ header{
 /* expenses-section */
 
 .expenses-section{
-    display:block;
+    display:none;
     width:100%;
     margin-top:5rem;
     padding:10px 0;
@@ -1210,7 +1210,7 @@ header{
 .generate-budget-section{
     width: 100%;
     padding:10px 0;
-    display: block;
+    display: none;
 }
 
 .generate-budget-control{
