@@ -8,7 +8,7 @@ Este repositório contém um conjunto de sistemas desenvolvidos como ferramentas
 Um sistema simples que funciona como um **hub** para concentrar todos os sistemas e ferramentas deste repositório.
 
 ### 2. **Criação de Orçamentos** (já desenvolvido)
-Ferramenta destinada à criação de orçamentos, utilizando informações dos clientes cadastrados. Ela oferece funcionalidades como controle de itens, geração de orçamentos em formato HTML ou PDF.
+Ferramenta destinada à criação de orçamentos, utilizando informações dos clientes cadastrados. Ela oferece funcionalidades como controle de itens, geração de orçamentos em formato HTML ou PDF. Esta ferramenta também conta com um sistema de enumeração para o orçamentos de forma automática fazendo a alteração do arquivo `latest_budget_number.json` através do servidor **Render**.
 
 - [Ajuda com Criação de Orçamentos](https://nicholas1front.github.io/emeg_system/apps/budget_plataform/help_budget_plataform.html)
 
