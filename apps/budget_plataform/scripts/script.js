@@ -260,7 +260,7 @@ async function validateSelectsProcess(){
         await showMessagePopup("Alguns campos estão vazios !", "adviceMsg");
     };
 
-    await showHtmlElement([partsSection,servicesSection,totalBudgetProdSection,observationsSection,generateBudgetSection], "block");
+    await showHtmlElement([partsSection,servicesSection,totalBudgetProdSection,observationsSection,expensesSection,generateBudgetSection], "block");
     await hideHtmlElement([nextStepContainer]);
 }
 
@@ -699,6 +699,162 @@ const totalBudgetProdSection = document.querySelector(".total-budget-prod-sectio
 
 const observationsSection = document.querySelector(".observations-section");
 const observationsTextarea = document.querySelector("#observations-textarea");
+
+// booting
+
+upperCaseInputs([
+    observationsTextarea
+])
+
+// expenses-section
+
+// elements 
+
+const expensesSection = document.querySelector(".expenses-section");
+const expensesAddedItemsControl = document.querySelector(".expenses-added-items-control");
+const expenseQuantInput = document.querySelector("#expense-quant-input");
+const expenseDescriptionInput = document.querySelector("#expense-description-input");
+const expenseUnitValueInput = document.querySelector("#expense-unit-value-input");
+const expenseAdditemBtn = document.querySelector("#expense-add-item-btn");
+
+// functions
+
+function createExpenseItem(quantString, descriptionString, unitValueString){
+    let quant = parseInt(quantString);
+
+    let unitValue = parseFloat(unitValueString.replace(",", "."));
+    unitValueString = formatToBrl(unitValue);
+
+    let totalValue =  quant * unitValue;
+
+    let totalValueString = formatToBrl(totalValue);
+
+    const itemString =
+    `
+        <div class="expenses-item">
+            <div class="expenses-item-content">
+                <span class="expense-quant-span">${quantString}</span>
+                <span class="expense-description-span">${descriptionString.toUpperCase()}</span>
+                <span class="expense-unit-value-span">${unitValueString}</span>
+                <span class="expense-total-value-span">${totalValueString}</span>
+                <div class="edit-btn-control">
+                    <button class="edit-btn-of-expenses">
+                        <i class="fa-solid fa-pen" aria-hidden="true"></i>
+                    </button>
+                </div>
+
+                <div class="delete-btn-control">
+                    <button class="delete-btn-of-expenses">
+                        <i class="fa-solid fa-trash" aria-hidden="true"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const parser = new DOMParser();
+
+    const doc = parser.parseFromString(itemString, 'text/html');
+
+    const itemHtml  = doc.body.firstChild;
+
+    expensesAddedItemsControl.appendChild(itemHtml);
+}
+
+async function expensesItem_handleEventListeners(){
+    let expensesItem = document.querySelectorAll(".expenses-item");
+    let editBtnOfExpenses = document.querySelectorAll(".edit-btn-of-expenses");
+    let deleteBtnOfExpenses = document.querySelectorAll(".delete-btn-of-expenses");
+
+    for(let i = 0; i < expensesItem.length; i++){
+        deleteBtnOfExpenses[i].addEventListener("click", ()=>{
+            expensesItem[i].remove();
+            updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+        })
+    }
+
+    for(let i = 0; i < expensesItem.length;  i++){
+        editBtnOfExpenses[i].addEventListener("click", ()=>{
+            let expenseQuantSpan = document.querySelectorAll(".expense-quant-span");
+            let expenseDescriptionSpan = document.querySelectorAll(".expense-description-span");
+            let expenseUnitValueSpan = document.querySelectorAll(".expense-unit-value-span");
+
+            expenseQuantInput.value = expenseQuantSpan[i].innerText;
+            expenseDescriptionInput.value = expenseDescriptionSpan[i].innerText;
+
+            let unitValueUpdated = expenseUnitValueSpan[i].innerText.slice(2);
+
+            expenseUnitValueInput.value = unitValueUpdated;
+
+            expensesItem[i].remove();
+
+            updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+        })
+    }
+
+}
+
+async function addExpenseItemProcess(){
+    // input validation
+
+    if(expenseQuantInput.value === "" && expenseDescriptionInput.value === "" && expenseUnitValueInput.value === "" ){
+        await showMessagePopup("Insira as informações dos gastos com o serviço antes de prosseguir !", "errorMsg");
+        return;
+    }
+
+    if(expenseQuantInput.value === ""){
+        await showMessagePopup("Insira a quantidade de gastos !", "errorMsg");
+        return;
+    }
+
+    if (expenseDescriptionInput.value === ""){
+        await showMessagePopup("Insira a descrição do gasto aplicado !", "errorMsg");
+        return;
+    }
+
+    if(expenseUnitValueInput.value === ""){
+        await showMessagePopup("Insira o valor do gasto aplicado !", "errorMsg");
+        return;
+    }
+
+    createExpenseItem(expenseQuantInput.value,expenseDescriptionInput.value,expenseUnitValueInput.value);
+    updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+
+    await expensesItem_handleEventListeners();
+
+    await clearInputs([
+        expenseQuantInput,
+        expenseDescriptionInput,
+        expenseUnitValueInput,
+    ])
+}
+
+// booting
+
+upperCaseInputs([
+    expenseDescriptionInput
+]);
+
+expensesItem_handleEventListeners();
+
+// event listeners
+
+expenseUnitValueInput.addEventListener("input", (event) => {
+    const updateValue = validateOnlyNumbers(event.target.value);
+
+    event.target.value = updateValue;
+});
+
+expenseUnitValueInput.addEventListener("keydown", async (event)=>{
+    if(event.key === "Enter"){
+        await addExpenseItemProcess();
+
+    }
+})
+
+expenseAdditemBtn.addEventListener("click", async ()=>{
+    await addExpenseItemProcess();
+})  
 
 // loading screen
 
@@ -1147,6 +1303,21 @@ function saveAsHtml(){
 
 function backHomeProcess(){
     clientsSelectList.value = clientSpanResult.innerText;
+
+    if(clientSpanResult.innerText === "(NÃO IDENTIFICADO)"){
+        showHtmlElement([notIdentifiedInput], "block");
+        hideHtmlElement([equipamentsSelectList]);
+
+        notIdentifiedInput.value = equipamentSpanResult.innerText;
+    }
+
+    if(clientSpanResult.innerText !== "(NÃO IDENTIFICADO)"){
+        showHtmlElement([equipamentsSelectList], "block");
+        hideHtmlElement([notIdentifiedInput]);
+
+        equipamentsSelectList.value  = equipamentSpanResult.innerText
+    }
+
     paymentTermsInput.value = paymentTermsSpanResult.innerText;
     completionDeadlineInput.value = completionDeadlineSpanResult.innerText;
     guaranteeInput.value = guaranteeSpanResult.innerText;

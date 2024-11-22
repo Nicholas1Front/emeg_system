@@ -410,6 +410,39 @@ header h2{
     border-radius:25px;
 }
 
+/* expenses-section */
+
+.expenses-section{
+    margin-bottom:1.5rem;
+}
+
+.expenses-section > .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.expenses-section > .container > .title-container{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 1.5rem;
+}
+
+.expenses-section > .container > .title-container h3{
+    font-size: 25px;
+    margin:1rem 0; 
+    width: fit-content;
+    font-size: 25px;
+    padding: 5px 16px;
+    background-color: #d61e1e;
+    color:#000;
+}
+
+.expenses-section > .container > .text-container p{
+    margin:1rem 0;
+}
+
 /* generate-budget-section */
 
 .generate-budget-section > .container{
