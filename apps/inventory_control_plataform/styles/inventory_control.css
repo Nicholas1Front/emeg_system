@@ -117,3 +117,49 @@ header h2{
     font-size:12px;
     padding-top:6px;
 }
+
+/* main-hub-section */
+
+.main-hub-section{
+    display: block;
+    margin:1.5rem 0;
+}
+
+.main-hub-section > .main-hub-container{
+    padding:3rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-hub-section > .main-hub-container button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a91818;
+    width:30%;
+    padding:10px 0;
+    margin: 0 1rem;
+    cursor: pointer;
+    font-size: 19px;
+    transition:0.2s;
+}
+
+.main-hub-section > .main-hub-container button > i{
+    margin-left:7px;
+    font-size:22px;
+}
+
+.main-hub-section > .main-hub-container button:hover{
+    background-color:#d61e1e ;
+    transition:0.2s;
+}
+
+.main-hub-section > .main-hub-container > #edit-inventory-btn{
+    background-color: #0364b3;
+    transition:0.2s;
+}
+
+.main-hub-section > .main-hub-container > #edit-inventory-btn:hover{
+    background-color: #0079dc;
+}
