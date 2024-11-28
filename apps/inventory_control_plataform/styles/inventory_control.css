@@ -121,7 +121,7 @@ header h2{
 /* main-hub-section */
 
 .main-hub-section{
-    display: block;
+    display: none;
     margin:1.5rem 0;
 }
 
@@ -162,4 +162,149 @@ header h2{
 
 .main-hub-section > .main-hub-container > #edit-inventory-btn:hover{
     background-color: #0079dc;
+}
+
+/* consult-inventory-section */
+
+.consult-inventory-section{
+    margin-top:1.5rem;
+    display: block;
+}
+
+/* back-home-control */
+
+.back-home-control{
+    display: flex;
+    align-items:center;
+    justify-content: left;
+    margin-bottom:1rem;
+}
+
+.back-home-control > button{
+    width:15%;
+    margin-left:1rem;
+    font-size: 14px;
+    padding:8px 0;
+    background-color: #a91818;
+    color: #fff;
+    border-radius: 25px;
+    border:none;
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.back-home-control > button:hover{
+    background-color: #d61e1e;
+    transition: 0.2s;
+}
+
+.back-home-control > button > i{
+    margin-right:7px;
+}
+
+.back-home-control > h3{
+    margin-left:10px;
+}
+
+.consult-inventory-section > .title-container{
+    margin-top:1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 25px;   
+}
+
+.consult-inventory-section > .title-container > .line{
+    width:10%;
+    background-color: #d61e1e;
+    height:1px;
+}
+
+.consult-inventory-section > .title-container > .title-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: fit-content;
+    margin: 0 1rem;
+}
+
+.consult-inventory-section > .title-container > .title-control h3{
+    font-size:35px;
+}
+
+.consult-inventory-section > .title-container > .title-control h5{
+    font-size:15px;
+    font-weight:300;
+    margin-top:10px;
+    margin-bottom:1rem;
+}
+
+/* consult-inventory-section -> search-input-container */
+
+.consult-inventory-section > .search-input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.consult-inventory-section > .search-input-container > *{
+    margin:0 8px;
+    padding:8px 0;
+    border-radius:25px;
+}
+
+.consult-inventory-section > .search-input-container > #item-type_select-search{
+    width:25%;
+}
+
+.consult-inventory-section > .search-input-container > .item-name-input-control{
+    width:55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.consult-inventory-section > .search-input-container > .item-name-input-control input{
+    width:100%;
+    padding:8px 0;
+    padding-left:8px;
+    border-radius:25px;
+    border: 1px solid #969696;
+}
+
+.consult-inventory-section > .search-input-container > .item-name-input-control > .item-name-options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 55%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.consult-inventory-section > .search-input-container > .item-name-input-control > .item-name-options-control > .item-name-option{
+    padding:8px 0;
+    padding-left:8px;    
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.consult-inventory-section > .search-input-container > .item-name-input-control > .item-name-options-control > .item-name-option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
+}
+
+.consult-inventory-section > .search-input-container > #consult-inventory_search-btn{
+    width:10%;
+    cursor:pointer;
+    background-color: #a91818;
+    transition:0.2s;
+}
+
+.consult-inventory-section > .search-input-container > #consult-inventory_search-btn:hover{
+    background-color: #d61e1e;
+    transition:0.2s;
 }

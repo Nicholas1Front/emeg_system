@@ -53,6 +53,46 @@
             </div>
         </section>
 
+        <section class="consult-inventory-section">
+            <div class="back-home-control">
+                <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Pesquisar item especifico do estoque</h3>
+            </div>
+
+            <div class="title-container">
+                <div class="line"></div>
+                
+                <div class="title-control">
+                    <h3>Pesquisar item</h3>
+                    <h5>Insira as informações adiante para pesquisar um item especifico na tabela</h5>
+                </div>
+
+                <div class="line"></div>
+            </div>
+
+            <div class="search-input-container">
+                <select id="item-type_select-search">
+                    <option value="FERRAMENTA">FERRAMENTA</option>
+                    <option value="MATERIAL GERAL">MATERIAL GERAL</option>
+                </select>
+
+                <div class="item-name-input-control">
+                    <input type="text" id="item-name-input-search">
+
+                    <div class="item-name-options-control">
+                        <div class="item-name-option">REPARO CILINDRO DE ELEVAÇÃO</div>
+                        <div class="item-name-option">WHITELUB</div>
+                    </div>
+                </div>
+
+                <button id="consult-inventory_search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+        </section>
+
     </div>
+
+    <script src="../inventory_control_plataform/scripts/script.js"></script>
 </body>
 </html>
