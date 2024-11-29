@@ -308,3 +308,109 @@ header h2{
     background-color: #d61e1e;
     transition:0.2s;
 }
+
+/* consult-inventory-section > consult-inventory_result-container */
+
+.consult-inventory-section > .consult-inventory_result-container{
+    margin-top:1.5rem;
+    display:block;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size:25px;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .title-container > .line{
+    width:9rem;
+    margin-left:18%;
+    height:1px;
+    background-color: #d61e1e;
+    margin-top:2px;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:90%;
+    margin: 2rem auto 0 auto;
+}
+
+/* consult-inventory-section > consult-inventory_result-container > .consult-inventory_label-control */
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_label-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d61e1e;
+    color:#fff;
+    padding:0.7rem 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_label-control h3{
+    font-size:18px;
+    text-align: center;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_label-control > .item-name-label{
+    width:40%;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_label-control > .item-type-label{
+    width:20%;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_label-control > .item-quant-label{
+    width:20%;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_label-control > .item-status-label{
+    width:20%;
+}
+
+/* consult-inventory-section > consult-inventory_result-container > .consult-inventory_show-item */
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_show-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ececec;
+    padding:1rem 0;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_show-item span{
+    font-size: 18px;
+    text-align: center;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_show-item > .item-name_span{
+    width:40%;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_show-item > .item-type_span{
+    width:20%;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_show-item > .item-quant_span{
+    width:20%;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_show-item > .item-status-control{
+    width:20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .consult-inventory_show-item > .item-status-control > .status-indicator-circle{
+    width:fit-content;
+    padding:10px;
+    border-radius:50%;
+    background-color: #d61e1e;
+    margin-bottom:0.3rem;
+}

@@ -1,0 +1,26 @@
+[
+    {
+        "name": "LIMPA CONTATO MARCA : WHITELUB",
+        "type": "MATERIAL GERAL",
+        "quant": 1,
+        "status" : "POSSUI"
+    },
+    {
+        "name": "CABEÇOTE DO MOTOR PERKINKS 9096",
+        "type": "PEÇA",
+        "quant": 1,
+        "status" : "POSSUI"
+    },
+    {
+        "name": "CLIPE DE PAPEL",
+        "type": "MATERIAL GERAL",
+        "quant": 0,
+        "status" : "EM FALTA"
+    },
+    {
+        "name": "PAPELÃO",
+        "type": "MATERIAL GERAL",
+        "quant": 0,
+        "status" : "EM FALTA"
+    }
+]
