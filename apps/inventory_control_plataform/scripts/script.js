@@ -62,6 +62,14 @@ async function hideHtmlElement([...elements]){
     })
 }
 
+// main-hub-section
+
+// elements
+
+const consultInventoryBtn = document.querySelector("#consult-inventory-btn");
+const inventoryShowBtn = document.querySelector("#inventory-show-btn");
+const editInventoryShowBtn = document.querySelector("#edit-inventory-show-btn");
+
 // consult-inventory-section
 
 // elements
@@ -80,18 +88,32 @@ async function createSelectOptions(select){
     const allTypes = [];
 
     itens_array.forEach((item)=>{
-        allTypes.push(item.type);   
+        allTypes.push(item.type);
+    })
+
+    allTypes.sort((a,b)=>{
+        if(a < b){
+            return -1;
+        }
+
+        if(a > b){
+            return 1; 
+        }
+
+        return 0;
     })
 
     console.log(allTypes);
 
-    allTypes.forEach((item)=>{
-        for(let i = 0 ; i < allTypes.length ; i++){
-            if(item === allTypes[i+1]){
-                allTypes.splice(i+1, 1);
-            }
+    for(let i = 0;i < allTypes.length; i++){
+        if(allTypes[i] === allTypes[i-1]){
+            allTypes.splice(i,1);
         }
-    })
+
+        if(allTypes[i] === allTypes[i+1]){
+            allTypes.splice(i,1);
+        }
+    }
 
     console.log(allTypes);
 
@@ -104,10 +126,6 @@ async function createSelectOptions(select){
         select.appendChild(option);
     })
 }
-
-setTimeout(async ()=>{
-    await createSelectOptions(itemType_selectSearch);
-},3000)
 
 async function createInputSuggestions(
     //
