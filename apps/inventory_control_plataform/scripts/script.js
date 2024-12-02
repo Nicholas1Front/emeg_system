@@ -62,17 +62,47 @@ async function hideHtmlElement([...elements]){
     })
 }
 
+// back home process and clear inputs
+
+async function backHomeProcess(){
+    await cleanAllInputs();
+
+    const allSections = document.querySelectorAll("section");
+
+    allSections.forEach(async(section)=>{
+        await hideHtmlElement([section]);
+    })
+
+    await showHtmlElement([mainHubSection],"block");
+}
+
+async function cleanAllInputs(){
+    const allInputs = document.querySelectorAll("input");
+    const allSelects = document.querySelectorAll("select");
+
+    allInputs.forEach((element)=>{
+        element.value = "";
+    })
+    
+    allSelects.forEach((element)=>{
+        element.value = "";
+    })
+}
+
 // main-hub-section
 
 // elements
 
-const consultInventoryBtn = document.querySelector("#consult-inventory-btn");
-const inventoryShowBtn = document.querySelector("#inventory-show-btn");
-const editInventoryShowBtn = document.querySelector("#edit-inventory-show-btn");
+const mainHubSection = document.querySelector(".main-hub-section");
+const consultInventoryLink = document.querySelector("#consult-inventory-btn");
+const inventoryShowLink = document.querySelector("#inventory-show-btn");
+const editInventoryShowLink = document.querySelector("#edit-inventory-show-btn");
 
 // consult-inventory-section
 
 // elements
+const backHomeBtn = document.querySelectorAll(".back-home-btn");
+
 const consultInventorySection = document.querySelector(".consult-inventory-section");
 const itemType_selectSearch = document.querySelector("#item-type_select-search");
 const itemNameInputSearch = document.querySelector("#item-name-input-search");
@@ -85,7 +115,7 @@ const consultInventory_searchBtn = document.querySelector("#consult-inventory_se
 async function createSelectOptions(select){
     console.log(itens_array);
     select.innerHTML = "";
-    const allTypes = [];
+    const allTypes = ["",];
 
     itens_array.forEach((item)=>{
         allTypes.push(item.type);
@@ -127,8 +157,91 @@ async function createSelectOptions(select){
     })
 }
 
-async function createInputSuggestions(
-    //
-){
+async function createInputSuggestions(){
+
+    let allItens = [];
+    let itensSearched = [];
+
+    itemNameOptionsControl.innerHTML = "";
+
+    if(itemType_selectSearch.value !== ""){
+        itens_array.forEach((item)=>{
+            if(item.type === itemType_selectSearch.value){
+                allItens.push(item);
+            }
+        });
+
+        for(let i = 0; i < allItens.length; i++){
+            if(allItens[i].name.includes(itemNameInputSearch.value)){
+                itensSearched.push(allItens[i]);
+            }
+        }
+    }
+
+    if(itemType_selectSearch.value === ""){
+        itens_array.forEach((item)=>{
+            allItens.push(item);
+        }) 
+
+        for(let i = 0; i < allItens.length ; i++){
+            if(allItens[i].name.includes(itemNameInputSearch.value)){
+                itensSearched.push(allItens[i]);
+            }
+        }
+    };
+
+    if(itensSearched.length <= 0){
+        itemNameOptionsControl.innerHTML = "";
+        await hideHtmlElement([itemNameOptionsControl]);
+        return;
+    };
+
+    if(itemNameInputSearch.value === ""){
+        itemNameOptionsControl.innerHTML = "";
+        await hideHtmlElement([itemNameOptionsControl]);
+        return;
+    };
+
+    itensSearched.forEach((item)=>{
+        let option = document.createElement("div");
+
+        option.innerText = item.name;
+        option.className = "item-name-option";
+        
+        itemNameOptionsControl.appendChild(option);
+    });
+
+    optionItem = document.querySelectorAll(".item-name-option");
+
+    optionItem.forEach((item)=>{
+        item.addEventListener("click", ()=>{
+            itemNameInputSearch.value = item.innerHTML;
+
+            itemNameOptionsControl.innerHTML = "";
+            hideHtmlElement([itemNameOptionsControl]);
+        })
+    });
+
+    await showHtmlElement([itemNameOptionsControl], "block");    
 
 }
+
+// event listerners
+
+backHomeBtn.forEach((button)=>{
+    button.addEventListener("click", async ()=>{
+        await backHomeProcess()
+    })
+})
+
+consultInventoryLink.addEventListener("click", async ()=>{
+    await hideHtmlElement([mainHubSection]);
+    await createSelectOptions(itemType_selectSearch);
+    await showHtmlElement([consultInventorySection], "block")
+})
+
+itemNameInputSearch.addEventListener("input", async ()=>{
+    itemNameInputSearch.value = itemNameInputSearch.value.toUpperCase();
+
+    await createInputSuggestions(); 
+}) 
