@@ -970,7 +970,6 @@ async function getBudgetLatestNumber(){
 async function updateBudgetNumberData(){
     try {
         let number = budgetNumberSpan.innerText;
-        number = number.slice(0,1);
 
         latest_budget_number.latestNumber = number; 
 
