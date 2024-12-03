@@ -157,48 +157,54 @@ async function createSelectOptions(select){
     })
 }
 
-async function createInputSuggestions(){
+async function createInputSuggestions(
+    typeSelectList,
+    searchInput,
+    optionsControl,
+    optionItem,
+    optionItemClassName
+){
 
     let allItens = [];
     let itensSearched = [];
 
-    itemNameOptionsControl.innerHTML = "";
+    optionsControl.innerHTML = "";
 
-    if(itemType_selectSearch.value !== ""){
+    if(typeSelectList.value !== ""){
         itens_array.forEach((item)=>{
-            if(item.type === itemType_selectSearch.value){
+            if(item.type === typeSelectList.value){
                 allItens.push(item);
             }
         });
 
         for(let i = 0; i < allItens.length; i++){
-            if(allItens[i].name.includes(itemNameInputSearch.value)){
+            if(allItens[i].name.includes(searchInput.value)){
                 itensSearched.push(allItens[i]);
             }
         }
     }
 
-    if(itemType_selectSearch.value === ""){
+    if(typeSelectList.value === ""){
         itens_array.forEach((item)=>{
             allItens.push(item);
         }) 
 
         for(let i = 0; i < allItens.length ; i++){
-            if(allItens[i].name.includes(itemNameInputSearch.value)){
+            if(allItens[i].name.includes(searchInput.value)){
                 itensSearched.push(allItens[i]);
             }
         }
     };
 
     if(itensSearched.length <= 0){
-        itemNameOptionsControl.innerHTML = "";
-        await hideHtmlElement([itemNameOptionsControl]);
+        optionsControl.innerHTML = "";
+        await hideHtmlElement([optionsControl]);
         return;
     };
 
-    if(itemNameInputSearch.value === ""){
-        itemNameOptionsControl.innerHTML = "";
-        await hideHtmlElement([itemNameOptionsControl]);
+    if(searchInput.value === ""){
+        optionsControl.innerHTML = "";
+        await hideHtmlElement([optionsControl]);
         return;
     };
 
@@ -206,23 +212,28 @@ async function createInputSuggestions(){
         let option = document.createElement("div");
 
         option.innerText = item.name;
-        option.className = "item-name-option";
+        option.className = `${optionItemClassName}`;
         
-        itemNameOptionsControl.appendChild(option);
+        optionsControl.appendChild(option);
     });
 
-    optionItem = document.querySelectorAll(".item-name-option");
+    optionItem = document.querySelectorAll(`.${optionItemClassName}`);
 
-    optionItem.forEach((item)=>{
-        item.addEventListener("click", ()=>{
-            itemNameInputSearch.value = item.innerHTML;
+    for(let i = 0; i < optionItem.length; i++){
+        optionItem[i].addEventListener("click", ()=>{
+            searchInput.value = optionItem[i].innerText;
+            
+            optionsControl.innerHTML = "";
+            hideHtmlElement([optionsControl]);
+        }) 
+    }
 
-            itemNameOptionsControl.innerHTML = "";
-            hideHtmlElement([itemNameOptionsControl]);
-        })
-    });
-
-    await showHtmlElement([itemNameOptionsControl], "block");    
+    showHtmlElement([optionsControl], "block");
+    
+    document.addEventListener("click", ()=>{
+        optionsControl.innerHTML="";
+        hideHtmlElement([optionsControl]);
+    })
 
 }
 
@@ -243,5 +254,11 @@ consultInventoryLink.addEventListener("click", async ()=>{
 itemNameInputSearch.addEventListener("input", async ()=>{
     itemNameInputSearch.value = itemNameInputSearch.value.toUpperCase();
 
-    await createInputSuggestions(); 
+    await createInputSuggestions(
+        itemType_selectSearch,
+        itemNameInputSearch,
+        itemNameOptionsControl,
+        itemNameOption,
+        "item-name-option"
+    ); 
 }) 
