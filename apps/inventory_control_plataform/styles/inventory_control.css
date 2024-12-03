@@ -414,3 +414,23 @@ header h2{
     background-color: #d61e1e;
     margin-bottom:0.3rem;
 }
+
+/* consult-inventory-section > consult-inventory_result-container > .no-item-inventory */
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .no-item-inventory{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ececec;
+    padding:1rem 0;
+    font-size:18px;
+}
+
+/* consult-inventory-section > consult-inventory_result-container > .end-of-items */
+
+.consult-inventory-section > .consult-inventory_result-container > .consult-inventory_show-control > .end-of-items{
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: #d61e1e;
+    padding: 0.7rem 0;
+}

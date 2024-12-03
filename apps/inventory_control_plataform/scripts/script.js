@@ -110,6 +110,9 @@ const itemNameOptionsControl = document.querySelector(".item-name-options-contro
 const itemNameOption = null;
 const consultInventory_searchBtn = document.querySelector("#consult-inventory_search-btn");
 
+const consultInventory_resultContainer = document.querySelector(".consult-inventory_result-container");
+const consultInventory_showControl = document.querySelector(".consult-inventory_show-control");
+
 // functions 
 
 async function createSelectOptions(select){
@@ -237,6 +240,112 @@ async function createInputSuggestions(
 
 }
 
+async function searchProcess_consultInventory(){
+    let allItens = [];
+    let itensSearched = [];
+
+    if(document.querySelector(".end-of-items") !== null){
+        document.querySelector(".end-of-items").remove();
+    }
+
+    if(document.querySelectorAll(".consult-inventory_show-item").length > 0 || document.querySelectorAll(".consult-inventory_show-item") !== undefined){
+        let itensInHtml = document.querySelectorAll(".consult-inventory_show-item")
+        for(let i = 0;i < itensInHtml.length ; i++){
+            itensInHtml[i].remove();
+        }
+    }
+
+    if(itemType_selectSearch.value !== ""){
+        itens_array.forEach((item)=>{
+            if(item.type === itemType_selectSearch.value){
+                allItens.push(item);
+            }
+        })
+    }
+
+    if(itemType_selectSearch.value === ""){
+        itens_array.forEach((item)=>{
+            allItens.push(item);
+        })
+    }
+
+    for(let i = 0 ; i < allItens.length; i++){
+        if(allItens[i].name.includes(itemNameInputSearch.value)){
+            itensSearched.push(allItens[i]);
+        }
+    }
+
+    if(itensSearched.length <= 0){
+        showHtmlElement([noItemInventory], "flex");
+        let endOfItems = document.createElement("div");
+        endOfItems.className = "end-of-items";
+        consultInventory_showControl.appendChild(endOfItems);
+        return;
+    }
+
+    if(itensSearched.length > 0){
+        hideHtmlElement([noItemInventory]);
+    }
+
+    itensSearched.forEach((element)=>{
+        let consultInventory_showItem = document.createElement("div");
+        consultInventory_showItem.className = "consult-inventory_show-item";
+
+        let itemNameSpan = document.createElement("span");
+        itemNameSpan.innerHTML = element.name;
+        itemNameSpan.className = "item-name_span";
+
+        let itemTypeSpan = document.createElement("span");
+        itemTypeSpan.innerHTML = element.type;
+        itemTypeSpan.className = "item-type_span";
+
+        let itemQuantSpan = document.createElement("span");
+        itemQuantSpan.innerHTML = element.quant;
+        itemQuantSpan.className = "item-quant_span";
+
+        let itemStatusControl = document.createElement("div");
+        itemStatusControl.className = "item-status-control";
+
+        let statusIndicatorCircle = document.createElement("div");
+        statusIndicatorCircle.className = "status-indicator-circle";
+
+        let itemStatusSpan = document.createElement("span");
+        itemStatusSpan.className = "item-status_span";
+
+        if(element.status === "EM FALTA"){
+            statusIndicatorCircle.style.backgroundColor = "#d61e1e"; // red
+            itemStatusSpan.innerText = `${element.status}`;
+
+            itemStatusControl.appendChild(statusIndicatorCircle);
+            itemStatusControl.appendChild(itemStatusSpan);
+        }
+
+        if(element.status === "POSSUI"){
+            statusIndicatorCircle.style.backgroundColor = "#42f55a"; // green
+            itemStatusSpan.innerText = `${element.status}`;
+
+            itemStatusControl.appendChild(statusIndicatorCircle);
+            itemStatusControl.appendChild(itemStatusSpan);
+        }
+
+        consultInventory_showItem.appendChild(itemNameSpan);
+        consultInventory_showItem.appendChild(itemTypeSpan);
+        consultInventory_showItem.appendChild(itemQuantSpan);
+        consultInventory_showItem.appendChild(itemStatusControl);
+
+        consultInventory_showControl.appendChild(consultInventory_showItem);
+    });
+
+    let endOfItems = document.createElement("div");
+    endOfItems.className = "end-of-items";
+
+    consultInventory_showControl.appendChild(endOfItems);
+
+    await showHtmlElement([consultInventory_resultContainer], "block");
+}
+
+
+
 // event listerners
 
 backHomeBtn.forEach((button)=>{
@@ -261,4 +370,8 @@ itemNameInputSearch.addEventListener("input", async ()=>{
         itemNameOption,
         "item-name-option"
     ); 
-}) 
+})
+
+consultInventory_searchBtn.addEventListener("click", async ()=>{
+    await searchProcess_consultInventory();
+})  
