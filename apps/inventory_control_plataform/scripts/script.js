@@ -89,6 +89,50 @@ async function cleanAllInputs(){
     })
 }
 
+//message popup
+
+//elements
+const messagePopup = document.querySelector(".message-popup");
+const closeMessagePopupBtn= document.querySelector(".close-message-popup-btn");
+const messagePopupSymbol = document.querySelector(".message-popup-control i");
+const messagePopupSpan = document.querySelector(".message-popup-span");
+
+//functions
+
+async function showMessagePopup(messageType, messageSpan){
+    messagePopupSymbol.removeAttribute("className");
+
+    if(messageType === "errorMsg"){
+        messagePopup.style.backgroundColor = "#d61e1e";
+        messagePopup.style.color = "#fff";
+        messagePopupSymbol.className = `fa-solid fa-triangle-exclamation` ;
+    }
+
+    if(messageType === "sucessMsg"){
+        messagePopup.style.backgroundColor = "#42f55a"; //green color
+        messagePopup.style.color = "#fff"
+        messagePopupSymbol.className = `fa-solid fa-circle-check`;
+    }
+
+    messagePopupSpan.innerText = messageSpan;
+
+    await showHtmlElement([messagePopup],"block");
+
+    setTimeout(()=>{
+        hideHtmlElement([messagePopup]);
+    },5000)
+
+}
+
+function closeMessagePopup(){
+    messagePopupSpan.innerText = "";
+    messagePopup.style.display = "none";
+}
+
+closeMessagePopupBtn.addEventListener("click", ()=>{
+    closeMessagePopup();
+})
+
 // main-hub-section
 
 // elements
@@ -118,7 +162,14 @@ const consultInventory_showControl = document.querySelector(".consult-inventory_
 async function createSelectOptions(select){
     console.log(itens_array);
     select.innerHTML = "";
-    const allTypes = ["",];
+    let allTypes = [];
+
+    let blankOption = document.createElement("option");
+
+    blankOption.value = "";
+    blankOption.innerHTML = "";
+
+    select.appendChild(blankOption);
 
     itens_array.forEach((item)=>{
         allTypes.push(item.type);
@@ -139,12 +190,10 @@ async function createSelectOptions(select){
     console.log(allTypes);
 
     for(let i = 0;i < allTypes.length; i++){
-        if(allTypes[i] === allTypes[i-1]){
-            allTypes.splice(i,1);
-        }
-
-        if(allTypes[i] === allTypes[i+1]){
-            allTypes.splice(i,1);
+        for(let j = 1; j < allTypes.length; j++){
+            if(allTypes[i] === allTypes[j]){
+                allTypes.splice(j,1);
+            }
         }
     }
 
@@ -243,6 +292,9 @@ async function createInputSuggestions(
 async function searchProcess_consultInventory(){
     let allItens = [];
     let itensSearched = [];
+
+    let noItemInventory = document.querySelector(".no-item-inventory");
+    hideHtmlElement([noItemInventory]);
 
     if(document.querySelector(".end-of-items") !== null){
         document.querySelector(".end-of-items").remove();
@@ -355,7 +407,7 @@ backHomeBtn.forEach((button)=>{
 })
 
 consultInventoryLink.addEventListener("click", async ()=>{
-    await hideHtmlElement([mainHubSection]);
+    await hideHtmlElement([mainHubSection, consultInventory_resultContainer]);
     await createSelectOptions(itemType_selectSearch);
     await showHtmlElement([consultInventorySection], "block")
 })
@@ -373,5 +425,9 @@ itemNameInputSearch.addEventListener("input", async ()=>{
 })
 
 consultInventory_searchBtn.addEventListener("click", async ()=>{
+    if(itemNameInputSearch.value === ""){
+        await showMessagePopup("errorMsg", "Digite as informações do item para continuar a pesquisa !");
+        return;
+    }
     await searchProcess_consultInventory();
 })  

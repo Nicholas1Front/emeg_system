@@ -12,6 +12,18 @@
     <script src="https://kit.fontawesome.com/8bf43e84bd.js" crossorigin="anonymous"></script><!--Font awesome-->
 </head>
 <body>
+
+    <div class="message-popup">
+        <button class="close-message-popup-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="message-popup-control">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span class="message-popup-span">Este campo não pode estar vazio !</span>
+        </div>
+    </div>
+
     <div class="inventory-control-system-container">
 
         <header>
@@ -113,13 +125,71 @@
                             <div class="status-indicator-circle"></div>
                             <span class="item-status_span">EM FALTA</span>
                         </div>
-                    </div>
+                    </div> -->
 
                     <div class="no-item-inventory">O ITEM NÃO EXISTE !</div>
 
-                    <div class="end-of-items"></div> -->
+            </div>
+        </section>
 
-                    
+        <section class="whole-inventory-section">
+            <div class="back-home-control">
+                <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Mostrar todo o estoque</h3>
+            </div>
+
+            <div class="title-container">
+                <div class="line"></div>
+                
+                <div class="title-control">
+                    <h3>Estoque completo</h3>
+                    <h5>Use um dos botões para verificar todos os itens do estoque</h5>
+                </div>
+
+                <div class="line"></div>
+            </div>
+
+            <div class="main-hub_whole-inventory">
+                <button class="missing-items-btn">
+                    Consultar itens em falta
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </button>
+                <button class="have-items-btn">
+                    Consultar itens do inventário
+                    <i class="fa-solid fa-circle-check"></i>
+                </button>
+            </div>
+
+            <div class="missing-items-container">
+
+                <div class="title-container">
+                    <h3>Itens que estão em falta</h3>
+                    <div class="line"></div>
+                </div>
+
+                <div class="missing-items_show-control">
+                    <div class="missing-items_label-control">
+                        <h3 class="item-name-label">Nome do item</h3>
+                        <h3 class="item-type-label">Tipo do item</h3>
+                        <h3 class="item-quant-label">Quantidade de itens</h3>
+                        <h3 class="item-status-label">Status atual</h3>
+                    </div>
+
+                    <div class="missing-items_show-item">
+                        <span class="item-name_span">WHITELUB</span>
+                        <span class="item-type_span">MATERIAL GERAL</span>
+                        <span class="item-quant_span">2</span>
+                        <div class="item-status-control">
+                            <div class="status-indicator-circle"></div>
+                            <span class="item-status_span">EM FALTA</span>
+                        </div>
+                    </div>
+
+                    <div class="no-item-inventory">SEM ITENS EM FALTA !</div>
+
+                    <div class="end-of-items"></div>
+                </div>
+
             </div>
         </section>
 
