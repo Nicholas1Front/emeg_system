@@ -551,6 +551,61 @@ header h2{
 /* .whole-inventory-section > .missing-items-container */
 
 .whole-inventory-section > .missing-items-container{
+    margin:2rem auto 2rem auto;
+    display: flex;
+    align-items: center;
+    flex-direction:column;
+}
+
+.whole-inventory-section > .missing-items-container > .title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:1.5rem;
+    font-size: 35px;
+}
+
+.whole-inventory-section > .missing-items-container > .title-container > .line{
+    width:14rem;
+    margin-left:20%;
+    height:2px;
+    background-color: #d61e1e;
+}
+
+/* .whole-inventory-section > .missing-items-container > .missing-items_show-control */
+
+.whole-inventory-section > .missing-items-container > .missing-items_show-control{
+    width:90%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin:1.5rem 0;
-    display: block;
+}
+
+/* hole-inventory-section > .missing-items-container > .missing-items_show-control > .missing-items_label-control */
+
+.whole-inventory-section > .missing-items-container > .missing-items_show-control > .missing-items_label-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d61e1e;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    padding:0.7rem 0;
+    color:#fff;
+}
+
+.whole-inventory-section > .missing-items-container > .missing-items_show-control > .missing-items_label-control > h3{
+    font-size:18px;
+    text-align: center;
+}
+
+.whole-inventory-section > .missing-items-container > .missing-items_show-control > .missing-items_label-control > .item-name-label{
+    width:40%
+}
+
+.whole-inventory-section > .missing-items-container > .missing-items_show-control > .missing-items_label-control > .item-type-label,
+.whole-inventory-section > .missing-items-container > .missing-items_show-control > .missing-items_label-control > .item-quant-label,
+.whole-inventory-section > .missing-items-container > .missing-items_show-control > .missing-items_label-control > .item-status-label{
+    width:20%;
 }
