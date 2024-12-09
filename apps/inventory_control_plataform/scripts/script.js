@@ -430,4 +430,39 @@ consultInventory_searchBtn.addEventListener("click", async ()=>{
         return;
     }
     await searchProcess_consultInventory();
-})  
+})
+
+// whole-inventory-section
+
+// elements
+const wholeInventorySection = document.querySelector(".whole-inventory-section");
+const missingItemsBtn = document.querySelector(".missing-items-btn");
+const haveItemsBtn = document.querySelector(".have-items-btn");
+const missingItemsContainer = document.querySelector(".missing-items-container");
+const haveItemsContainer = document.querySelector(".have-items-container");
+
+// functions
+
+async function showItems_missingItemsContainer(){
+    let allItens = [];
+
+    if(document.querySelectorAll(".missing-items_show-item").length > 0){
+        let itens = document.querySelectorAll(".missing-items_show-item");
+    }
+}
+
+
+// event listerners and booting
+
+inventoryShowLink.addEventListener("click", async ()=>{
+    await hideHtmlElement([mainHubSection]);
+    await showHtmlElement([wholeInventorySection], "block");
+});
+
+missingItemsBtn.addEventListener("click", async ()=>{
+    await showHtmlElement([missingItemsContainer], "flex");
+});
+
+haveItemsBtn.addEventListener("click", async ()=>{
+    await showHtmlElement([haveItemsContainer], "flex");
+})

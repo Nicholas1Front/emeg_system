@@ -948,6 +948,8 @@ let latest_budget_number = {
 
 // functions
 
+getBudgetLatestNumber();
+
 async function getBudgetLatestNumber(){
     try{
         const response = await fetch(`https://nicholas1front.github.io/emeg_system/apps/backend/data/latest_budget_number.json?timestamp=${new Date().getTime()}`);
@@ -957,7 +959,6 @@ async function getBudgetLatestNumber(){
         }
 
         let number = await response.json();
-        number = number.latest_budget_number.latestNumber; 
 
         console.log(number);
 
@@ -1020,7 +1021,8 @@ async function displayBudgetNumber(){
     number = parseInt(number) + 1;
     let year = new Date().getFullYear();
 
-    budgetNumberSpan.innerHTML = `${number}${year}`;
+    budgetNumberSpan.innerHTML = `${number}`;
+    budgetYearSpan.innerHTML = `${year}`;
 
 }
 
@@ -1032,7 +1034,8 @@ const budgetFinishedContent = document.querySelector(".budget-finished-content-c
 
 const clientSpanResult = document.querySelector("#client-span-result");
 const equipamentSpanResult = document.querySelector("#equipament-span-result");
-const budgetNumberSpan = document.querySelector("#budget-number-span"); 
+const budgetNumberSpan = document.querySelector("#budget-number-span");
+const budgetYearSpan = document.querySelector("#budget-year-span");
 const paymentTermsSpanResult = document.querySelector("#payment-terms-span-result");
 const completionDeadlineSpanResult = document.querySelector("#completion-deadline-span-result");
 const guaranteeSpanResult = document.querySelector("#guarantee-span-result");
@@ -1094,7 +1097,7 @@ async function addHeaderFinishedProcess(){
         dateSpanResult.innerText = "###"
     }
 
-    document.querySelector("title").textContent = `ORÇAMENTO ${budgetNumberSpan.innerText} ${clientSpanResult.innerText} ${equipamentSpanResult.innerText}`;
+    document.querySelector("title").textContent = `ORÇAMENTO ${budgetNumberSpan.innerText}${budgetYearSpan.innerText} ${clientSpanResult.innerText} ${equipamentSpanResult.innerText}`;
 }
 
 function createPartItemFinished(numberItem, quant , description , unitValue , totalValue){

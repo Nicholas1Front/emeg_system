@@ -552,7 +552,7 @@ header h2{
 
 .whole-inventory-section > .missing-items-container{
     margin:2rem auto 2rem auto;
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction:column;
 }
@@ -668,7 +668,7 @@ header h2{
 
 .whole-inventory-section > .have-items-container{
     margin:2rem auto 2rem auto;
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction:column;
 }
