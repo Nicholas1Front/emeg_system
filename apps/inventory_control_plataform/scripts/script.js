@@ -446,9 +446,78 @@ const haveItemsContainer = document.querySelector(".have-items-container");
 async function showItems_missingItemsContainer(){
     let allItens = [];
 
+    let noItemInventory = missingItemsContainer.querySelector(".no-item-inventory");
+    hideHtmlElement([noItemInventory]);
+
     if(document.querySelectorAll(".missing-items_show-item").length > 0){
         let itens = document.querySelectorAll(".missing-items_show-item");
+
+        itens.forEach((item)=>{
+            item.remove();
+        })
     }
+
+    if(missingItemsContainer.querySelector(".end-of-items") !== null){
+        let item = missingItemsContainer.querySelector(".end-of-items");
+
+        item.remove();
+    }
+
+    itens_array.forEach((item)=>{
+        if(item.status === "EM FALTA"){
+            allItens.push(item);
+        }
+    });
+    
+    allItens.sort((a,b)=>{
+        if(a < b){
+            return -1;
+        }
+
+        if(a > b){
+            return 1; 
+        }
+
+        return 0;
+    });
+
+    console.log(allItens);
+
+    allItens.forEach((element)=>{
+        let missingItems_showItem = document.createElement("div");
+        missingItems_showItem.className= "missing-items_show-item";
+
+        let itemName_span = document.createElement("span");
+        itemName_span.className= "item-name_span";
+        itemName_span.innerText = element.name;
+
+        let itemType_span = document.createElement("span");
+        itemType_span.className = "item-type_span";
+        itemType_span.innerText = element.type;
+        
+        let itemQuant_span = document.createElement("span");
+        itemQuant_span.className= "item-quant_span";
+        itemQuant_span.innerText = element.quant;
+
+        let itemStatusControl = document.createElement("div");
+        itemStatusControl.className= "item-status-control";
+
+        let statusIndicatorCircle = document.createElement("div");
+        statusIndicatorCircle.className= "status-indicator-circle";
+
+        let itemStatus_span = document.createElement("span");
+        itemStatus_span.className= "item-status_span";
+        itemStatus_span.innerText = element.status;
+
+        if(element.status === "EM FALTA"){
+            statusIndicatorCircle.style.backgroundColor = "#d61e1e"; // red
+        }
+
+        if(element.status === "POSSUI"){
+            statusIndicatorCircle.style.backgroundColor = "#42f55a"; // green
+        }
+    })
+
 }
 
 
@@ -460,7 +529,7 @@ inventoryShowLink.addEventListener("click", async ()=>{
 });
 
 missingItemsBtn.addEventListener("click", async ()=>{
-    await showHtmlElement([missingItemsContainer], "flex");
+    await showItems_missingItemsContainer();
 });
 
 haveItemsBtn.addEventListener("click", async ()=>{
