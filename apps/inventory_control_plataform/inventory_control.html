@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controle de estoque EMEG</title>
+    <link rel="stylesheet" href="../inventory_control_plataform/styles/inventory_control.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8bf43e84bd.js" crossorigin="anonymous"></script><!--Font awesome-->
+</head>
+<body>
+
+    <div class="message-popup">
+        <button class="close-message-popup-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="message-popup-control">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span class="message-popup-span">Este campo não pode estar vazio !</span>
+        </div>
+    </div>
+
+    <div class="inventory-control-system-container">
+
+        <header>
+            <div class="back-hub-apps-control">
+                <a href="https://nicholas1front.github.io/emeg_system/apps/main_hub/main_hub.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Voltar para o hub de apps</span>
+                </a>
+            </div>
+
+            <img src="https://nicholas1front.github.io/emeg_system/assets/images/emeg_symbol_white.png">
+
+            <h2>Controle de estoque</h2>
+
+            <div class="help-page-link-control">
+                <a href="https://nicholas1front.github.io/emeg_system/apps/price_list/help_price_list.html">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Ajuda</span>
+                </a>
+            </div>
+        </header>
+
+        <section class="main-hub-section">
+            <div class="main-hub-container">
+                <button id="consult-inventory-btn">
+                    Pesquisar item especifico do estoque
+                    <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                </button>
+
+                <button id="inventory-show-btn">
+                    Mostrar todo estoque
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </button>
+
+                <button id="edit-inventory-btn">
+                    Editar itens
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+            </div>
+        </section>
+
+        <section class="consult-inventory-section">
+            <div class="back-home-control">
+                <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Pesquisar item especifico do estoque</h3>
+            </div>
+
+            <div class="title-container">
+                <div class="line"></div>
+                
+                <div class="title-control">
+                    <h3>Pesquisar item</h3>
+                    <h5>Insira as informações adiante para pesquisar um item especifico na tabela</h5>
+                </div>
+
+                <div class="line"></div>
+            </div>
+
+            <div class="search-input-container">
+                <select id="item-type_select-search">
+                    <option value="FERRAMENTA">FERRAMENTA</option>
+                    <option value="MATERIAL GERAL">MATERIAL GERAL</option>
+                </select>
+
+                <div class="item-name-input-control">
+                    <input type="text" id="item-name-input-search" autocomplete="off">
+
+                    <div class="item-name-options-control">
+                        <div class="item-name-option">REPARO CILINDRO DE ELEVAÇÃO</div>
+                        <div class="item-name-option">WHITELUB</div>
+                    </div>
+                </div>
+
+                <button id="consult-inventory_search-btn">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
+
+            <div class="consult-inventory_result-container">
+                <div class="title-container">
+                    <h3>Resultados da pesquisa</h3>
+                    <div class="line"></div>
+                </div>
+
+                <div class="consult-inventory_show-control">
+                    
+                    <div class="consult-inventory_label-control">
+                        <h3 class="item-name-label">Nome do item</h3>
+                        <h3 class="item-type-label">Tipo do item</h3>
+                        <h3 class="item-quant-label">Quantidade de itens</h3>
+                        <h3 class="item-status-label">Status atual</h3>
+                    </div>
+
+                    <!-- <div class="consult-inventory_show-item">
+                        <span class="item-name_span">WHITELUB</span>
+                        <span class="item-type_span">MATERIAL GERAL</span>
+                        <span class="item-quant_span">2</span>
+                        <div class="item-status-control">
+                            <div class="status-indicator-circle"></div>
+                            <span class="item-status_span">EM FALTA</span>
+                        </div>
+                    </div> -->
+
+                    <div class="no-item-inventory">O ITEM NÃO EXISTE !</div>
+
+            </div>
+        </section>
+
+        <section class="whole-inventory-section">
+            <div class="back-home-control">
+                <button class="back-home-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Mostrar todo o estoque</h3>
+            </div>
+
+            <div class="title-container">
+                <div class="line"></div>
+                
+                <div class="title-control">
+                    <h3>Estoque completo</h3>
+                    <h5>Use um dos botões para verificar todos os itens do estoque</h5>
+                </div>
+
+                <div class="line"></div>
+            </div>
+
+            <div class="main-hub_whole-inventory">
+                <button class="missing-items-btn">
+                    Consultar itens em falta
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                </button>
+                <button class="have-items-btn">
+                    Consultar itens existentes do estoque
+                    <i class="fa-solid fa-circle-check"></i>
+                </button>
+            </div>
+
+            <div class="missing-items-container">
+
+                <div class="title-container">
+                    <h3>Itens que estão em falta</h3>
+                    <div class="line"></div>
+                </div>
+
+                <div class="missing-items_show-control">
+                    <div class="missing-items_label-control">
+                        <h3 class="item-name-label">Nome do item</h3>
+                        <h3 class="item-type-label">Tipo do item</h3>
+                        <h3 class="item-quant-label">Quantidade de itens</h3>
+                        <h3 class="item-status-label">Status atual</h3>
+                    </div>
+
+                    <div class="missing-items_show-item">
+                        <span class="item-name_span">WHITELUB</span>
+                        <span class="item-type_span">MATERIAL GERAL</span>
+                        <span class="item-quant_span">2</span>
+                        <div class="item-status-control">
+                            <div class="status-indicator-circle"></div>
+                            <span class="item-status_span">EM FALTA</span>
+                        </div>
+                    </div>
+
+                    <div class="no-item-inventory">SEM ITENS EM FALTA !</div>
+
+                    <div class="end-of-items"></div>
+                </div>
+
+            </div>
+
+            <div class="have-items-container">
+                <div class="title-container">
+                    <h3>Itens existentes no estoque</h3>
+                    <div class="line"></div>
+                </div>
+
+                <div class="have-items_show-control">
+                    <div class="have-items_label-control">
+                        <h3 class="item-name-label">Nome do item</h3>
+                        <h3 class="item-type-label">Tipo do item</h3>
+                        <h3 class="item-quant-label">Quantidade de itens</h3>
+                        <h3 class="item-status-label">Status atual</h3>
+                    </div>
+
+                    <div class="have-items_show-item">
+                        <span class="item-name_span">WHITELUB</span>
+                        <span class="item-type_span">MATERIAL GERAL</span>
+                        <span class="item-quant_span">2</span>
+                        <div class="item-status-control">
+                            <div class="status-indicator-circle"></div>
+                            <span class="item-status_span">EM FALTA</span>
+                        </div>
+                    </div>
+
+                    <div class="no-item-inventory">SEM ITENS EM FALTA !</div>
+
+                    <div class="end-of-items"></div>
+                    
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script src="../inventory_control_plataform/scripts/script.js"></script>
+</body>
+</html>
