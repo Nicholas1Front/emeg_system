@@ -1018,7 +1018,7 @@ async function sendToServerProcess(){
 
 async function displayBudgetNumber(){
     let number = await getBudgetLatestNumber();
-    number = parseInt(number) + 1;
+    number = parseInt(number.latest_budget_number.latestNumber) + 1;
     let year = new Date().getFullYear();
 
     budgetNumberSpan.innerHTML = `${number}`;
