@@ -439,6 +439,7 @@ const wholeInventorySection = document.querySelector(".whole-inventory-section")
 const missingItemsBtn = document.querySelector(".missing-items-btn");
 const haveItemsBtn = document.querySelector(".have-items-btn");
 const missingItemsContainer = document.querySelector(".missing-items-container");
+const missingItems_showControl = document.querySelector(".missing-items_show-control");
 const haveItemsContainer = document.querySelector(".have-items-container");
 
 // functions
@@ -446,8 +447,8 @@ const haveItemsContainer = document.querySelector(".have-items-container");
 async function showItems_missingItemsContainer(){
     let allItens = [];
 
-    let noItemInventory = missingItemsContainer.querySelector(".no-item-inventory");
-    hideHtmlElement([noItemInventory]);
+    let noItemInventory_missingItemsContainer = missingItemsContainer.querySelector(".no-item-inventory");
+    hideHtmlElement([noItemInventory_missingItemsContainer]);
 
     if(document.querySelectorAll(".missing-items_show-item").length > 0){
         let itens = document.querySelectorAll(".missing-items_show-item");
@@ -483,6 +484,13 @@ async function showItems_missingItemsContainer(){
 
     console.log(allItens);
 
+    if(allItens.length <= 0){
+        await showHtmlElement([noItemInventory_missingItemsContainer],"flex");
+        let endOfItems = document.createElement("div");
+        endOfItems.className = "end-of-items";
+        missingItemsContainer.appendChild(endOfItems);
+    }
+
     allItens.forEach((element)=>{
         let missingItems_showItem = document.createElement("div");
         missingItems_showItem.className= "missing-items_show-item";
@@ -516,7 +524,23 @@ async function showItems_missingItemsContainer(){
         if(element.status === "POSSUI"){
             statusIndicatorCircle.style.backgroundColor = "#42f55a"; // green
         }
-    })
+
+        itemStatusControl.appendChild(statusIndicatorCircle);
+        itemStatusControl.appendChild(itemStatus_span);
+
+        missingItems_showItem.appendChild(itemName_span);
+        missingItems_showItem.appendChild(itemType_span);
+        missingItems_showItem.appendChild(itemQuant_span);
+        missingItems_showItem.appendChild(itemStatusControl);
+
+        missingItems_showControl.appendChild(missingItems_showItem);
+    });
+
+    let endOfItems = document.createElement("div");
+    endOfItems.className = "end-of-items";
+    missingItems_showControl.appendChild(endOfItems);
+
+    await showHtmlElement([missingItemsContainer], "flex")
 
 }
 
