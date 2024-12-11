@@ -441,6 +441,7 @@ const haveItemsBtn = document.querySelector(".have-items-btn");
 const missingItemsContainer = document.querySelector(".missing-items-container");
 const missingItems_showControl = document.querySelector(".missing-items_show-control");
 const haveItemsContainer = document.querySelector(".have-items-container");
+const haveItems_showControl = document.querySelector(".have-items_show-control");
 
 // functions
 
@@ -489,6 +490,7 @@ async function showItems_missingItemsContainer(){
         let endOfItems = document.createElement("div");
         endOfItems.className = "end-of-items";
         missingItemsContainer.appendChild(endOfItems);
+        return;
     }
 
     allItens.forEach((element)=>{
@@ -540,8 +542,108 @@ async function showItems_missingItemsContainer(){
     endOfItems.className = "end-of-items";
     missingItems_showControl.appendChild(endOfItems);
 
-    await showHtmlElement([missingItemsContainer], "flex")
+    await showHtmlElement([missingItemsContainer], "flex");
+    await hideHtmlElement([haveItemsContainer]);
+}
 
+async function showItems_haveItemsContainer(){
+    let allItens = [];
+
+    let noItemInventory_haveItemContainer = haveItemsContainer.querySelector(".no-item-inventory");
+    await hideHtmlElement([noItemInventory_haveItemContainer]);
+
+    if(haveItemsContainer.querySelectorAll(".have-items_show-item").length > 0){
+       let items =  haveItemsContainer.querySelectorAll(".have-items_show-item");
+
+       items.forEach(item => {
+        item.remove();
+       })
+    }
+
+    if(haveItemsContainer.querySelector(".end-of-items") !== null){
+        let item = haveItemsContainer.querySelector(".end-of-items");
+        item.remove();
+    }
+
+    itens_array.forEach((item) => {
+        if(item.status === "POSSUI"){
+            allItens.push(item);
+        }
+    })
+
+    allItens.sort((a,b)=>{
+        if(a < b){
+            return -1;
+        }
+
+        if(a > b){
+            return 1; 
+        }
+
+        return 0;
+    });
+
+    console.log(allItens);
+
+    if(allItens.length <= 0){
+        await showHtmlElement([noItemInventory_haveItemContainer],"flex");
+        let endOfItems = document.createElement("div");
+        endOfItems.className = "end-of-items";
+        haveItems_showControl.appendChild(endOfItems);
+        return;
+    }
+
+    allItens.forEach((element) => {
+        let haveItems_showItem = document.createElement("div");
+        haveItems_showItem.className = "have-items_show-item";
+
+        let itemName_span = document.createElement("span");
+        itemName_span.className = "item-name_span";
+        itemName_span.innerText = element.name;
+
+        let itemType_span = document.createElement("span");
+        itemType_span.className = "item-type_span";
+        itemType_span.innerText = element.type;
+
+        let itemQuant_span = document.createElement("span");
+        itemQuant_span.className = "item-quant_span";
+        itemQuant_span.innerText = element.quant;
+
+        let itemStatusControl = document.createElement("div");
+        itemStatusControl.className = "item-status-control";
+
+        let statusIndicatorCircle = document.createElement("div");
+        statusIndicatorCircle.className = "status-indicator-circle";
+
+        let itemStatus_span = document.createElement("span");
+        itemStatus_span.className = "item-status_span";
+        itemStatus_span.innerText = element.status;
+
+        if(element.status === "EM FALTA"){
+            statusIndicatorCircle.style.backgroundColor = "#d61e1e"; // red
+        }
+
+        if(element.status === "POSSUI"){
+            statusIndicatorCircle.style.backgroundColor = "#42f55a"; // green
+        }
+
+        itemStatusControl.appendChild(statusIndicatorCircle);
+        itemStatusControl.appendChild(itemStatus_span);
+
+        haveItems_showItem.appendChild(itemName_span);
+        haveItems_showItem.appendChild(itemType_span);
+        haveItems_showItem.appendChild(itemQuant_span);
+        haveItems_showItem.appendChild(itemStatusControl);
+
+        haveItems_showControl.appendChild(haveItems_showItem);
+    });
+
+    let endOfItems = document.createElement("div");
+    endOfItems.className = "end-of-items";
+    haveItems_showControl.appendChild(endOfItems);
+
+    await showHtmlElement([haveItemsContainer], "flex");
+    await hideHtmlElement([missingItemsContainer]);
 }
 
 
@@ -557,5 +659,6 @@ missingItemsBtn.addEventListener("click", async ()=>{
 });
 
 haveItemsBtn.addEventListener("click", async ()=>{
-    await showHtmlElement([haveItemsContainer], "flex");
+    await showItems_haveItemsContainer();
 })
+
