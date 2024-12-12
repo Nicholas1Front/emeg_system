@@ -650,7 +650,7 @@ async function showItems_haveItemsContainer(){
 // event listerners and booting
 
 inventoryShowLink.addEventListener("click", async ()=>{
-    await hideHtmlElement([mainHubSection]);
+    await hideHtmlElement([mainHubSection,missingItemsContainer,haveItemsContainer]);
     await showHtmlElement([wholeInventorySection], "block");
 });
 
@@ -662,3 +662,116 @@ haveItemsBtn.addEventListener("click", async ()=>{
     await showItems_haveItemsContainer();
 })
 
+// edit-inventory-section -> main-hub_edit-inventory
+
+// elements
+const editInventorySection = document.querySelector(".edit-inventory-section");
+const addItemLinkBtn = document.querySelector("#add-item-link-btn");
+const deleteItemLinkBtn = document.querySelector("#delete-item-link-btn");
+const editItemLinkBtn = document.querySelector("#edit-item-link-btn");
+
+// event listerners and booting
+
+editInventoryShowLink.addEventListener("click", async ()=>{
+    await hideHtmlElement([mainHubSection]);
+    await showHtmlElement([editInventorySection], "block");
+})
+
+// edit-inventory-section -> add-item-container_edit-inventory
+
+// elements
+
+const backHomeBtn_editInventory = document.querySelectorAll(".back-home-btn_edit-inventory");
+const addItemContainer_editInventory = document.querySelector(".add-item-container_edit-inventory");
+let addItemTypeInput = document.querySelector("#add-item-type-input");
+let addItemTypeOptionsControl = document.querySelector(".add-item-type-options-control")
+
+// functions
+
+async function backHomeProcess_editInventory(){
+    await hideHtmlElement([addItemContainer_editInventory]);
+    await showHtmlElement([editInventorySection],"block");
+}
+
+async function createInputSuggestions_ItemType(){
+    let allTypes = [];
+    let itensSearched = [];
+
+    itens_array.forEach((item)=>{
+        allTypes.push(item.type);
+    })
+
+    addItemTypeOptionsControl.innerHTML = "";
+
+    allTypes.sort((a,b)=>{
+        if(a < b){
+            return -1;
+        }
+
+        if(a > b){
+            return 1; 
+        }
+
+        return 0;
+    });
+
+    for(let i = 0 ; i <= allTypes.length ; i++){
+        for(let j = 0; j <= allTypes.length ; j++){
+            if(allTypes[i] === allTypes[j]){
+                allTypes.splice(j,1);
+            }
+        }
+    }
+
+    for(let i = 0 ; i <= allTypes.length; i++){
+        if(allTypes[i].includes(addItemTypeInput.value)){
+            itensSearched.push(allTypes[i]);
+        }
+    }
+
+    if(itensSearched.length <= 0){
+        addItemTypeOptionsControl.innerHTML="";
+        await hideHtmlElement([addItemTypeOptionsControl]);
+        return;
+    }
+
+    if(addItemTypeInput.value === ""){
+        addItemTypeOptionsControl.innerHTML="";
+        await hideHtmlElement([addItemTypeOptionsControl]);
+        return;
+    }
+
+    itensSearched.forEach((item)=>{
+        let addItemTypeOption = document.createElement("div");
+        addItemTypeOption.className = "add-item-type-option";
+        addItemTypeOption.innerText = item.value;
+
+        addItemTypeOptionsControl.appendChild(addItemTypeOption);
+    })
+
+    let allOptions = addItemTypeOptionsControl.querySelectorAll(".add-item-type-option");
+
+    allOptions.forEach((option)=>{
+        option.addEventListener("click", async()=>{
+            addItemTypeInput.value = option.innerText;
+            addItemTypeOptionsControl.innerHTML="";
+            await hideHtmlElement([addItemTypeOptionsControl]);
+        })    
+    })
+
+    await showHtmlElement([addItemTypeOptionsControl], "block");
+    
+    document.addEventListener("click", async()=>{
+        addItemTypeOptionsControl.innerHTML="";
+        await hideHtmlElement([addItemTypeOptionsControl]);
+    })
+
+}
+
+// event listeners and booting
+
+backHomeBtn_editInventory.forEach((button)=>{
+    button.addEventListener("click", async ()=>{
+        await backHomeProcess_editInventory();
+    })
+})
