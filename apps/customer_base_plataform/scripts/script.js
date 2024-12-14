@@ -716,36 +716,17 @@ function createSelectListHtml_equipaments(targetList, targetClientList){
 }
 
 async function  editEquipamentLogic(){
-    let editClientObject = null;
 
     clients_equipaments_array.forEach((client)=>{
         if(client.name === editEquipament_clientSelectList.value){
-            editClientObject = client;
-            return editClientObject
+            let newEquipament = editEquipamentInput.value;
+
+            newEquipament.toUpperCase();
+
+            client.equipaments.push(newEquipament);
         }
     })
 
-    //delete element in clients_equipaments_array
-    for(let i = 0; i < clients_equipaments_array.length ; i++){
-        if(clients_equipaments_array[i].name  === editClientObject.name){
-            clients_equipaments_array.splice(i, 1);
-        }
-    }
-
-    //delete specific equipament in editClientObject
-    for(let i = 0; i < editClientObject.equipaments.length ; i++){
-        if(editClientObject.equipaments[i]  === editEquipament_equipamentSelectList.value){
-            editClientObject.splice(i,1);
-        }
-    }
-
-    //push edited equipament in editClientObject
-    let editedEquipament = editEquipamentInput.value.trim();
-
-    editClientObject.equipaments.push(editedEquipament.toUpperCase());
-
-    //push editClientObject in clients_equipaments_array and sort
-    clients_equipaments_array.push(editClientObject);
     
 };
 
