@@ -895,7 +895,7 @@ header h2{
 }
 
 .edit-inventory-section > .add-item-container_edit-inventory > .input-container > .add-item-type-input-control > .add-item-type-options-control{
-    display:block;
+    display:none;
     border: 1px solid #969696;
     background-color: #fff;
     width:18%;

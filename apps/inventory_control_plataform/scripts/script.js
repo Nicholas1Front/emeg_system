@@ -693,7 +693,11 @@ async function backHomeProcess_editInventory(){
     await showHtmlElement([editInventorySection],"block");
 }
 
-async function createInputSuggestions_ItemType(){
+async function createInputSuggestions_ItemType(
+    typeInput,
+    optionsControl,
+    optionClassName,
+){
     let allTypes = [];
     let itensSearched = [];
 
@@ -701,7 +705,7 @@ async function createInputSuggestions_ItemType(){
         allTypes.push(item.type);
     })
 
-    addItemTypeOptionsControl.innerHTML = "";
+    optionsControl.innerHTML = "";
 
     allTypes.sort((a,b)=>{
         if(a < b){
@@ -715,55 +719,57 @@ async function createInputSuggestions_ItemType(){
         return 0;
     });
 
+
     for(let i = 0 ; i <= allTypes.length ; i++){
-        for(let j = 0; j <= allTypes.length ; j++){
+        for(let j = 1; j <= allTypes.length ; j++){
             if(allTypes[i] === allTypes[j]){
                 allTypes.splice(j,1);
             }
         }
     }
 
-    for(let i = 0 ; i <= allTypes.length; i++){
-        if(allTypes[i].includes(addItemTypeInput.value)){
+
+    for(let i = 0 ; i < allTypes.length; i++){
+        if(allTypes[i].includes(typeInput.value)){
             itensSearched.push(allTypes[i]);
         }
     }
 
     if(itensSearched.length <= 0){
-        addItemTypeOptionsControl.innerHTML="";
-        await hideHtmlElement([addItemTypeOptionsControl]);
+        optionsControl.innerHTML="";
+        await hideHtmlElement([optionsControl]);
         return;
     }
 
-    if(addItemTypeInput.value === ""){
-        addItemTypeOptionsControl.innerHTML="";
-        await hideHtmlElement([addItemTypeOptionsControl]);
+    if(typeInput.value === ""){
+        optionsControl.innerHTML="";
+        await hideHtmlElement([optionsControl]);
         return;
     }
 
     itensSearched.forEach((item)=>{
         let addItemTypeOption = document.createElement("div");
-        addItemTypeOption.className = "add-item-type-option";
-        addItemTypeOption.innerText = item.value;
+        addItemTypeOption.className = `${optionClassName}`;
+        addItemTypeOption.innerText = item;
 
-        addItemTypeOptionsControl.appendChild(addItemTypeOption);
+        optionsControl.appendChild(addItemTypeOption);
     })
 
-    let allOptions = addItemTypeOptionsControl.querySelectorAll(".add-item-type-option");
+    let allOptions = optionsControl.querySelectorAll(`.${optionClassName}`);
 
     allOptions.forEach((option)=>{
         option.addEventListener("click", async()=>{
-            addItemTypeInput.value = option.innerText;
-            addItemTypeOptionsControl.innerHTML="";
-            await hideHtmlElement([addItemTypeOptionsControl]);
+            typeInput.value = option.innerText;
+            optionsControl.innerHTML="";
+            await hideHtmlElement([optionsControl]);
         })    
     })
 
-    await showHtmlElement([addItemTypeOptionsControl], "block");
+    await showHtmlElement([optionsControl], "block");
     
     document.addEventListener("click", async()=>{
-        addItemTypeOptionsControl.innerHTML="";
-        await hideHtmlElement([addItemTypeOptionsControl]);
+        optionsControl.innerHTML="";
+        await hideHtmlElement([optionsControl]);
     })
 
 }
@@ -774,4 +780,14 @@ backHomeBtn_editInventory.forEach((button)=>{
     button.addEventListener("click", async ()=>{
         await backHomeProcess_editInventory();
     })
+});
+
+addItemTypeInput.addEventListener("input", async()=>{
+    addItemTypeInput.value = addItemTypeInput.value.toUpperCase();
+
+    await createInputSuggestions_ItemType(
+        addItemTypeInput,
+        addItemTypeOptionsControl,
+        "add-item-type-option"
+    );
 })
