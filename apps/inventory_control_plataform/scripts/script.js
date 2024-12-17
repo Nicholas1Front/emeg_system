@@ -133,6 +133,115 @@ closeMessagePopupBtn.addEventListener("click", ()=>{
     closeMessagePopup();
 })
 
+// confirmation popup
+
+// elements
+
+const inventoryControlSystemContainer = document.querySelector(".inventory-control-system-container");
+const overlay = document.querySelector(".overlay");
+const closeConfirmationPopupBtn = document.querySelector("#close-confirmation-popup-btn");
+const confirmationPasswordInput = document.querySelector("#confirmation-password-input");
+const wrongPasswordSpan = document.querySelector(".wrong-password-span");
+const confirmationPopupBtn = document.querySelector("#confirmation-popup-btn");
+const confirmationPassword = "88320940";
+
+let functionToBeExecutedGlobal;
+let msgPopupContentGlobal;
+
+function showConfirmationPopup(){
+    overlay.style.display = "flex";
+    inventoryControlSystemContainer.style.filter = "blur(9px)";
+    wrongPasswordSpan.style.display = "none";
+}
+
+function closeConfirmationPopup(){
+    overlay.style.display="none";
+    inventoryControlSystemContainer.style.filter = "blur(0)"
+}
+
+async function clickHandleListener(){
+    if(confirmationPasswordInput.value === confirmationPassword){
+        await callFunction(functionToBeExecutedGlobal, msgPopupContentGlobal);
+
+        await backHomeProcess_editInventory();
+
+        await cleanAllInputs();
+    }else{
+        wrongPasswordSpan.style.display = "block";
+        
+        setTimeout(()=>{
+            wrongPasswordSpan.style.display = "none";
+        },10000);
+
+        confirmationPasswordInput.addEventListener("focus",()=>{
+            wrongPasswordSpan.style.display = "none";
+        })
+
+        return;
+    };
+}
+
+async function keyPressHandleListener(event){
+    if(event.key === "Enter"){
+        if(confirmationPasswordInput.value === confirmationPassword){            
+            await callFunction(functionToBeExecutedGlobal, msgPopupContentGlobal);
+
+            await backHomeProcess_editInventory();
+
+            await cleanAllInputs();
+        }else{
+            wrongPasswordSpan.style.display = "block";
+            
+            setTimeout(()=>{
+                wrongPasswordSpan.style.display = "none";
+            },10000);
+
+            confirmationPasswordInput.addEventListener("focus",()=>{
+                wrongPasswordSpan.style.display = "none";
+            })
+
+            return;
+        };  
+    }
+}
+
+async function verifyPasswordProcess(functionToBeExecuted, msgPopupContent){
+
+    functionToBeExecutedGlobal = functionToBeExecuted;
+    msgPopupContentGlobal = msgPopupContent;
+
+    showConfirmationPopup();
+
+    confirmationPopupBtn.removeEventListener("click", clickHandleListener);
+    confirmationPasswordInput.removeEventListener("keypress",keyPressHandleListener);
+
+    confirmationPopupBtn.addEventListener("click", clickHandleListener);
+    confirmationPasswordInput.addEventListener("keypress",keyPressHandleListener);
+};
+
+async function callFunction(functionToBeExecuted, msgPopupContent){
+    
+    closeConfirmationPopup();
+
+    await functionToBeExecuted();
+
+    itens_array.sort((a, b) => {
+        if (a.type === b.type) {
+            return a.name.localeCompare(b.name);
+        }
+        return a.type.localeCompare(b.type);
+    });
+
+    if(msgPopupContent !== undefined){
+        showMessagePopup("sucessMsg", msgPopupContent);
+    }
+}
+
+closeConfirmationPopupBtn.addEventListener("click", ()=>{
+    closeConfirmationPopup();
+})
+
+
 // main-hub-section
 
 // elements
@@ -684,7 +793,11 @@ editInventoryShowLink.addEventListener("click", async ()=>{
 const backHomeBtn_editInventory = document.querySelectorAll(".back-home-btn_edit-inventory");
 const addItemContainer_editInventory = document.querySelector(".add-item-container_edit-inventory");
 let addItemTypeInput = document.querySelector("#add-item-type-input");
-let addItemTypeOptionsControl = document.querySelector(".add-item-type-options-control")
+let addItemTypeOptionsControl = document.querySelector(".add-item-type-options-control");
+let addItemNameInput = document.querySelector("#add-item-name-input");
+const addItemBtn = document.querySelector("#add-item-btn");
+let addItemQuantInput = document.querySelector("#add-item-quant-input");
+let addItemStatusSelect = document.querySelector("#add-item-status-select");
 
 // functions
 
@@ -774,6 +887,83 @@ async function createInputSuggestions_ItemType(
 
 }
 
+async function addItemLogic(){
+    let newItem = {
+        name : `${addItemNameInput.value}`,
+        type : `${addItemTypeInput.value}`,
+        quant : null,
+        status : null
+    }
+
+    if(addItemStatusSelect.value === "POSSUI"){
+        newItem.status = "POSSUI";
+        newItem.quant = addItemQuantInput.value;
+    }
+
+    if(addItemStatusSelect.value === "EM FALTA"){
+        newItem.status = "EM FALTA";
+        newItem.quant = 0;
+    }
+
+    console.log(newItem);
+
+    itens_array.push(newItem);
+
+    itens_array.sort((a,b)=>{
+        if(a.name < b.name){
+            return -1;
+        }
+
+        if(a.name > b.name){
+            return 1; 
+        }
+
+        return 0;
+    });
+
+    console.log(itens_array);
+}
+
+async function addItemInventoryProcess(){
+    if(addItemTypeInput.value === ""){
+        await showMessagePopup("errorMsg","Insira o tipo do item !");
+        return;
+    }
+
+    if(addItemNameInput.value === ""){
+        await showMessagePopup("errorMsg","Insira o nome do item !");
+        return;
+    }
+
+    if(addItemStatusSelect.value === "POSSUI" && addItemQuantInput.value === ""){
+        await showMessagePopup("errorMsg","A quantidade do item não pode estar vazia !");
+        return;
+    }
+
+    if(addItemStatusSelect.value === "POSSUI" && addItemQuantInput.value === "0"){
+        await showMessagePopup("errorMsg","A quantidade do item não pode ser 0 !");
+        return;
+    }
+
+    let includesInArray = 0;
+
+    for(let i = 0 ; i < itens_array.length; i++){
+        let itemName = itens_array[i].name;
+
+        if(itemName.includes(addItemNameInput.value)){
+            includesInArray += 1;
+        }
+    }
+
+    if(includesInArray >= 1){
+        await showMessagePopup("errorMsg", "Item já existente ! Tente novamente !");
+        return;
+    }else{
+        await addItemLogic();
+        return;
+    }
+}
+
 // event listeners and booting
 
 backHomeBtn_editInventory.forEach((button)=>{
@@ -790,4 +980,25 @@ addItemTypeInput.addEventListener("input", async()=>{
         addItemTypeOptionsControl,
         "add-item-type-option"
     );
+});
+
+addItemNameInput.addEventListener("input", async()=>{
+    addItemNameInput.value = addItemNameInput.value.toUpperCase();
 })
+
+addItemStatusSelect.addEventListener("change", async()=>{
+    if(addItemStatusSelect.value === "POSSUI"){
+        addItemQuantInput.value = "1";
+        return;
+    }
+
+    if(addItemStatusSelect.value === "EM FALTA"){
+        addItemQuantInput.value = "0"
+        return;
+    }
+})
+
+addItemBtn.addEventListener("click", async()=>{
+    await addItemInventoryProcess();
+})   
+
