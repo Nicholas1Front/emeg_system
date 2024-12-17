@@ -225,12 +225,17 @@ async function callFunction(functionToBeExecuted, msgPopupContent){
 
     await functionToBeExecuted();
 
-    itens_array.sort((a, b) => {
-        if (a.type === b.type) {
-            return a.name.localeCompare(b.name);
+    itens_array.sort((a,b)=>{
+        if(a.name < b.name){
+            return -1;
         }
-        return a.type.localeCompare(b.type);
-    });
+
+        if(a.name > b.name){
+            return 1; 
+        }
+
+        return 0;
+    })
 
     if(msgPopupContent !== undefined){
         showMessagePopup("sucessMsg", msgPopupContent);
@@ -959,7 +964,7 @@ async function addItemInventoryProcess(){
         await showMessagePopup("errorMsg", "Item já existente ! Tente novamente !");
         return;
     }else{
-        await addItemLogic();
+        await verifyPasswordProcess(addItemLogic, "Item adicionado com sucesso !");
         return;
     }
 }
