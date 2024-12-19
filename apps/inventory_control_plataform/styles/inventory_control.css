@@ -1009,7 +1009,7 @@ header h2{
 /* .edit-inventory-section > .add-item-container_edit-inventory */
 
 .edit-inventory-section > .add-item-container_edit-inventory{
-    display: block;
+    display: none;
     margin:1.5rem 0;
 }
 
@@ -1130,4 +1130,222 @@ header h2{
 .edit-inventory-section > .add-item-container_edit-inventory > .button-container > button:hover{
     background-color: #0079dc;
     transition:0.2s;
+}
+
+/* .edit-inventory-section > .delete-item-container_edit-inventory */
+
+.edit-inventory-section > .delete-item-container_edit-inventory{
+    margin:1.5rem 0;
+    display: block;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:1.5rem 0;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .title-container h3{
+    font-size: 35px;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .title-container > .line{
+    width:10rem;
+    height:2px;
+    background-color: #d61e1e;
+    margin-left:22%;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:90%;
+    margin:1.5rem auto;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container > *{
+    margin: 0 8px;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container input,
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container select{
+    padding:8px 0;
+    border-radius:25px;
+    border: 1px solid #969696;
+    padding-left:8px;
+}
+
+/* .edit-inventory-section > .delete-item-container_edit-inventory > .input-container > .delete-item-type-input-control */
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container > .delete-item-type-input-control{
+    width:20%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container > .delete-item-type-input-control input{
+    width:100%;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container > .delete-item-type-input-control > .delete-item-type-options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width:18%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container > .delete-item-type-input-control > .delete-item-type-options-control > .delete-item-type-option{
+    padding:8px 0;
+    padding-left:8px;    
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container > .delete-item-type-input-control > .delete-item-type-options-control > .delete-item-type-option:hover{
+    transition: 0.2s;
+    background-color: #d2d2d2;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container >.delete-item-name-input-control{
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container >.delete-item-name-input-control input{
+    width:100%;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container >.delete-item-name-input-control > .delete-item-name-options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width:36%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container >.delete-item-name-input-control > .delete-item-name-options-control > .delete-item-name-option{
+    padding:8px 0;
+    padding-left:8px;    
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .input-container >.delete-item-name-input-control > .delete-item-name-options-control > .delete-item-name-option:hover{
+    transition: 0.2s;
+    background-color: #d2d2d2;
+}
+
+/* .edit-inventory-section > .delete-item-container_edit-inventory > .search-btn-container */
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .search-btn-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .search-btn-container button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0364b3;
+    width:20%;
+    padding:8px 0;
+    margin:0.7rem 0;
+    cursor: pointer;
+    font-size: 19px;
+    transition:0.2s;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .search-btn-container button > i{
+    margin-left:7px;
+    font-size:22px;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .search-btn-container button:hover{
+    transition:0.2s;
+    background-color: #0079dc;
+}
+
+/* .edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container */
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width:90%;
+    margin:1.5rem auto;
+}
+
+/* .edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .title-container */
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom:1.5rem;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .title-container h3{
+    font-size: 35px;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .title-container > .line{
+    width:10rem;
+    height:2px;
+    background-color: #d61e1e;
+    margin-left:27%;
+}
+
+/* .edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container */
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin:1rem 0;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-label-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding:0.7rem 0;
+    border-top-left-radius: 50px;
+    border-top-right-radius: 50px;
+    background-color: #d61e1e;
+    color:#fff;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-label-control > .item-name-label{
+    width:40%;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-label-control > .item-quant-label,
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-label-control > .item-type-label,
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-label-control > .item-status-label{
+    width:20%;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .end-of-items{
+    padding:0.7rem 0;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    background-color: #d61e1e;
 }
