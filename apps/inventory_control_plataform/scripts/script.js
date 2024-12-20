@@ -1020,15 +1020,24 @@ addItemBtn.addEventListener("click", async()=>{
 
 // elements
 const deleteItemContainer_editInventory = document.querySelector(".delete-item-container_edit-inventory");
+
 let deleteItemTypeInput = document.querySelector("#delete-item-type-input");
 const deleteItemTypeOptionsControl = document.querySelector(".delete-item-type-options-control");
+
 let deleteItemNameInput = document.querySelector("#delete-item-name-input");
 const deleteItemNameOptionsControl = document.querySelector(".delete-item-name-options-control");
 let deleteItemNameOption = null;
+
 const deleteItem_searchItemBtn = document.querySelector("#delete-item_search-item-btn");
 const deleteItem_searchedItemContainer = document.querySelector(".delete-item_searched-item-container");
 
 // functions
+
+async function searchForItemProcess_deleteItemContainer(){
+    const searchedItemContainer = deleteItem_searchedItemContainer.querySelector(".searched-item-container");  
+
+    const ItemName = searchedItemContainer.querySelector(".");
+}
 
 // event listerners and booting
 
@@ -1043,7 +1052,7 @@ deleteItemTypeInput.addEventListener("input", async()=>{
     await createInputSuggestions_ItemType(
         deleteItemTypeInput,
         deleteItemTypeOptionsControl,
-        "delete-item-name-option"
+        "delete-item-type-option"
     );
 });
 
