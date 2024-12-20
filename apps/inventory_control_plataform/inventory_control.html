@@ -254,13 +254,18 @@
                     <h3>// Editar inventário</h3>
                 </div>
 
-                <button id="add-item-link-btn">Adicionar item a tabela <i class="fa-solid fa-square-plus"></i></button>
+                <div class="button-container">
 
-                <button id="delete-item-link-btn">Excluir item da tabela <i class="fa-solid fa-square-minus"></i></button>
+                    <button id="add-item-link-btn">Adicionar item a tabela <i class="fa-solid fa-square-plus"></i></button>
 
-                <button id="edit-item-link-btn">Editar item da tabela <i class="fa-solid fa-square-pen"></i></button>
+                    <button id="delete-item-link-btn">Excluir item da tabela <i class="fa-solid fa-square-minus"></i></button>
 
-                <button id="send-to-server-btn">Enviar alterações para o servidor <i class="fa-solid fa-paper-plane"></i></button>
+                    <button id="edit-item-link-btn">Editar item da tabela <i class="fa-solid fa-square-pen"></i></button>
+
+                    <button id="send-to-server-btn">Enviar alterações para o servidor <i class="fa-solid fa-paper-plane"></i></button>
+
+                </div>
+                
             </div>
 
             <div class="add-item-container_edit-inventory">
@@ -324,7 +329,7 @@
                     </div>
 
                     <div class="delete-item-name-input-control">
-                        <input type="text" id="delete-item-name-input"/>
+                        <input type="text" id="delete-item-name-input" autocomplete="off"/>
 
                         <div class="delete-item-name-options-control">
                             <div class="delete-item-name-option">LIMPA CONTATO</div>
@@ -348,7 +353,7 @@
                         <div class="searched-item-label-control">
                             <h3 class="item-name-label">Nome do item</h3>
                             <h3 class="item-type-label">Tipo do item</h3>
-                            <h3 class="item-quant-label">Quantidade de itens</h3>
+                            <h3 class="item-quant-label">Quantidade do item</h3>
                             <h3 class="item-status-label">Status atual</h3>
                         </div>
 
@@ -363,11 +368,13 @@
                         </div>
 
                         <div class="end-of-items"></div>
-                    </div>
-                </div>
 
-                <div class="delete-btn-container">
-                    <button id="delete-item-btn"></button>
+                    </div>
+
+                    <div class="delete-btn-container">
+                        <button id="delete-item-btn">Excluir item <i class="fa-solid fa-square-minus"></i></button>
+                    </div>       
+
                 </div>
 
             </div>

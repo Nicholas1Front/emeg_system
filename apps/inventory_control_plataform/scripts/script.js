@@ -780,6 +780,7 @@ haveItemsBtn.addEventListener("click", async ()=>{
 
 // elements
 const editInventorySection = document.querySelector(".edit-inventory-section");
+const mainHub_editInventory = document.querySelector(".main-hub_edit-inventory");
 const addItemLinkBtn = document.querySelector("#add-item-link-btn");
 const deleteItemLinkBtn = document.querySelector("#delete-item-link-btn");
 const editItemLinkBtn = document.querySelector("#edit-item-link-btn");
@@ -807,8 +808,11 @@ let addItemStatusSelect = document.querySelector("#add-item-status-select");
 // functions
 
 async function backHomeProcess_editInventory(){
-    await hideHtmlElement([addItemContainer_editInventory]);
-    await showHtmlElement([editInventorySection],"block");
+    await hideHtmlElement([
+        addItemContainer_editInventory,
+        deleteItemContainer_editInventory
+    ]);
+    await showHtmlElement([mainHub_editInventory],"flex");
 }
 
 async function createInputSuggestions_ItemType(
@@ -977,6 +981,11 @@ backHomeBtn_editInventory.forEach((button)=>{
     })
 });
 
+addItemLinkBtn.addEventListener("click", async ()=>{
+    await showHtmlElement([addItemContainer_editInventory], "block");
+    await hideHtmlElement([mainHub_editInventory]);
+})  
+
 addItemTypeInput.addEventListener("input", async()=>{
     addItemTypeInput.value = addItemTypeInput.value.toUpperCase();
 
@@ -1007,3 +1016,45 @@ addItemBtn.addEventListener("click", async()=>{
     await addItemInventoryProcess();
 })   
 
+// edit-inventory-section -> delete-item-container_edit-inventory
+
+// elements
+const deleteItemContainer_editInventory = document.querySelector(".delete-item-container_edit-inventory");
+let deleteItemTypeInput = document.querySelector("#delete-item-type-input");
+const deleteItemTypeOptionsControl = document.querySelector(".delete-item-type-options-control");
+let deleteItemNameInput = document.querySelector("#delete-item-name-input");
+const deleteItemNameOptionsControl = document.querySelector(".delete-item-name-options-control");
+let deleteItemNameOption = null;
+const deleteItem_searchItemBtn = document.querySelector("#delete-item_search-item-btn");
+const deleteItem_searchedItemContainer = document.querySelector(".delete-item_searched-item-container");
+
+// functions
+
+// event listerners and booting
+
+deleteItemLinkBtn.addEventListener("click", async()=>{
+    await hideHtmlElement([mainHub_editInventory,deleteItem_searchedItemContainer]);
+    await showHtmlElement([deleteItemContainer_editInventory], "block");    
+})
+
+deleteItemTypeInput.addEventListener("input", async()=>{
+    deleteItemTypeInput.value = deleteItemTypeInput.value.toUpperCase();
+    
+    await createInputSuggestions_ItemType(
+        deleteItemTypeInput,
+        deleteItemTypeOptionsControl,
+        "delete-item-name-option"
+    );
+});
+
+deleteItemNameInput.addEventListener("input", async()=>{
+    deleteItemNameInput.value = deleteItemNameInput.value.toUpperCase();
+
+    await createInputSuggestions(
+        deleteItemTypeInput,
+        deleteItemNameInput,
+        deleteItemNameOptionsControl,
+        deleteItemNameOption,
+        "delete-item-name-option"
+    )
+})

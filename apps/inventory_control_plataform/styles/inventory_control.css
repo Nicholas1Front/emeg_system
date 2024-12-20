@@ -973,7 +973,13 @@ header h2{
     align-items: center;
 }
 
-.edit-inventory-section > .main-hub_edit-inventory button{
+.edit-inventory-section > .main-hub_edit-inventory > .button-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-inventory-section > .main-hub_edit-inventory > .button-container button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -986,22 +992,22 @@ header h2{
     transition:0.2s;
 }
 
-.edit-inventory-section > .main-hub_edit-inventory button > i{
+.edit-inventory-section > .main-hub_edit-inventory > .button-container button > i{
     margin-left:7px;
     font-size:22px;
 }
 
-.edit-inventory-section > .main-hub_edit-inventory button:hover{
+.edit-inventory-section > .main-hub_edit-inventory > .button-container button:hover{
     transition:0.2s;
     background-color: #d61e1e;
 }
 
-.edit-inventory-section > .main-hub_edit-inventory > #send-to-server-btn{
+.edit-inventory-section > .main-hub_edit-inventory > .button-container > #send-to-server-btn{
     background-color: #0364b3;
     transition:0.2s;
 }
 
-.edit-inventory-section > .main-hub_edit-inventory > #send-to-server-btn:hover{
+.edit-inventory-section > .main-hub_edit-inventory > .button-container > #send-to-server-btn:hover{
     background-color: #0079dc;
     transition:0.2s;
 }
@@ -1343,9 +1349,73 @@ header h2{
     width:20%;
 }
 
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-show-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1rem 0;
+    background-color: #ececec;
+    font-size: 18px;   
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-show-control > .item-name_span{
+    width:40%;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-show-control > .item-type_span,
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-show-control > .item-quant_span{
+    width:20%;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-show-control > .item-status-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:20%;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .searched-item-show-control > .item-status-control > .status-indicator-circle{
+    width: fit-content;
+    padding:10px;
+    border-radius: 50%;
+    margin-bottom: 0.3rem;
+    background-color: #d61e1e;
+}
+
 .edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .searched-item-container > .end-of-items{
     padding:0.7rem 0;
     border-bottom-left-radius: 50px;
     border-bottom-right-radius: 50px;
+    background-color: #d61e1e;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .delete-btn-container{
+    display: flex;
+    justify-content:center;
+    align-items: center;
+    margin:1.5rem 0;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .delete-btn-container button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a91818;
+    width:20%;
+    padding:8px 0;
+    margin:0.7rem 0;
+    cursor: pointer;
+    font-size: 19px;
+    transition:0.2s;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .delete-btn-container button> i{
+    margin-left:7px;
+    font-size:22px;
+}
+
+.edit-inventory-section > .delete-item-container_edit-inventory > .delete-item_searched-item-container > .delete-btn-container button:hover{
+    transition:0.2s;
     background-color: #d61e1e;
 }
