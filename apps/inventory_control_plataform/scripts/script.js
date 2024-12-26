@@ -1034,9 +1034,69 @@ const deleteItem_searchedItemContainer = document.querySelector(".delete-item_se
 // functions
 
 async function searchForItemProcess_deleteItemContainer(){
+
+    if(deleteItemNameInput.value === ""){
+        await showMessagePopup("errorMsg", "Digite o nome do item !");
+        return;
+    }
+
+    let itemExists = false;
+
+    if(deleteItemTypeInput.value !== ""){
+        itens_array.forEach((item)=>{
+            if(item.type === deleteItemTypeInput.value && item.name === deleteItemNameInput.value){
+                itemExists = true;
+                return;
+            }
+        })
+    }
+
+    if(deleteItemTypeInput.value === ""){
+        itens_array.forEach((item)=>{
+            if(item.name === deleteItemNameInput.value){
+                itemExists = true;
+                return;
+            }
+        })
+    };
+
+    console.log(itemExists);
+
+    if(!itemExists){
+        await showMessagePopup("errorMsg", "O item informado não existe ! Tenete novamente !");
+        return;
+    }
+
     const searchedItemContainer = deleteItem_searchedItemContainer.querySelector(".searched-item-container");  
 
-    const ItemName = searchedItemContainer.querySelector(".");
+    const searchedItemShowControl = searchedItemContainer.querySelector(".searched-item-show-control");
+
+    const itemName = searchedItemShowControl.querySelector(".item-name_span").innerHTML = "";
+    const itemType = searchedItemShowControl.querySelector(".item-type_span").innerHTML = "";
+    const itemQuant = searchedItemShowControl.querySelector(".item-quant_span").innerHTML = "";
+    const itemStatusControl = searchedItemShowControl.querySelector(".item-status-control");
+    const statusIndicatorCircle = itemStatusControl.querySelector(".status-indicator-circle");
+    const itemStatus = itemStatusControl.querySelector(".item-status_span");
+
+    itens_array.forEach((item)=>{
+        if(item.name === deleteItemNameInput.value){
+            itemName.innerText = item.name;
+            itemType.innerText = item.type;
+            itemQuant.innerText = item.quant;
+            itemStatus.innerText = item.status;
+
+            if(item.status === "POSSUI"){
+                statusIndicatorCircle.style.backgroundColor = "#42f55a";
+            }
+
+            if(item.status === "EM FALTA"){
+                statusIndicatorCircle.style.backgroundColor = "#d61e1e";
+            }
+        }
+    });
+    
+    await showHtmlElement([deleteItem_searchedItemContainer], "flex");
+
 }
 
 // event listerners and booting
@@ -1066,4 +1126,8 @@ deleteItemNameInput.addEventListener("input", async()=>{
         deleteItemNameOption,
         "delete-item-name-option"
     )
+});
+
+deleteItem_searchItemBtn.addEventListener("click", async()=>{
+    await searchForItemProcess_deleteItemContainer();
 })
