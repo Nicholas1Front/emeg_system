@@ -808,6 +808,8 @@ let addItemStatusSelect = document.querySelector("#add-item-status-select");
 // functions
 
 async function backHomeProcess_editInventory(){
+    await cleanAllInputs();
+
     await hideHtmlElement([
         addItemContainer_editInventory,
         deleteItemContainer_editInventory
@@ -982,6 +984,7 @@ backHomeBtn_editInventory.forEach((button)=>{
 });
 
 addItemLinkBtn.addEventListener("click", async ()=>{
+    await cleanAllInputs();
     await showHtmlElement([addItemContainer_editInventory], "block");
     await hideHtmlElement([mainHub_editInventory]);
 })  
@@ -1031,6 +1034,8 @@ let deleteItemNameOption = null;
 const deleteItem_searchItemBtn = document.querySelector("#delete-item_search-item-btn");
 const deleteItem_searchedItemContainer = document.querySelector(".delete-item_searched-item-container");
 
+const deleteItemBtn = document.querySelector("#delete-item-btn");
+
 // functions
 
 async function searchForItemProcess_deleteItemContainer(){
@@ -1071,12 +1076,17 @@ async function searchForItemProcess_deleteItemContainer(){
 
     const searchedItemShowControl = searchedItemContainer.querySelector(".searched-item-show-control");
 
-    const itemName = searchedItemShowControl.querySelector(".item-name_span").innerHTML = "";
-    const itemType = searchedItemShowControl.querySelector(".item-type_span").innerHTML = "";
-    const itemQuant = searchedItemShowControl.querySelector(".item-quant_span").innerHTML = "";
+    const itemName = searchedItemShowControl.querySelector(".item-name_span")
+    const itemType = searchedItemShowControl.querySelector(".item-type_span")
+    const itemQuant = searchedItemShowControl.querySelector(".item-quant_span")
     const itemStatusControl = searchedItemShowControl.querySelector(".item-status-control");
     const statusIndicatorCircle = itemStatusControl.querySelector(".status-indicator-circle");
     const itemStatus = itemStatusControl.querySelector(".item-status_span");
+
+    itemName.innerHTML = "";
+    itemType.innerHTML = "";
+    itemQuant.innerHTML = "";
+    itemStatus.innerHTML = "";
 
     itens_array.forEach((item)=>{
         if(item.name === deleteItemNameInput.value){
@@ -1099,9 +1109,43 @@ async function searchForItemProcess_deleteItemContainer(){
 
 }
 
+async function deleteItemLogic(){
+    if(deleteItemTypeInput.value !== ""){
+        for(let i = 0; i < itens_array.length ; i++){
+            if(itens_array[i].type === deleteItemTypeInput.value && itens_array[i].name === deleteItemNameInput.value){
+                itens_array.splice(i, 1);
+            }
+        }
+    }
+
+    if(deleteItemTypeInput.value === ""){
+        for(let i = 0; i < itens_array.length ; i++){
+            if(itens_array[i].name === deleteItemNameInput.value){
+                itens_array.splice(i, 1);
+            }
+        }
+    }
+
+    itens_array.sort((a,b)=>{
+        if(a.name < b.name){
+            return -1;
+        }
+
+        if(a.name > b.name){
+            return 1; 
+        }
+
+        return 0;
+    });
+
+    console.log(itens_array);
+
+}
+
 // event listerners and booting
 
 deleteItemLinkBtn.addEventListener("click", async()=>{
+    await cleanAllInputs();
     await hideHtmlElement([mainHub_editInventory,deleteItem_searchedItemContainer]);
     await showHtmlElement([deleteItemContainer_editInventory], "block");    
 })
@@ -1130,4 +1174,8 @@ deleteItemNameInput.addEventListener("input", async()=>{
 
 deleteItem_searchItemBtn.addEventListener("click", async()=>{
     await searchForItemProcess_deleteItemContainer();
+})
+
+deleteItemBtn.addEventListener("click", async ()=>{
+    await verifyPasswordProcess(deleteItemLogic, "Item deletado com sucesso !");
 })
