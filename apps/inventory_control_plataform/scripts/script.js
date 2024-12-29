@@ -812,7 +812,8 @@ async function backHomeProcess_editInventory(){
 
     await hideHtmlElement([
         addItemContainer_editInventory,
-        deleteItemContainer_editInventory
+        deleteItemContainer_editInventory,
+        editItemContainer_editInventory
     ]);
     await showHtmlElement([mainHub_editInventory],"flex");
 }
@@ -1179,3 +1180,8 @@ deleteItem_searchItemBtn.addEventListener("click", async()=>{
 deleteItemBtn.addEventListener("click", async ()=>{
     await verifyPasswordProcess(deleteItemLogic, "Item deletado com sucesso !");
 })
+
+// edit-inventory-section -> edit-item-container_edit-inventory
+
+// elements
+const editItemContainer_editInventory = document.querySelector(".edit-item-container_edit-inventory");
