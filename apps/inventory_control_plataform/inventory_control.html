@@ -428,13 +428,6 @@
                         </div>
 
                         <div class="searched-item-input-container">
-                            <div class="edit-item-type-control_searched">
-                                <input type="text" id="edit-item-type-input_searched"autocomplete="off" placeholder="Digite o tipo do item..."/>
-
-                                <div class="edit-item-type-options-control_searched">
-                                    <div class="edit-item-type-option_searched">OPÇÃO</div>
-                                </div>
-                            </div>
 
                             <div class="edit-item-name-control_searched">
                                 <input type="text" id="edit-item-name-input_searched" autocomplete="off" placeholder="Digite o nome do item..."/>
@@ -445,17 +438,32 @@
                                 </div>
                             </div>
 
-                            <input type="number" id="edit-item-quant-input_searched" autocomplete="off" placeholder="Digite a quantidade de itens..." />
+                            <div class="edit-item-type-control_searched">
+                                <input type="text" id="edit-item-type-input_searched" autocomplete="off" placeholder="Digite o tipo do item..."/>
 
-                            <div class="edit-item-status-control_searched">
-                                <div class="status-indicator-circle"></div>
+                                <div class="edit-item-type-options-control_searched">
+                                    <div class="edit-item-type-option_searched">OPÇÃO</div>
+                                    <div class="edit-item-type-option_searched">OPÇÃO</div>
+                                </div>
+                            </div>
 
-                                <select id="edit-item-status-select_searched">
-                                    <option value="POSSUI">POSSUI</option>
-                                    <option value="EM FALTA">EM FALTA</option>
-                                </select>
+                            <div class="edit-item-quant-control_searched">
+                                <input type="number" id="edit-item-quant-input_searched" autocomplete="off" placeholder="Digite a quantidade de itens..." />
+                            </div>
+                            
+                            <div class="edit-item-status-container_searched">
+                                <div class="edit-item-status-control_searched">
+                                    <select id="edit-item-status-select_searched">
+                                        <option value="POSSUI">POSSUI</option>
+                                        <option value="EM FALTA">EM FALTA</option>
+                                    </select>
+    
+                                    <div class="status-indicator-circle"></div>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="end-of-items"></div>
 
                         <div class="edit-btn-container">
                             <button id="edit-item-btn">Editar <i class="fa-solid fa-square-pen"></i></button>
