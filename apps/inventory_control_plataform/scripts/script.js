@@ -1192,8 +1192,44 @@ const editItemTypeOptionsControl_search = document.querySelector(".edit-item-typ
 const editItemNameInput_search = document.querySelector("#edit-item-name-input_search");
 const editItemNameOptionsControl_search = document.querySelector(".edit-item-name-options-control_search");
 const editItemNameOption_search = null;
+
+const editItem_searchItemBtn = document.querySelector("#edit-item_search-item-btn");
+
+const searchedItemContainer_editItemContainer  = document.querySelector(".edit-item_searched-item-container");
+
+const editItemNameInput_searched = document.querySelector("#edit-item-name-input_searched");
+const editItemNameOptionsControl_searched = document.querySelector(".edit-item-name-options-control_searched");
+const editNameOption_searched = null;
+
+const editItemTypeInput_searched = document.querySelector("#edit-item-type-input_searched");
+const editItemTypeOptionsControl_searched = document.querySelector(".edit-item-type-options-control_searched");
+const editItemTypeOption_searched = null;
+
+const editItemQuantInput_searched = document.querySelector("#edit-item-quant-input_searched");
+
+const editItemStatusControl_searched = document.querySelector(".edit-item-status-control_searched");
+const editItemStatusSelect_searched = document.querySelector("#edit-item-status-select_searched");
+
 // functions
 
+async function searchForItemProcess_editItemContainer(){
+    if (editItemNameInput_search.value === ""){
+        await showMessagePopup("errorMsg", "Digite o nome do item!");
+        return;
+    }
+
+    let itemExists = false;
+
+    if(editItemTypeInput_search.value !== ""){
+        itens_array.forEach((item)=>{
+            if(item.type === editItemTypeInput_search.value && item.name === editItemNameInput_search.value){
+                itemExists = true;
+                
+
+            }
+        })
+    }
+}
 
 // event listeners and booting
 
