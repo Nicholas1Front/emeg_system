@@ -1225,10 +1225,55 @@ async function searchForItemProcess_editItemContainer(){
             if(item.type === editItemTypeInput_search.value && item.name === editItemNameInput_search.value){
                 itemExists = true;
                 
+                editItemNameInput_searched.value = item.name;
+                editItemTypeInput_searched.value = item.type;
+                editItemQuantInput_searched.value = item.quant;
+                editItemStatusSelect_searched.value = item.status;
 
+                const statusIndicatorCircle = editItemStatusControl_searched.querySelector(".status-indicator-circle");
+
+                if(item.status === "EM FALTA"){
+                    statusIndicatorCircle.style.backgroundColor = "#d61e1e";
+                }
+
+                if(item.status === "POSSUI"){
+                    statusIndicatorCircle.style.backgroundColor = "#42f55a";
+                }
+                
             }
         })
     }
+
+    if(editItemTypeInput_search.value === ""){
+        itens_array.forEach((item)=>{
+            if(item.name === editItemNameInput_search.value){
+                itemExists = true;
+                
+                editItemNameInput_searched.value = item.name;
+                editItemTypeInput_searched.value = item.type;
+                editItemQuantInput_searched.value = item.quant;
+                editItemStatusSelect_searched.value = item.status;
+
+                const statusIndicatorCircle = editItemStatusControl_searched.querySelector(".status-indicator-circle");
+
+                if(item.status === "EM FALTA"){
+                    statusIndicatorCircle.style.backgroundColor = "#d61e1e";
+                }
+
+                if(item.status === "POSSUI"){
+                    statusIndicatorCircle.style.backgroundColor = "#42f55a";
+                }
+                
+            }
+        })
+    };
+
+    if(!itemExists){
+        await showMessagePopup("errorMsg", "O item não existe ! Tente novamente !");
+        return;
+    }
+
+    await showHtmlElement([searchedItemContainer_editItemContainer], "flex");
 }
 
 // event listeners and booting
@@ -1253,4 +1298,8 @@ editItemNameInput_search.addEventListener("input", async ()=>{
         editItemNameOption_search,
         "edit-item-name-option_search"
     )
+})
+
+editItem_searchItemBtn.addEventListener("click", async ()=>{
+    await searchForItemProcess_editItemContainer();
 })

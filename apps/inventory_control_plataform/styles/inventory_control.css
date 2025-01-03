@@ -1565,7 +1565,7 @@ header h2{
 
 /* .edit-inventory-section > .edit-item-container_edit-inventory > .edit-item_searched-item-container */
 .edit-inventory-section > .edit-item-container_edit-inventory > .edit-item_searched-item-container{
-    display: flex;
+    display: none;
     align-items: center;
     flex-direction: column;
 }
