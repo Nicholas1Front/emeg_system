@@ -1185,3 +1185,36 @@ deleteItemBtn.addEventListener("click", async ()=>{
 
 // elements
 const editItemContainer_editInventory = document.querySelector(".edit-item-container_edit-inventory");
+
+const editItemTypeInput_search = document.querySelector("#edit-item-type-input_search");
+const editItemTypeOptionsControl_search = document.querySelector(".edit-item-type-options-control_search");
+
+const editItemNameInput_search = document.querySelector("#edit-item-name-input_search");
+const editItemNameOptionsControl_search = document.querySelector(".edit-item-name-options-control_search");
+const editItemNameOption_search = null;
+// functions
+
+
+// event listeners and booting
+
+editItemTypeInput_search.addEventListener("input", async()=>{
+    editItemTypeInput_search.value = editItemTypeInput_search.value.toUpperCase();
+
+    await createInputSuggestions_ItemType(
+        editItemTypeInput_search,
+        editItemTypeOptionsControl_search,
+        "edit-item-type-option_search"
+    )
+})
+
+editItemNameInput_search.addEventListener("input", async ()=>{
+    editItemNameInput_search.value = editItemNameInput_search.value.toUpperCase();
+
+    await createInputSuggestions(
+        editItemTypeInput_search,
+        editItemNameInput_search,
+        editItemNameOptionsControl_search,
+        editItemNameOption_search,
+        "edit-item-name-option_search"
+    )
+})
