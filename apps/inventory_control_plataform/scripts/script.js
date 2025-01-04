@@ -1326,9 +1326,49 @@ async function editItemProcess(){
     if(itemExists){
         await showMessagePopup("errorMsg","Item já existe ! Tente novamente !");
         return;
-    }else{
-        //..
     }
+    
+    if(!itemExists){
+        await verifyPasswordProcess(editItemLogic,"Item editado com suceso !");
+    }
+}
+
+async function editItemLogic(){
+    if(editItemTypeInput_search.value !== ""){
+        itens_array.forEach((item)=>{
+            if(item.type === editItemTypeInput_search.value && item.name === editItemNameInput_search){
+                item.name = editItemNameInput_searched.value;
+                item.type = editItemTypeInput_searched.value;
+                item.quant = editItemQuantInput_searched.value;
+                item.status = editItemStatusSelect_searched.value;   
+            }
+        });
+    }
+
+    if(editItemTypeInput_search.value === ""){
+        itens_array.forEach((item)=>{
+            if(item.name === editItemNameInput_search){
+                item.name = editItemNameInput_searched.value;
+                item.type = editItemTypeInput_searched.value;
+                item.quant = editItemQuantInput_searched.value;
+                item.status = editItemStatusSelect_searched.value;   
+            }
+        });
+    }
+
+    itens_array.sort((a,b)=>{
+        if(a.name < b.name){
+            return -1;
+        }
+
+        if(a.name > b.name){
+            return 1; 
+        }
+
+        return 0;
+    });
+
+    console.log(itens_array);
 }
 
 async function changeStatusIndicator_itemSearched(){
