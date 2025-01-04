@@ -1286,7 +1286,49 @@ async function editItemProcess(){
 
     let existingItem = {};
 
+    if(editItemTypeInput_search.value !== ""){
+        itens_array.forEach((item)=>{
+            if(item.type === editItemTypeInput_search.value && item.name === editItemNameInput_search.value){
+                existingItem = item;
+            }
+        })
+    }
 
+    if(editItemTypeInput_search.value === ""){
+        itens_array.forEach((item)=>{
+            if(item.name === editItemNameInput_search.value){
+                existingItem = item;
+            }
+        })
+    }
+
+    let newItem = {
+        name : editItemNameInput_searched.value,
+        type : editItemTypeInput_searched.value,
+        quant : editItemQuantInput_searched.value,
+        status : editItemStatusSelect_searched.value
+    }
+
+    if(existingItem === newItem){
+        await showMessagePopup("errorMsg","Item não pode ser igual ao anterior ! Tente novamente !");
+        return;
+    }
+
+    let itemExists = false;
+
+    itens_array.forEach((item)=>{
+        if(newItem.name === item.name && newItem.type === item.type){
+            itemExists = true;
+            return;
+        }  
+    })
+
+    if(itemExists){
+        await showMessagePopup("errorMsg","Item já existe ! Tente novamente !");
+        return;
+    }else{
+        //..
+    }
 }
 
 async function changeStatusIndicator_itemSearched(){
