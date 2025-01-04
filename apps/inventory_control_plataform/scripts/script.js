@@ -1199,7 +1199,7 @@ const searchedItemContainer_editItemContainer  = document.querySelector(".edit-i
 
 const editItemNameInput_searched = document.querySelector("#edit-item-name-input_searched");
 const editItemNameOptionsControl_searched = document.querySelector(".edit-item-name-options-control_searched");
-const editNameOption_searched = null;
+const editItemNameOption_searched = null;
 
 const editItemTypeInput_searched = document.querySelector("#edit-item-type-input_searched");
 const editItemTypeOptionsControl_searched = document.querySelector(".edit-item-type-options-control_searched");
@@ -1219,6 +1219,7 @@ async function searchForItemProcess_editItemContainer(){
     }
 
     let itemExists = false;
+    const statusIndicatorCircle = editItemStatusControl_searched.querySelector(".status-indicator-circle");
 
     if(editItemTypeInput_search.value !== ""){
         itens_array.forEach((item)=>{
@@ -1229,8 +1230,6 @@ async function searchForItemProcess_editItemContainer(){
                 editItemTypeInput_searched.value = item.type;
                 editItemQuantInput_searched.value = item.quant;
                 editItemStatusSelect_searched.value = item.status;
-
-                const statusIndicatorCircle = editItemStatusControl_searched.querySelector(".status-indicator-circle");
 
                 if(item.status === "EM FALTA"){
                     statusIndicatorCircle.style.backgroundColor = "#d61e1e";
@@ -1254,8 +1253,6 @@ async function searchForItemProcess_editItemContainer(){
                 editItemQuantInput_searched.value = item.quant;
                 editItemStatusSelect_searched.value = item.status;
 
-                const statusIndicatorCircle = editItemStatusControl_searched.querySelector(".status-indicator-circle");
-
                 if(item.status === "EM FALTA"){
                     statusIndicatorCircle.style.backgroundColor = "#d61e1e";
                 }
@@ -1274,6 +1271,35 @@ async function searchForItemProcess_editItemContainer(){
     }
 
     await showHtmlElement([searchedItemContainer_editItemContainer], "flex");
+}
+
+async function editItemProcess(){
+    if(editItemNameInput_searched.value === ""){
+        await showMessagePopup("errorMsg", "Digite o nome do item!");
+        return;
+    }
+
+    if(editItemTypeInput_searched.value === ""){
+        await showMessagePopup("errorMsg", "Digite o tipo do item!");
+        return;
+    }
+
+    let existingItem = {};
+
+
+}
+
+async function changeStatusIndicator_itemSearched(){
+    const statusIndicatorCircle = editItemStatusControl_searched.querySelector(".status-indicator-circle");
+    
+    if(editItemStatusSelect_searched.value === "EM FALTA"){
+        statusIndicatorCircle.style.backgroundColor = "#d61e1e";
+        editItemQuantInput_searched.value = "0";
+    }
+
+    if(editItemStatusSelect_searched.value === "POSSUI"){
+        statusIndicatorCircle.style.backgroundColor = "#42f55a";
+    }
 }
 
 // event listeners and booting
@@ -1302,4 +1328,41 @@ editItemNameInput_search.addEventListener("input", async ()=>{
 
 editItem_searchItemBtn.addEventListener("click", async ()=>{
     await searchForItemProcess_editItemContainer();
+});
+
+editItemNameInput_searched.addEventListener("input", async()=>{
+    await createInputSuggestions(
+        editItemTypeInput_searched,
+        editItemNameInput_searched,
+        editItemNameOptionsControl_searched,
+        editItemNameOption_searched,
+        "edit-item-name-option_searched"
+    )
+});
+
+editItemTypeInput_searched.addEventListener("input", async()=>{
+    await createInputSuggestions_ItemType(
+        editItemTypeInput_searched,
+        editItemTypeOptionsControl_searched,
+        "edit-item-type-option_searched"
+    );
+})
+
+editItemStatusSelect_searched.addEventListener("change", async()=>{
+    await changeStatusIndicator_itemSearched();
+})
+
+editItemQuantInput_searched.addEventListener("focusout",async()=>{
+    let value = parseInt(editItemQuantInput_searched.value);
+    console.log(value);
+
+    if(value === 0 || value === NaN){
+        editItemStatusSelect_searched.value = "EM FALTA";
+    }
+
+    if(value >= 1){
+        editItemStatusSelect_searched.value = "POSSUI";
+    }
+
+    await changeStatusIndicator_itemSearched();
 })
