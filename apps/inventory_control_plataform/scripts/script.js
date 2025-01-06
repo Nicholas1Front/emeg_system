@@ -784,13 +784,75 @@ const mainHub_editInventory = document.querySelector(".main-hub_edit-inventory")
 const addItemLinkBtn = document.querySelector("#add-item-link-btn");
 const deleteItemLinkBtn = document.querySelector("#delete-item-link-btn");
 const editItemLinkBtn = document.querySelector("#edit-item-link-btn");
+const sendToServerBtn = document.querySelector("#send-to-server-btn");
+
+// functions
+
+async function verifyDataBeforeSend(){
+    let itensArrayFetched = await getInventoryItens();
+
+    console.log(itens_array);
+    console.log(itensArrayFetched);
+
+    if(itens_array.length < itensArrayFetched.length || itens_array.length > itensArrayFetched.length){
+        await verifyPasswordProcess(sendToServerProcess);
+        return;
+    }
+
+    let itemAlreadyExist = 0;
+
+    for(let i = 0; i < itens_array.length; i++){
+        let objectA = JSON.stringify(itens_array[i]);
+
+        for(let j = 0; j < itens_array.length;j++){
+            let objectB = JSON.stringify(itensArrayFetched[j]);  
+            
+            if(objectA === objectB){
+                itemAlreadyExist += 1;
+            }
+        }
+    }
+
+    if(itemAlreadyExist > 0){
+        await verifyPasswordProcess(verifyPasswordProcess);
+        return;
+    }
+    
+    await showMessagePopup("errorMsg", "Dados já existentes ! Tente novamente !")
+}
+
+async function sendToServerProcess(){
+    await showHtmlElement([overlayForLoading],"flex");
+
+    const response =  await updateServiceData();
+
+    if(!response){
+        await hideHtmlElement([overlayForLoading]);
+        await showServerMessagePopup("errorMsg", "Erro ao enviar os dados ! Tente novamente !");
+        return;
+    }
+
+    await hideHtmlElement([overlayForLoading]);
+    await showServerMessagePopup("sucessMsg","Dados enviados com sucesso !");
+
+    await showMessagePopup("sucessMsg","Dados atualizados com sucesso !");
+
+    setTimeout(async () => {
+        getServicesData();
+    },1000);
+}
+
 
 // event listerners and booting
 
 editInventoryShowLink.addEventListener("click", async ()=>{
     await hideHtmlElement([mainHubSection]);
     await showHtmlElement([editInventorySection], "block");
-})
+});
+
+sendToServerBtn.addEventListener("click", async ()=>{
+    await verifyDataBeforeSend();
+}) 
 
 // edit-inventory-section -> add-item-container_edit-inventory
 

@@ -84,7 +84,7 @@ async function verifyDataBeforeSend(){
     }
 
     for(let i = 0 ; i < clients_equipaments_array_clientsList ; i++){
-        if(arrayFetched_clientsList[i] !== clients_equipaments_array_clientsList){
+        if(arrayFetched_clientsList[i] !== clients_equipaments_array_clientsList[i]){
             await verifyPasswordProcess(sendToServerProcess);
             return;
         }

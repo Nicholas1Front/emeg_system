@@ -768,7 +768,7 @@ async function sendToServerProcess(){
     await showMessagePopup("sucessMsg","Dados atualizados com sucesso !");
 
     setTimeout(async () => {
-        getClientsData();
+        getServicesData();
     },1000);
 }
 
