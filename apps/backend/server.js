@@ -202,6 +202,61 @@ app.post('/update-latest-budget-number', async (req, res) => {
     }
 });
 
+// Endpoint para atualizar o arquivo JSON no GitHub (inventory)
+app.post('/update-inventory', async (req, res) => {
+    try {
+        const { itens_array } = req.body;
+
+        if (!itens_array) {
+            return res.status(400).send('A variável itens_array é obrigatória.');
+        }
+
+        // 1. Busca o arquivo atual do GitHub
+        const INVENTORY_FILE_PATH = 'apps/backend/data/inventory.json';
+        const response = await axios.get(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${INVENTORY_FILE_PATH}?ref=${BRANCH}`, {
+            headers: {
+                Authorization: `Bearer ${GITHUB_TOKEN}`,
+                Accept: 'application/vnd.github.v3+json',
+            },
+        });
+
+        const fileSha = response.data.sha;
+
+        // 2. Atualiza o conteúdo com os novos dados
+        const updatedContent = Buffer.from(JSON.stringify(itens_array, null, 2)).toString('base64');
+
+        // 3. Atualiza o arquivo no GitHub
+        await axios.put(
+            `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${INVENTORY_FILE_PATH}`,
+            {
+                message: 'Update inventory data',
+                content: updatedContent,
+                sha: fileSha,
+                branch: BRANCH,
+            },
+            {
+                headers: {
+                    Authorization: `Bearer ${GITHUB_TOKEN}`,
+                    Accept: 'application/vnd.github.v3+json',
+                },
+            }
+        );
+
+        // 4. Verifica se o arquivo foi atualizado no GitHub Pages
+        const isUpdated = await checkGitHubPagesUpdate(INVENTORY_FILE_PATH, itens_array);
+
+        if (!isUpdated) {
+            return res.status(500).send('Commit realizado, mas o GitHub Pages não foi atualizado a tempo.');
+        }
+
+        res.send('Itens do inventário atualizados com sucesso no GitHub Pages!');
+    } catch (error) {
+        console.error(`[Erro /update-inventory]: ${error.response ? error.response.data : error.message}`);
+        res.status(500).send('Erro ao atualizar os itens do inventário.');
+    }
+});
+
+
 // Roda o servidor
 app.listen(PORT, () => {
     console.log(`Servidor rodando na porta ${PORT}`);

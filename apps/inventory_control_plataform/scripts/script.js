@@ -12,6 +12,18 @@ async function getInventoryItens(){
 
         const itens = await response.json();
 
+        itens.sort((a,b)=>{
+            if(a.name < b.name){
+                return -1;
+            }
+    
+            if(a.name > b.name){
+                return 1; 
+            }
+    
+            return 0;
+        })
+
         return itens;
     }
 
@@ -27,6 +39,36 @@ async function initialize_itens_array(){
 }
 
 initialize_itens_array();
+
+// update itens data
+
+async function updateItensData(){
+    try {
+        const response = await fetch('https://emeg-orc.onrender.com/update-services', { 
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ itens_array }),
+        });
+
+        if (!response.ok) {
+            await showServerMessagePopup("errorMsg", "Erro ao atualizar dados no servidor!");
+            throw new Error('Erro ao atualizar os dados no backend');
+        }
+
+        const result = await response.text();
+
+        console.log('Dados atualizados com sucesso no backend e GitHub Pages:', result);
+
+        return true;
+
+    } catch (error) {
+        console.error('Erro:', error);
+        return false;
+    }
+}
+
 
 // upperCase inputs
 
@@ -131,7 +173,13 @@ function closeMessagePopup(){
 
 closeMessagePopupBtn.addEventListener("click", ()=>{
     closeMessagePopup();
-})
+});
+
+// loading screen
+
+//elements
+const overlayForLoading = document.querySelector(".overlay-for-loading");
+
 
 // confirmation popup
 
@@ -510,8 +558,6 @@ async function searchProcess_consultInventory(){
     await showHtmlElement([consultInventory_resultContainer], "block");
 }
 
-
-
 // event listerners
 
 backHomeBtn.forEach((button)=>{
@@ -824,7 +870,7 @@ async function verifyDataBeforeSend(){
 async function sendToServerProcess(){
     await showHtmlElement([overlayForLoading],"flex");
 
-    const response =  await updateServiceData();
+    const response =  await updateItensData();
 
     if(!response){
         await hideHtmlElement([overlayForLoading]);
@@ -838,7 +884,7 @@ async function sendToServerProcess(){
     await showMessagePopup("sucessMsg","Dados atualizados com sucesso !");
 
     setTimeout(async () => {
-        getServicesData();
+        getInventoryItens();
     },1000);
 }
 
@@ -1076,6 +1122,18 @@ addItemStatusSelect.addEventListener("change", async()=>{
         addItemQuantInput.value = "0"
         return;
     }
+});
+
+addItemQuantInput.addEventListener("focusout", async()=>{
+    let value = parseInt(addItemQuantInput.value);
+
+    if(value === 0 || value === NaN){
+        addItemStatusSelect.value = "EM FALTA";
+    }
+
+    if(value >= 1){
+        addItemStatusSelect.value = "POSSUI";
+    }
 })
 
 addItemBtn.addEventListener("click", async()=>{
@@ -1272,6 +1330,7 @@ const editItemQuantInput_searched = document.querySelector("#edit-item-quant-inp
 const editItemStatusControl_searched = document.querySelector(".edit-item-status-control_searched");
 const editItemStatusSelect_searched = document.querySelector("#edit-item-status-select_searched");
 
+const editItemBtn = document.querySelector("#edit-item-btn");
 // functions
 
 async function searchForItemProcess_editItemContainer(){
@@ -1371,51 +1430,58 @@ async function editItemProcess(){
         status : editItemStatusSelect_searched.value
     }
 
-    if(existingItem === newItem){
-        await showMessagePopup("errorMsg","Item não pode ser igual ao anterior ! Tente novamente !");
+    newItem = JSON.stringify(newItem);
+    existingItem = JSON.stringify(existingItem);
+
+    if (newItem === existingItem){
+        await showMessagePopup("errorMsg", "Novo item não pode ser igual ao anterior ! Tente novamente !")
         return;
     }
 
     let itemExists = false;
 
     itens_array.forEach((item)=>{
-        if(newItem.name === item.name && newItem.type === item.type){
+        let objectA = JSON.stringify(item);
+
+        if(objectA === newItem){
             itemExists = true;
-            return;
-        }  
+        }
     })
 
     if(itemExists){
-        await showMessagePopup("errorMsg","Item já existe ! Tente novamente !");
+        await showMessagePopup("errorMsg","Item já existente ! Tente novamente !");
         return;
     }
-    
+
     if(!itemExists){
-        await verifyPasswordProcess(editItemLogic,"Item editado com suceso !");
+        await verifyPasswordProcess(editItemLogic, "Item editado com sucesso !");
+        return;
     }
 }
 
 async function editItemLogic(){
+    console.log(itens_array);
+
     if(editItemTypeInput_search.value !== ""){
-        itens_array.forEach((item)=>{
-            if(item.type === editItemTypeInput_search.value && item.name === editItemNameInput_search){
-                item.name = editItemNameInput_searched.value;
-                item.type = editItemTypeInput_searched.value;
-                item.quant = editItemQuantInput_searched.value;
-                item.status = editItemStatusSelect_searched.value;   
+        for(let i = 0;i<itens_array.length;i++){
+            if(itens_array[i].type === editItemTypeInput_searched.value && itens_array[i].name === editItemNameInput_searched.value){
+                itens_array[i].name = editItemNameInput_searched.value;
+                itens_array[i].type = editItemTypeInput_searched.value;
+                itens_array[i].quant = editItemQuantInput_searched.value;
+                itens_array[i].status = editItemStatusSelect_searched.value;
             }
-        });
+        }
     }
 
     if(editItemTypeInput_search.value === ""){
-        itens_array.forEach((item)=>{
-            if(item.name === editItemNameInput_search){
-                item.name = editItemNameInput_searched.value;
-                item.type = editItemTypeInput_searched.value;
-                item.quant = editItemQuantInput_searched.value;
-                item.status = editItemStatusSelect_searched.value;   
+        for(let i = 0;i<itens_array.length;i++){
+            if(itens_array[i].type === editItemTypeInput_searched.value && itens_array[i].name === editItemNameInput_searched.value){
+                itens_array[i].name = editItemNameInput_searched.value;
+                itens_array[i].type = editItemTypeInput_searched.value;
+                itens_array[i].quant = editItemQuantInput_searched.value;
+                itens_array[i].status = editItemStatusSelect_searched.value;
             }
-        });
+        }
     }
 
     itens_array.sort((a,b)=>{
@@ -1509,4 +1575,8 @@ editItemQuantInput_searched.addEventListener("focusout",async()=>{
     }
 
     await changeStatusIndicator_itemSearched();
+});
+
+editItemBtn.addEventListener("click", async()=>{
+    await editItemProcess();
 })
