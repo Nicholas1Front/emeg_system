@@ -131,6 +131,46 @@ async function cleanAllInputs(){
     })
 }
 
+// server message popup
+
+// elements
+const serverMessagePopup = document.querySelector(".server-message-popup");
+const closeServerMessagePopupBtn = document.querySelector(".close-server-message-popup-btn")
+const serverMessageSymbol = document.querySelector(".server-message-control i");
+const serverMessageSpan = document.querySelector(".server-message-span");
+
+// functions
+
+async function showServerMessagePopup(messageType, messageSpan){
+    serverMessageSymbol.className = "";
+
+    if(messageType === "errorMsg"){
+        serverMessagePopup.style.backgroundColor = "#d61e1e"; //red color
+        serverMessagePopup.style.color = "#fff";
+        serverMessageSymbol.className = `fa-solid fa-triangle-exclamation`;
+    }
+
+    if(messageType === "sucessMsg"){
+        serverMessagePopup.style.backgroundColor = "#42f55a"; //green color
+        serverMessagePopup.style.color = "#fff"
+        serverMessageSymbol.className = `fa-solid fa-circle-check`;
+    }
+
+    serverMessageSpan.innerText = messageSpan ;
+
+    await showHtmlElement([serverMessagePopup], "block");
+
+    setTimeout(()=>{
+        hideHtmlElement([serverMessagePopup]);
+    },5000);
+}
+
+//event listeners
+
+closeServerMessagePopupBtn.addEventListener("click",()=>{
+    hideHtmlElement([serverMessagePopup]);
+})
+
 //message popup
 
 //elements
@@ -179,7 +219,6 @@ closeMessagePopupBtn.addEventListener("click", ()=>{
 
 //elements
 const overlayForLoading = document.querySelector(".overlay-for-loading");
-
 
 // confirmation popup
 
@@ -310,14 +349,16 @@ const editInventoryShowLink = document.querySelector("#edit-inventory-show-btn")
 const backHomeBtn = document.querySelectorAll(".back-home-btn");
 
 const consultInventorySection = document.querySelector(".consult-inventory-section");
-const itemType_selectSearch = document.querySelector("#item-type_select-search");
-const itemNameInputSearch = document.querySelector("#item-name-input-search");
-const itemNameOptionsControl = document.querySelector(".item-name-options-control");
+const itemTypeInputSearch = consultInventorySection.querySelector("#item-type-input-search");
+const itemTypeOptionsControl = consultInventorySection.querySelector(".item-type-options-control");
+const itemTypeOption = consultInventorySection.querySelector(".item-type-option");
+const itemNameInputSearch = consultInventorySection.querySelector("#item-name-input-search");
+const itemNameOptionsControl = consultInventorySection.querySelector(".item-name-options-control");
 const itemNameOption = null;
-const consultInventory_searchBtn = document.querySelector("#consult-inventory_search-btn");
+const consultInventory_searchBtn = consultInventorySection.querySelector("#consult-inventory_search-btn");
 
-const consultInventory_resultContainer = document.querySelector(".consult-inventory_result-container");
-const consultInventory_showControl = document.querySelector(".consult-inventory_show-control");
+const consultInventory_resultContainer = consultInventorySection.querySelector(".consult-inventory_result-container");
+const consultInventory_showControl = consultInventorySection.querySelector(".consult-inventory_show-control");
 
 // functions 
 
@@ -469,15 +510,15 @@ async function searchProcess_consultInventory(){
         }
     }
 
-    if(itemType_selectSearch.value !== ""){
+    if(itemTypeInputSearch.value !== ""){
         itens_array.forEach((item)=>{
-            if(item.type === itemType_selectSearch.value){
+            if(item.type === itemTypeInputSearch.value){
                 allItens.push(item);
             }
         })
     }
 
-    if(itemType_selectSearch.value === ""){
+    if(itemTypeInputSearch.value === ""){
         itens_array.forEach((item)=>{
             allItens.push(item);
         })
@@ -568,15 +609,22 @@ backHomeBtn.forEach((button)=>{
 
 consultInventoryLink.addEventListener("click", async ()=>{
     await hideHtmlElement([mainHubSection, consultInventory_resultContainer]);
-    await createSelectOptions(itemType_selectSearch);
     await showHtmlElement([consultInventorySection], "block")
+});
+
+itemTypeInputSearch.addEventListener("input", async ()=>{
+    createInputSuggestions_ItemType(
+        itemTypeInputSearch,
+        itemTypeOptionsControl,
+        "item-type-option"
+    )
 })
 
 itemNameInputSearch.addEventListener("input", async ()=>{
     itemNameInputSearch.value = itemNameInputSearch.value.toUpperCase();
 
     await createInputSuggestions(
-        itemType_selectSearch,
+        itemTypeInputSearch,
         itemNameInputSearch,
         itemNameOptionsControl,
         itemNameOption,
@@ -632,11 +680,11 @@ async function showItems_missingItemsContainer(){
     });
     
     allItens.sort((a,b)=>{
-        if(a < b){
+        if(a.name < b.name){
             return -1;
         }
 
-        if(a > b){
+        if(a.name > b.name){
             return 1; 
         }
 
@@ -681,10 +729,6 @@ async function showItems_missingItemsContainer(){
 
         if(element.status === "EM FALTA"){
             statusIndicatorCircle.style.backgroundColor = "#d61e1e"; // red
-        }
-
-        if(element.status === "POSSUI"){
-            statusIndicatorCircle.style.backgroundColor = "#42f55a"; // green
         }
 
         itemStatusControl.appendChild(statusIndicatorCircle);
@@ -732,11 +776,11 @@ async function showItems_haveItemsContainer(){
     })
 
     allItens.sort((a,b)=>{
-        if(a < b){
+        if(a.name < b.name){
             return -1;
         }
 
-        if(a > b){
+        if(a.name > b.name){
             return 1; 
         }
 
@@ -778,10 +822,6 @@ async function showItems_haveItemsContainer(){
         let itemStatus_span = document.createElement("span");
         itemStatus_span.className = "item-status_span";
         itemStatus_span.innerText = element.status;
-
-        if(element.status === "EM FALTA"){
-            statusIndicatorCircle.style.backgroundColor = "#d61e1e"; // red
-        }
 
         if(element.status === "POSSUI"){
             statusIndicatorCircle.style.backgroundColor = "#42f55a"; // green
@@ -1513,6 +1553,12 @@ async function changeStatusIndicator_itemSearched(){
 }
 
 // event listeners and booting
+
+editItemLinkBtn.addEventListener("click", async ()=>{
+    await cleanAllInputs();
+    await showHtmlElement([editItemContainer_editInventory], "block");
+    await hideHtmlElement([mainHub_editInventory,searchedItemContainer_editItemContainer]);
+})  
 
 editItemTypeInput_search.addEventListener("input", async()=>{
     editItemTypeInput_search.value = editItemTypeInput_search.value.toUpperCase();
