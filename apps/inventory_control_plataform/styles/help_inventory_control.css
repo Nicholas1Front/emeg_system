@@ -1,0 +1,231 @@
+*{
+    margin: 0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+}
+
+body{
+    max-width: 1920px;
+    overflow-x: hidden;
+}
+
+div,section,header{
+    width:100%;
+}
+
+button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #a91818;
+    color:#fff;
+    width:30%;
+    padding:10px 0;
+    margin: 0 1rem;
+    cursor: pointer;
+    font-size: 19px;
+    transition:0.2s;
+    border-radius:25px;
+    border:none;
+}
+
+button:hover{
+    transition:0.2s;
+    background-color: #d61e1e;
+}
+
+button > i{
+    margin-left:7px;
+    font-size:22px;
+}
+
+h2,h3{
+    font-size:25px;
+}
+
+p{
+    font-size: 17px;
+    font-weight:300;
+}
+
+redbold, strong{
+    color: #d61e1e;
+    font-weight: 700;
+}
+
+.container{
+    margin: 0 auto;
+    padding:0 2%;
+}
+
+/* .back-inventory-control */
+
+.back-inventory-control{
+    position:absolute;
+    margin-left:-83%;
+    width:fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:8px;
+}
+
+.back-inventory-control a{
+    text-decoration: none;
+    color:#dedede;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.2s;
+}
+
+.back-inventory-control a:hover{
+    transition: 0.2s;
+    color:#fff;
+}
+
+.back-inventory-control a > i {
+    font-size:30px;
+}
+
+.back-inventory-control a > span{
+    font-size:12px;
+    padding-top:6px;
+}
+
+/* header */
+
+header{
+    padding:12px 0;
+    background-color: #d61e1e;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom:8px;
+}
+
+header img{
+    width:81px;
+    height:70px;
+}
+
+header h2{
+    margin-left:15px;
+    font-size:25px;
+}
+
+/* title-section */
+
+.title-section{
+    width:100%;
+    margin:5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-section > .container > .title-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title-section > .container > .title-container h2{
+    font-size: 35px;
+}
+
+.title-section > .container > .title-container h2 > .line{
+    width:11rem;
+    margin:2px 0;
+    margin-left:75%;
+    height:1.5px;
+    background-color: #d61e1e;
+}
+
+.title-section > .container > .title-container h4{
+    font-size: 17px;
+    font-weight: normal;
+    margin-top:4px;
+}
+
+/* introduction-usage-system-section */
+
+.introduction-usage-system-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:1.5rem;
+}
+
+.introduction-usage-system-section > .container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.introduction-usage-system-section > .container > .title-container h2{
+    font-size:25px;
+}
+
+.introduction-usage-system-section > .container > .title-container h2 > .line{
+    width:11rem;
+    margin:2px 0;
+    margin-left:15%;
+    height:1.5px;
+    background-color: #d61e1e;
+}
+
+.introduction-usage-system-section > .container > p{
+    margin:1rem 0;
+}
+
+.introduction-usage-system-section > .container > p > strong{
+    color:#d61e1e;
+}
+
+/* main-hub-section */
+
+.main-hub-section{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:1.5rem;
+}
+
+.main-hub-section > .container > .title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-hub-section > .container > .title-container > .line{
+    width:11rem;
+    margin:2px 1rem;
+    height:1.5px;
+    background-color: #d61e1e;
+}
+
+.main-hub-section > .container > .title-container > .title-control{
+    width:fit-content;
+    margin:0 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-hub-section > .container > .title-container > .title-control h2{
+    font-size:25px;
+}
+
+.main-hub-section > .container > .title-container > .title-control p{
+    font-size:17px;
+}
+
+.main-hub-section > .container > .button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:3rem 0;
+}
