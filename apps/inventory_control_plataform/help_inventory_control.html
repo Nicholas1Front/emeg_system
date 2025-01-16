@@ -80,7 +80,107 @@
             </div>
         </section>
 
+        <section class="consult-inventory-section">
+            <div class="back-main-hub-control">
+                <button class="back-main-hub-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Ajuda : Pesquisa de item especifico</h3>
+            </div>
+
+            <section class="feature-introduction-section">
+                <div class="container">
+                    <div class="text-container">
+                        <h3>
+                            Pesquisa de item especifico
+                            <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                        </h3>
+    
+                        <p>Quando este botão é clicado o usuário é levado a uma <redbold>área de pesquisa e exibição de resultados</redbold>, onde de acordo com os parametros de pesquisa passado o sistema se encarregará de exibir os itens correspondentes como resultado em uma tabela e se o mesmo não encontrar nenhum resultado irá informar</p>
+    
+                        <p>É recomendado o uso dessa funcionalidade para a execução de uma pesquisa mais refinida buscando uma peça ou ferramenta especifíca que pode ser feita pela própria equipe de manutenção</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="correct-format-section">
+                <div class="container">
+                    <div class="text-container">
+                        <h3>
+                            Preenchimento e pesquisa correta
+                            <i class="fa-solid fa-circle-check"></i>
+                        </h3>
+
+                        <p>Como primeiro parâmetro de pesquisa é necessário digitar ou escolher o tipo do item desejado, importante destacar que este sistema possui uma ferramenta de sugestões que conforme esse item ou grupo de itens existir no banco de dados do sistema a mesma irá oferecer opções para autocompletar o campo do tipo de serviço, como mostra a imagem a seguir. Entretanto caso se queira fazer uma pesquisa sem passar o tipo de item é possível usando somente o nome/descrição do item entretanto recomenda-se para sempre especificar o máximo possível a pesquisa</p>
+
+                        <p>Para o segundo parâmetro de pesquisa temos o nome/descrição do item que conta com o mesmo sistema de sugestão de nome que funciona da seguinte maneira se campo de tipo de item está vazio o programa irá sugerir sugestões através dos nome digitado procurando em todos os itens, entretanto se o campo do tipo estiver preenchido com um tipo como : PEÇA ou FERRAMENTA , as sugestões no campo de nome/descrição aparecerão somente derividas daquele tipo de item.</p>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="../../assets/images/consult_inventory_type_and_name_item_screenshot.png" />
+                    </div>
+
+                    <div class="text-container">
+                        <p>Passado os parâmetros e clicado no botão de pesquisa o sistema irá fazer a pesquisa de acordo com os parâmtros passados (tipo de item e nome/descrição do item). Se o sistema for bem sucedido na procura pelos itens irá exibir o item ou os itens numa tabela como mostra a imagem a seguir, mas caso não consiga achar nenhum item (seja por digitação erada ou pela não existência deste item ) o programa irá exibir que o item não existe no banco de dados. Importante apontar que a funcionalidade de pesquisa não funciona caso o nome/descrição de serviço esteja vazio</p>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="../../assets/images/consult_inventory_searched-item-screenshot.png" />
+                    </div>
+
+                </div>
+            </section>
+
+            <section class="error-msg-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>
+                            Mensagens do sistema
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </h3>
+                    </div>
+    
+                    <div class="text-container">
+                        <p><redbold>Em caso de falta de informações ou dados inseridos de maneira incorreta</redbold> este sistema avisará o usuário por meio de avisos popup que aparecerão na tela. Nestes popups estará contida a mensagem do que esta motivando o erro.</p>
+                    </div>
+    
+                    <div class="image-container">
+                        <img src="../../assets/images/message-popup_screenshot.png"/>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+
+        <section class="inventory-show-section">
+            <div class="back-main-hub-control">
+                <button class="back-main-hub-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Ajuda : Mostrar todo estoque</h3>
+            </div>
+
+            <section class="feature-introduction-section">
+                <div class="container">
+                    <div class="text-container">
+                        <h3>
+                            Mostrar todo estoque
+                            <i class="fa-solid fa-clipboard-list"></i>
+                        </h3>
+
+                        <p>Quando este botão é clicado o usuário é levado a uma página de exibição da informação dos itens onde essa página possui dois botões sendo estes : Consultar itens em falta e Consultar itens existente do estoque , onde os mesmos respectivamente mostram as informações dos itens em falta e depois dos itens que o estoque possuí como mostra as imagens abaixo.</p>
+
+                        <p>O uso dessa funcionalidade é indicado para analisar todos os itens de uma maneira geral para que assim se possa fazer um planejamento mais eficaz na compra de materiais e ferramentas , outra indicação de uso é que essa funcionalidade pode ser util para verificar as alterações que são feitas no sistema como adicionar , exlcuir ou editar arquivos , usar essa funcionalidade pode ser de grande avalia para verificar as informações gerais dos itens e sua conformidade.</p>
+                    </div>
+
+                    <div class="image-container">
+                        <img src="../../assets/images/missing_items_inventory_control_plataform_screenshot.png"/>
+                        <img src="../../assets/images/have_items_inventory_control_plataform_screenshot.png"/>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+
         
     </body>
+
+
 
 </html>

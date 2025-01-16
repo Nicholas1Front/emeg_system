@@ -229,3 +229,187 @@ header h2{
     align-items: center;
     margin:3rem 0;
 }
+
+/* consult-inventory-section */
+
+.consult-inventory-section{
+    display: none;
+    margin-top:1.5rem;
+}
+
+/* back-main-hub-control */
+
+.back-main-hub-control{
+    display: flex;
+    align-items:center;
+    justify-content: left;
+    margin-bottom:1rem;
+}
+
+.back-main-hub-control > button{
+    width:15%;
+    margin-left:1rem;
+    font-size: 14px;
+    padding:8px 0;
+    background-color: #a91818;
+    color: #fff;
+    border-radius: 25px;
+    border:none;
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.back-main-hub-control > button:hover{
+    background-color: #d61e1e;
+    transition: 0.2s;
+}
+
+.back-main-hub-control > button > i{
+    margin-right:7px;
+}
+
+.back-main-hub-control > h3{
+    margin-left:10px;
+    font-size:1.17em;
+}
+
+/* .consult-inventory-section  -> feature-introduction-section */
+
+.consult-inventory-section > .feature-introduction-section{
+    margin:1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.consult-inventory-section > .feature-introduction-section > .container > .text-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.consult-inventory-section > .feature-introduction-section > .container > .text-container h3{
+    padding: 8px 3rem;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.consult-inventory-section > .feature-introduction-section > .container > .text-container p{
+    margin:1rem 0;
+}
+
+/* .consult-inventory-section  -> correct-format-section */
+
+.consult-inventory-section > .correct-format-section{
+    padding:1.5rem 0;
+    background-color: #dedede;
+}
+
+.consult-inventory-section > .correct-format-section > .container > .text-container h3{
+    padding: 5px 16px 5px 2px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.consult-inventory-section > .correct-format-section > .container > .text-container p{
+    padding:1rem 0;
+}
+
+.consult-inventory-section > .correct-format-section > .container > .image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:1.5rem 0;
+}
+
+.consult-inventory-section > .correct-format-section > .container > .image-container img{
+    width:90%;
+    border-radius: 25px;
+    box-shadow: 0px 1px 13px 8px #d61e1e;
+}
+
+/* .consult-inventory-section -> error-msg-section */
+
+.consult-inventory-section > .error-msg-section{
+    margin:1.5rem 0;
+}
+
+.consult-inventory-section > .error-msg-section > .container > .title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.consult-inventory-section > .error-msg-section > .container > .title-container h3{
+    font-size: 25px;
+    padding: 8px 3rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.consult-inventory-section > .error-msg-section > .container > .text-container p{
+    margin:1.5rem 0;
+}
+
+.consult-inventory-section > .error-msg-section > .container > .image-container{
+    margin:1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .inventory-show-section */
+
+.inventory-show-section{
+    margin-top:1.5rem;
+    display: block;
+}
+
+.inventory-show-section > .feature-introduction-section{
+    margin:1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inventory-show-section > .feature-introduction-section > .container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inventory-show-section > .feature-introduction-section > .container > .text-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.inventory-show-section > .feature-introduction-section > .container > .text-container h3{
+    padding: 8px 3rem;
+    margin-bottom: 1rem;
+    border-radius: 50px;
+    background-color: #d61e1e;
+    width: fit-content;
+}
+
+.inventory-show-section > .feature-introduction-section > .container > .text-container p{
+    margin:1rem 0;
+}
+
+.inventory-show-section > .feature-introduction-section > .container > .image-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:2rem 0;
+}
+
+.inventory-show-section > .feature-introduction-section > .container > .image-container img{
+    width:45%;
+    margin:0 3rem;
+    border-radius: 25px;
+    box-shadow: 0px 1px 13px 8px #d61e1e;
+}
