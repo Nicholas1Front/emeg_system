@@ -496,6 +496,8 @@ header h2{
     box-shadow: 0px 1px 13px 8px #000;
 }
 
+/* .edit-inventory-show-section -> .add-item-section */
+
 .edit-inventory-show-section > .add-item-section{
     display: flex;
     align-items: center;
@@ -551,4 +553,92 @@ header h2{
     align-items: center;
     font-size: 35px;
     color: #d61e1e;
+}
+
+/* .edit-inventory-show-section -> .delete-item-section */
+
+.edit-inventory-show-section > .delete-item-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding:2rem 0;
+    background-color: #dedede;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .title-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .title-container h3{
+    padding: 5px 16px 5px 5px;
+    color: #000;
+    background-color:#d61e1e;
+    width: fit-content;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .introduction-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:2.5rem 0;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .introduction-container > .text-container{
+    width:40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .introduction-container > .text-container p{
+    width:100%;
+    text-align: left;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .introduction-container > .image-container{
+    width:60%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .introduction-container > .image-container img{
+    width:90%;
+    border-radius: 25px;
+    box-shadow: 0px 1px 13px 8px #5e5e5e;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .action-delete-item-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:2.5rem 0;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .action-delete-item-container > .text-container{
+    width:40%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .action-delete-item-container > .text-container p{
+    width:100%;
+    text-align: justify;
+    margin:1rem 0;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .action-delete-item-container > .image-container{
+    width:60%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.edit-inventory-show-section > .delete-item-section > .container > .action-delete-item-container > .image-container img{
+    width:90%;
+    border-radius: 25px;
+    box-shadow: 0px 1px 13px 8px #5e5e5e;
 }
