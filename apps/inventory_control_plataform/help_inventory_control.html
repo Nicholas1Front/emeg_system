@@ -90,45 +90,61 @@
                 <div class="container">
                     <div class="text-container">
                         <h3>
-                            Pesquisa de item especifico
+                            Pesquisa de Item Específico
                             <i class="fa-solid fa-magnifying-glass-dollar"></i>
                         </h3>
-    
-                        <p>Quando este botão é clicado o usuário é levado a uma <redbold>área de pesquisa e exibição de resultados</redbold>, onde de acordo com os parametros de pesquisa passado o sistema se encarregará de exibir os itens correspondentes como resultado em uma tabela e se o mesmo não encontrar nenhum resultado irá informar</p>
-    
-                        <p>É recomendado o uso dessa funcionalidade para a execução de uma pesquisa mais refinida buscando uma peça ou ferramenta especifíca que pode ser feita pela própria equipe de manutenção</p>
+                        <p>
+                            Quando este botão é clicado, o usuário é levado a uma 
+                            <strong>área de pesquisa e exibição de resultados</strong>, onde, de acordo com os parâmetros de pesquisa fornecidos, o sistema exibirá os itens correspondentes como resultado em uma tabela. 
+                            Caso nenhum item seja encontrado, o sistema informará ao usuário.
+                        </p>
+                        <p>
+                            É <strong>recomendado utilizar essa funcionalidade</strong> para realizar uma pesquisa mais refinada, buscando uma peça ou ferramenta específica. 
+                            Essa pesquisa pode ser realizada pela própria equipe de manutenção.
+                        </p>
                     </div>
                 </div>
             </section>
-
+            
             <section class="correct-format-section">
                 <div class="container">
                     <div class="text-container">
                         <h3>
-                            Preenchimento e pesquisa correta
+                            Preenchimento e Pesquisa Correta
                             <i class="fa-solid fa-circle-check"></i>
                         </h3>
-
-                        <p>Como primeiro parâmetro de pesquisa é necessário digitar ou escolher o tipo do item desejado, importante destacar que este sistema possui uma ferramenta de sugestões que conforme esse item ou grupo de itens existir no banco de dados do sistema a mesma irá oferecer opções para autocompletar o campo do tipo de serviço, como mostra a imagem a seguir. Entretanto caso se queira fazer uma pesquisa sem passar o tipo de item é possível usando somente o nome/descrição do item entretanto recomenda-se para sempre especificar o máximo possível a pesquisa</p>
-
-                        <p>Para o segundo parâmetro de pesquisa temos o nome/descrição do item que conta com o mesmo sistema de sugestão de nome que funciona da seguinte maneira se campo de tipo de item está vazio o programa irá sugerir sugestões através dos nome digitado procurando em todos os itens, entretanto se o campo do tipo estiver preenchido com um tipo como : PEÇA ou FERRAMENTA , as sugestões no campo de nome/descrição aparecerão somente derividas daquele tipo de item.</p>
+                        <p>
+                            Como <strong>primeiro parâmetro de pesquisa</strong>, é necessário digitar ou escolher o tipo do item desejado. 
+                            É importante destacar que este sistema possui uma <strong>ferramenta de sugestões</strong> que, conforme o item ou grupo de itens existir no banco de dados, oferecerá opções para autocompletar o campo do tipo de serviço. 
+                            Veja o exemplo na imagem abaixo. 
+                            Entretanto, caso deseje realizar uma pesquisa sem preencher o tipo de item, é possível usar apenas o nome/descrição do item. 
+                            Contudo, <strong>recomenda-se especificar o máximo possível</strong> para obter resultados mais precisos.
+                        </p>
+                        <p>
+                            Para o <strong>segundo parâmetro de pesquisa</strong>, temos o nome/descrição do item, que também conta com o mesmo sistema de sugestões. 
+                            Este sistema funciona da seguinte forma: 
+                            - Se o campo "tipo de item" estiver vazio, o programa sugerirá itens com base no nome digitado, pesquisando em todos os itens do banco de dados. 
+                            - Se o campo "tipo de item" estiver preenchido com categorias como <strong>PEÇA</strong> ou <strong>FERRAMENTA</strong>, as sugestões no campo de nome/descrição serão limitadas aos itens relacionados a esse tipo específico.
+                        </p>
                     </div>
-
                     <div class="image-container">
-                        <img src="../../assets/images/consult_inventory_type_and_name_item_screenshot.png" />
+                        <img src="../../assets/images/consult_inventory_type_and_name_item_screenshot.png" alt="Exemplo de pesquisa por tipo e nome de item">
                     </div>
-
                     <div class="text-container">
-                        <p>Passado os parâmetros e clicado no botão de pesquisa o sistema irá fazer a pesquisa de acordo com os parâmtros passados (tipo de item e nome/descrição do item). Se o sistema for bem sucedido na procura pelos itens irá exibir o item ou os itens numa tabela como mostra a imagem a seguir, mas caso não consiga achar nenhum item (seja por digitação erada ou pela não existência deste item ) o programa irá exibir que o item não existe no banco de dados. Importante apontar que a funcionalidade de pesquisa não funciona caso o nome/descrição de serviço esteja vazio</p>
+                        <p>
+                            Após definir os parâmetros e clicar no botão de pesquisa, o sistema realizará a busca de acordo com os critérios fornecidos (tipo de item e nome/descrição). 
+                            Se a pesquisa for bem-sucedida, os resultados serão exibidos em uma tabela, como mostrado na imagem a seguir. 
+                            Caso contrário, o sistema exibirá uma mensagem informando que o item não existe no banco de dados. 
+                            Isso pode ocorrer devido a <strong>erros de digitação</strong> ou à <strong>inexistência do item pesquisado</strong>. 
+                            É importante ressaltar que a funcionalidade de pesquisa <strong>não funcionará caso o campo "nome/descrição do item" esteja vazio</strong>.
+                        </p>
                     </div>
-
                     <div class="image-container">
-                        <img src="../../assets/images/consult_inventory_searched-item-screenshot.png" />
+                        <img src="../../assets/images/consult_inventory_searched-item-screenshot.png" alt="Resultado da pesquisa por itens">
                     </div>
-
                 </div>
             </section>
-
+            
             <section class="error-msg-section">
                 <div class="container">
                     <div class="title-container">
@@ -164,9 +180,19 @@
                             <i class="fa-solid fa-clipboard-list"></i>
                         </h3>
 
-                        <p>Quando este botão é clicado o usuário é levado a uma página de exibição da informação dos itens onde essa página possui dois botões sendo estes : Consultar itens em falta e Consultar itens existente do estoque , onde os mesmos respectivamente mostram as informações dos itens em falta e depois dos itens que o estoque possuí como mostra as imagens abaixo.</p>
-
-                        <p>O uso dessa funcionalidade é indicado para analisar todos os itens de uma maneira geral para que assim se possa fazer um planejamento mais eficaz na compra de materiais e ferramentas , outra indicação de uso é que essa funcionalidade pode ser util para verificar as alterações que são feitas no sistema como adicionar , exlcuir ou editar arquivos , usar essa funcionalidade pode ser de grande avalia para verificar as informações gerais dos itens e sua conformidade.</p>
+                        <p>
+                            Quando este botão é clicado, o usuário é levado a uma <strong>página de exibição das informações dos itens</strong>. 
+                            Nesta página, há dois botões principais:
+                            <strong>Consultar itens em falta</strong> e <strong>Consultar itens existentes no estoque</strong>. 
+                            Esses botões, respectivamente, mostram as informações dos itens que estão em falta e dos itens disponíveis no estoque, como ilustrado nas imagens abaixo.
+                        </p>
+                        
+                        <p>
+                            O uso dessa funcionalidade é <strong>indicado para analisar todos os itens de forma geral</strong>, permitindo um planejamento mais eficaz na compra de materiais e ferramentas. 
+                            Outra recomendação de uso é para <strong>verificar alterações realizadas no sistema</strong>, como adicionar, excluir ou editar itens. 
+                            Utilizar essa funcionalidade pode ser de <strong>grande valor</strong> para validar as informações gerais dos itens e garantir a conformidade dos dados no sistema.
+                        </p>
+                        
                     </div>
 
                     <div class="image-container">
@@ -223,25 +249,82 @@
                     </div>
 
                     <div class="text-container">
-                        <p>Quando o botão Adicionar item ao inventário é clicado o usuário é apresentado a uma área para inserir as informações de um novo item onde a mesma possui 4 campos para inserção de dados : <strong>tipo do item, nome/descrição do item, estado do item e quantidade</strong></p>
+                        <p>
+                            Quando o botão <strong>Adicionar item ao inventário</strong> é clicado, o usuário é direcionado a uma área para inserir as informações de um novo item. 
+                            Esta área possui 4 campos para inserção de dados: 
+                            <strong>tipo do item, nome/descrição do item, estado do item e quantidade</strong>.
+                        </p>
+                    
+                        <p>
+                            Explicando cada campo, respectivamente:
+                        </p>
 
-                        <p>Explicando respectivamente cada campo : o campo do tipo de item diz respeito ao tipo de cada item (peça, ferramenta, material e etc...) e conta com a ferramenta de sugestão de tipos conforme o usuário digita. Em seguida o campo de nome/descrição necessita uma descrição precisa e detalhada do item que será adicionado para evitar divergências entre nomes no sistema do inventário</p>
+                        <p>- O campo <strong>tipo de item</strong> refere-se ao tipo do item (por exemplo: peça, ferramenta, material, etc.) e conta com uma ferramenta de sugestões que se ativa conforme o usuário digita.</p>
 
-                        <p>O campos de estado de item e quantidade diz respeito primeiramente ao estado do item no inventário, se o mesmo existe ou está em falta e caso o item exista no inventário é necessário inserir a quantidade de itens. As imagens abaixo mostram como devem ficar os campos após o preenchimento.</p>
+                        <p>- O campo <strong>nome/descrição do item</strong> exige uma descrição precisa e detalhada do item que será adicionado, para evitar divergências nos nomes dentro do sistema de inventário.</p>
+                    
+                        <p>
+                            O campo <strong>estado do item</strong> indica se o item existe ou está em falta no inventário. Caso o item exista, o campo <strong>quantidade</strong> deve ser preenchido com a quantidade disponível. As imagens abaixo ilustram como os campos devem ser preenchidos.
+                        </p>
                     </div>
-
+                    
                     <div class="image-container">
-                        <img src="../../assets/images/add_item_inventory_control_plataform_screenshot.png"/>
-
+                        <img src="../../assets/images/add_item_inventory_control_plataform_screenshot.png" alt="Exemplo de preenchimento do formulário de inventário"/>
+                    
                         <div class="arrow-control">
                             <i class="fa-regular fa-circle-down"></i>
                         </div>
+                    
+                        <img src="../../assets/images/add_item__example_inventory_control_plataform_screenshot.png" alt="Exemplo de preenchimento com dados inseridos"/>
+                    </div>
+                    
+                    <div class="text-container">
+                        <p>
+                            É importante destacar que a <strong>estrutura de preenchimento</strong> deve seguir o modelo mostrado nas imagens, para garantir a <strong>padronização das nomenclaturas</strong>. 
+                            Outro ponto relevante é que <strong>nenhum dos campos pode estar vazio</strong>. Caso o sistema detecte campos não preenchidos, ele exibirá uma mensagem de erro. 
+                            Da mesma forma, se o item for igual a um item já existente no inventário, o sistema retornará uma mensagem informando que o novo item não pode ser idêntico ao item já registrado.
+                        </p>
+                    </div>
+                    
+                </div>
+            </section>
 
-                        <img src="../../assets/images/add_item__example_inventory_control_plataform_screenshot.png"/>
+            <section class="edit-item-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>Editar item do inventário <i class="fa-solid fa-pen-to-square"></i></h3>
                     </div>
 
-                    <div class="text-container">
-                        <p>Importante destacar que quanto a estrutura de preenchimento é necessário que se siga como mostrado na imagem para que haja padronização nas nomenclaturas. Outro ponto importante é que nenhum dos campos podem estar vazios pois se o sistema assim detectar irá mostrar uma mensagem de erro . O mesmo vale caso o item seja igual a outro já existe , o sistema retornará uma mensagem informando que o novo item não pode ser igual a um item existente.</p>
+                    <div class="introduction-container">
+                        <div class="text-container">
+                            <p>
+                                A primeira parte da edição de itens começa com a pesquisa da existência do item, para que o usuário possa prosseguir com o processo de edição do item encontrado. 
+                                Para isso, o usuário é apresentado a dois campos para inserção de dados: 
+                                <strong>tipo do item</strong> e <strong>nome/descrição do item</strong>. Ambos os campos possuem uma ferramenta de sugestões, que exibe tanto os itens existentes quanto os nomes sugeridos, conforme o usuário digita, como mostrado na imagem abaixo.
+                            </p>
+                            <p>
+                                Após inserir os dados corretamente e clicar no botão <strong>"Pesquisar item"</strong>, o sistema irá realizar a busca com os parâmetros fornecidos. Se o item existir, ele será exibido. 
+                                No entanto, se o que for inserido for inválido ou se o item não existir, o sistema retornará uma mensagem de erro informando que o item não foi encontrado ou não existe.
+                            </p>
+                        </div>
+                    
+                        <div class="image-container">
+                            <img src="../../assets/images/edit_item_search_inventory_control_plataform_screenshot.png" alt="Exemplo de busca de item para edição no inventário">
+                        </div>
+                    </div>
+                    
+                    <div class="searched-container">
+                        <div class="text-container">
+                            <p>
+                                Caso o item realmente exista, o sistema exibirá as informações do item e disponibilizará os campos para inserção dos dados, já com as informações existentes. 
+                                Como mostrado na imagem abaixo, o usuário pode editar o <strong>tipo do item</strong>, <strong>nome/descrição do item</strong>, <strong>estado do item</strong> e <strong>quantidade do item</strong>. 
+                                É importante destacar que o item editado não pode ser igual ao anterior. Portanto, é <strong>estritamente necessário verificar as novas informações</strong> antes de salvar, pois, caso contrário, o sistema retornará uma mensagem de erro informando que as informações estão incorretas.
+                            </p>
+                        </div>
+                    
+                        <div class="image-container">
+                            <img src="../../assets/images/delete_item_searched_inventory_control_plataform_screenshot.png" alt="Exemplo de edição de item no inventário">
+                        </div>
                     </div>
                 </div>
             </section>
@@ -256,32 +339,117 @@
 
                     <div class="introduction-container">
                         <div class="text-container">
-                            <p>Nesta área do sistema o usuário primeiro é apresentado a dois campos onde serão inseridos o tipo do item e nome/descrição do mesmo, pois como mostra a imagem ao lado o sistema irá buscar a existência do item. Caso as informações inseridas estejam incorretas ou o item não exista no banco de dados o sistema irá retornar uma mensagem de erro informando que o item desejado não foi encontrado ou não existe.</p>
+                            <p>
+                                Nesta área do sistema, o usuário é inicialmente apresentado a dois campos para inserir o <strong>tipo do item</strong> e o <strong>nome/descrição</strong> do item. 
+                                Como mostrado na imagem ao lado, o sistema buscará a existência do item. 
+                                Caso as informações inseridas estejam incorretas ou o item não exista no banco de dados, o sistema retornará uma mensagem de erro informando que o item desejado não foi encontrado ou não existe.
+                            </p>
                         </div>
-                        
+                    
                         <div class="image-container">
-                            <img src="../../assets/images/delete_item_search_inventory_control_plataform_screenshot.png"/>
+                            <img src="../../assets/images/delete_item_search_inventory_control_plataform_screenshot.png" alt="Exemplo de busca de item no sistema">
                         </div>
                     </div>
-
+                    
                     <div class="action-delete-item-container">
                         <div class="image-container">
-                            <img src="../../assets/images/delete_item_searched_inventory_control_plataform_screenshot.png"/>
+                            <img src="../../assets/images/delete_item_searched_inventory_control_plataform_screenshot.png" alt="Exemplo de item encontrado para exclusão">
                         </div>
-
+                    
                         <div class="text-container">
-                            <p>Caso o item inserido exista o sistema irá exibir o mesmo dessa forma que aparece ao lado esquerdo, com todas as informações e dados que o item possui naquele momento e logo em seguida o botão Excluir item estará disponível para confirmar se o usuário realmente deseja excluir aquele item especifíco. </p>
-
-                            <p>Importante destacar que esta ação irá excluir o item do banco de dados do sistema e deletar todas as suas informações caso o usuário deseje indicar que um item está EM FALTA o mesmo deve se dirigir ao botão Editar item do inventário</p>
+                            <p>
+                                Caso o item inserido exista, o sistema exibirá os dados do item, como mostrado na imagem à esquerda, com todas as informações atuais do item. 
+                                Em seguida, o botão <strong>Excluir item</strong> estará disponível, permitindo que o usuário confirme a exclusão do item específico.
+                            </p>
+                    
+                            <p>
+                                É importante destacar que esta ação irá <strong>excluir permanentemente o item do banco de dados</strong> do sistema, apagando todas as informações relacionadas a ele. 
+                                Caso o usuário deseje apenas indicar que o item está <strong>EM FALTA</strong>, ele deve utilizar o botão <strong>Editar item do inventário</strong>.
+                            </p>
                         </div>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <section class="send-server-steps-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>
+                            Enviar alterações para o servidor <i class="fa-solid fa-paper-plane"></i>
+                        </h3>
+                    </div>
+    
+                    <div class="text-container">
+                        <p>Após feita qualquer alteração no sistema, seja Adicionar um item, Excluir ou Editar, é necessário <redbold>enviar essas alterações para o servidor</redbold> para que essas mudanças sejam internalizadas no sistema. É importante somente fazer uso deste botão Enviar alterações para o servidor somente quando realmente existerem alterações no sistema, pois se o mesmo detectar que não existem alterações o programa não permitirá prosseguir com a ação de envio retornando uma <redbold>mensagem de erro</redbold>.</p>
+                    </div>
+    
+                    <div class="step-container">
+                        <div class="step-control">
+                            <h3>
+                                <i class="fa-solid fa-file-signature"></i>
+                                Realize as alterações necessárias
+                            </h3>
+                            <p>Com as informações organizadas, faça as alterações no sistema, sempre prestando atenção aos detalhes para evitar a inserção de dados incorretos.</p>
+                        </div>
+                    </div>
+        
+                    <div class="arrow-symbol-container">
+                        <i class="fa-regular fa-circle-down"></i>
+                    </div>
+        
+                    <div class="step-container">
+                        <div class="step-control">
+                            <h3>
+                                <i class="fa-solid fa-file-export"></i>
+                                Envie os dados ao servidor
+                            </h3>
+                            <p>Após finalizar as alterações, clique em <redbold>"Enviar ao servidor"</redbold> para sincronizar as informações com a nuvem.</p>
+                        </div>
+                    </div>
+        
+                    <div class="arrow-symbol-container">
+                        <i class="fa-regular fa-circle-down"></i>
+                    </div>
+        
+                    <div class="step-container">
+                        <div class="step-control">
+                            <h3>
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                Aguarde o processamento
+                            </h3>
+                            <p>Depois de confirmar a senha, o sistema precisará de um tempo para processar as informações. <redbold>Não feche a página</redbold> até que o processo seja concluído. Uma vez finalizado, você poderá sair com segurança.</p>
+                        </div>
+                    </div>                
+                </div>
+            </section>
+    
+            <section class="error-msg-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>
+                            Mensagens do sistema
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </h3>
+                    </div>
+    
+                    <div class="text-container">
+                        <p><redbold>Em caso de falta de informações ou dados inseridos de maneira incorreta</redbold> este sistema avisará o usuário por meio de avisos popup que aparecerão na tela. Nestes popups estará contida a mensagem do que esta motivando o erro.</p>
+                    </div>
+    
+                    <div class="image-container">
+                        <img src="../../assets/images/message-popup_screenshot.png"/>
                     </div>
                 </div>
             </section>
         </section>
 
-        
+        <footer>
+            <h3>© EMEG Guindaste - Todos os Direitos Reservados.</h3>
+        </footer>
+
     </body>
 
-
+    <script src="../inventory_control_plataform/scripts/help_inventory_control_plataform.js"></script>
 
 </html>
