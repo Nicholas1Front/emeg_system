@@ -2,7 +2,7 @@
 
 Este release marca o lançamento da **versão 2.6.0** dos sistemas que compõem o **Emeg System**, desenvolvido para criação de orçamentos para atender as necessidades da **EMEG Guindaste**
 
-## Atualizações incluídas na Versão 2.5
+## Atualizações incluídas na Versão 2.6.0
 
 ### 1. **Criação de orçamentos**
 Ferramenta desenvolvida para auxiliar na criação e edição de orçamentos de maneira precisa, segura e rápida. Foram corrigidos alguns problemas e adicionadas algumas funcionalidades
