@@ -44,7 +44,7 @@ initialize_itens_array();
 
 async function updateItensData(){
     try {
-        const response = await fetch('https://emeg-orc.onrender.com/update-services', { 
+        const response = await fetch('https://emeg-orc.onrender.com/update-inventory', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -885,26 +885,21 @@ async function verifyDataBeforeSend(){
         return;
     }
 
-    let itemAlreadyExist = 0;
+   let itens_arrayJSON = JSON.stringify(itens_array);
+   let itensArrayFetchedJSON = JSON.stringify(itensArrayFetched);
 
-    for(let i = 0; i < itens_array.length; i++){
-        let objectA = JSON.stringify(itens_array[i]);
+   console.log(itens_arrayJSON);
+   console.log(itensArrayFetchedJSON); 
 
-        for(let j = 0; j < itens_array.length;j++){
-            let objectB = JSON.stringify(itensArrayFetched[j]);  
-            
-            if(objectA === objectB){
-                itemAlreadyExist += 1;
-            }
-        }
-    }
-
-    if(itemAlreadyExist > 0){
-        await verifyPasswordProcess(verifyPasswordProcess);
+   if(itens_arrayJSON !== itensArrayFetchedJSON){
+        await verifyPasswordProcess(sendToServerProcess);
         return;
-    }
-    
-    await showMessagePopup("errorMsg", "Dados já existentes ! Tente novamente !")
+   }
+
+   if(itensArrayFetchedJSON === itens_arrayJSON){
+        await showMessagePopup("errorMsg", "Dados já existentes ! Tente novamente !")
+   }
+
 }
 
 async function sendToServerProcess(){

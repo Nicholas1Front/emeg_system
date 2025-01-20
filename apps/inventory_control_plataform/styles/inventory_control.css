@@ -335,7 +335,7 @@ header h2{
 /* main-hub-section */
 
 .main-hub-section{
-    display: none;
+    display: block;
     margin:1.5rem 0;
 }
 
@@ -382,7 +382,7 @@ header h2{
 
 .consult-inventory-section{
     margin-top:1.5rem;
-    display: block;
+    display: none;
 }
 
 /* back-home-control */
@@ -1816,4 +1816,21 @@ header h2{
     font-size:22px;    
 }
 
+/* footer */
 
+footer{
+    z-index: -4;
+    width:100%;
+    background-color: #d61e1e;
+    position:absolute;
+    margin-top:28%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+footer h3{
+    font-size:14px;
+    font-weight: normal;
+    padding:0.9rem 0;
+}
