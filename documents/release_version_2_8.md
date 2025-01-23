@@ -7,21 +7,28 @@ Este release marca o lançamento da **versão 2.8.0** dos sistemas que compõem 
 ### 1. **Criação de orçamentos**
 Ferramenta desenvolvida para auxiliar na criação e edição de orçamentos de maneira precisa, segura e rápida. Foram corrigidos alguns problemas e adicionadas algumas funcionalidades
 
-## Bugs corrigidos
+## Correções de Bugs
 
-- **Funcionamento dos botões de edição e exclusão :** na versão anterior os botões de editar item e excluir item , nas sessões de peças, serviços e gastos, não estavam funcionando corretamente devido a um erro de lógica com os eventos no script do sistema o que foi corrigido reparando o fluxo de eventos no sistema
+- **Funcionamento dos botões de edição e exclusão:**
+  - Na versão anterior, os botões de edição e exclusão de itens nas seções de peças, serviços e gastos apresentavam falhas devido a erros lógicos nos eventos do script do sistema. Esse problema foi corrigido ajustando o fluxo de eventos e garantindo o funcionamento adequado.
 
-- **Numeração orçamento incompleta :** no salvamento HTML do arquivo do orçamento, a numeração não estava salvando de maneira perfeitamente completa o que nessa versão foi reparado adicionando a numeração completa no salvamento do arquivo : _Número orçamento + Ano em questão_
+- **Numeração incompleta nos orçamentos:**
+  - Ao salvar o arquivo HTML dos orçamentos, a numeração não era registrada de forma completa. Essa falha foi solucionada, e agora o sistema salva corretamente o **número do orçamento** seguido do **ano em questão**, garantindo maior precisão nos registros.
 
-- **Campos de inserção de quantidade e de preço :** foram reparados alguns problemas nos campos númericos de quantidade e de preço nas sessões de gastos, peças e serviços, melhorando a inserção da quantidade de um dado e a conversão do formato de preço para se inserir no campo de inserção de valores;
+- **Campos de quantidade e preço:**
+  - Problemas nos campos numéricos de quantidade e preço nas seções de gastos, peças e serviços foram corrigidos. A inserção de valores foi aprimorada, incluindo a conversão correta do formato de preço para os campos de entrada, proporcionando uma experiência mais intuitiva e precisa.
 
-## Funcionalidades
+## Novas Funcionalidades
 
-- **Sugestões de nomes (clientes e equipamentos) :** assim como em nos outros sistemas, este possui uma ferramenta de sugestão de nomes que busca no banco de dados : nome dos clientes e seus respectivos equipamentos
+- **Sugestões de nomes (clientes e equipamentos):**
+  - Agora o sistema oferece sugestões automáticas de nomes ao buscar no banco de dados. Essa funcionalidade permite que o usuário localize rapidamente nomes de clientes e seus respectivos equipamentos, melhorando a eficiência e a usabilidade.
 
 ## Considerações Finais
-Com essa versão sendo lançada hoje o sistema dá mais um passo para continuar sendo aprimorado, pois a correção de bugs e as novas funcionalidades ajudam o sistema a ser mais seguro, funcional e preciso para atender as necessidades da empresa. 
-Contamos com o feedback e opiniões sobre o sistema como um todo para buscar futuras melhorias para o mesmo.
+
+Com o lançamento desta versão, o sistema avança ainda mais em direção à melhoria contínua. As correções de bugs e a implementação de novas funcionalidades tornam a plataforma mais segura, funcional e precisa, atendendo com eficiência às necessidades da empresa.
+
+Agradecemos pelo feedback e pelas sugestões. Sua opinião é essencial para direcionar futuras melhorias no sistema.
+
 
 ---
 
