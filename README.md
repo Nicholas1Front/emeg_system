@@ -40,7 +40,7 @@ Esses sistemas foram projetados para serem utilizados por meio de download das p
 - [Criação de orçamentos](https://nicholas1front.github.io/emeg_system/apps/budget_plataform/budget_plataform.html)
 - [Controle de clientes](https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/customer_base_plataform.html)
 - [Tabela de preços](https://nicholas1front.github.io/emeg_system/apps/price_list/price_list.html)
-- [Ajuda com Controle de estoque](https://nicholas1front.github.io/emeg_system/apps/inventory_control_plataform/help_inventory_control.html)
+- [Controle de estoque](https://nicholas1front.github.io/emeg_system/apps/inventory_control_plataform/inventory_control.html)
 
 ### Requisitos
 Para usar o sistema, você só precisa de um navegador moderno.
