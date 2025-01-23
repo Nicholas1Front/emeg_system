@@ -23,6 +23,9 @@ async function initialize_clients_arary(){
     clientsEquipamentsArray = await getClientsData();
 }
 
+//booting
+
+initialize_clients_arary();
 
 // message popup
 
@@ -173,6 +176,12 @@ function currencyToFloatNum(value){
     return parseFloat(number);
 }
 
+function currencyToStringFormat(value){
+    const number = value.replace(/[^\d,-]/g, '').replace('.', '').replace('.', ',');
+
+    return number;
+}
+
 //budget-production
 
 //header
@@ -183,8 +192,10 @@ const msgControl = document.querySelector(".msg-control");
 const closeMsgBtn = document.querySelector("#close-msg-btn");
 const msgSpan = document.querySelector(".msg-span");
 
-const clientsSelectList = document.querySelector("#clients-select-list");
-const equipamentsSelectList = document.querySelector("#equipaments-select-list");
+const clientInput = document.querySelector("#client-input");
+const clientInputOptionsControl = document.querySelector(".client-input-options-control");
+const equipamentInput = document.querySelector("#equipament-input");
+const equipamentInputOptionsControl = document.querySelector(".equipament-input-options-control");
 const notIdentifiedInput = document.querySelector("#not-identified-input");
 const dateInput = document.querySelector("#date-input");
 const completionDeadlineInput = document.querySelector("#completion-deadline-input");
@@ -195,64 +206,136 @@ const infosNextStepBtn = document.querySelector("#infos-next-step-btn");
 
 //functions
 
-async function createClientsList(){
-    clientsEquipamentsArray = await getClientsData();
+async function createClientInputSuggestions(
+    inputClient,
+    optionsControl,
+    itemClassName
+){
+    optionsControl.innerHTML = "";
 
-    clientsEquipamentsArray.forEach(client => {
-        let option = document.createElement("option");
+    let notIdentifiedClient = document.createElement("div");
 
-        option.textContent = client.name;
-        option.value = client.name;
+    notIdentifiedClient.className = "client-input-option";
+    notIdentifiedClient.innerHTML = "(NÃO IDENTIFICADO)";
+    optionsControl.appendChild(notIdentifiedClient);
 
-        clientsSelectList.appendChild(option);
+    console.log(clientsEquipamentsArray);
+
+    let itensSearched = [];
+
+    clientsEquipamentsArray.forEach((client)=>{
+        if(client.name.includes(inputClient.value)){
+            itensSearched.push(client.name);
+        }
     });
+
+    if(itensSearched.length === 0 || inputClient.value === ""){
+        optionsControl.innerHTML = "";
+        hideHtmlElement([optionsControl]);
+        return;
+    }
+
+    itensSearched.forEach((client)=>{
+        let clientOption = document.createElement("div");
+
+        clientOption.className = `${itemClassName}`;
+        clientOption.innerHTML = client;
+
+        optionsControl.appendChild(clientOption);
+    });
+
+    optionItem = document.querySelectorAll(`.${itemClassName}`);
+
+    optionItem.forEach((option)=>{
+        option.addEventListener("click", ()=>{
+            inputClient.value = option.innerHTML;
+
+            optionsControl.innerHTML = "";
+
+            hideHtmlElement([optionsControl]);
+        })
+    });
+
+    showHtmlElement([optionsControl], "block");
+
+    document.addEventListener("click", async()=>{
+        optionsControl.innerHTML = "";
+        await hideHtmlElement([optionsControl]);
+    })
+
 }
 
-function createEquipamentsList(){
-    let equipamentData = [];
+async function createEquipamentsInputSuggestions(
+    inputEquipament,
+    optionsControl,
+    itemClassName
+){
+    optionsControl.innerHTML = "";
 
-    clearHtmlElement([equipamentsSelectList]);
-    clearInputs([notIdentifiedInput]);
+    let allEquipaments= [];
 
-    if(clientsSelectList.value === "(NÃO IDENTIFICADO)"){
-        showHtmlElement([notIdentifiedInput],"block");
-        hideHtmlElement([equipamentsSelectList]);
-    }else{
-        showHtmlElement([equipamentsSelectList],"block");
-        hideHtmlElement([notIdentifiedInput]);
-    }
-
-    clientsEquipamentsArray.forEach((client) => {
-        if(clientsSelectList.value === client.name){
-            equipamentData = equipamentData.concat(client.equipaments);
-
-            console.log(equipamentData);
-
-            equipamentData.forEach((equipament)=>{
-                let option = document.createElement("option");
-
-                option.textContent = equipament;
-                option.value = equipament;
-
-                equipamentsSelectList.add(option);
-            });
+    clientsEquipamentsArray.forEach((client)=>{
+        if(client.name === clientInput.value){
+            client.equipaments.forEach((equipament)=>{
+                allEquipaments.push(equipament);
+            })
         }
+    });
+
+    let itensSearched = [];
+
+    allEquipaments.forEach((equipament)=>{
+        if(equipament.includes(inputEquipament.value)){
+            itensSearched.push(equipament);
+        }
+    });
+
+    console.log(itensSearched);
+
+    if(itensSearched.length === 0 || inputEquipament.value === ""){
+        optionsControl.innerHTML = "";
+        hideHtmlElement([optionsControl])
+        return;
+    };
+
+    itensSearched.forEach((equipament)=>{
+        let equipamentOption = document.createElement("div");
+
+        equipamentOption.className = `${itemClassName}`;
+        equipamentOption.innerHTML = equipament;
+
+        optionsControl.appendChild(equipamentOption);
+    });
+
+    optionItem = document.querySelectorAll(`.${itemClassName}`);
+
+    optionItem.forEach((option)=>{
+        option.addEventListener("click", ()=>{
+            inputEquipament.value = option.innerText;
+
+            optionsControl.innerHTML = "";
+
+            hideHtmlElement([optionsControl]);
+        })
+    });
+
+    showHtmlElement([optionsControl], "block");
+
+    document.addEventListener("click", ()=>{
+        optionsControl.innerHTML = "";
+
+            hideHtmlElement([optionsControl]);
     })
-};
+}
 
 async function validateSelectsProcess(){
-    if(clientsSelectList.value === ""){
-        await showMessagePopup("Selecione um cliente !", "errorMsg");
+    if(clientInput.value === ""){
+        await showMessagePopup("Digite ou selecione um cliente !", "errorMsg");
         return;
     }
 
-    if(equipamentsSelectList.style.display === "block" && equipamentsSelectList.value === ""){
-        await showMessagePopup("Selecione um equipamento !", "errorMsg");
-        return;
-    }
-
-    if(clientsSelectList.value === "(NÃO IDENTIFICADO)" && notIdentifiedInput.style.display === "block" && notIdentifiedInput.value === ""){
-        await showMessagePopup("Digite o modelo do equipamento !", "errorMsg");
+    if(equipamentInput.value === ""){
+        await showMessagePopup("Digite ou selecione um equipamento !", "errorMsg");
         return;
     }
 
@@ -264,16 +347,11 @@ async function validateSelectsProcess(){
     await hideHtmlElement([nextStepContainer]);
 }
 
-
-
 //booting
 
-window.addEventListener("DOMContentLoaded",async ()=>{
-    await createClientsList();
-})
-
 upperCaseInputs([
-    notIdentifiedInput,
+    clientInput,
+    equipamentInput,
     guaranteeInput,
     paymentTermsInput,
     completionDeadlineInput
@@ -281,8 +359,20 @@ upperCaseInputs([
 
 //event listeners
 
-clientsSelectList.addEventListener("change", ()=>{
-    createEquipamentsList();
+clientInput.addEventListener("input", ()=>{
+    createClientInputSuggestions(
+        clientInput,
+        clientInputOptionsControl,
+        "client-input-option"
+    );
+});
+
+equipamentInput.addEventListener("input", ()=>{
+    createEquipamentsInputSuggestions(
+        equipamentInput,
+        equipamentInputOptionsControl,
+        "equipament-input-option"
+    );
 })
 
 infosNextStepBtn.addEventListener("click", ()=>{
@@ -433,43 +523,49 @@ function createPartItem(quantString, descriptionString, unitValueString){
     partsAddedItemsControl.appendChild(itemHtml);
 };
 
-async function partsItems_handleEventListeners(){
-    /*get itens all time this function is called*/
+async function deleteItem_partItem(element){
+    element.remove();
+    updateTotalSpan("parts-total-value-span", "parts-item-total-span");
+    updateTotalSpans_BudgetProdSection();
+}
 
+async function editItem_partItem(element, elementIndex){
+    let partsQuantSpan = document.querySelectorAll(".parts-quant-span");
+    let partsDescriptionSpan = document.querySelectorAll(".parts-description-span");
+    let partsUnitValueSpan = document.querySelectorAll(".parts-unit-value-span");
+
+    partQuantInput.value = partsQuantSpan[elementIndex].innerText;
+    partDescriptionInput.value = partsDescriptionSpan[elementIndex].innerText;
+            
+    let unitValueUpdated = currencyToStringFormat(partsUnitValueSpan[elementIndex].innerText);
+
+    partUnitValueInput.value = unitValueUpdated;
+
+    element.remove();
+
+    updateTotalSpan("parts-total-value-span", "parts-item-total-span");
+    updateTotalSpans_BudgetProdSection();
+}
+
+async function handleAllEventListeners_partsItem(){
     let partsItem = document.querySelectorAll(".parts-item");
     let editBtnOfParts = document.querySelectorAll(".edit-btn-of-parts");
-    let deleteBtnOfParts = document.querySelectorAll('.delete-btn-of-parts');
+    let deleteBtnOfParts = document.querySelectorAll(".delete-btn-of-parts");
 
-    //event listeners to delete itens
-    for(let i = 0 ; i < partsItem.length ; i++){
+    for(let i = 0; i < partsItem.length; i++){
+        editBtnOfParts[i].removeEventListener("click", editItem_partItem)
+        deleteBtnOfParts[i].removeEventListener("click", deleteItem_partItem);
+    }
+
+    for(let i = 0;i < partsItem.length; i++){
+        editBtnOfParts[i].addEventListener("click", ()=>{
+            editItem_partItem(partsItem[i], i);
+        })
         deleteBtnOfParts[i].addEventListener("click", ()=>{
-            partsItem[i].remove();
-            updateTotalSpan("parts-total-value-span", "parts-item-total-span");
-            updateTotalSpans_BudgetProdSection();
-        })   
-    };
+            deleteItem_partItem(partsItem[i]);
+        })
+    }
 
-    //event listeners to edit itens
-
-    for(let i = 0 ; i < partsItem.length ; i++){
-       editBtnOfParts[i].addEventListener("click", ()=>{
-            let partsQuantSpan = document.querySelectorAll(".parts-quant-span");
-            let partsDescriptionSpan = document.querySelectorAll(".parts-description-span");
-            let partsUnitValueSpan = document.querySelectorAll(".parts-unit-value-span");
-
-            partQuantInput.value = partsQuantSpan[i].innerText;
-            partDescriptionInput.value = partsDescriptionSpan[i].innerText;
-            
-            let unitValueUpdated = partsUnitValueSpan[i].innerText.slice(2); // took off the R$
-
-            partUnitValueInput.value = unitValueUpdated;
-
-            partsItem[i].remove();
-
-            updateTotalSpan("parts-total-value-span", "parts-item-total-span");
-            updateTotalSpans_BudgetProdSection();
-       })   
-    };
 }
 
 async function addPartItemProcess(){
@@ -497,7 +593,7 @@ async function addPartItemProcess(){
     createPartItem(partQuantInput.value, partDescriptionInput.value, partUnitValueInput.value)
     updateTotalSpan("parts-total-value-span", "parts-item-total-span");
 
-    await partsItems_handleEventListeners();
+    await handleAllEventListeners_partsItem();
 
     await clearInputs([
         partQuantInput,
@@ -509,7 +605,7 @@ async function addPartItemProcess(){
 
 //booting
 
-partsItems_handleEventListeners();
+handleAllEventListeners_partsItem();
 
 upperCaseInputs([
     partDescriptionInput
@@ -517,9 +613,10 @@ upperCaseInputs([
 
 // event listerers
 
-partAddItemBtn.addEventListener("click", async ()=>{
-    await addPartItemProcess();
-    await updateTotalSpans_BudgetProdSection();
+partQuantInput.addEventListener('input', (event)=>{
+    const updateValue = validateOnlyNumbers(event.target.value);
+
+    event.target.value = updateValue;
 });
 
 partUnitValueInput.addEventListener('input', (event)=>{
@@ -532,8 +629,17 @@ partUnitValueInput.addEventListener('keydown',async (event)=>{
     if(event.key === "Enter"){
         await addPartItemProcess();
         await updateTotalSpans_BudgetProdSection();
+
+        partQuantInput.focus();
     }
 })
+
+partAddItemBtn.addEventListener("click", async ()=>{
+    await addPartItemProcess();
+    await updateTotalSpans_BudgetProdSection();
+
+    partQuantInput.focus();
+});
 
 //services section 
 
@@ -593,38 +699,50 @@ function createServiceItem(quantString , descriptionString , unitValueString){
     servicesAddedItemsControl.appendChild(itemHtml);
 }
 
-async function servicesItems_handleEventListeners(){
+
+async function deleteItem_serviceItem(element){
+    element.remove();
+    updateTotalSpan("service-total-value-span", "services-item-total-span");
+    updateTotalSpans_BudgetProdSection();
+}
+
+async function editItem_serviceItem(element, elementIndex){
+    let serviceQuantSpan = document.querySelectorAll(".service-quant-span");
+    let serviceDescriptionSpan = document.querySelectorAll(".service-description-span");
+    let serviceUnitValueSpan = document.querySelectorAll(".service-unit-value-span");
+
+    let unitValue = currencyToStringFormat(serviceUnitValueSpan[elementIndex].innerText);
+
+    serviceQuantInput.value = serviceQuantSpan[elementIndex].innerText.slice(2);;
+    serviceDescriptionInput.value = serviceDescriptionSpan[elementIndex].innerText.slice(2);nnerText;
+    serviceUnitValueInput.value = unitValue;
+
+    element.remove();
+
+    updateTotalSpan("service-total-value-span", "services-item-total-span");
+    updateTotalSpans_BudgetProdSection();
+}
+
+async function handleAllEventListeners_servicesItem(){
     let servicesItem = document.querySelectorAll(".services-item");
     let editBtnOfServices = document.querySelectorAll(".edit-btn-of-services");
     let deleteBtnOfServices = document.querySelectorAll(".delete-btn-of-services");
 
-    for(let i = 0 ; i < servicesItem.length ; i++){
-        deleteBtnOfServices[i].addEventListener('click', ()=>{
-            servicesItem[i].remove();
-            updateTotalSpan("service-total-value-span", "services-item-total-span");
-            updateTotalSpans_BudgetProdSection();
+    for(let i = 0; i < servicesItem.length; i++){
+        editBtnOfServices[i].removeEventListener("click", editItem_serviceItem);
+        deleteBtnOfServices[i].removeEventListener("click", deleteItem_serviceItem);
+    }
+
+    for(let i = 0; i < servicesItem.length; i++){
+        editBtnOfServices[i].addEventListener("click", ()=>{
+            editItem_serviceItem(servicesItem[i], i);
+        });
+        deleteBtnOfServices[i].addEventListener("click", ()=>{
+            deleteItem_serviceItem(servicesItem[i]);
         });
     }
-
-    for(let i = 0 ; i < servicesItem.length ; i++){
-        editBtnOfServices[i].addEventListener("click", ()=>{
-            let serviceQuantSpan = document.querySelectorAll(".service-quant-span");
-            let serviceDescriptionSpan = document.querySelectorAll(".service-description-span");
-            let serviceUnitValueSpan = document.querySelectorAll(".service-unit-value-span");
-
-            let unitValue = serviceUnitValueSpan[i].innerText.slice(2);
-
-            serviceQuantInput.value = serviceQuantSpan[i].innerText;
-            serviceDescriptionInput.value = serviceDescriptionSpan[i].innerText;
-            serviceUnitValueInput.value = unitValue;
-
-            servicesItem[i].remove();
-
-            updateTotalSpan("service-total-value-span", "services-item-total-span");
-            updateTotalSpans_BudgetProdSection();
-        })
-    }
 }
+
 
 async function addServiceItemProcess(){
     //validation inputs
@@ -651,7 +769,7 @@ async function addServiceItemProcess(){
     createServiceItem(serviceQuantInput.value, serviceDescriptionInput.value , serviceUnitValueInput.value);
     updateTotalSpan("service-total-value-span", "services-item-total-span");
 
-    await servicesItems_handleEventListeners(); 
+    await handleAllEventListeners_servicesItem();
     
     await clearInputs([
         serviceQuantInput,
@@ -662,7 +780,7 @@ async function addServiceItemProcess(){
 
 //booting
 
-servicesItems_handleEventListeners();
+handleAllEventListeners_servicesItem();
 
 upperCaseInputs([
     serviceDescriptionInput
@@ -670,9 +788,17 @@ upperCaseInputs([
 
 // event listeners
 
+serviceQuantInput.addEventListener('input', (event)=>{
+    const updateValue = validateOnlyNumbers(event.target.value);
+
+    event.target.value = updateValue;
+});
+
 serviceAddItemBtn.addEventListener("click", ()=>{
     addServiceItemProcess();
     updateTotalSpans_BudgetProdSection();
+
+    serviceQuantInput.focus();
 })
 
 serviceUnitValueInput.addEventListener('input', (event)=>{
@@ -685,6 +811,8 @@ serviceUnitValueInput.addEventListener('keydown',(event)=>{
     if(event.key === "Enter"){
         addServiceItemProcess();
         updateTotalSpans_BudgetProdSection();
+
+        serviceQuantInput.focus();
     }
 })
 
@@ -761,37 +889,47 @@ function createExpenseItem(quantString, descriptionString, unitValueString){
     expensesAddedItemsControl.appendChild(itemHtml);
 }
 
-async function expensesItem_handleEventListeners(){
+async function deleteItem_expenseItem(element){
+    element.remove();
+    updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+}
+
+async function editItem_expenseItem(element, elementIndex){
+    let expenseQuantSpan = document.querySelectorAll(".expense-quant-span");
+    let expenseDescriptionSpan = document.querySelectorAll(".expense-description-span");
+    let expenseUnitValueSpan = document.querySelectorAll(".expense-unit-value-span");
+
+    expenseQuantInput.value = expenseQuantSpan[elementIndex].innerText;
+    expenseDescriptionInput.value = expenseDescriptionSpan[elementIndex].innerText;
+
+    let unitValueUpdated = currencyToStringFormat(expenseUnitValueSpan[elementIndex].innerText);
+
+    expenseUnitValueInput.value = unitValueUpdated;
+
+    element.remove();
+
+    updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+}
+
+async function handleAllEventListeners_expensesItem(){
     let expensesItem = document.querySelectorAll(".expenses-item");
     let editBtnOfExpenses = document.querySelectorAll(".edit-btn-of-expenses");
     let deleteBtnOfExpenses = document.querySelectorAll(".delete-btn-of-expenses");
 
     for(let i = 0; i < expensesItem.length; i++){
-        deleteBtnOfExpenses[i].addEventListener("click", ()=>{
-            expensesItem[i].remove();
-            updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
-        })
+        editBtnOfExpenses[i].removeEventListener("click", editItem_expenseItem);
+        deleteBtnOfExpenses[i].removeEventListener("click", deleteItem_expenseItem);
     }
 
-    for(let i = 0; i < expensesItem.length;  i++){
+    for(let i = 0; i < expensesItem.length; i++){
         editBtnOfExpenses[i].addEventListener("click", ()=>{
-            let expenseQuantSpan = document.querySelectorAll(".expense-quant-span");
-            let expenseDescriptionSpan = document.querySelectorAll(".expense-description-span");
-            let expenseUnitValueSpan = document.querySelectorAll(".expense-unit-value-span");
+            editItem_expenseItem(expensesItem[i], i);
+        });
 
-            expenseQuantInput.value = expenseQuantSpan[i].innerText;
-            expenseDescriptionInput.value = expenseDescriptionSpan[i].innerText;
-
-            let unitValueUpdated = expenseUnitValueSpan[i].innerText.slice(2);
-
-            expenseUnitValueInput.value = unitValueUpdated;
-
-            expensesItem[i].remove();
-
-            updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+        deleteBtnOfExpenses[i].addEventListener("click", ()=>{
+            deleteItem_expenseItem(expensesItem[i]);
         })
     }
-
 }
 
 async function addExpenseItemProcess(){
@@ -820,7 +958,7 @@ async function addExpenseItemProcess(){
     createExpenseItem(expenseQuantInput.value,expenseDescriptionInput.value,expenseUnitValueInput.value);
     updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
 
-    await expensesItem_handleEventListeners();
+    await handleAllEventListeners_expensesItem();
 
     await clearInputs([
         expenseQuantInput,
@@ -835,9 +973,15 @@ upperCaseInputs([
     expenseDescriptionInput
 ]);
 
-expensesItem_handleEventListeners();
+handleAllEventListeners_expensesItem();
 
 // event listeners
+
+expenseQuantInput.addEventListener("input", (event)=>{
+    const updateValue = validateOnlyNumbers(event.target.value);
+
+    event.target.value = updateValue;
+})
 
 expenseUnitValueInput.addEventListener("input", (event) => {
     const updateValue = validateOnlyNumbers(event.target.value);
@@ -1068,12 +1212,12 @@ async function addHeaderFinishedProcess(){
         completionDeadlineSpanResult
     ])
 
-    clientSpanResult.innerText = clientsSelectList.value;
+    clientSpanResult.innerText = clientInput.value;
 
-    if(clientsSelectList.value === "(NÃO IDENTIFICADO)"){
+    if(clientInput.value === "(NÃO IDENTIFICADO)"){
         equipamentSpanResult.innerText = notIdentifiedInput.value;
     }else{
-        equipamentSpanResult.innerText = equipamentsSelectList.value;
+        equipamentSpanResult.innerText = equipamentInput.value;
     }
 
     paymentTermsSpanResult.innerText = paymentTermsInput.value;
@@ -1304,20 +1448,20 @@ function saveAsHtml(){
 }
 
 function backHomeProcess(){
-    clientsSelectList.value = clientSpanResult.innerText;
+    clientInput.value = clientSpanResult.innerText;
 
     if(clientSpanResult.innerText === "(NÃO IDENTIFICADO)"){
         showHtmlElement([notIdentifiedInput], "block");
-        hideHtmlElement([equipamentsSelectList]);
+        hideHtmlElement([equipamentInput]);
 
         notIdentifiedInput.value = equipamentSpanResult.innerText;
     }
 
     if(clientSpanResult.innerText !== "(NÃO IDENTIFICADO)"){
-        showHtmlElement([equipamentsSelectList], "block");
+        showHtmlElement([equipamentInput], "block");
         hideHtmlElement([notIdentifiedInput]);
 
-        equipamentsSelectList.value  = equipamentSpanResult.innerText
+        equipamentInput.value  = equipamentSpanResult.innerText
     }
 
     paymentTermsInput.value = paymentTermsSpanResult.innerText;

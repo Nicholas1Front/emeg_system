@@ -6,6 +6,8 @@
     <title>Criar orçamento EMEG</title>
     <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/budget_plataform/styles/budgetProduction.css">
     <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/budget_plataform/styles/budgetFinished.css">
+    <link rel="stylesheet" href="../budget_plataform/styles/budgetProduction.css">
+    <link rel="stylesheet" href="../budget_plataform/styles/budgetFinished.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -116,17 +118,26 @@
                             <h3><i class="fa-solid fa-user-tie"></i>Cliente</h3>
 
     
-                            <select name="client-select-list" id="clients-select-list">
-                                <option value=""></option>
-                                <option value="(NÃO IDENTIFICADO)">(NÃO IDENTIFICADO)</option>
-                            </select>
+                            <div class="client-input-control">
+                                <input type="text" id="client-input" autocomplete="off" placeholder="Insira o nome do cliente..."/>
+
+                                <div class="client-input-options-control">
+                                    <div class="client-input-option">NÃO IDENTIFICADO</div>
+                                </div>
+
+                            </div>
                         </div>
     
                         <div class="equipaments-select-control">
                             <h3><i class="fa-solid fa-truck"></i>Equipamento</h3>
-                            
-                            <input type="text" name="not-identified-input" id="not-identified-input" placeholder="Insira o modelo do equipamento..." autocomplete="off"/>
-                            <select name="equipaments-select-list" id="equipaments-select-list"></select>
+
+                            <div class="equipament-input-control">
+                                <input type="text" id="equipament-input" autocomplete="off" placeholder="Insira o modelo do equipamento..."/>
+
+                                <div class="equipament-input-options-control">
+                                    <div class="equipament-input-option">CAMINHÃO POPULOP</div>
+                                </div>
+                            </div>
                         </div>
     
                     </div>
@@ -198,7 +209,7 @@
 
                             <div class="quant-control">
                                 <h3>Quantidade</h3>
-                                <input type="number" name="quant-input" id="part-quant-input" placeholder="1...">
+                                <input type="text" name="quant-input" id="part-quant-input" autocomplete="off" placeholder="1...">
                             </div>
 
                             <div class="part-description-control">
@@ -220,9 +231,9 @@
 
                     </div>
 
-                    <div class="parts-added-items-container"> <!--width:100%; -->
+                    <div class="parts-added-items-container">
 
-                        <div class="parts-added-items-control"> <!--display flex ; flex-direction:column , align-items:center-->
+                        <div class="parts-added-items-control">
 
                             <div class="parts-added-items-title-control">
 
@@ -290,7 +301,7 @@
                         <div class="services-input-control">
                             <div class="quant-control">
                                 <h3>Quantidade</h3>
-                                <input type="number" name="quant-input" id="service-quant-input" placeholder="1...">
+                                <input type="text" name="quant-input" id="service-quant-input" autocomplete="off" placeholder="1..."/>
                             </div>
 
                             <div class="part-description-control">
@@ -464,7 +475,7 @@
 
                             <div class="quant-control">
                                 <h3>Quantidade</h3>
-                                <input type="number" name="quant-input" id="expense-quant-input" placeholder="1...">
+                                <input type="text" name="quant-input" id="expense-quant-input" autocomplete="off" placeholder="1...">
                             </div>
 
                             <div class="part-description-control">

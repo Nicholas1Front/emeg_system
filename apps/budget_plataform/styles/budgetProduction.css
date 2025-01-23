@@ -428,11 +428,9 @@ header{
     color:#d61e1e;
 } 
 
-#not-identified-input{display: none;}
 
-#clients-select-list,
-#equipaments-select-list,
-#not-identified-input{
+#client-input,
+#equipament-input{
     width:90%;
     font-size:15px;
     text-align: center;
@@ -443,11 +441,74 @@ header{
     border : 1px solid #969696;
 }
 
-#clients-select-list:focus,
-#equipaments-select-list:focus,
-#not-identified-input:focus{
+#client-input:focus,
+#equipament-input:focus{
     border-color:#d61e1e;
     outline-color: #d61e1e;
+}
+
+.clients-select-control > .client-input-control{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.clients-select-control > .client-input-control > .client-input-options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 43.5%;
+    border-radius:25px;
+    margin-top:34.5px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.clients-select-control > .client-input-control > .client-input-options-control > .client-input-option{
+    padding:5px 0;
+    padding-left:8px;    
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.clients-select-control >  .client-input-control > .client-input-options-control > .client-input-option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
+}
+
+.equipaments-select-control > .equipament-input-control{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.equipaments-select-control > .equipament-input-control > .equipament-input-options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 43.5%;
+    border-radius:25px;
+    margin-top:34.5px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.equipaments-select-control > .equipament-input-control > .equipament-input-options-control > .equipament-input-option{
+    padding:5px 0;
+    padding-left:8px;    
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.equipaments-select-control > .equipament-input-control > .equipament-input-options-control > .equipament-input-option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
 }
 
 .general-information-container{
