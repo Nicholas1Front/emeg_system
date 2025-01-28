@@ -24,7 +24,7 @@ Sistema para manter e consultar uma tabela de preços dos serviços e equipament
 
 - [Ajuda com Tabela de preços](https://nicholas1front.github.io/emeg_system/apps/price_list/help_price_list.html)
 
-### 5. **Controle de Estoque** (em breve)
+### 5. **Controle de Estoque** (já desenvolvido)
 Sistema para manter e gerenciar o estoque de itens, entre eles : peças, ferramentas e materiais. As funcionalidades incluem : pesquisa de itens especifícos, consulta de itens em falta, consulta de itens existentes, **adição, exclusão e edição de dados de serviços**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `inventory.json` usando a API do GitHub.
 
 - [Ajuda com Controle de estoque](https://nicholas1front.github.io/emeg_system/apps/inventory_control_plataform/help_inventory_control.html)

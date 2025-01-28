@@ -4,7 +4,7 @@ let itens_array = null;
 
 async function getInventoryItens(){
     try{
-        const response = await fetch(`../backend/data/inventory.json`);
+        const response = await fetch(`https://nicholas1front.github.io/emeg_system/apps/backend/data/inventory.json`);
 
         if (!response.ok){
             throw new Error(`HTTP Error ! Status : ${response.status}`);
