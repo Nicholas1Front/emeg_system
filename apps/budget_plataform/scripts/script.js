@@ -405,7 +405,7 @@ async function clearInputs([...inputs]){
     })
 }
 
-function updateTotalSpan(spanGroupHtml, spanResultHtml){
+async function updateTotalSpan(spanGroupHtml, spanResultHtml){
     const allSpansHtml = document.querySelectorAll(`.${spanGroupHtml}`);
 
     let totalValue = null;
@@ -474,7 +474,7 @@ async function updateTotalSpans_BudgetProdSection(){
 
 }
 
-function createPartItem(quantString, descriptionString, unitValueString){
+async function createPartItem(quantString, descriptionString, unitValueString){
 
     let quant = parseInt(quantString);
 
@@ -527,12 +527,17 @@ async function deleteItem_partItem(element){
     element.remove();
     updateTotalSpan("parts-total-value-span", "parts-item-total-span");
     updateTotalSpans_BudgetProdSection();
+
+    await handleAllEventListeners_partsItem();
 }
 
 async function editItem_partItem(element, elementIndex){
-    let partsQuantSpan = document.querySelectorAll(".parts-quant-span");
-    let partsDescriptionSpan = document.querySelectorAll(".parts-description-span");
-    let partsUnitValueSpan = document.querySelectorAll(".parts-unit-value-span");
+    let partsQuantSpan = document.querySelectorAll(`.parts-quant-span`);
+    let partsDescriptionSpan = document.querySelectorAll(`.parts-description-span`);
+    let partsUnitValueSpan = document.querySelectorAll(`.parts-unit-value-span`);
+
+    console.log(element);
+    console.log(elementIndex);
 
     partQuantInput.value = partsQuantSpan[elementIndex].innerText;
     partDescriptionInput.value = partsDescriptionSpan[elementIndex].innerText;
@@ -541,7 +546,11 @@ async function editItem_partItem(element, elementIndex){
 
     partUnitValueInput.value = unitValueUpdated;
 
-    element.remove();
+    await handleAllEventListeners_partsItem();
+
+    setTimeout(async()=>{
+        await deleteItem_partItem(element);
+    },1)
 
     updateTotalSpan("parts-total-value-span", "parts-item-total-span");
     updateTotalSpans_BudgetProdSection();
@@ -549,22 +558,29 @@ async function editItem_partItem(element, elementIndex){
 
 async function handleAllEventListeners_partsItem(){
     let partsItem = document.querySelectorAll(".parts-item");
+
+    if(partsItem[0] === undefined || partsItem.length == 0){
+        return;
+    }
+
     let editBtnOfParts = document.querySelectorAll(".edit-btn-of-parts");
     let deleteBtnOfParts = document.querySelectorAll(".delete-btn-of-parts");
 
-    for(let i = 0; i <= partsItem.length; i++){
-        editBtnOfParts[i].removeEventListener("click", editItem_partItem)
-        deleteBtnOfParts[i].removeEventListener("click", deleteItem_partItem);
+    for(let i = 0; i < partsItem.length; i++){
+        editBtnOfParts[i].removeEventListener("click", editItem_partItem);
+        deleteBtnOfParts[i].removeEventListener("click",deleteItem_partItem)
+    }
+    
+    for(let i = 0; i < partsItem.length; i++){
+        editBtnOfParts[i].addEventListener("click", async()=>{
+            await editItem_partItem(partsItem[i], i);
+        });
+
+        deleteBtnOfParts[i].addEventListener("click", async()=>{
+            await deleteItem_partItem(partsItem[i], i);
+        })
     }
 
-    for(let i = 0;i <= partsItem.length; i++){
-        editBtnOfParts[i].addEventListener("click", ()=>{
-            editItem_partItem(partsItem[i], i);
-        })
-        deleteBtnOfParts[i].addEventListener("click", ()=>{
-            deleteItem_partItem(partsItem[i]);
-        })
-    }
 
 }
 
@@ -590,8 +606,8 @@ async function addPartItemProcess(){
         return;
     }
 
-    createPartItem(partQuantInput.value, partDescriptionInput.value, partUnitValueInput.value)
-    updateTotalSpan("parts-total-value-span", "parts-item-total-span");
+    await createPartItem(partQuantInput.value, partDescriptionInput.value, partUnitValueInput.value)
+    await updateTotalSpan("parts-total-value-span", "parts-item-total-span");
 
     await handleAllEventListeners_partsItem();
 
@@ -652,7 +668,7 @@ const serviceDescriptionInput = document.querySelector("#service-description-inp
 const serviceUnitValueInput = document.querySelector("#service-unit-value-input");
 const serviceAddItemBtn = document.querySelector("#service-add-item-btn");
 
-function createServiceItem(quantString , descriptionString , unitValueString){
+async function createServiceItem(quantString , descriptionString , unitValueString){
     let quant = parseInt(quantString);
 
     let unitValue = parseFloat(unitValueString.replace(",", "."));
@@ -704,6 +720,8 @@ async function deleteItem_serviceItem(element){
     element.remove();
     updateTotalSpan("service-total-value-span", "services-item-total-span");
     updateTotalSpans_BudgetProdSection();
+
+    await handleAllEventListeners_servicesItem();
 }
 
 async function editItem_serviceItem(element, elementIndex){
@@ -713,18 +731,27 @@ async function editItem_serviceItem(element, elementIndex){
 
     let unitValue = currencyToStringFormat(serviceUnitValueSpan[elementIndex].innerText);
 
-    serviceQuantInput.value = serviceQuantSpan[elementIndex].innerText.slice(2);;
+    serviceQuantInput.value = serviceQuantSpan[elementIndex].innerText;
     serviceDescriptionInput.value = serviceDescriptionSpan[elementIndex].innerText;
     serviceUnitValueInput.value = unitValue;
 
-    element.remove();
+    setTimeout(async()=>{
+        await deleteItem_serviceItem(element);
+    },1)
 
     updateTotalSpan("service-total-value-span", "services-item-total-span");
     updateTotalSpans_BudgetProdSection();
+
+    await handleAllEventListeners_servicesItem();
 }
 
 async function handleAllEventListeners_servicesItem(){
     let servicesItem = document.querySelectorAll(".services-item");
+
+    if(servicesItem[0] === undefined || servicesItem.length == 0){
+        return;
+    }
+
     let editBtnOfServices = document.querySelectorAll(".edit-btn-of-services");
     let deleteBtnOfServices = document.querySelectorAll(".delete-btn-of-services");
 
@@ -766,8 +793,8 @@ async function addServiceItemProcess(){
         return;
     }
     
-    createServiceItem(serviceQuantInput.value, serviceDescriptionInput.value , serviceUnitValueInput.value);
-    updateTotalSpan("service-total-value-span", "services-item-total-span");
+    await createServiceItem(serviceQuantInput.value, serviceDescriptionInput.value , serviceUnitValueInput.value);
+    await updateTotalSpan("service-total-value-span", "services-item-total-span");
 
     await handleAllEventListeners_servicesItem();
     
@@ -847,7 +874,7 @@ const expenseAdditemBtn = document.querySelector("#expense-add-item-btn");
 
 // functions
 
-function createExpenseItem(quantString, descriptionString, unitValueString){
+async function createExpenseItem(quantString, descriptionString, unitValueString){
     let quant = parseInt(quantString);
 
     let unitValue = parseFloat(unitValueString.replace(",", "."));
@@ -892,6 +919,8 @@ function createExpenseItem(quantString, descriptionString, unitValueString){
 async function deleteItem_expenseItem(element){
     element.remove();
     updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+
+    await handleAllEventListeners_expensesItem();
 }
 
 async function editItem_expenseItem(element, elementIndex){
@@ -906,7 +935,11 @@ async function editItem_expenseItem(element, elementIndex){
 
     expenseUnitValueInput.value = unitValueUpdated;
 
-    element.remove();
+    await handleAllEventListeners_expensesItem();
+
+    setTimeout(async()=>{
+        await deleteItem_expenseItem(element);
+    },1)
 
     updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
 }
@@ -915,6 +948,10 @@ async function handleAllEventListeners_expensesItem(){
     let expensesItem = document.querySelectorAll(".expenses-item");
     let editBtnOfExpenses = document.querySelectorAll(".edit-btn-of-expenses");
     let deleteBtnOfExpenses = document.querySelectorAll(".delete-btn-of-expenses");
+
+    if(expensesItem[0] === undefined || expensesItem.length == 0){
+        return
+    }
 
     for(let i = 0; i < expensesItem.length; i++){
         editBtnOfExpenses[i].removeEventListener("click", editItem_expenseItem);
@@ -955,8 +992,8 @@ async function addExpenseItemProcess(){
         return;
     }
 
-    createExpenseItem(expenseQuantInput.value,expenseDescriptionInput.value,expenseUnitValueInput.value);
-    updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+    await createExpenseItem(expenseQuantInput.value,expenseDescriptionInput.value,expenseUnitValueInput.value);
+    await updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
 
     await handleAllEventListeners_expensesItem();
 
@@ -993,11 +1030,14 @@ expenseUnitValueInput.addEventListener("keydown", async (event)=>{
     if(event.key === "Enter"){
         await addExpenseItemProcess();
 
+        expenseQuantInput.focus();
     }
 })
 
 expenseAdditemBtn.addEventListener("click", async ()=>{
     await addExpenseItemProcess();
+
+    expenseQuantInput.focus();
 })  
 
 // loading screen
