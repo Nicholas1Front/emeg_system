@@ -336,7 +336,7 @@ header h2{
 
 .main-hub-section{
     margin:1.5rem 0;
-    display:block;
+    display:none;
 }
 
 .main-hub-section > .main-hub-container{
@@ -382,7 +382,7 @@ header h2{
 
 .consult-price-list-section{
     margin-top:1.5rem;
-    display: none;
+    display: block;
 }
 
 /* back-home-control */
@@ -468,8 +468,44 @@ header h2{
     border-radius:25px;
 }
 
-.consult-price-list-section > .search-input-container > #service-type_select-search{
+.consult-price-list-section > .search-input-container > .service-type-input-control{
     width:25%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.consult-price-list-section > .search-input-container > .service-type-input-control input{
+    width:100%;
+    padding:8px 0;
+    padding-left:8px;
+    border-radius:25px;
+    border: 1px solid #969696
+}
+
+.consult-price-list-section > .search-input-container > .service-type-input-control > .service-type-options-control{
+    display:block;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 25.5%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.consult-price-list-section > .search-input-container > .service-type-input-control > .service-type-options-control > .service-type-option{
+    padding:8px 0;
+    padding-left: 8px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.consult-price-list-section > .search-input-container > .service-type-input-control > .service-type-options-control > .service-type-option:hover{
+    transition: 0.2s;
+    background-color:#d2d2d2;
 }
 
 .consult-price-list-section > .search-input-container > .service-name-input-control{

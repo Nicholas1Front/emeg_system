@@ -350,10 +350,14 @@ const editPriceListLink = document.querySelector("#edit-price-list-btn");
 const backHomeBtn = document.querySelectorAll(".back-home-btn");
 
 const consultPriceListSection = document.querySelector(".consult-price-list-section");
-let serviceType_selectSearch = document.querySelector("#service-type_select-search");
-let serviceNameInputSearch = document.querySelector("#service-name-input-search");
-let serviceNameOptionsControl = document.querySelector(".service-name-options-control");
-let serviceNameOption = null;
+const searchInputContainer = document.querySelector(".search-input-container");
+
+const serviceTypeInputSearch = document.querySelector("#service-type-input-search");
+const serviceTypeOptionsControl = searchInputContainer.querySelector(".service-type-options-control");
+
+const serviceNameInputSearch = document.querySelector("#service-name-input-search");
+const serviceNameOptionsControl = document.querySelector(".service-name-options-control");
+const serviceNameOption = null;
 
 const consultPriceListBtn = document.querySelector("#consult-price-list_search-btn");
 const consultPriceList_resultContainer = document.querySelector(".consult-price-list_result-container");
@@ -361,7 +365,89 @@ const consultPriceList_showControl = document.querySelector(".consult-price-list
 
 // functions
 
-async function createInputSuggestions(
+async function createTypeSuggestions(
+    input,
+    optionsControl,
+    optionsClassName
+){
+    optionsControl.innerHTML = "";
+
+    let allTypes = [];
+    let itensSearched = [];
+
+    services_array.forEach((service)=>{
+        allTypes.push(service.type);
+    });
+
+    console.log(allTypes);
+
+    allTypes.sort((a,b)=>{
+        if(a < b){
+            return -1;
+        }
+
+        if(a > b){
+            return 1; 
+        }
+
+        return 0;
+    });
+
+    for (let i = 0; i <= allTypes.length; i++) {
+        for(let j = 1; j <= allTypes.length; j++){
+            if(allTypes[i] === allTypes[j]){
+                allTypes.splice(j, 1);
+            }
+        }
+    }
+
+    console.log(allTypes);
+
+    for(let i = 0 ; i <= allTypes.length ; i++){
+        if(allTypes[i].includes(input.value)){
+            itensSearched.push(allTypes[i]);
+        }
+    }
+
+    console.log(itensSearched);
+
+    if(itensSearched.length === 0 || input.value === ""){
+        optionsControl.innerHTML = "";
+        await hideHtmlElement(optionsControl);
+        return;
+    };
+
+    itensSearched.forEach((item)=>{
+        const serviceTypeOption = document.createElement("div");
+
+        serviceTypeOption.innerHTML = item;
+        serviceTypeOption.className = optionsClassName;
+
+        optionsControl.appendChild(serviceTypeOption);
+    });
+
+    const allOptions = document.querySelectorAll(`.${optionsClassName}`);
+
+    for(let i = 0; i < allOptions.length; i++){
+        allOptions[i].addEventListener("click", async()=>{
+            input.value = allOptions[i].innerText;
+            
+            optionsControl.innerHTML = "";
+
+            await hideHtmlElement([optionsControl]);
+        })
+    }
+
+    document.addEventListener("click", async()=>{
+        optionsControl.innerHTML = "";
+
+        await hideHtmlElement([optionsControl]);
+    })
+
+    await showHtmlElement([optionsControl], "block");
+}
+
+async function createNameSuggestions(
     typeSelectList,
     searchInput,
     optionsControl,
@@ -495,14 +581,14 @@ async function searchItemProcess(){
     let servicesSearched = [];
 
     for(let i = 0 ; i < services_array.length; i++){
-        if(serviceType_selectSearch.value.trim() === ""){
+        if(serviceTypeInputSearch.value.trim() === ""){
             if(services_array[i].name.includes(serviceNameInputSearch.value)){
                 servicesSearched.push(services_array[i]);   
             }
         }
         
-        if(serviceType_selectSearch.value !== ""){
-            if(serviceType_selectSearch.value === services_array[i].type && services_array[i].name.includes(serviceNameInputSearch.value.trim())){
+        if(serviceTypeInputSearch.value !== ""){
+            if(serviceTypeInputSearch.value === services_array[i].type && services_array[i].name.includes(serviceNameInputSearch.value.trim())){
                 servicesSearched.push(services_array[i]);
             }
         }
@@ -565,14 +651,18 @@ consultPriceListLink.addEventListener("click", async()=>{
     hideHtmlElement([mainHubSection,consultPriceList_showControl,consultPriceList_resultContainer]);
 })
 
-serviceType_selectSearch.addEventListener("change", ()=>{
-    serviceNameInputSearch.value = "";
+serviceTypeInputSearch.addEventListener("input", async()=>{
+    await createTypeSuggestions(
+        serviceTypeInputSearch,
+        serviceTypeOptionsControl,
+        "service-type-option"
+    )
 })
 
 serviceNameInputSearch.addEventListener("input",async()=>{
 
-    await createInputSuggestions(
-        serviceType_selectSearch,
+    await createNameSuggestions(
+        serviceTypeInputSearch,
         serviceNameInputSearch,
         serviceNameOptionsControl,
         serviceNameOption,
@@ -694,61 +784,21 @@ async function verifyDataBeforeSend(){
         return;
     }
 
-    let serviceAlreadyExist = null;
+    let services_arrayJSON = JSON.stringify(services_array);
+    let servicesArrayFetchedJSON = JSON.stringify(servicesArrayFetched);
 
-    services_array.forEach((service)=>{
-        let servicesArrayFetched_name = [];
+    console.log(services_arrayJSON);
+    console.log(servicesArrayFetchedJSON);
 
-        servicesArrayFetched.forEach((service)=>{
-            servicesArrayFetched_name.push(service.name);
-        })
-
-        let includesInArray = servicesArrayFetched_name.includes(service.name);
-
-        if(!includesInArray){
-            serviceAlreadyExist += 1;
-        }
-        
-    });
-
-    if(serviceAlreadyExist !== null || serviceAlreadyExist > 0){
-        await verifyPasswordProcess(sendToServerProcess);
+    if(services_arrayJSON === servicesArrayFetchedJSON){
+        await showServerMessagePopup("errorMsg", "Dados já existentes ! Tente novamente !");
         return;
     }
 
-    serviceAlreadyExist = null;
-
-    for(let i = 0 ; i < services_array.length ; i++){
-        if(services_array[i].name === servicesArrayFetched[i].name){
-            if(services_array[i].price !== servicesArrayFetched[i].price){
-                serviceAlreadyExist += 1;
-            }
-        }
-    }
-
-    if(serviceAlreadyExist !== null || serviceAlreadyExist > 0){
+    if(services_arrayJSON !== servicesArrayFetchedJSON){
         await verifyPasswordProcess(sendToServerProcess);
         return;
     }
-    
-    serviceAlreadyExist = null;
-
-    for(let i = 0 ; i < services_array.length ; i++){
-        if(services_array[i].name === servicesArrayFetched[i].name){
-            if(services_array[i].type !== servicesArrayFetched[i].type){
-                serviceAlreadyExist += 1;
-            }
-        }
-    }
-
-    if(serviceAlreadyExist !== null || serviceAlreadyExist > 0){
-        await verifyPasswordProcess(sendToServerProcess);
-        return;
-    }
-
-    await showServerMessagePopup("errorMsg" , "Dados já existentes ! Tente novamente !");
-
-    services_array = await getServicesData();
 }
 
 async function sendToServerProcess(){
@@ -1001,7 +1051,7 @@ allowServiceInput(serviceTypeDeleteItem_select,serviceNameDeleteItem_input,servi
 
 serviceNameDeleteItem_input.addEventListener("input",async()=>{  
 
-    await createInputSuggestions(
+    await createNameSuggestions(
         serviceTypeDeleteItem_select,
         serviceNameDeleteItem_input,
         serviceNameDeleteItem_optionsControl,
@@ -1154,7 +1204,7 @@ allowServiceInput(serviceTypeSelect_editItem,serviceNameInput_editItem,servicePr
 
 serviceNameInput_editItem.addEventListener("input", async()=>{
 
-    await createInputSuggestions(
+    await createNameSuggestions(
         serviceTypeSelect_editItem,
         serviceNameInput_editItem,
         serviceNameEditItem_optionsControl,

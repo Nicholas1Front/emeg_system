@@ -552,12 +552,12 @@ async function handleAllEventListeners_partsItem(){
     let editBtnOfParts = document.querySelectorAll(".edit-btn-of-parts");
     let deleteBtnOfParts = document.querySelectorAll(".delete-btn-of-parts");
 
-    for(let i = 0; i < partsItem.length; i++){
+    for(let i = 0; i <= partsItem.length; i++){
         editBtnOfParts[i].removeEventListener("click", editItem_partItem)
         deleteBtnOfParts[i].removeEventListener("click", deleteItem_partItem);
     }
 
-    for(let i = 0;i < partsItem.length; i++){
+    for(let i = 0;i <= partsItem.length; i++){
         editBtnOfParts[i].addEventListener("click", ()=>{
             editItem_partItem(partsItem[i], i);
         })
@@ -714,7 +714,7 @@ async function editItem_serviceItem(element, elementIndex){
     let unitValue = currencyToStringFormat(serviceUnitValueSpan[elementIndex].innerText);
 
     serviceQuantInput.value = serviceQuantSpan[elementIndex].innerText.slice(2);;
-    serviceDescriptionInput.value = serviceDescriptionSpan[elementIndex].innerText.slice(2);nnerText;
+    serviceDescriptionInput.value = serviceDescriptionSpan[elementIndex].innerText;
     serviceUnitValueInput.value = unitValue;
 
     element.remove();
