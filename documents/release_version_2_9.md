@@ -1,6 +1,6 @@
 # Versão 2.9.0 - Emeg System
 
-Este release marca o lançamento da **versão 2.8.0** dos sistemas que compõem o **Emeg System**, desenvolvido para criação de orçamentos para atender as necessidades da **EMEG Guindaste**
+Este release marca o lançamento da **versão 2.9.0** dos sistemas que compõem o **Emeg System**, desenvolvido para criação de orçamentos para atender as necessidades da **EMEG Guindaste**
 
 ## Atualizações incluídas na Versão 2.9.0
 
