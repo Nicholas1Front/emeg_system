@@ -382,7 +382,7 @@ header h2{
 
 .consult-price-list-section{
     margin-top:1.5rem;
-    display: none;
+    display: block;
 }
 
 /* back-home-control */

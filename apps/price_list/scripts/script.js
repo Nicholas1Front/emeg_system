@@ -393,11 +393,12 @@ async function createTypeSuggestions(
         return 0;
     });
 
-    for (let i = 0; i <= allTypes.length; i++) {
-        for(let j = 1; j <= allTypes.length; j++){
-            if(allTypes[i] === allTypes[j]){
-                allTypes.splice(j, 1);
-            }
+    for (let i = 0; i < allTypes.length; i++) {
+        allTypes.sort((a, b) => (a < b ? -1 : 1));
+
+        if (allTypes[i] === allTypes[i + 1]) {
+            allTypes.splice(i + 1, 1);
+            i--; // Voltar um índice para não pular elementos
         }
     }
 
