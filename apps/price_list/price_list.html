@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabela de preços</title>
-    <!-- <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/price_list/styles/price_list.css"> -->
-     <link rel="stylesheet" href="../price_list/styles/price_list.css"/>
+    <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/price_list/styles/price_list.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -128,7 +127,7 @@
 
             <div class="search-input-container">
                 <div class="service-type-input-control">
-                    <input type="text" id="service-type-input-search" autocomplete="off" placeholder="Digite o tipo de serviço"/>
+                    <input type="text" id="service-type-input-search" autocomplete="off" placeholder="Digite o tipo de serviço..."/>
 
                     <div class="service-type-options-control">
                         <div class="service-type-option">POP</div>
@@ -137,7 +136,7 @@
                 </div>
 
                 <div class="service-name-input-control">
-                    <input type="text" id="service-name-input-search" autocomplete="off"/>
+                    <input type="text" id="service-name-input-search" autocomplete="off" placeholder="Digite o nome ou descrição do serviço..."/>
                     <div class="service-name-options-control">
                         <div class="service-name-option">TROCA REPARO</div>
                         <div class="service-name-option">MONTAGEM E USINAGEM MOTOR</div>
@@ -241,12 +240,16 @@
                 </div>
 
                 <div class="input-container">
-                    <select id="service-type-add-item_select">
-                        <option value=""></option>
-                        <option value="HIDRAÚLICO">HIDRAÚLICO</option>
-                        <option value="MECÂNICO">MECÂNICO</option>
-                        <option value="ELÉTRICO">ELÉTRICO</option>
-                    </select>
+
+                    <div class="service-type-add-item_control-input">
+                        <input type="text" id="service-type-add-item_input" autocomplete="off" placeholder="Digite o tipo do serviço..."/>
+
+                        <div class="service-type-add-item_options-control">
+                            <div class="service-type-add-item_option">OPTION 1</div>
+                            <div class="service-type-add-item_option">OPTION 2</div>
+                        </div>
+                    </div>
+
                     <input type="text" id="service-name-add-item_input" placeholder="Digite a descrição completa do serviço e o equipamento..." autocomplete="off"/>
                     <input type="text" id="service-price-add-item_input" placeholder="Digite o preço do serviço..." autocomplete="off">
                 </div>
@@ -268,15 +271,17 @@
                 </div>
 
                 <div class="input-container">
-                    <select id="service-type-delete-item_select">
-                        <option value=""></option>
-                        <option value="HIDRAÚLICO">HIDRAÚLICO</option>
-                        <option value="MECÂNICO">MECÂNICO</option>
-                        <option value="ELÉTRICO">ELÉTRICO</option>
-                    </select>
+                    <div class="service-type-delete-item_control-input">
+                        <input type="text" id="service-type-delete-item_input" autocomplete="off" placeholder="Digite o tipo do serviço..."/>
+
+                        <div class="service-type-delete-item_options-control">
+                            <div class="service-type-delete-item_option">OPTION 1</div>
+                            <div class="service-type-delete-item_option">OPTION 1</div>
+                        </div>
+                    </div>
 
                     <div class="service-name-input-control_delete-item">
-                        <input type="text" id="service-name-delete-item_input" autocomplete="off" disabled />
+                        <input type="text" id="service-name-delete-item_input" autocomplete="off" disabled placeholder="Digite o nome ou descrição do serviço..."/>
                         <div class="service-name-delete-item_options-control">
                             <div class="service-name-delete-item_option">TROCA REPARO...</div>
                             <div class="service-name-delete-item_option">MONTAGEM DO MOTOR...</div>
@@ -304,12 +309,15 @@
                 </div>
 
                 <div class="input-container">
-                    <select id="service-type-select_edit-item">
-                        <option value=""></option>
-                        <option value="HIDRAÚLICO">HIDRAÚLICO</option>
-                        <option value="MECÂNICO">MECÂNICO</option>
-                        <option value="ELÉTRICO">ELÉTRICO</option>
-                    </select>
+
+                    <div class="service-type-input-control_edit-item">
+                        <input type="text" id="service-type-input_edit-item" autocomplete="off" placeholder="Digite o tipo do serviço..."/>
+
+                        <div class="service-type-options-control_edit-item">
+                            <div class="service-type-option_edit-item">OPTION 1</div>
+                            <div class="service-type-option_edit-item">OPTION 1</div>
+                        </div>
+                    </div>
                     <div class="service-name-input-control_edit-item">
                         <input type="text" id="service-name-input_edit-item" autocomplete="off" disabled/>
                         <div class="service-name-edit-item_options-control">
@@ -325,13 +333,24 @@
                 </div>
 
                 <div id="update-item-input-container" class="input-container">
-                    <select id="service-type-select_update-item">
-                        <option value=""></option>
-                        <option value="HIDRAÚLICO">HIDRAÚLICO</option>
-                        <option value="MECÂNICO">MECÂNICO</option>
-                        <option value="ELÉTRICO">ELÉTRICO</option>
-                    </select>
-                    <input type="text" id="service-name-input_update-item" autocomplete="off"/>
+                    <div class="service-type-input-control_update-item">
+                        <input type="text" id="service-type-input_update-item" autocomplete="off" placeholder="Digite o tipo do serviço..."/>
+
+                        <div class="service-type-options-control_update-item">
+                            <div class="service-type-option_update-item">OPTION 1</div>
+                            <div class="service-type-option_update-item">OPTION 1</div>
+                        </div>
+                    </div>
+
+                    <div class="service-name-input-control_update-item">
+                        <input type="text" id="service-name-input_update-item" autocomplete="off" placeholder="Digite o nome ou descrição do serviço..."/>
+
+                        <div class="service-name-input-options-control_update-item">
+                            <div class="service-name-option_update-item">OPTION 11</div>
+                            <div class="service-name-option_update-item">OPTION 11</div>
+                        </div>
+                    </div>
+
                     <input type="text" id="service-price-input_update-item" autocomplete="off"/>
                 </div>
 
@@ -345,7 +364,6 @@
             <h3>© EMEG Guindaste - Todos os Direitos Reservados.</h3>
         </footer>
     </div>
-    <!-- <script src="https://nicholas1front.github.io/emeg_system/apps/price_list/scripts/script.js"></script> -->
-     <script src="../price_list/scripts/script.js"></script>
+    <script src="https://nicholas1front.github.io/emeg_system/apps/price_list/scripts/script.js"></script>
 </body>
 </html>

@@ -366,7 +366,7 @@ const consultPriceList_showControl = document.querySelector(".consult-price-list
 // functions
 
 async function createTypeSuggestions(
-    input,
+    typeInput,
     optionsControl,
     optionsClassName
 ){
@@ -403,17 +403,17 @@ async function createTypeSuggestions(
 
     console.log(allTypes);
 
-    for(let i = 0 ; i <= allTypes.length ; i++){
-        if(allTypes[i].includes(input.value)){
+    for(let i = 0 ; i < allTypes.length ; i++){
+        if(allTypes[i].includes(typeInput.value)){
             itensSearched.push(allTypes[i]);
         }
     }
 
     console.log(itensSearched);
 
-    if(itensSearched.length === 0 || input.value === ""){
+    if(itensSearched.length === 0 || typeInput.value === ""){
         optionsControl.innerHTML = "";
-        await hideHtmlElement(optionsControl);
+        await hideHtmlElement([optionsControl]);
         return;
     };
 
@@ -430,7 +430,7 @@ async function createTypeSuggestions(
 
     for(let i = 0; i < allOptions.length; i++){
         allOptions[i].addEventListener("click", async()=>{
-            input.value = allOptions[i].innerText;
+            typeInput.value = allOptions[i].innerText;
             
             optionsControl.innerHTML = "";
 
@@ -512,6 +512,10 @@ async function createNameSuggestions(
             searchInput.value = optionItem[i].innerHTML;
             hideHtmlElement([optionsControl]);
 
+            if(priceSpan === "nopricespan"){
+                console.log("no price span mentioned");
+            }
+
             if(priceSpan !== undefined){
                 let service = null
 
@@ -542,6 +546,10 @@ async function createNameSuggestions(
         optionsControl.innerHTML = "";
         hideHtmlElement([optionsControl]);
 
+        if(priceSpan === "nopricespan"){
+            console.log("no price span mentioned");
+        }
+
         if(priceSpan !== undefined){
             let serviceName = searchInput.value.trim();
 
@@ -559,6 +567,12 @@ async function createNameSuggestions(
    });
   
 }
+
+function logsomething(argument){
+    console.log(argument);
+}
+
+logsomething();
 
 async function searchItemProcess(){
     if(serviceNameInputSearch.value === ""){
@@ -844,7 +858,8 @@ sendToServerBtn.addEventListener("click", async()=>{
 // elements
 
 const addItemContainer_editPriceList = document.querySelector(".add-item-container_edit-price-list");
-const serviceTypeAddItem_select = document.querySelector("#service-type-add-item_select")
+const serviceTypeAddItem_input = document.querySelector("#service-type-add-item_input");
+const serviceTypeAddItem_optionsControl = document.querySelector(".service-type-add-item_options-control");
 const serviceNameAddItem_input = document.querySelector("#service-name-add-item_input");
 const servicePriceAddItem_input = document.querySelector("#service-price-add-item_input");
 const serviceAddItem_btn = document.querySelector("#service-add-item_btn");
@@ -880,7 +895,7 @@ async function formatPriceInput(priceInput){
 }
 
 async function addServiceProcess(){
-    if(serviceTypeAddItem_select.value === ""){
+    if(serviceTypeAddItem_input.value === ""){
         showMessagePopup("errorMsg", "Selecione um tipo de serviço !");
         return;
     }
@@ -904,7 +919,6 @@ async function addServiceProcess(){
     console.log(findInArray);
 
     if(findInArray === undefined){
-        /* in a near future the confirmation process in this function will be implemented */
         await addServiceLogic();
         await showMessagePopup("sucessMsg", "Serviço adicionado com sucesso !");
         return;
@@ -925,7 +939,7 @@ async function addServiceLogic(){
         formatToBrl(servicePrice);
     }
 
-    let serviceType = serviceTypeAddItem_select.value;
+    let serviceType = serviceTypeAddItem_input.value;
 
     let newService = {
         name : serviceName,
@@ -953,6 +967,14 @@ addItemLink.addEventListener("click", async()=>{
     await showHtmlElement([addItemContainer_editPriceList], "block");
 });
 
+serviceTypeAddItem_input.addEventListener("input", async()=>{
+    await createTypeSuggestions(
+        serviceTypeAddItem_input,
+        serviceTypeAddItem_optionsControl,
+        "service-type-add-item_option"
+    );
+})
+
 serviceAddItem_btn.addEventListener("click", async()=>{
     await addServiceProcess();
 });
@@ -964,7 +986,10 @@ formatPriceInput(servicePriceAddItem_input);
 // elements
 
 const deleteItemContainer_editPriceList = document.querySelector(".delete-item-container_edit-price-list");
-const serviceTypeDeleteItem_select = document.querySelector("#service-type-delete-item_select");
+
+const serviceTypeDeleteItem_input = document.querySelector("#service-type-delete-item_input");
+const serviceTypeDeleteItem_optionsControl = document.querySelector(".service-type-delete-item_options-control");
+
 const serviceNameDeleteItem_input = document.querySelector("#service-name-delete-item_input");
 const serviceNameDeleteItem_optionsControl = document.querySelector(".service-name-delete-item_options-control");
 const serviceNameDeleteItem_option = null;
@@ -973,9 +998,9 @@ const serviceDeleteItemBtn = document.querySelector("#service-delete-item-btn")
 
 // functions
 
-async function allowServiceInput(typeSelect,serviceInput,priceSpan){
-    typeSelect.addEventListener("change", async ()=>{
-        if(typeSelect.value === ""){
+async function allowServiceInput(typeInput,serviceInput,priceSpan){
+    typeInput.addEventListener("focusout", async ()=>{
+        if(typeInput.value === ""){
             serviceInput.setAttribute("disabled", "true");
             serviceInput.style.cursor = "not-allowed";
 
@@ -985,7 +1010,7 @@ async function allowServiceInput(typeSelect,serviceInput,priceSpan){
             return;
         }
 
-        if(typeSelect.value !== ""){
+        if(typeInput.value !== ""){
             serviceInput.removeAttribute("disabled");
             serviceInput.style.cursor = "auto";
         }
@@ -993,7 +1018,7 @@ async function allowServiceInput(typeSelect,serviceInput,priceSpan){
 }
 
 async function deleteItemProcess(){
-    if(serviceTypeDeleteItem_select.value === ""){
+    if(serviceTypeDeleteItem_input.value === ""){
         showMessagePopup("erroMsg","Selecione um tipo de serviço para prosseguir ! Tente novamente !");
         return;
     }
@@ -1045,14 +1070,22 @@ deleteItemLink.addEventListener("click", async ()=>{
     await cleanAllInputs();
     await hideHtmlElement([mainHubContainer_editPriceList]);
     await showHtmlElement([deleteItemContainer_editPriceList],"block");
+});
+
+serviceTypeDeleteItem_input.addEventListener("input", async()=>{
+    await createTypeSuggestions(
+        serviceTypeDeleteItem_input,
+        serviceTypeDeleteItem_optionsControl,
+        "service-type-delete-item_option"
+    )
 })
 
-allowServiceInput(serviceTypeDeleteItem_select,serviceNameDeleteItem_input,servicePriceDeleteItem_span);
+allowServiceInput(serviceTypeDeleteItem_input,serviceNameDeleteItem_input,servicePriceDeleteItem_span);
 
 serviceNameDeleteItem_input.addEventListener("input",async()=>{  
 
     await createNameSuggestions(
-        serviceTypeDeleteItem_select,
+        serviceTypeDeleteItem_input,
         serviceNameDeleteItem_input,
         serviceNameDeleteItem_optionsControl,
         serviceNameDeleteItem_option,
@@ -1070,24 +1103,34 @@ serviceDeleteItemBtn.addEventListener("click", async ()=>{
 // elements
 
 const editItemContainer_editPriceList = document.querySelector(".edit-item-container_edit-price-list");
-const serviceTypeSelect_editItem = document.querySelector("#service-type-select_edit-item");
+
+const serviceTypeInput_editItem = document.querySelector("#service-type-input_edit-item");
+const serviceTypeOptionsControl_editItem = document.querySelector(".service-type-options-control_edit-item");
+
 const serviceNameInput_editItem = document.querySelector("#service-name-input_edit-item");
 const serviceNameEditItem_optionsControl = document.querySelector(".service-name-edit-item_options-control");
 const serviceNameEditItem_option = null;
+
 const servicePriceSpan_editItem = document.querySelector("#service-price-span_edit-item");
 const nextStepEditItemBtn = document.querySelector("#next-step-edit-item-btn");
 
 const updateItemInputContainer = document.querySelector("#update-item-input-container");
 const updateItemBtnContainer = document.querySelector("#update-item-btn-container");
-const serviceTypeSelect_updateItem = document.querySelector("#service-type-select_update-item");
+
+const serviceTypeInput_updateItem = document.querySelector("#service-type-input_update-item");
+const serviceTypeOptionsControl_updateItem = document.querySelector(".service-type-options-control_update-item");
+
 const serviceNameInput_updateItem = document.querySelector("#service-name-input_update-item");
+const serviceNameInputOptionsControl_updateItem = document.querySelector(".service-name-input-options-control_update-item");
+const serviceNameOption_updateItem = null;
+
 const servicePriceInput_updateItem = document.querySelector("#service-price-input_update-item")
 const editItemBtn = document.querySelector("#edit-item-btn");
 
 // functions
 
 async function verifyEditItem_forNextStep(){
-    if(serviceTypeSelect_editItem.value === ""){
+    if(serviceTypeInput_editItem.value === ""){
         await showMessagePopup("errorMsg", "Selecione um tipo de serviço para prosseguir !");
         return;
     }
@@ -1108,7 +1151,7 @@ async function verifyEditItem_forNextStep(){
         return;
     }
 
-    serviceTypeSelect_updateItem.value = serviceTypeSelect_editItem.value;
+    serviceTypeInput_updateItem.value = serviceTypeInput_editItem.value;
     serviceNameInput_updateItem.value = serviceNameInput_editItem.value;
     servicePriceInput_updateItem.value = servicePriceSpan_editItem.innerText;
 
@@ -1118,7 +1161,7 @@ async function verifyEditItem_forNextStep(){
 }
 
 async function editItemProcess(){
-    if(serviceTypeSelect_updateItem.value === ""){
+    if(serviceTypeInput_updateItem.value === ""){
         await showMessagePopup("errorMsg", "Selecione um tipo de serviço para prosseguir !");
         return;
     }
@@ -1164,7 +1207,7 @@ async function editItemLogic(){
     let newItem = {
         name : serviceNameInput_updateItem.value.trim(),
         price : servicePrice,
-        type : serviceTypeSelect_updateItem.value
+        type : serviceTypeInput_updateItem.value
     }
 
     for(let i = 0 ; i < services_array.length; i++){
@@ -1198,14 +1241,22 @@ editItemLink.addEventListener("click", async()=>{
     await cleanAllInputs();
     await hideHtmlElement([mainHubContainer_editPriceList]);
     await showHtmlElement([editItemContainer_editPriceList], "block");
+});
+
+serviceTypeInput_editItem.addEventListener("input", async()=>{
+    await createTypeSuggestions(
+        serviceTypeInput_editItem,
+        serviceTypeOptionsControl_editItem,
+        "service-type-option_edit-item"
+    )
 })
 
-allowServiceInput(serviceTypeSelect_editItem,serviceNameInput_editItem,servicePriceSpan_editItem);
+allowServiceInput(serviceTypeInput_editItem,serviceNameInput_editItem,servicePriceSpan_editItem);
 
 serviceNameInput_editItem.addEventListener("input", async()=>{
 
     await createNameSuggestions(
-        serviceTypeSelect_editItem,
+        serviceTypeInput_editItem,
         serviceNameInput_editItem,
         serviceNameEditItem_optionsControl,
         serviceNameEditItem_option,
@@ -1216,6 +1267,25 @@ serviceNameInput_editItem.addEventListener("input", async()=>{
 
 nextStepEditItemBtn.addEventListener("click", async()=>{
     await verifyEditItem_forNextStep();
+});
+
+serviceTypeInput_updateItem.addEventListener("input", async()=>{
+    await createTypeSuggestions(
+        serviceTypeInput_updateItem,
+        serviceTypeOptionsControl_updateItem,
+        "service-type-option_update-item"
+    )
+});
+
+serviceNameInput_updateItem.addEventListener("input",async ()=>{
+    await createNameSuggestions(
+        serviceTypeInput_updateItem,
+        serviceNameInput_updateItem,
+        serviceNameInputOptionsControl_updateItem,
+        serviceNameOption_updateItem,
+        "service-name-option_update-item",
+        'nopricespan'
+    )
 })
 
 editItemBtn.addEventListener("click", async()=>{

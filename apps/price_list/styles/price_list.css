@@ -336,7 +336,7 @@ header h2{
 
 .main-hub-section{
     margin:1.5rem 0;
-    display:none;
+    display:block;
 }
 
 .main-hub-section > .main-hub-container{
@@ -382,7 +382,7 @@ header h2{
 
 .consult-price-list-section{
     margin-top:1.5rem;
-    display: block;
+    display: none;
 }
 
 /* back-home-control */
@@ -484,7 +484,7 @@ header h2{
 }
 
 .consult-price-list-section > .search-input-container > .service-type-input-control > .service-type-options-control{
-    display:block;
+    display:none;
     border: 1px solid #969696;
     background-color: #fff;
     width: 25.5%;
@@ -848,22 +848,56 @@ header h2{
     margin:1.5rem auto;
 }
 
-.edit-price-list-section > .add-item-container_edit-price-list > .input-container > input,
-.edit-price-list-section > .add-item-container_edit-price-list > .input-container > select{
+.edit-price-list-section > .add-item-container_edit-price-list > .input-container > input{
     border-radius:25px;
     border: 1px solid #969696;
     margin:0 8px;
     padding:8px 0;
 }
 
-.edit-price-list-section > .add-item-container_edit-price-list > .input-container > input:focus,
-.edit-price-list-section > .add-item-container_edit-price-list > .input-container > select:focus{
+.edit-price-list-section > .add-item-container_edit-price-list > .input-container > input:focus{
     outline: 1px solid #d61e1e;
 }
 
-.edit-price-list-section > .add-item-container_edit-price-list > .input-container > #service-type-add-item_select{
+.edit-price-list-section > .add-item-container_edit-price-list > .input-container > .service-type-add-item_control-input{
     width:20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0 8px;
+}
+
+.edit-price-list-section > .add-item-container_edit-price-list > .input-container > .service-type-add-item_control-input input{
+    border-radius:25px;
+    border: 1px solid #969696;
+    padding:8px 0;
     padding-left:8px;
+    width:100%;
+}
+
+.edit-price-list-section > .add-item-container_edit-price-list > .input-container > .service-type-add-item_control-input > .service-type-add-item_options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 17.5%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-price-list-section > .add-item-container_edit-price-list > .input-container > .service-type-add-item_control-input > .service-type-add-item_options-control > .service-type-add-item_option{
+    padding: 8px 0;
+    cursor: pointer;
+    transition:0.2s;
+    padding-left:8px;
+}
+
+.edit-price-list-section > .add-item-container_edit-price-list > .input-container > .service-type-add-item_control-input > .service-type-add-item_options-control > .service-type-add-item_option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
 }
 
 .edit-price-list-section > .add-item-container_edit-price-list > .input-container > #service-name-add-item_input{
@@ -936,7 +970,6 @@ header h2{
     margin:1.5rem auto;
 }
 
-.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > select,
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > span{
     border-radius:25px;
     border: 1px solid #969696;
@@ -944,14 +977,49 @@ header h2{
     padding:8px 0;
 }
 
-.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > select:focus,
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > span:focus{
     outline: 1px solid #d61e1e;
 }
 
-.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > #service-type-delete-item_select{
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-type-delete-item_control-input{
     width:20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin:0 8px;
+}
+
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-type-delete-item_control-input input{
+    border-radius:25px;
+    border: 1px solid #969696;
+    padding:8px 0;
     padding-left:8px;
+    width:100%;
+}
+
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-type-delete-item_control-input > .service-type-delete-item_options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 17.5%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-type-delete-item_control-input > .service-type-delete-item_options-control > .service-type-delete-item_option{
+    padding: 8px 0;
+    cursor: pointer;
+    transition:0.2s;
+    padding-left:8px;
+}
+
+.edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-type-delete-item_control-input > .service-type-delete-item_options-control > .service-type-delete-item_option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
 }
 
 .edit-price-list-section > .delete-item-container_edit-price-list > .input-container > .service-name-input-control_delete-item {
@@ -1060,16 +1128,52 @@ header h2{
     margin:1.5rem auto;   
 }
 
-.edit-price-list-section > .edit-item-container_edit-price-list > .input-container input,
-.edit-price-list-section > .edit-item-container_edit-price-list > .input-container select{
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container input{
     border-radius:25px;
     border: 1px solid #969696;
     margin:0 8px;
     padding:8px 0;   
 }
 
-.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-type-select_edit-item{
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_edit-item{
     width:20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin:0 8px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_edit-item input{
+    border-radius:25px;
+    border: 1px solid #969696;
+    padding:8px 0;
+    padding-left: 8px;   
+    width:100%;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_edit-item > .service-type-options-control_edit-item{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 17.5%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_edit-item > .service-type-options-control_edit-item > .service-type-option_edit-item{
+    padding:8px 0;
+    padding-left:8px;    
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_edit-item > .service-type-options-control_edit-item > .service-type-option_edit-item:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
 }
 
 .edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_edit-item{
@@ -1154,16 +1258,94 @@ header h2{
 .edit-price-list-section > .edit-item-container_edit-price-list > #update-item-input-container,
 .edit-price-list-section > .edit-item-container_edit-price-list > #update-item-btn-container{
     display: none;
+    justify-content: center;
+    align-items: center;
 }
 
-.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-type-select_update-item{
+.edit-price-list-section > .edit-item-container_edit-price-list > #update-item-input-container > *{
+    margin: 0 8px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_update-item{
     width:20%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin:0 8px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_update-item input{
+    border-radius:25px;
+    border: 1px solid #969696;
+    padding:8px 0;
+    padding-left: 8px;   
+    width:100%;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_update-item > .service-type-options-control_update-item{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 17.5%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_update-item > .service-type-options-control_update-item > .service-type-option_update-item{
+    padding: 8px 0;
+    cursor: pointer;
+    transition:0.2s;
     padding-left:8px;
 }
 
-.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-name-input_update-item{
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-type-input-control_update-item > .service-type-options-control_update-item > .service-type-option_update-item:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_update-item{
     width:50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin:0 8px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_update-item input{
+    border-radius:25px;
+    border: 1px solid #969696;
+    padding:8px 0;
+    padding-left: 8px;   
+    width:100%;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_update-item > .service-name-input-options-control_update-item{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 43%;
+    border-radius:25px;
+    margin-top:33px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_update-item > .service-name-input-options-control_update-item > .service-name-option_update-item{
+    padding: 8px 0;
+    cursor: pointer;
+    transition:0.2s;
     padding-left:8px;
+}
+
+.edit-price-list-section > .edit-item-container_edit-price-list > .input-container > .service-name-input-control_update-item > .service-name-input-options-control_update-item > .service-name-option_update-item:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
 }
 
 .edit-price-list-section > .edit-item-container_edit-price-list > .input-container > #service-price-input_update-item{
