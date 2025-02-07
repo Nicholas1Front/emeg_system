@@ -8,6 +8,8 @@ Colocar uma nova feature onde insira o CNPJ dado pela empresa e pesquise os dado
     - CEP
     - Nome/Razão social
 
+A principio usar uma API chamada : (Consultar CNPJ (InApplet) (consultarcnpj.inapplet.com)) que não tem limites de consultas.
+
 Além disso com a implementação dessa nova feature é necessário mudar a estrutura dos objetos dos clientes onde os mesmos passarão a ser criados e tratados da seguinte forma :
 ```
 const new client = {

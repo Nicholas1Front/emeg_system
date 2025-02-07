@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Controle de clientes</title>
-    <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/styles/customer_base_plataform.css">
+    <!-- <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/styles/customer_base_plataform.css"> -->
+     <link rel="stylesheet" href="../customer_base_plataform/styles/customer_base_plataform.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -196,10 +197,23 @@
                     <div class="line"></div>
                 </div>
 
-                <div class="client-select-control">
-                    <select id="add-equipament_client-select-list">
-                        <option value=""></option>
-                    </select>
+                <div class="add-equipament_client-input-container">
+                    
+                    <div class="add-equipament_client-input-control">
+
+                        <input type="text" id="add-equipament_client-input" placeholder="Digite o nome do cliente..." autocomplete="off"/>
+
+                        <div class="add-equipament_client-options-control">
+                            <div class="add-equipament_client-option">CLIENTE 1</div>
+                            <div class="add-equipament_client-option">CLIENTE 2</div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="add-equipament_search-button-container">
+                    <button id="add-equipament_search-btn"><i class="fa-solid fa-users-viewfinder"></i> Pesquisar cliente</button>
                 </div>
 
                 <div class="add-equipament-control">
@@ -230,9 +244,17 @@
                 </div>
 
                 <div class="client-select-control">
-                    <select id="edit-client_client-select-list">
-                        <option value=""></option>
-                    </select>
+
+                    <input type="text" id="edit-client_client-input" autocomplete="off" placeholder="Digite o nome do cliente..."/>
+
+                    <div class="edit-client_client-options-control">
+                        <div class="edit-client_client-option">OPTION 1</div>
+                        <div class="edit-client_client-option">OPTION 2</div>
+                    </div>
+                </div>
+
+                <div class="client-select_search-button-container">
+                    <button id="edit-client_client-search-btn"><i class="fa-solid fa-users-viewfinder"></i> Pesquisar cliente</button>
                 </div>
 
                 <div class="edit-client-control">
@@ -243,7 +265,7 @@
     
                     <div class="edit-client-input-control">
                         <input type="text" id="edit-client-input" placeholder="Editar cliente selecionado..." autocomplete="off" autocapitalize="on">
-                        <button id="edit-client-btn"><i class="fa-solid fa-user-pen"></i> Editar cliente</button>      
+                        <button id="edit-client-btn"><i class="fa-solid fa-user-pen"></i> Editar cliente</button>
                     </div>
                 </div>
             </div>
@@ -262,23 +284,35 @@
                 </div>
 
                 <div class="client-select-control">
-                    <select id="edit-equipament_client-select-list">
-                        <option value=""></option>
-                    </select>
+                    <input type="text" id="edit-equipament_client-input" placeholder="Digite o nome do cliente..." autocomplete="off"/>
+
+                    <div class="edit-equipament_client-options-control">
+                        <div class="edit-equipament_client-option">OPTION 1</div>
+                        <div class="edit-equipament_client-option">OPTION 2</div>
+                    </div>
+
+                    <button id="edit-equipament_search-client-btn"><i class="fa-solid fa-users-viewfinder"></i> Pesquisar cliente</button>
                 </div>
 
-                <div class="edit-equipament-control">
+                <div class="edit-equipament_equipament-search-control">
                     <div class="title-container">
                         <h2>Selecione o equipamento a ser editado</h2>
                         <div class="line"></div>
                     </div>
 
-                    <select id="edit-equipament_equipament-select-list">
-                        <option value=""></option>
-                    </select>
+                    <div class="equipament-search-input-control">
+                        <input type="text" id="edit-equipament_equipament-search-input" autocomplete="off" placeholder="Digite o nome do equipamento a ser pesquisado..."/>
+
+                        <div class="edit-equipament_equipament-search-options-control">
+                            <div class="edit-equipament_equipament-search-option">OPTION 1</div>
+                            <div class="edit-equipament_equipament-search-option">OPTION 2</div>
+                        </div>
+
+                        <button id="edit-equipament_search-equipament-btn"><i class="fa-solid fa-magnifying-glass"></i> Pesquisar equipamento</button>
+                    </div>
                 </div>
 
-                <div class="edit-equipament-control">
+                <div class="edit-equipament_equipament-edit-control">
                     <div class="title-container">
                         <h2>Edite o equipamento selecionado</h2>
                         <div class="line"></div>
@@ -287,6 +321,7 @@
                     <input type="text" id="edit-equipament-input" placeholder="Edite o equipamento..."/>
 
                     <button id="edit-equipament-btn"><i class="fa-solid fa-pen-to-square"></i>Editar equipamento</button>
+
                 </div>
             </div>
         </section>
@@ -304,9 +339,13 @@
                 </div>
 
                 <div class="client-select-control">
-                    <select id="delete-client_client-select-list">
-                        <option value=""></option>
-                    </select>
+
+                    <input type="text" id="delete-client-input" autocomplete="off" placeholder="Digite o nome do clinete..."/>
+
+                    <div class="delete-client-options-control">
+                        <div class="delete-client-option">OPTION 1</div>
+                        <div class="delete-client-option">OPTION 1</div>
+                    </div>
 
                     <button id="delete-client-btn"><i class="fa-solid fa-user-minus"></i>Excluir cliente</button>
                 </div>
@@ -326,9 +365,15 @@
                 </div>
 
                 <div class="client-select-control">
-                    <select id="delete-equipament_client-select-list">
-                        <option value=""></option>
-                    </select>
+
+                    <input type="text" id="delete-equipament_client-input" autocomplete="off" placeholder="Digite o nome do cliente..."/>
+
+                    <div class="delete-equipament_client-options-control">
+                        <div class="delete-equipament_client-option">OPTION 1</div>
+                        <div class="delete-equipament_client-option">OPTION 2</div>
+                    </div>
+
+                    <button id="delete-equipament_search-client-btn"><i class="fa-solid fa-users-viewfinder"></i> Pesquisar cliente</button>
                 </div>
 
                 <div class="delete-equipament-control">
@@ -338,9 +383,14 @@
                         <div class="line"></div>
                     </div>
 
-                    <select id="delete-equipament_equipament-select-list">
-                        <option value=""></option>
-                    </select>
+                    <div class="delete-equipament_equipament-input-control">
+                        <input type="text" id="delete-equipament_equipament-input" autocomplete="off" placeholder="Digite o nome do equipamento..."/>
+
+                        <div class="delete-equipament_equipament-options-control">
+                            <div class="delete-equipament_equipament-option">OPTION 1</div>
+                            <div class="delete-equipament_equipament-option">OPTION 2</div>
+                        </div>
+                    </div>
 
                     <button id="delete-equipament-btn"><i class="fa-solid fa-trash-can"></i>Exlcuir equipamento</button>
                 </div>
@@ -392,6 +442,7 @@
         <h3>© EMEG Guindaste - Todos os Direitos Reservados.</h3>
     </footer>
     
-    <script src="https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/scripts/script.js"></script>
+    <!-- <script src="https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/scripts/script.js"></script> -->
+     <script src="../customer_base_plataform/scripts/script.js"></script>
 </body>
 </html>

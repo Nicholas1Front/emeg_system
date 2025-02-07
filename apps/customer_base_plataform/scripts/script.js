@@ -65,61 +65,25 @@ Initialize_clients_equipaments_array();
 
 //functions
 async function verifyDataBeforeSend(){
-    let arrayFetched = await getClientsData();
+    let clients_equipaments_array_Fetched = await getClientsData();
 
-    let arrayFetched_clientsList = [];
-    let clients_equipaments_array_clientsList = [];
-
-    for(let i = 0 ; i < arrayFetched.length ; i++){
-        arrayFetched_clientsList.push(arrayFetched[i].name);
-    }
-
-    for(let i = 0 ; i < clients_equipaments_array.length ; i++){
-        clients_equipaments_array_clientsList.push(clients_equipaments_array[i].name);
-    }
-
-    if(clients_equipaments_array_clientsList > arrayFetched_clientsList ||clients_equipaments_array_clientsList < arrayFetched_clientsList ){
+    if(clients_equipaments_array.length < clients_equipaments_array_Fetched.length || clients_equipaments_array.length > clients_equipaments_array_Fetched.length){
         await verifyPasswordProcess(sendToServerProcess);
+        return;        
+    }
+
+    let clients_equipaments_array_Fetched_JSON = JSON.stringify(clients_equipaments_array_Fetched);
+    let clients_equipaments_array_JSON = JSON.stringify(clients_equipaments_array);
+
+    if(clients_equipaments_array_Fetched_JSON === clients_equipaments_array_JSON){
+        await showServerMessagePopup("errorMsg", "Dados já existentes ! Tente novamente !");
         return;
     }
 
-    for(let i = 0 ; i < clients_equipaments_array_clientsList ; i++){
-        if(arrayFetched_clientsList[i] !== clients_equipaments_array_clientsList[i]){
-            await verifyPasswordProcess(sendToServerProcess);
-            return;
-        }
-    }
-
-    let arrayFetched_equipamentsList = [];
-    let clients_equipaments_array_equipamentsList = [];
-
-    arrayFetched.forEach((client)=>{
-        for(let i = 0 ; i < client.equipaments.length; i++){
-            arrayFetched_equipamentsList.push(client.equipaments[i]);
-        }
-    })
-
-    clients_equipaments_array.forEach((client)=>{
-        for(let i = 0 ;i < client.equipaments.length; i++){
-            clients_equipaments_array_equipamentsList.push(client.equipaments[i]);
-        }
-    })
-    
-    if(clients_equipaments_array_equipamentsList > arrayFetched_equipamentsList || clients_equipaments_array_equipamentsList < arrayFetched_equipamentsList){
+    if(clients_equipaments_array_Fetched_JSON !== clients_equipaments_array_JSON){
         await verifyPasswordProcess(sendToServerProcess);
-        return
+        return;
     }
-
-    for(let i = 0 ; i < clients_equipaments_array_equipamentsList ; i++){
-        if(clients_equipaments_array_equipamentsList[i] !== arrayFetched_equipamentsList[i]){
-            await verifyPasswordProcess(sendToServerProcess);
-            return;   
-        }
-    }
-
-    showServerMessagePopup("errorMsg","Dados já existentes ! Tente novamente !");
-
-    getClientsData();
 }
 
 async function updateClientsData() {
@@ -194,10 +158,25 @@ async function backHomeProcess(){
         hideHtmlElement([All_sections[i]]);
     }
 
+    hideHtmlElement([
+        editEquipament_equipamentSearchControl,
+        editEquipament_equipamentEditControl
+    ])
+
     showHtmlElement([mainHubSection],"flex");
 }    
 
-// clear inputs and selects
+// clear inputs and other inputs
+
+async function UpperCaseAllInputs(){
+    let allInputs = document.querySelectorAll("input");
+
+    for(let i = 0; i < allInputs.length ; i++){
+        allInputs[i].addEventListener("input", async ()=>{
+            allInputs[i].value = allInputs[i].value.toUpperCase();
+        })
+    }
+}
 
 async function clearAllInputs(){
     let All_inputs = document.querySelectorAll("input");
@@ -211,6 +190,10 @@ async function clearAllInputs(){
         select.value = "";
     })
 }
+
+// booting
+
+UpperCaseAllInputs();
 
 // loading screen
 
@@ -506,11 +489,15 @@ for(let i = 0; i < backHomeBtn.length ; i++){
 //add-equipament-section
 
 //elements
-const addEquipamentSection = document.querySelector(".add-equipament-section")
-const addEquipament_clientSelectList = document.querySelector("#add-equipament_client-select-list")
+const addEquipamentSection = document.querySelector(".add-equipament-section");
+
+const addEquipament_clientInput = document.querySelector("#add-equipament_client-input");
+const addEquipament_clientOptionsControl = document.querySelector(".add-equipament_client-options-control");
+const addEquipament_searchBtn = document.querySelector("#add-equipament_search-btn");
+
+const addEquipamentControl = document.querySelector(".add-equipament-control");
 const addEquipamentInput = document.querySelector("#add-equipament-input");
 const addEquipamentBtn = document.querySelector("#add-equipament-btn");
-const addEquipamentControl = document.querySelector(".add-equipament-control");
 
 //functions
 
@@ -537,6 +524,93 @@ function createSelectListHtml_clients(targetList){
 
 }
 
+async function createClientSuggestions(
+    clientInput,
+    optionsControl,
+    optionClassName
+){
+    optionsControl.innerHTML = "";
+
+    let allClients = [];
+    let itensSearched = [];
+
+    clients_equipaments_array.forEach((client)=>{
+        allClients.push(client.name);
+    });
+
+    for(let i = 0; i < allClients.length ; i++){
+        if(allClients[i].includes(clientInput.value)){
+            itensSearched.push(allClients[i]);
+        }
+    }
+
+    console.log(itensSearched);
+
+    if(itensSearched.length < 0 || clientInput.value === ""){
+        optionsControl.innerHTML = "";
+        await hideHtmlElement([optionsControl]);
+        return;
+    }
+
+    for(let i = 0; i < itensSearched.length ; i++){
+        let option = document.createElement("div");
+
+        option.className = optionClassName;
+        option.innerHTML = itensSearched[i];
+
+        optionsControl.appendChild(option);
+    }
+
+    const allOptions = document.querySelectorAll(`.${optionClassName}`);
+
+    for(let i = 0; i < allOptions.length ; i++){
+        allOptions[i].addEventListener("click", async ()=>{
+            clientInput.value = allOptions[i].innerText;
+
+            optionsControl.innerHTML = "";
+            await hideHtmlElement([optionsControl]);
+        })
+    }
+
+    document.addEventListener("click", async ()=>{
+        optionsControl.innerHTML = "";
+        await hideHtmlElement([optionsControl]);
+    });
+
+    await showHtmlElement([optionsControl], "block");
+}
+
+async function verifyClientInput_searchBtn(
+    clientInput,
+    showThisElement,
+    displayType
+){
+    let inputValue = clientInput.value.trim();
+
+    if(inputValue === ""){
+        await showMessagePopup("errorMsg", "O campo 'Cliente' não pode estar vazio ! Tente novamente !");
+        return
+    }
+
+    let clientExists = false;
+
+    clients_equipaments_array.forEach(async (client)=>{
+        if(inputValue === client.name){
+            clientExists = true;
+        }
+    });
+
+    if(!clientExists){
+        await showMessagePopup("errorMsg", "O cliente inserido não existe ! Tente nocvamente !");
+        return;
+    }
+
+    if(clientExists){
+        await showHtmlElement([showThisElement], displayType);
+        return;
+    }
+}
+
 async function addEquipamentLogic(){
 
     let equipamentName = addEquipamentInput.value.toUpperCase();
@@ -544,7 +618,7 @@ async function addEquipamentLogic(){
     equipamentName.trim();
 
     clients_equipaments_array.forEach((client)=>{
-        if(client.name === addEquipament_clientSelectList.value){
+        if(client.name === addEquipament_clientInput.value){
             client.equipaments.push(equipamentName);
         }
     });
@@ -563,7 +637,7 @@ async function addEquipamentProcess(){
     let equipamentsArray = [];
 
     clients_equipaments_array.forEach((client)=>{
-        if(client.name === addEquipament_clientSelectList.value){
+        if(client.name === addEquipament_clientInput.value){
             client.equipaments.forEach((equipament)=>{
                 equipamentsArray.push(equipament);
             })
@@ -586,16 +660,23 @@ async function addEquipamentProcess(){
 addEquipamentLink.addEventListener("click", ()=>{
     backHomeProcess();
     showHtmlElement([addEquipamentSection],"flex");
-    createSelectListHtml_clients(addEquipament_clientSelectList);
 });
 
-addEquipament_clientSelectList.addEventListener("change",()=>{
-    if(addEquipament_clientSelectList.value !== ""){
-        showHtmlElement([addEquipamentControl],"block")
-    }else{
-        hideHtmlElement([addEquipamentControl]);
-    }
+addEquipament_clientInput.addEventListener("input", async ()=>{
+    await createClientSuggestions(
+        addEquipament_clientInput,
+        addEquipament_clientOptionsControl,
+        "add-equipament_client-option"
+    );
 });
+
+addEquipament_searchBtn.addEventListener("click", async()=>{
+    await verifyClientInput_searchBtn(
+        addEquipament_clientInput,
+        addEquipamentControl,
+        "flex"
+    )
+})
 
 addEquipamentBtn.addEventListener("click", ()=>{
     addEquipamentProcess();
@@ -606,6 +687,9 @@ addEquipamentBtn.addEventListener("click", ()=>{
 //elements
 const editClientSection = document.querySelector(".edit-client-section");
 const editClient_clientSelectList = document.querySelector("#edit-client_client-select-list");
+const editClient_clientInput = document.querySelector("#edit-client_client-input");
+const editClient_clientOptionsControl = document.querySelector(".edit-client_client-options-control");
+const editClient_clientSearchBtn = document.querySelector("#edit-client_client-search-btn")
 const editClientControl = document.querySelector(".edit-client-control");
 const editClientInput = document.querySelector("#edit-client-input");
 const editClientBtn = document.querySelector("#edit-client-btn");
@@ -614,8 +698,8 @@ const editClientBtn = document.querySelector("#edit-client-btn");
 
 async function editClientLogic(){
     clients_equipaments_array.forEach((client)=>{
-        if(client.name === editClient_clientSelectList.value){
-            client.name = editClientInput.value.toUpperCase();
+        if(client.name === editClient_clientInput.value){
+            client.name = editClientInput.value.trim();
         }
     })
 
@@ -623,15 +707,14 @@ async function editClientLogic(){
 
 async function editClientProcess(){
 
-    let clientName = editClientInput.value.toUpperCase();
-    clientName.trim();
+    let clientName = editClientInput.value.trim();
 
-    if(editClient_clientSelectList.value === ""){
+    if(editClient_clientInput.value === ""){
         showMessagePopup("errorMsg","O campo 'Cliente' não pode estar vazio !");
         return;
     }
 
-    if(clientName === editClient_clientSelectList.value){
+    if(clientName === editClient_clientInput.value){
         showMessagePopup("errorMsg","Cliente não pode ser igual a anterior !");
         return;
     }
@@ -657,17 +740,23 @@ async function editClientProcess(){
 //event listeners
 editClientLink.addEventListener("click", ()=>{
     backHomeProcess();
-    createSelectListHtml_clients(editClient_clientSelectList);
     showHtmlElement([editClientSection],"flex");
 })
 
-editClient_clientSelectList.addEventListener("change",()=>{
-    if(editClient_clientSelectList.value !== ""){
-        showHtmlElement([editClientControl],"block");
-        editClientInput.value = editClient_clientSelectList.value;
-    }else{
-        hideHtmlElement([editClientControl]);
-    }
+editClient_clientInput.addEventListener("input", async ()=>{
+    await createClientSuggestions(
+        editClient_clientInput,
+        editClient_clientOptionsControl,
+        "edit-client_client-option"
+    )
+});
+
+editClient_clientSearchBtn.addEventListener("click", async()=>{
+    await verifyClientInput_searchBtn(
+        editClient_clientInput,
+        editClientControl,
+        "block"
+    )
 })
 
 editClientBtn.addEventListener("click", ()=>{
@@ -679,8 +768,17 @@ editClientBtn.addEventListener("click", ()=>{
 //elements
 
 const editEquipamentSection = document.querySelector(".edit-equipament-section");
-const All_editEquipamentControl = document.querySelectorAll(".edit-equipament-control");
-const editEquipament_clientSelectList = document.querySelector("#edit-equipament_client-select-list");
+
+const editEquipament_clientInput = document.querySelector("#edit-equipament_client-input");
+const editEquipament_clientOptionsControl = document.querySelector(".edit-equipament_client-options-control");
+const editEquipament_searchClientBtn = document.querySelector("#edit-equipament_search-client-btn");
+
+const editEquipament_equipamentSearchControl = document.querySelector(".edit-equipament_equipament-search-control");
+const editEquipament_equipamentSearchInput = document.querySelector("#edit-equipament_equipament-search-input");
+const editEquipament_equipamentSearchOptionsControl = document.querySelector(".edit-equipament_equipament-search-options-control");
+const editEquipament_searchEquipamentBtn = document.querySelector("#edit-equipament_search-equipament-btn");
+
+const editEquipament_equipamentEditControl = document.querySelector(".edit-equipament_equipament-edit-control");
 const editEquipament_equipamentSelectList = document.querySelector("#edit-equipament_equipament-select-list");
 const editEquipamentInput = document.querySelector("#edit-equipament-input");
 const editEquipamentBtn = document.querySelector("#edit-equipament-btn");
@@ -715,27 +813,129 @@ function createSelectListHtml_equipaments(targetList, targetClientList){
 
 }
 
+async function createEquipamentSuggestions(
+    clientInput,
+    equipamentInput,
+    optionsControl,
+    optionClassName
+){
+    optionsControl.innerHTML = "";
+
+    let targetClient;
+
+    let allEquipaments = [];
+
+    let inputValue = clientInput.value.trim();
+
+    let clientExists = false;
+
+    for(i = 0; i < clients_equipaments_array.length; i++){
+        if(clients_equipaments_array[i].name === inputValue){
+            targetClient = clients_equipaments_array[i];
+            clientExists = true;
+        }
+    }
+
+    if(!clientExists){
+        await showMessagePopup("errorMsg","Cliente não encontrado ! Tente novamente !");
+        return;
+    }
+
+
+    for(i = 0; i < targetClient.equipaments.length; i++){
+        allEquipaments.push(targetClient.equipaments[i]);
+    }
+
+    if(allEquipaments.length == 0 || equipamentInput.value === ""){
+        optionsControl.innerHTML = "";
+        await hideHtmlElement([optionsControl]);
+        return;
+    }
+
+    allEquipaments.forEach((equipament)=>{
+        let option = document.createElement("div");
+
+        option.innerHTML = equipament;
+        option.className = optionClassName;
+
+        optionsControl.appendChild(option);
+    });
+
+    const allEquipamentOptions = document.querySelectorAll(`.${optionClassName}`);
+
+    allEquipamentOptions.forEach((option)=>{
+        option.addEventListener("click", async()=>{
+            equipamentInput.value = option.innerHTML;
+
+            await hideHtmlElement([optionsControl]);
+            optionsControl.innerHTML = "";
+        })
+    });
+
+    document.addEventListener('click', async()=>{
+        await hideHtmlElement([optionsControl]);
+        optionsControl.innerHTML = "";
+    })
+
+    await showHtmlElement([optionsControl], "block");
+
+}
+
+async function verifyEquipamentInput_searchBtn(
+    clientInput,
+    equipamentInput,
+    equipamentInput_edit,
+    showThisElement,
+    displayType
+){
+    let targetClient;
+
+    for(i = 0; i < clients_equipaments_array.length;i++){
+        if(clients_equipaments_array[i].name === clientInput.value){
+            targetClient = clients_equipaments_array[i];
+        }
+    }
+
+    let equipamentExists = false;
+
+    for(i = 0; i < targetClient.equipaments.length; i++){
+        if(targetClient.equipaments[i] === equipamentInput.value){
+            equipamentExists = true;
+            if(equipamentInput_edit !== "noInput"){
+                equipamentInput_edit.value = equipamentInput.value;
+            }
+        }
+    }
+
+    if(equipamentExists){
+        await showHtmlElement([showThisElement], displayType);
+        return
+    }
+
+    if(!equipamentExists){
+        await showMessagePopup("errorMsg", "Equipamento não encontrado ! Tente novamente !");
+        return;
+    }
+}
+
 async function  editEquipamentLogic(){
-
     clients_equipaments_array.forEach((client)=>{
-        if(client.name === editEquipament_clientSelectList.value){
-            let newEquipament = editEquipamentInput.value;
-
-            newEquipament.toUpperCase();
-
-            client.equipaments.push(newEquipament);
+        if(client.name === editEquipament_clientInput.value){
+            for(i=0; i < client.equipaments.length; i++){
+                if(client.equipaments[i] === editEquipament_equipamentSearchInput.value){
+                    client.equipaments[i] = editEquipamentInput.value;
+                }
+            }
         }
     })
 
-    
 };
 
 async function editEquipamentProcess(){
 
-    let equipamentName = editEquipamentInput.value.toUpperCase();
-    equipamentName.trim()
+    let equipamentName = editEquipamentInput.value.trim();
 
-    if(editEquipament_equipamentSelectList.value === equipamentName){
+    if(editEquipament_equipamentSearchInput.value === equipamentName){
         showMessagePopup("errorMsg","Equipamento não pode ser igual ao anterior !");
         return;
     }
@@ -743,7 +943,7 @@ async function editEquipamentProcess(){
     let equipamentsArray = [];
 
     clients_equipaments_array.forEach((client)=>{
-        if(client.name === editEquipament_clientSelectList.value){
+        if(client.name === editEquipament_clientInput.value){
             client.equipaments.forEach((equipament)=>{
                 equipamentsArray.push(equipament);
             })
@@ -766,26 +966,42 @@ async function editEquipamentProcess(){
 editEquipamentLink.addEventListener("click", ()=>{
     backHomeProcess();
     showHtmlElement([editEquipamentSection],"flex");
-    createSelectListHtml_clients(editEquipament_clientSelectList);
+    hideHtmlElement([editEquipament_equipamentSearchControl,editEquipament_equipamentEditControl])
 })
 
-editEquipament_clientSelectList.addEventListener("change", ()=>{
-    if(editEquipament_clientSelectList.value === ""){
-        hideHtmlElement([All_editEquipamentControl]);
-    }else{
-        All_editEquipamentControl.forEach((div)=>{
-            showHtmlElement([div],"flex");
-        })
-        createSelectListHtml_equipaments(editEquipament_equipamentSelectList,editEquipament_clientSelectList);
-    }
+editEquipament_clientInput.addEventListener("input", async ()=>{
+    await createClientSuggestions(
+        editEquipament_clientInput,
+        editEquipament_clientOptionsControl,
+        "edit-equipament_client-option"
+    )
+})
+
+editEquipament_searchClientBtn.addEventListener("click", async ()=>{
+    await verifyClientInput_searchBtn(
+        editEquipament_clientInput,
+        editEquipament_equipamentSearchControl,
+        "flex"
+    )
 });
 
-editEquipament_equipamentSelectList.addEventListener("change", ()=>{
-    if(editEquipament_equipamentSelectList.value!==""){
-        editEquipamentInput.value = editEquipament_equipamentSelectList.value;
-    }else{
-        return;
-    }
+editEquipament_equipamentSearchInput.addEventListener("input", async ()=>{
+    await createEquipamentSuggestions(
+        editEquipament_clientInput,
+        editEquipament_equipamentSearchInput,
+        editEquipament_equipamentSearchOptionsControl,
+        "edit-equipament_equipament-search-option"
+    );
+})
+
+editEquipament_searchEquipamentBtn.addEventListener("click", async()=>{
+    await verifyEquipamentInput_searchBtn(
+        editEquipament_clientInput,
+        editEquipament_equipamentSearchInput,
+        editEquipamentInput,
+        editEquipament_equipamentEditControl,
+        "flex"
+    );
 })
 
 editEquipamentBtn.addEventListener("click", ()=>{
@@ -797,6 +1013,8 @@ editEquipamentBtn.addEventListener("click", ()=>{
 // elements
 const deleteClientSection = document.querySelector(".delete-client-section");
 const deleteClient_clientSelectList = document.querySelector("#delete-client_client-select-list");
+const deleteClientInput = document.querySelector("#delete-client-input");
+const deleteClientOptionsControl = document.querySelector(".delete-client-options-control");
 const deleteClientBtn = document.querySelector("#delete-client-btn");
 
 // functions
@@ -804,7 +1022,7 @@ const deleteClientBtn = document.querySelector("#delete-client-btn");
 async function deleteClientLogic(){
 
     for(let i = 0 ; i < clients_equipaments_array.length ; i++){
-        if(clients_equipaments_array[i].name === deleteClient_clientSelectList.value){
+        if(clients_equipaments_array[i].name === deleteClientInput.value){
             clients_equipaments_array.splice(i,1);
         }
     };
@@ -812,7 +1030,7 @@ async function deleteClientLogic(){
 }
 
 async function deleteClientProcess(){
-    if(deleteClient_clientSelectList.value === ""){
+    if(deleteClientInput.value === ""){
         showMessagePopup("errorMsg","Um cliente precisa ser selecionado !");
         return;
     }
@@ -825,7 +1043,14 @@ async function deleteClientProcess(){
 deleteClientLink.addEventListener("click", ()=>{
     backHomeProcess();
     showHtmlElement([deleteClientSection],"flex");
-    createSelectListHtml_clients(deleteClient_clientSelectList);
+});
+
+deleteClientInput.addEventListener("input", async ()=>{
+    await createClientSuggestions(
+        deleteClientInput,
+        deleteClientOptionsControl,
+        "delete-client-option"
+    )
 })
 
 deleteClientBtn.addEventListener("click", ()=>{
@@ -837,8 +1062,14 @@ deleteClientBtn.addEventListener("click", ()=>{
 // elements
 const deleteElementSection = document.querySelector(".delete-equipament-section");
 const deleteEquipament_clientSelectList = document.querySelector("#delete-equipament_client-select-list");
+const deleteEquipament_clientInput = document.querySelector("#delete-equipament_client-input");
+const deleteEquipament_clientOptionsControl = document.querySelector(".delete-equipament_client-options-control")
+const deleteEquipament_searchClientBtn = document.querySelector("#delete-equipament_search-client-btn");
+
 const deleteEquipamentControl = document.querySelector(".delete-equipament-control");
 const deleteEquipament_equipamentSelectList = document.querySelector("#delete-equipament_equipament-select-list");
+const deleteEquipament_equipamentInput = document.querySelector("#delete-equipament_equipament-input");
+const deleteEquipament_equipamentOptionsControl = document.querySelector(".delete-equipament_equipament-options-control")
 const deleteEquipamentBtn = document.querySelector("#delete-equipament-btn");
 
 // functions
@@ -846,9 +1077,9 @@ const deleteEquipamentBtn = document.querySelector("#delete-equipament-btn");
 async function deleteEquipamentLogic(){
 
     clients_equipaments_array.forEach((client)=>{
-        if(client.name === deleteEquipament_clientSelectList.value){
+        if(client.name === deleteEquipament_clientInput.value){
             for(let i = 0 ; i < client.equipaments.length ; i++){
-                if(client.equipaments[i] === deleteEquipament_equipamentSelectList.value){
+                if(client.equipaments[i] === deleteEquipament_equipamentInput.value){
                     client.equipaments.splice(i, 1);
                 }
             }
@@ -858,12 +1089,36 @@ async function deleteEquipamentLogic(){
 }
 
 async function deleteEquipamentProcess(){
-    if(deleteEquipament_equipamentSelectList.value === ""){
+    if(deleteEquipament_equipamentInput.value === ""){
         showMessagePopup("errorMsg","Selecione o equipamento que deseja excluir !");
         return
     };
 
-    await verifyPasswordProcess(deleteEquipamentLogic,"Equipamento deletado com sucesso !");
+    let targetClient;
+
+    clients_equipaments_array.forEach(client => {
+        if(client.name === deleteEquipament_clientInput.value){
+            targetClient = client;
+        }
+    });
+
+    let equipamentExists = false;
+
+    targetClient.equipaments.forEach((equipament)=>{
+        if(equipament === deleteEquipament_equipamentInput.value){
+            equipamentExists = true;
+        }
+    })
+
+    if(equipamentExists){
+        await verifyPasswordProcess(deleteEquipamentLogic,"Equipamento deletado com sucesso !");
+        return;
+    }
+
+    if(!equipamentExists){
+        await showMessagePopup("errorMsg", "Equipamento informado incorreto ou não existe ! Tente novamente !")
+        return;
+    }
 }
 
 // event listeners
@@ -871,18 +1126,32 @@ async function deleteEquipamentProcess(){
 deleteEquipamentLink.addEventListener("click", ()=>{
     backHomeProcess();
     showHtmlElement([deleteElementSection],"flex");
-    createSelectListHtml_clients(deleteEquipament_clientSelectList)
 })
 
-deleteEquipament_clientSelectList.addEventListener("change", ()=>{
-    if(deleteEquipament_clientSelectList.value !== ""){
-        createSelectListHtml_equipaments(deleteEquipament_equipamentSelectList,deleteEquipament_clientSelectList);
-        showHtmlElement([deleteEquipamentControl],"flex");
-    }else{
-        hideHtmlElement([deleteEquipamentControl]);
-        return;
-    }
+deleteEquipament_clientInput.addEventListener("input", async()=>{
+    await createClientSuggestions(
+        deleteEquipament_clientInput,
+        deleteEquipament_clientOptionsControl,
+        "delete-equipament_client-option"
+    )
 });
+
+deleteEquipament_searchClientBtn.addEventListener("click", async()=>{
+    await verifyClientInput_searchBtn(
+        deleteEquipament_clientInput,
+        deleteEquipamentControl,
+        "flex"
+    )
+});
+
+deleteEquipament_equipamentInput.addEventListener("input", async()=>{
+    await createEquipamentSuggestions(
+        deleteEquipament_clientInput,
+        deleteEquipament_equipamentInput,
+        deleteEquipament_equipamentOptionsControl,
+        "delete-equipament_equipament-option"
+    )
+})
 
 deleteEquipamentBtn.addEventListener("click", ()=>{
     deleteEquipamentProcess();

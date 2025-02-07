@@ -462,14 +462,14 @@ button{
     margin-left:7rem;
 }
 
-.add-client-input-control{
+.add-client-container > .add-client-input-control{
     margin-top:1.5rem;
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.add-client-input-control input{
+.add-client-container > .add-client-input-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -478,11 +478,11 @@ button{
     border-radius: 25px;
 }
 
-.add-client-input-control input:focus{
+.add-client-container > .add-client-input-control input:focus{
     outline-color:#d61e1e;
 }
 
-.add-client-input-control button{
+.add-client-container > .add-client-input-control button{
     margin-top:1rem;
     padding:8px 0;
     width:20%;
@@ -495,12 +495,12 @@ button{
     transition:0.2s;
 }
 
-.add-client-input-control button:hover{
+.add-client-container > .add-client-input-control button:hover{
     background-color: #0079dc;
     transition:0.2s;
 }
 
-.add-client-input-control button > i{
+.add-client-container > .add-client-input-control button > i{
     margin-right:7px;
 }
 
@@ -537,24 +537,73 @@ button{
     margin-left:7rem;
 }
 
-.add-equipament-container > .client-select-control{
+.add-equipament-container > .add-equipament_client-input-container{
     margin-top:1.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.add-equipament-container > .client-select-control select{
+.add-equipament-container > .add-equipament_client-input-container > .add-equipament_client-input-control{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width:45%;
+}
+
+.add-equipament-container > .add-equipament_client-input-container > .add-equipament_client-input-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
     padding-left:4px;
-    width: 45%;
+    width: 100%;
     border-radius: 25px;
 }
 
-.add-equipament-container > .client-select-control select:focus{
+.add-equipament-container > .add-equipament_client-input-container > .add-equipament_client-input-control input:focus{
     outline:1px solid #d61e1e;
+}
+
+.add-equipament-container > .add-equipament_client-input-container > .add-equipament_client-input-control > .add-equipament_client-options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 45%;
+    border-radius:25px;
+    margin-top:35px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.add-equipament-container > .add-equipament_client-input-container > .add-equipament_client-input-control > .add-equipament_client-options-control > .add-equipament_client-option{
+    padding: 8px 0;
+    cursor: pointer;
+    transition:0.2s;
+    padding-left:8px;
+}
+
+.add-equipament-container > .add-equipament_client-input-container > .add-equipament_client-input-control > .add-equipament_client-options-control > .add-equipament_client-option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
+}
+
+.add-equipament-container > .add-equipament_search-button-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-equipament-container > .add-equipament_search-button-container button{
+    margin-top:1rem;
+    padding:8px 0;
+    width:20%;
+    font-size: 19px;
+    background-color: #0079dc;
+    color: white;
+    border-radius: 25px;
+    border:none;
 }
 
 .add-equipament-container > .add-equipament-control{
@@ -605,10 +654,16 @@ button{
     padding:8px 0;
     width:20%;
     font-size: 19px;
-    background-color: #0079dc;
+    background-color: #0364b3;
     color: white;
     border-radius: 25px;
     border:none;
+    transition:0.2s;
+}
+
+.add-equipament-container > .add-equipament-control > .add-equipament-input-control button:hover{
+    transition: 0.2s;
+    background-color: #0079dc;
 }
 
 /* edit-client-section */
@@ -647,11 +702,11 @@ button{
 .edit-client-container > .client-select-control{
     margin-top:1.5rem;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 }
 
-.edit-client-container > .client-select-control select{
+.edit-client-container > .client-select-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -660,8 +715,56 @@ button{
     border-radius: 25px;
 }
 
-.edit-client-container > .client-select-control select:focus{
+.edit-client-container > .client-select-control input:focus{
     outline:1px solid #d61e1e;
+}
+
+.edit-client-container > .client-select-control > .edit-client_client-options-control{
+    display:none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 45%;
+    border-radius:25px;
+    margin-top:35px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-client-container > .client-select-control > .edit-client_client-options-control > .edit-client_client-option{
+    padding: 8px 0;
+    cursor: pointer;
+    transition:0.2s;
+    padding-left:8px;
+}
+
+.edit-client-container > .client-select-control > .edit-client_client-options-control > .edit-client_client-option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
+}
+
+.edit-client-container > .client-select_search-button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.edit-client-container > .client-select_search-button-container button{
+    margin-top:1rem;
+    padding:8px 0;
+    width:20%;
+    font-size: 19px;
+    background-color: #0364b3;
+    color: white;
+    border-radius: 25px;
+    border:none;
+    transition:0.2s;
+}
+
+.edit-client-container > .client-select_search-button-container button:hover{
+    transition:0.2s;
+    background-color: #0079dc;
 }
 
 .edit-client-container >.edit-client-control{
@@ -716,12 +819,12 @@ button{
     color: white;
     border-radius: 25px;
     border:none;
-    transition: 0.2s;
+    transition:0.2s;
 }
 
 .edit-client-container > .edit-client-control > .edit-client-input-control button:hover{
+    transition:0.2s;
     background-color: #0079dc;
-    transition: 0.2s;
 }
 
 /* edit-equipament-section */
@@ -764,7 +867,7 @@ button{
     margin-top:1.5rem;
 }
 
-.edit-equipament-container > .client-select-control select{
+.edit-equipament-container > .client-select-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -773,17 +876,59 @@ button{
     border-radius: 25px;
 }
 
-.edit-equipament-container > .client-select-control select:focus{
+.edit-equipament-container > .client-select-control input:focus{
     outline: 1px solid #d61e1e;
 }
 
-.edit-equipament-container > .edit-equipament-control{
+.edit-equipament-container > .client-select-control > .edit-equipament_client-options-control{
+    display: none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 45%;
+    border-radius:25px;
+    margin-top:35px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-equipament-container > .client-select-control > .edit-equipament_client-options-control > .edit-equipament_client-option{
+    padding: 8px 0;
+    padding-left:8px;
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.edit-equipament-container > .client-select-control > .edit-equipament_client-options-control > .edit-equipament_client-option:hover{
+    transition:0.2s;
+    background-color: #d2d2d2;
+}
+
+.edit-equipament-container > .client-select-control button{
+    margin-top:1rem;
+    padding:8px 0;
+    width:20%;
+    font-size: 19px;
+    background-color: #0364b3;
+    color: white;
+    border-radius: 25px;
+    border:none;
+    transition:0.2s;
+}
+
+.edit-equipament-container > .client-select-control button:hover{
+    transition:0.2s;
+    background-color: #0079dc;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-search-control{
     display: none;
     flex-direction: column;
     align-items: center;
 }
 
-.edit-equipament-container > .edit-equipament-control > .title-container{
+.edit-equipament-container > .edit-equipament_equipament-search-control > .title-container{
     margin-top:2rem;
     display: flex;
     flex-direction: column;
@@ -791,11 +936,11 @@ button{
     margin-bottom:1.5rem;
 }
 
-.edit-equipament-container > .edit-equipament-control > .title-container h2{
+.edit-equipament-container > .edit-equipament_equipament-search-control > .title-container h2{
     font-size: 25px;
 }
 
-.edit-equipament-container > .edit-equipament-control > .title-container > .line{
+.edit-equipament-container > .edit-equipament_equipament-search-control > .title-container > .line{
     width:150px;
     background-color: #d61e1e;
     height: 2px;
@@ -803,7 +948,14 @@ button{
     margin-left:7rem;
 }
 
-.edit-equipament-container > .edit-equipament-control select{
+.edit-equipament-container > .edit-equipament_equipament-search-control > .equipament-search-input-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-search-control > .equipament-search-input-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -812,11 +964,79 @@ button{
     border-radius: 25px;
 } 
 
-.edit-equipament-container > .edit-equipament-control select:focus{
+.edit-equipament-container > .edit-equipament_equipament-search-control > .equipament-search-input-control input:focus{
     outline:1px solid #d61e1e;
 }
 
-.edit-equipament-container > .edit-equipament-control input{
+.edit-equipament-container > .edit-equipament_equipament-search-control > .equipament-search-input-control > .edit-equipament_equipament-search-options-control{
+    display: none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 45%;
+    border-radius:25px;
+    margin-top:35px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-search-control > .equipament-search-input-control > .edit-equipament_equipament-search-options-control > .edit-equipament_equipament-search-option{
+    padding: 8px 0;
+    padding-left:8px;
+    transition:0.2s;
+    cursor:pointer;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-search-control > .equipament-search-input-control > .edit-equipament_equipament-search-options-control > .edit-equipament_equipament-search-option:hover{
+    transition:0.2s;
+    background-color: #d2d2d2;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-search-control > .equipament-search-input-control button{
+    margin-top:1rem;
+    padding:8px 0;
+    width:20%;
+    font-size: 19px;
+    background-color: #0364b3;
+    color: white;
+    border-radius: 25px;
+    border:none;
+    transition:0.2s;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-search-control > .equipament-search-input-control button:hover{
+    background-color: #0079dc;
+    transition:0.2s;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-edit-control{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-edit-control > .title-container{
+    margin-top:2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom:1.5rem;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-edit-control > .title-container h3{
+    font-size: 25px;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-edit-control > .title-container > .line{
+    width:150px;
+    background-color: #d61e1e;
+    height: 2px;
+    margin-top:0.2rem;
+    margin-left:7rem;
+}
+
+.edit-equipament-container > .edit-equipament_equipament-edit-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -825,11 +1045,11 @@ button{
     border-radius: 25px;
 }
 
-.edit-equipament-container > .edit-equipament-control input:focus{
+.edit-equipament-container > .edit-equipament_equipament-edit-control input:focus{
     outline:1px solid #d61e1e;
 }
 
-.edit-equipament-container > .edit-equipament-control button{
+.edit-equipament-container > .edit-equipament_equipament-edit-control button{
     margin-top:1rem;
     padding:8px 0;
     width:20%;
@@ -841,7 +1061,7 @@ button{
     transition: 0.2s;
 }
 
-.edit-equipament-container > .edit-equipament-control button:hover{
+.edit-equipament-container > .edit-equipament_equipament-edit-control button:hover{
     background-color: #0079dc;
     transition:0.2s;
 }
@@ -886,7 +1106,7 @@ button{
     margin-top:1.5rem;
 }
 
-.delete-client-container > .client-select-control select{
+.delete-client-container > .client-select-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -895,8 +1115,33 @@ button{
     border-radius: 25px;
 }
 
-.delete-client-container > .client-select-control select:focus{
+.delete-client-container > .client-select-control input:focus{
     outline:1px solid #d61e1e;
+}
+
+.delete-client-container > .client-select-control > .delete-client-options-control{
+    display: none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 45%;
+    border-radius:25px;
+    margin-top:35px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.delete-client-container > .client-select-control > .delete-client-options-control > .delete-client-option{
+    padding:8px 0;
+    padding-left: 8px;
+    cursor: pointer;
+    transition:0.2;
+}
+
+.delete-client-container > .client-select-control > .delete-client-options-control > .delete-client-option:hover{
+    transition:0.2s;
+    background-color: #d2d2d2;
 }
 
 .delete-client-container > .client-select-control button{
@@ -911,7 +1156,7 @@ button{
     transition: 0.2s;
 }
 
-.delete-client-container > .client-select-control button:hover{
+.delete-client-container > .add-equipament_client-input-container button:hover{
     background-color: #d61e1e;
     transition:0.2s; 
 }
@@ -920,7 +1165,7 @@ button{
 
 .delete-equipament-section{
     width:100%;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
     margin:1.5rem 0;
@@ -956,7 +1201,7 @@ button{
     margin-top:1.5rem;
 }
 
-.delete-equipament-container > .client-select-control select{
+.delete-equipament-container > .client-select-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -965,8 +1210,50 @@ button{
     border-radius: 25px;
 }
 
-.delete-equipament-container > .client-select-control select:focus{
+.delete-equipament-container > .client-select-control input:focus{
     outline: 1px solid #d61e1e;
+}
+
+.delete-equipament-container > .client-select-control > .delete-equipament_client-options-control{
+    display: none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 45%;
+    border-radius:25px;
+    margin-top:35px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.delete-equipament-container > .client-select-control > .delete-equipament_client-options-control > .delete-equipament_client-option{
+    padding: 8px 0;
+    cursor: pointer;
+    padding-left:8px;
+    transition:0.2s;
+}
+
+.delete-equipament-container > .client-select-control > .delete-equipament_client-options-control > .delete-equipament_client-option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
+}
+
+.delete-equipament-container > .client-select-control button{
+    margin-top:1rem;
+    padding:8px 0;
+    width:20%;
+    font-size: 19px;
+    background-color: #0364b3;
+    color: white;
+    border-radius: 25px;
+    border:none;
+    transition: 0.2s;
+}
+
+.delete-equipament-container > .client-select-control button:hover{
+    transition:0.2s;
+    background-color: #0079dc;
 }
 
 .delete-equipament-container > .delete-equipament-control{
@@ -995,7 +1282,14 @@ button{
     margin-left:7rem;
 }
 
-.delete-equipament-container > .delete-equipament-control select{
+.delete-equipament-container > .delete-equipament-control > .delete-equipament_equipament-input-control{
+    width:100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.delete-equipament-container > .delete-equipament-control > .delete-equipament_equipament-input-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -1004,8 +1298,33 @@ button{
     border-radius: 25px;
 }
 
-.delete-equipament-container > .delete-equipament-control select:focus{
+.delete-equipament-container > .delete-equipament-control > .delete-equipament_equipament-input-control  input:focus{
     outline:1px solid #d61e1e;
+}
+
+.delete-equipament-container > .delete-equipament-control > .delete-equipament_equipament-input-control > .delete-equipament_equipament-options-control{
+    display: none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 45%;
+    border-radius:25px;
+    margin-top:35px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.delete-equipament-container > .delete-equipament-control > .delete-equipament_equipament-input-control > .delete-equipament_equipament-options-control > .delete-equipament_equipament-option{
+    padding: 8px 0;
+    padding-left:8px;
+    cursor : pointer;
+    transition:0.2s;
+}
+
+.delete-equipament-container > .delete-equipament-control > .delete-equipament_equipament-input-control > .delete-equipament_equipament-options-control > .delete-equipament_equipament-option:hover{
+    background-color: #d2d2d2;
+    transition:0.2s;
 }
 
 .delete-equipament-container > .delete-equipament-control button{
@@ -1058,14 +1377,14 @@ button{
     margin-left:7rem;   
 }
 
-.consult-client-container > .client-select-control{
+.consult-client-container > .add-equipament_client-input-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top:1.5rem;
 }
 
-.consult-client-container > .client-select-control select{
+.consult-client-container > .add-equipament_client-input-container select{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -1074,11 +1393,11 @@ button{
     border-radius: 25px;
 }
 
-.consult-client-container > .client-select-control select:focus{
+.consult-client-container > .add-equipament_client-input-container select:focus{
     outline: 1px solid #d61e1e;
 }
 
-.consult-client-container > .client-select-control button{
+.consult-client-container > .add-equipament_client-input-container button{
     margin-top:1rem;
     padding:8px 0;
     width:20%;
@@ -1090,7 +1409,7 @@ button{
     transition: 0.2s;
 }
 
-.consult-client-container > .client-select-control button:hover{
+.consult-client-container > .add-equipament_client-input-container button:hover{
     background-color: #0079dc;
     transition:0.2s;
 }
