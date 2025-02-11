@@ -410,27 +410,49 @@
                 </div>
 
                 <div class="client-select-control">
-                    <select id="consult-client_client-select-list">
-                        <option value=""></option>
-                    </select>
+                    <input type="text" id="consult-client-input" autocomplete="off" placeholder="Digite o nome do cliente..."/>
+
+                    <div class="consult-client-options-control">
+                        <div class="consult-client-option">OPTION 1</div>
+                        <div class="consult-client-option">OPTION 2</div>
+                    </div>
 
                     <button id="consult-client-btn"><i class="fa-solid fa-users-viewfinder"></i>Consultar cliente</button>
                 </div>
 
                 <div class="result-consult-container">
-                    <div class="result-consult-control">
-                        <div class="client-name-control_result-consult">
-                            <h3><i class="fa-solid fa-user-tie"></i>CLIENTE</h3>
-
-                            <span class="client-name-title_result-consult"></span>
+                    <div class="client-result-container">
+                        <div class="title-container">
+                            <div class="line"></div>
+                            <h2>
+                                <i class="fa-solid fa-user-tie"></i>
+                                Informações do cliente
+                            </h2>
+                            <div class="line"></div>
                         </div>
-    
-                        <div class="line"></div>
-                        
-                        <div class="client-equipaments-control_result-consult">
-                            <h3><i class="fa-solid fa-truck"></i>EQUIPAMENTOS</h3>
 
-                            <div class="equipaments-items-control_result-consult"></div>
+                        <div class="client-data-control">
+                            <div class="client-data">
+                                <h3>Nome do cliente</h3>
+                                <span id="consult-result_client-name">DÍNAMO ENGENHARIA</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="equipaments-result-container">
+                        <div class="title-container">
+                            <div class="line"></div>
+                            <h2>
+                                <i class="fa-solid fa-truck"></i>
+                                Lista dos equipamentos
+                            </h2>
+                            <div class="line"></div>
+                        </div>
+
+                        <div class="equipament-data-control">
+                            <div class="equipament-data">
+                                GUINDASTE OF GUINDASTE
+                            </div>
                         </div>
                     </div>
                 </div>

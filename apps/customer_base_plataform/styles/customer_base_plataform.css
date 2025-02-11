@@ -600,14 +600,21 @@ button{
     padding:8px 0;
     width:20%;
     font-size: 19px;
-    background-color: #0079dc;
+    background-color: #0364b3;
     color: white;
     border-radius: 25px;
     border:none;
 }
 
+.add-equipament-container > .add-equipament_search-button-container button:hover{
+    transition:0.2s;
+    background-color: #0079dc;
+}
+
 .add-equipament-container > .add-equipament-control{
     display: none;
+    flex-direction: column;
+    align-items: center;
 }
 
 .add-equipament-container > .add-equipament-control > .title-container{
@@ -634,6 +641,7 @@ button{
     flex-direction: column;
     align-items: center;
     margin-top:1.5rem;
+    width: 100%;
 }
 
 .add-equipament-container > .add-equipament-control > .add-equipament-input-control input{
@@ -1165,7 +1173,7 @@ button{
 
 .delete-equipament-section{
     width:100%;
-    display: flex;
+    display:none;
     justify-content: center;
     align-items: center;
     margin:1.5rem 0;
@@ -1377,14 +1385,14 @@ button{
     margin-left:7rem;   
 }
 
-.consult-client-container > .add-equipament_client-input-container{
+.consult-client-container > .client-select-control{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top:1.5rem;
 }
 
-.consult-client-container > .add-equipament_client-input-container select{
+.consult-client-container > .client-select-control input{
     border:1px solid #969696;
     padding:8px 0;
     font-size:15px;
@@ -1393,11 +1401,36 @@ button{
     border-radius: 25px;
 }
 
-.consult-client-container > .add-equipament_client-input-container select:focus{
+.consult-client-container > .client-select-control input:focus{
     outline: 1px solid #d61e1e;
 }
 
-.consult-client-container > .add-equipament_client-input-container button{
+.consult-client-container > .client-select-control > .consult-client-options-control{
+    display: none;
+    border: 1px solid #969696;
+    background-color: #fff;
+    width: 45%;
+    border-radius:25px;
+    margin-top:35px;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 1000;
+    font-size:15px;
+}
+
+.consult-client-container > .client-select-control > .consult-client-options-control > .consult-client-option{
+    cursor: pointer;
+    padding: 8px 0;
+    padding-left:8px;
+    transition:0.2s;
+}
+
+.consult-client-container > .client-select-control > .consult-client-options-control > .consult-client-option:hover{
+    background-color: #d2d2d2;
+    transition: 0.2s;
+}
+
+.consult-client-container > .client-select-control button{
     margin-top:1rem;
     padding:8px 0;
     width:20%;
@@ -1409,7 +1442,7 @@ button{
     transition: 0.2s;
 }
 
-.consult-client-container > .add-equipament_client-input-container button:hover{
+.consult-client-container > .client-select-control button:hover{
     background-color: #0079dc;
     transition:0.2s;
 }
@@ -1417,78 +1450,128 @@ button{
 /* result-consult-container */
 
 .result-consult-container{
-    display: none;
-    justify-content: center;
-    align-items: center;
-    margin:2rem 0;
-}
-
-.result-consult-control{
-    width:70%;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: #d61e1e;
-    border-radius:25px;
-    padding:1.5rem 0.5rem;
-}
-
-.result-consult-control > .client-name-control_result-consult{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-}
-
-.result-consult-control > .client-name-control_result-consult h3{
-    font-size:20px;
-}
-
-.result-consult-control > .client-name-control_result-consult h3 > i{
-    margin-right:5px;
-}
-
-.result-consult-control > .client-name-control_result-consult span{
-    margin-top:1rem;
-    font-size:18px;
-}
-
-.result-consult-control > .line{
-    width:45%;
-    height:2px;
-    background-color: #000;
-    margin:1rem 0;
-}
-
-.result-consult-control > .client-equipaments-control_result-consult{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.result-consult-control > .client-equipaments-control_result-consult h3{
     width:100%;
-    text-align: center;
-    margin-bottom:0.6rem;
-    font-size:20px;
+    display : none;
+    align-items: center;
+    flex-direction: column;
+    margin:1.5rem 0;
 }
 
-.result-consult-control > .client-equipaments-control_result-consult h3 > i{
-    margin-right:5px;
+.result-consult-container > *{
+    margin:2.5rem 0;
 }
 
-.result-consult-control > .client-equipaments-control_result-consult > .equipaments-items-control_result-consult{
+.result-consult-container > .client-result-container{
+    width:90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.result-consult-container > .client-result-container > .title-container{
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
 }
 
-.result-consult-control > .client-equipaments-control_result-consult > .equipaments-items-control_result-consult span{
-    width:23%;
+.result-consult-container > .client-result-container > .title-container > .line{
+    background-color: #d61e1e;
+    height:2px;
+    width:95px;
+    margin:0 1.5rem;
+}
+
+.result-consult-container > .client-result-container > .title-container h2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size:20px;
+}
+
+.result-consult-container > .client-result-container > .title-container h2 > i{
+    font-size:40px;
+    margin-bottom:0.5rem;
+}
+
+.result-consult-container > .client-result-container > .client-data-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:2rem;
+    width:80%;
+    border: 2px solid #d61e1e;
+    border-top:1rem solid #d61e1e;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.result-consult-container > .client-result-container > .client-data-control > .client-data{
+    background-color:#ececec;
+    padding:1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.result-consult-container > .client-result-container > .client-data-control > .client-data h3,
+.result-consult-container > .client-result-container > .client-data-control > .client-data span{
+    width:50%;
     text-align: center;
-    margin:0.4rem 3px;
-    font-size:16px;
+}
+
+
+.result-consult-container > .equipaments-result-container{
+    width:90%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.result-consult-container > .equipaments-result-container > .title-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.result-consult-container > .equipaments-result-container > .title-container > .line{
+    background-color: #d61e1e;
+    height:2px;
+    width:95px;
+    margin:0 1.5rem;
+}
+
+.result-consult-container > .equipaments-result-container > .title-container h2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    font-size:20px;
+}
+
+.result-consult-container > .equipaments-result-container > .title-container h2 > i{
+    font-size:40px;
+    margin-bottom:0.5rem;
+}
+
+.result-consult-container > .equipaments-result-container > .equipament-data-control{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top:2rem;
+    width:80%;
+    border: 2px solid #d61e1e;
+    border-top:1rem solid #d61e1e;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+.result-consult-container > .equipaments-result-container > .equipament-data-control > .equipament-data{
+    background-color:#ececec;
+    padding:1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
 }
 
 /* footer */

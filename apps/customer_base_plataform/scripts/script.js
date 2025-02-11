@@ -159,8 +159,11 @@ async function backHomeProcess(){
     }
 
     hideHtmlElement([
+        addEquipamentControl,
+        editClientControl,
         editEquipament_equipamentSearchControl,
-        editEquipament_equipamentEditControl
+        editEquipament_equipamentEditControl,
+        deleteEquipamentControl
     ])
 
     showHtmlElement([mainHubSection],"flex");
@@ -501,29 +504,6 @@ const addEquipamentBtn = document.querySelector("#add-equipament-btn");
 
 //functions
 
-function createSelectListHtml_clients(targetList){
-    let clientsArray = [];
-    clients_equipaments_array.forEach((client)=>{
-        clientsArray.push(client.name);  
-    })
-
-    targetList.innerHTML = "";
-
-    let noValueOption = document.createElement("option");
-    noValueOption.value = "";
-    targetList.add(noValueOption);
-
-    clientsArray.forEach((client)=>{
-        let option = document.createElement("option");
-
-        option.value = client;
-        option.textContent = client;
-
-        targetList.add(option);
-    })
-
-}
-
 async function createClientSuggestions(
     clientInput,
     optionsControl,
@@ -784,34 +764,6 @@ const editEquipamentInput = document.querySelector("#edit-equipament-input");
 const editEquipamentBtn = document.querySelector("#edit-equipament-btn");
 
 // functions
-
-function createSelectListHtml_equipaments(targetList, targetClientList){
-    let equipamentsArray = [];
-
-    clients_equipaments_array.forEach((client) => {
-        if(client.name === targetClientList.value){
-            client.equipaments.forEach((equipament) => {
-                equipamentsArray.push(equipament);
-            })
-        }
-    });
-
-    targetList.innerHTML = "";
-
-    let noValueOption = document.createElement("option");
-    noValueOption.value = "";
-    targetList.add(noValueOption);
-
-    equipamentsArray.forEach((equipament)=>{
-        let option = document.createElement("option");
-
-        option.value = equipament;
-        option.textContent = equipament;
-
-        targetList.add(option);
-    })
-
-}
 
 async function createEquipamentSuggestions(
     clientInput,
@@ -1161,60 +1113,51 @@ deleteEquipamentBtn.addEventListener("click", ()=>{
 
 // elements 
 const consultClientSection = document.querySelector(".consult-client-section");
-const consultClient_clientSelecList = document.querySelector("#consult-client_client-select-list");
+const consultClientInput = document.querySelector("#consult-client-input");
+const consultClientOptionsControl = document.querySelector(".consult-client-options-control");   
 const consultClientBtn = document.querySelector("#consult-client-btn");
+
 const resultConsultContainer = document.querySelector(".result-consult-container");
-const clientNameTitle_resultConsult = document.querySelector(".client-name-title_result-consult");
-const equipamentsItemsControl_resultConsult = document.querySelector(".equipaments-items-control_result-consult");
 
 // functions
 
-async function displayConsultResultHtml(clientObject){
-    clientNameTitle_resultConsult.innerHTML = "";
+ async function displayConsultResultHtml(clientObject){
+    const consultResult_clientName = document.querySelector("#consult-result_client-name");
+    const equipamentDataControl = document.querySelector(".equipament-data-control");
+    consultResult_clientName.innerHTML = "";
+    equipamentDataControl.innerHTML = "";
 
-    clientNameTitle_resultConsult.innerHTML = clientObject.name;
+    consultResult_clientName.innerHTML = clientObject.name;
 
-    equipamentsItemsControl_resultConsult.innerHTML = "";
+    clientObject.equipaments.forEach((equipament)=>{
+        let equipamentData = document.createElement("div");
 
-    if(clientObject.equipaments.length === 0){
-        let span = document.createElement("span");
+        equipamentData.className = "equipament-data";
+        equipamentData.innerHTML = equipament;
 
-        span.textContent = "EQUIPAMENTOS AINDA NÃO ADICIONADOS !";
+        equipamentDataControl.appendChild(equipamentData);
+    });
 
-        equipamentsItemsControl_resultConsult.appendChild(span);
-    }else{
-        for(let i = 0 ; i < clientObject.equipaments.length ; i++){
-            let span = document.createElement("span");
-    
-            span.textContent = clientObject.equipaments[i];
-    
-            equipamentsItemsControl_resultConsult.appendChild(span);
-        }
-    }
-
-    let allSpans = document.querySelectorAll(".equipaments-items-control_result-consult span");
-
-    if(allSpans.length === 1){
-        allSpans[0].style.width = "99%";
-    }else if(allSpans.length === 2){
-        for(let i = 0;i < allSpans.length ; i++){
-            allSpans[i].style.width = "49%"
-        }
-    }else if(allSpans.length === 3){
-        for(let i = 0;i < allSpans.length ; i++){
-            allSpans[i].style.width = "32%"
-        }
-    }else if(allSpans.length >= 4){
-        for(let i = 0;i < allSpans.length ; i++){
-            allSpans[i].style.width = "23%"
-        }
-    };
+    await showHtmlElement([resultConsultContainer], "flex");
 }
 
 async function consultClientProcess(){
-    if(consultClient_clientSelecList.value === ""){
+    if(consultClientInput.value === ""){
         showMessagePopup("errorMsg", "Selecione um cliente para consulta !");
         return;
+    }
+
+    let clientExists = false;
+
+    clients_equipaments_array.forEach((client)=>{
+        if(client.name === consultClientInput.value){
+            clientExists = true;
+        }
+    });
+
+    if(!clientExists){
+        await showMessagePopup("erroMsg", "Cliente informado não existe ! Tente novamente !");
+        return
     }
 
     let clientObject = {
@@ -1223,13 +1166,11 @@ async function consultClientProcess(){
     }
 
     clients_equipaments_array.forEach((client)=>{
-        if(client.name === consultClient_clientSelecList.value){
+        if(client.name === consultClientInput.value){
             clientObject.name = client.name;
             clientObject.equipaments = client.equipaments;
         }
     });
-
-    showHtmlElement([resultConsultContainer],"flex");
 
     await displayConsultResultHtml(clientObject);
 }
@@ -1238,10 +1179,17 @@ async function consultClientProcess(){
 
 consultClientLink.addEventListener("click", ()=>{
     backHomeProcess();
-    createSelectListHtml_clients(consultClient_clientSelecList);
     hideHtmlElement([resultConsultContainer]);
     showHtmlElement([consultClientSection], "flex");
-}) 
+});
+
+consultClientInput.addEventListener("input", async ()=>{
+    await createClientSuggestions(
+        consultClientInput,
+        consultClientOptionsControl,
+        "consult-client-option"
+    )
+})
 
 consultClientBtn.addEventListener("click", ()=>{
     consultClientProcess();

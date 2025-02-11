@@ -171,9 +171,10 @@ function formatToBrl(value){
 // formato BRL to float
 
 function currencyToFloatNum(value){
-    const number = value.replace(/[^\d,-]/g, '').replace('.', '').replace(',', '.');
+    value = value.replace(/[^\d,-]/g, '').replace('.', '').replace(',', '.');
+    value = parseFloat(value);
 
-    return parseFloat(number);
+    return value;
 }
 
 function currencyToStringFormat(value){
@@ -405,73 +406,72 @@ async function clearInputs([...inputs]){
     })
 }
 
-async function updateTotalSpan(spanGroupHtml, spanResultHtml){
-    const allSpansHtml = document.querySelectorAll(`.${spanGroupHtml}`);
+async function updateTotal_servicesAndParts(){
+    const partsTotalValueSpan = document.querySelectorAll(".parts-total-value-span");
 
-    let totalValue = null;
+    let totalValueOfParts = 0;
 
-    for(let i = 0 ; i < allSpansHtml.length ; i++){
-        let number = currencyToFloatNum(allSpansHtml[i].innerText);
-
-        totalValue += number;
+    if(partsTotalValueSpan[0] !== null || partsTotalValueSpan[0] !== undefined){
+        partsTotalValueSpan.forEach((span)=>{
+            let value = span.innerText;
+            value = currencyToFloatNum(value);
+    
+            totalValueOfParts += value;
+        })
     }
 
-    const resultSpan = document.querySelector(`.${spanResultHtml}`);
-
-    resultSpan.innerHTML = "";
-
-    let totalValueString = formatToBrl(totalValue);
-
-    if (totalValueString === "R$ NaN"){
-        totalValueString = "R$ 0,00";
+    if(partsTotalValueSpan[0] === null || partsTotalValueSpan[0] === undefined){
+        totalValueOfParts = 0;
     }
 
-    resultSpan.innerText = totalValueString;
-
-}
-
-async function updateTotalSpans_BudgetProdSection(){
+    totalValueOfParts = formatToBrl(totalValueOfParts);
+    
     const partsItemTotalSpan = document.querySelector(".parts-item-total-span");
+    partsItemTotalSpan.innerHTML = "";
+    partsItemTotalSpan.innerHTML = totalValueOfParts;
+    
+    const totalOfPartsDisplaySpan = document.querySelector(".total-of-parts-display-span");
+    totalOfPartsDisplaySpan.innerHTML = "";
+    totalOfPartsDisplaySpan.innerHTML = totalValueOfParts;
+
+    const serviceTotalValueSpan = document.querySelectorAll(".service-total-value-span");
+    let totalValueOfServices = 0;
+
+    if(serviceTotalValueSpan[0] !== null || servicesTotalValueSpan[0] !== undefined){
+        serviceTotalValueSpan.forEach((span)=>{
+            let value = span.innerText;
+            value = currencyToFloatNum(value);
+    
+            totalValueOfServices += value;
+        });
+    }
+
+    if(serviceTotalValueSpan[0] === null || serviceTotalValueSpan[0] === undefined){
+        totalValueOfServices = 0;
+    }
+
+    totalValueOfServices = formatToBrl(totalValueOfServices);
+
     const servicesItemTotalSpan = document.querySelector(".services-item-total-span");
-    let partsItemsValue = 0;
-    let servicesItemsValue = 0;
-    let totalBudgetValue = 0;
+    servicesItemTotalSpan.innerHTML = "";
+    servicesItemTotalSpan.innerHTML = totalValueOfServices;
 
-    const totalPartsDisplaySpan = document.querySelector(".total-of-parts-display-span");
-    const totalServicesDisplaySpan = document.querySelector(".total-of-services-display-span");
-    const totalBudgetDisplaySpan = document.querySelector(".total-of-budget-display-span");
+    const totalOfServicesDisplaySpan = document.querySelector(".total-of-services-display-span");
+    totalOfServicesDisplaySpan.innerHTML = "";
+    totalOfServicesDisplaySpan.innerHTML = totalValueOfServices;
+    
+    let totalValueOfPartsAndServices = 0;
 
-    //clear inputs
-    totalPartsDisplaySpan.innerHTML = "";
-    totalServicesDisplaySpan.innerHTML = "";
-    totalBudgetDisplaySpan.innerHTML = "";
+    totalValueOfParts = currencyToFloatNum(totalOfPartsDisplaySpan.innerText);
+    totalValueOfServices = currencyToFloatNum(totalOfServicesDisplaySpan.innerText);
 
-    if (partsItemTotalSpan.innerText === ""){
-        partsItemTotalSpan.innerText = "R$ 0,00";
-    }
+    totalValueOfPartsAndServices = totalValueOfParts + totalValueOfServices;
 
-    if(servicesItemTotalSpan.innerText === ""){
-        servicesItemTotalSpan.innerText = "R$ 0,00"
-    }
+    totalValueOfPartsAndServices = formatToBrl(totalValueOfPartsAndServices);
 
-    let partsItemsValueString = currencyToFloatNum(partsItemTotalSpan.innerText)
-    let servicesItemsValueString = currencyToFloatNum(servicesItemTotalSpan.innerText);
-
-    partsItemsValue = partsItemsValueString;
-    servicesItemsValue = servicesItemsValueString;
-
-    totalBudgetValue = partsItemsValue + servicesItemsValue;
-        
-    let totalBudgetValueString = formatToBrl(totalBudgetValue);
-    partsItemsValueString = formatToBrl(partsItemsValue);
-    servicesItemsValueString = formatToBrl(servicesItemsValue);
-
-    totalPartsDisplaySpan.innerHTML = partsItemsValueString;
-    totalServicesDisplaySpan.innerHTML = servicesItemsValueString
-    totalBudgetDisplaySpan.innerHTML = totalBudgetValueString;
-
-    return;
-
+    const totalOfBudgetDisplaySpan = document.querySelector(".total-of-budget-display-span");
+    totalOfBudgetDisplaySpan.innerHTML = "";
+    totalOfBudgetDisplaySpan.innerHTML = totalValueOfPartsAndServices;
 }
 
 async function createPartItem(quantString, descriptionString, unitValueString){
@@ -525,8 +525,7 @@ async function createPartItem(quantString, descriptionString, unitValueString){
 
 async function deleteItem_partItem(element){
     element.remove();
-    updateTotalSpan("parts-total-value-span", "parts-item-total-span");
-    updateTotalSpans_BudgetProdSection();
+    await updateTotal_servicesAndParts();
 
     await handleAllEventListeners_partsItem();
 }
@@ -552,8 +551,8 @@ async function editItem_partItem(element, elementIndex){
         await deleteItem_partItem(element);
     },1)
 
-    updateTotalSpan("parts-total-value-span", "parts-item-total-span");
-    updateTotalSpans_BudgetProdSection();
+    await updateTotal_servicesAndParts();
+
 }
 
 async function handleAllEventListeners_partsItem(){
@@ -607,7 +606,7 @@ async function addPartItemProcess(){
     }
 
     await createPartItem(partQuantInput.value, partDescriptionInput.value, partUnitValueInput.value)
-    await updateTotalSpan("parts-total-value-span", "parts-item-total-span");
+    await updateTotal_servicesAndParts();
 
     await handleAllEventListeners_partsItem();
 
@@ -627,6 +626,8 @@ upperCaseInputs([
     partDescriptionInput
 ])
 
+updateTotal_servicesAndParts();
+
 // event listerers
 
 partQuantInput.addEventListener('input', (event)=>{
@@ -643,8 +644,7 @@ partUnitValueInput.addEventListener('input', (event)=>{
 
 partUnitValueInput.addEventListener('keydown',async (event)=>{
     if(event.key === "Enter"){
-        await addPartItemProcess();
-        await updateTotalSpans_BudgetProdSection();
+        await addPartItemProcess(); 
 
         partQuantInput.focus();
     }
@@ -652,7 +652,6 @@ partUnitValueInput.addEventListener('keydown',async (event)=>{
 
 partAddItemBtn.addEventListener("click", async ()=>{
     await addPartItemProcess();
-    await updateTotalSpans_BudgetProdSection();
 
     partQuantInput.focus();
 });
@@ -718,8 +717,7 @@ async function createServiceItem(quantString , descriptionString , unitValueStri
 
 async function deleteItem_serviceItem(element){
     element.remove();
-    updateTotalSpan("service-total-value-span", "services-item-total-span");
-    updateTotalSpans_BudgetProdSection();
+    await updateTotal_servicesAndParts();
 
     await handleAllEventListeners_servicesItem();
 }
@@ -738,11 +736,9 @@ async function editItem_serviceItem(element, elementIndex){
     setTimeout(async()=>{
         await deleteItem_serviceItem(element);
     },1)
-
-    updateTotalSpan("service-total-value-span", "services-item-total-span");
-    updateTotalSpans_BudgetProdSection();
-
+    
     await handleAllEventListeners_servicesItem();
+    await updateTotal_servicesAndParts();
 }
 
 async function handleAllEventListeners_servicesItem(){
@@ -794,9 +790,10 @@ async function addServiceItemProcess(){
     }
     
     await createServiceItem(serviceQuantInput.value, serviceDescriptionInput.value , serviceUnitValueInput.value);
-    await updateTotalSpan("service-total-value-span", "services-item-total-span");
+    
 
     await handleAllEventListeners_servicesItem();
+    await updateTotal_servicesAndParts();
     
     await clearInputs([
         serviceQuantInput,
@@ -823,7 +820,6 @@ serviceQuantInput.addEventListener('input', (event)=>{
 
 serviceAddItemBtn.addEventListener("click", ()=>{
     addServiceItemProcess();
-    updateTotalSpans_BudgetProdSection();
 
     serviceQuantInput.focus();
 })
@@ -837,7 +833,6 @@ serviceUnitValueInput.addEventListener('input', (event)=>{
 serviceUnitValueInput.addEventListener('keydown',(event)=>{
     if(event.key === "Enter"){
         addServiceItemProcess();
-        updateTotalSpans_BudgetProdSection();
 
         serviceQuantInput.focus();
     }
@@ -916,9 +911,33 @@ async function createExpenseItem(quantString, descriptionString, unitValueString
     expensesAddedItemsControl.appendChild(itemHtml);
 }
 
+async function updateTotal_expenseSection(){
+    const expenseTotalValueSpan = document.querySelectorAll(".expense-total-value-span");
+    let totalValueOfExpenses = 0;
+
+    if(expenseTotalValueSpan !== null ||expenseTotalValueSpan !== undefined){
+        expenseTotalValueSpan.forEach((span)=>{
+            let value = span.innerText;
+            value = currencyToFloatNum(value);
+
+            totalValueOfExpenses += value;
+        })
+    }
+
+    if(expenseTotalValueSpan === null ||expenseTotalValueSpan === undefined){
+        totalValueOfExpenses = 0
+    }
+
+    totalValueOfExpenses = formatToBrl(totalValueOfExpenses);
+
+    const expensesItemTotalSpan = document.querySelector(".expenses-item-total-span");
+    expensesItemTotalSpan.innerHTML = "";
+    expensesItemTotalSpan.innerHTML = totalValueOfExpenses;
+}
+
 async function deleteItem_expenseItem(element){
     element.remove();
-    updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+    await updateTotal_expenseSection();
 
     await handleAllEventListeners_expensesItem();
 }
@@ -941,7 +960,7 @@ async function editItem_expenseItem(element, elementIndex){
         await deleteItem_expenseItem(element);
     },1)
 
-    updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+    await updateTotal_expenseSection();
 }
 
 async function handleAllEventListeners_expensesItem(){
@@ -993,7 +1012,7 @@ async function addExpenseItemProcess(){
     }
 
     await createExpenseItem(expenseQuantInput.value,expenseDescriptionInput.value,expenseUnitValueInput.value);
-    await updateTotalSpan("expense-total-value-span", "expenses-item-total-span");
+    await updateTotal_expenseSection();
 
     await handleAllEventListeners_expensesItem();
 
@@ -1011,6 +1030,7 @@ upperCaseInputs([
 ]);
 
 handleAllEventListeners_expensesItem();
+updateTotal_expenseSection();
 
 // event listeners
 
@@ -1535,10 +1555,10 @@ function backHomeProcess(){
 //event listerner
 
 generateBudgetBtn.addEventListener("click", async ()=>{
-    if(budgetNumberSpan.innerText === ""){
+    /* if(budgetNumberSpan.innerText === ""){
         await confirmationProcess();
         return;
-    }
+    } */
 
     await displayBudgetProcess();
 })
