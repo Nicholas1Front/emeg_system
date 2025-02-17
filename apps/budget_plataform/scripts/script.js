@@ -1555,10 +1555,10 @@ function backHomeProcess(){
 //event listerner
 
 generateBudgetBtn.addEventListener("click", async ()=>{
-    /* if(budgetNumberSpan.innerText === ""){
+    if(budgetNumberSpan.innerText === ""){
         await confirmationProcess();
         return;
-    } */
+    }
 
     await displayBudgetProcess();
 })
