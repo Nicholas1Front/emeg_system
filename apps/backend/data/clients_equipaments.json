@@ -163,10 +163,20 @@
     ]
   },
   {
+<<<<<<< HEAD
     "name": "CAMPOS MOVIMENTAÇÕES",
     "contact":[ "(+55 98 8247-0262 / lucas)"],
     "cnpj_cpf": null,
     "locality" : ["BALSAS/MA"],
+=======
+    "name": "CACAU",
+    "equipaments": [
+      "FIORINO OXW6G36"
+    ]
+  },
+  {
+    "name": "CAMPOS MOVIMENTAÇÕES (+55 98 8247-0262 / LUCAS)",
+>>>>>>> 1472c3cd02b42d1329ab5c32b3f583c8deed78c4
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 31.280 RXA2D24",
       "CAMINHÃO VOLKSWAGEN 31.280 RWL4I03",
@@ -213,10 +223,18 @@
     ]
   },
   {
+<<<<<<< HEAD
     "name": "COSMEPEÇAS",
     "contact":[ ],
     "cnpj_cpf": null,
     "locality" : ["SÃO LUÍS/MA"],
+=======
+    "name": "CONSTRUTORA ESCUDO ",
+    "equipaments": []
+  },
+  {
+    "name": "COSMEPEÇAS (SILVIA)",
+>>>>>>> 1472c3cd02b42d1329ab5c32b3f583c8deed78c4
     "equipaments": [
       "MOTONIVELADORA NEW HOLLAND",
       "CAMINHÃO VOLKSWAGEN HPL-2941",
@@ -258,7 +276,8 @@
       "CAMINHÃO VOLKSWAGEN 24-280",
       "CAMINHÃO SHINERAY TRUCK SMT9A58",
       "CAMINHÃO SHINERAY TRUCK SMU3H53",
-      "CAMINHÃO FORD CARGO 1719 FFA7D79"
+      "CAMINHÃO FORD CARGO 1719 FFA7D79",
+      "CAMINHÃO VOLKSWAGEN NHR-2787"
     ]
   },
   {
@@ -286,7 +305,11 @@
       "CAMINHÃO FORD CARGO OIU-3133",
       "CAMINHÃO FORD CARGO 1317 AREINHA",
       "TRATOR VALTRA BN 110",
-      "TRATOR DE ESTEIRA KOMATSU"
+      "TRATOR DE ESTEIRA KOMATSU",
+      "CAMINHONETE TOYOTA HILUX PST-0537",
+      "MOTOR VOLKSWAGEN SAVEIRO ",
+      "CAMINHÃO FORD CARGO HQD-3525",
+      "CAMINHONETE VOLKSWAGEN SAVEIRO "
     ]
   },
   {
@@ -651,7 +674,8 @@
       "MANIPULADOR JCB 540160",
       "TRATOR TL 85E NEW HOLLAND",
       "GUINDASTE XCMG QY25",
-      "MANIPULADOR JCB 540170"
+      "MANIPULADOR JCB 540170",
+      "ROLO COMPACTADOR DYNAPAC CA-25"
     ]
   },
   {
@@ -760,10 +784,20 @@
     ]
   },
   {
+<<<<<<< HEAD
     "name": "NORTE CARGAS",
     "contact":[ "(roberto nascimento / +55 98 8300-0136)"],
     "cnpj_cpf": null,
     "locality" : ["SÃO LUÍS/MA"],
+=======
+    "name": "MUNDIAL TRANSPORTES ( +55 94 9181-0222)",
+    "equipaments": [
+      "CAMINHÃO VOLKSWAGEN 31.280 RWL4123"
+    ]
+  },
+  {
+    "name": "NORTE CARGAS (ROBERTO NASCIMENTO / +55 98 8300-0136)",
+>>>>>>> 1472c3cd02b42d1329ab5c32b3f583c8deed78c4
     "equipaments": [
       "EMPILHADEIRA HYSTER H50CT- BR"
     ]
@@ -866,10 +900,14 @@
     ]
   },
   {
+<<<<<<< HEAD
     "name": "PHM MECÂNICA",
     "contact":[ "(phm.ma@phm.mecanica.com.br/andreia)"],
     "cnpj_cpf": null,
     "locality" : ["SÃO LUÍS/MA"],
+=======
+    "name": "PHM SERVICES & SOLUTIONS LTDA (PHM.MA@PHM.MECANICA.COM.BR/ANDREIA)",
+>>>>>>> 1472c3cd02b42d1329ab5c32b3f583c8deed78c4
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 15180 GUINDAUTO PALFINGER",
       "CAMINHÃO VOLKSWAGEN 24-220 WORKER HNE-4220",
@@ -972,7 +1010,9 @@
       "GUINDASTE SANY 80T OXV-6494",
       "GUINDASTE TADANO 30TON HJI3C15",
       "GUINDASTE SANY STC 800",
-      "CAMINHÃO PRANCHA EQU1I04"
+      "CAMINHÃO PRANCHA EQU1I04",
+      "CAMINHÃO FORD OJA-9096",
+      "CAMINHÃO FORD NNH-4497"
     ]
   },
   {
@@ -1044,7 +1084,7 @@
     "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 31.280 RXA2D24",
-      "CAMINHÃO VOLKSWAGEN 31.280 RWL4I03",
+      "CAMINHÃO VOLKSWAGEN 31.280 RWL4123",
       "GUINDASTE SANY STC 75",
       "GUINDASTE MADAL MD300"
     ]
