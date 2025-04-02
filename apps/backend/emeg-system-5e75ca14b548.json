@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "emeg-system",
+  "private_key_id": "5e75ca14b548d8ebabb9a34b3c22e570adb07c50",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDT/skUcZH1t69z\nhnWqwhUDAGkL0nlALF1wxRTNVjSiz5Gj9rc32AGNYXszo31qmlQkRslTXSoTHK2V\nclxEEk6Xz/4r0pZMS5P1qFobjY7Hf1Od/dRf4kw18DYVKRxPsZz+tWC4mNWraxGF\nbUJyLIMUuV0pljPQFPQxLFOP6CQ72GMvW5I2dE5TgpR7Ip1ktq0nRYFaoD08/6z5\nOAuI4+S9KQzRc2FEeuFOO21ZURH6/vkCS6zyJBFaExEUqutQo1hteD9tKDVsddaZ\naSECnYwehD5ppgA5XfPzJvWd6cF4/YLGsrHIT35euAKoDDpvqZaYmXd57Ku9U9u4\nKkA5Ay/zAgMBAAECggEADwmrktcsNDgSP97MWaSzH9ziFrQYj2xLjonJsXfJe7kU\noC21ORwJ9CZI5SoA5f8fiS6PmRRqknjTeV6SMUPz2Oyon3bXMX9KS2qPRcATXjm9\nITUVtl1+QXSSKYsagS6yBRaxpIvhhZYujn6TGuKRw8u9p4sKOYWa/Xf4T3oh7oVd\nvzLr3cvij1/BD5nS4WbYcGOAu2Zu0gemDsfnh5JxK/msdqS2ux6v0kEQwF/17Yu+\nToxirO+cZRWZIwJbe7Eqvh3vy9HvwRAVZ4SoV1ck5TB3JRSLQtlQwhEPas9sC05z\n5yFpTD5EOhjKqbZycx7urygbdvyYMTZHCc7KX6aPTQKBgQDslhueUOwFQHc9/2os\nBapyyGZGykNXC/RiVbHAkYFP8XVPvGa92iUsBNuGwYRfPE1G7i1k1vUxXfgi6UOs\nVpAsqB2Hsb1NqfuWKRHg4ovtbO6Ym9jpaoCSMLhXRSZeK3LJGVNYKJ2PpMAcoD95\n2HTCy+EYBmYxDSUzuzL4D1gY3wKBgQDlZBmvs6eiz6SDCnr4WQ0i3xKQPsfF8UAB\nOB4Kv+pM2r56618usMCdrNCF169GhLUsSPahPi5ey29dQzFc4DZfN0eA/8fFz4Az\naOTkXUus+XujKtYqZlCTzddSPcVHA1tbDFZqLBrKwaiPNP68TQJguM5waCs//NaG\nbc8QOf2HbQKBgBhMdnu1HfiQHW8dq37n+hCd6ns8zNvE24259W6swxY922mcFQVM\nwWKbARz/BSRu4hT1422m8jnmx9R2FsA9h8M+ZQIJzEKMwc0zXKW3Pt3cwUilQQsA\nKEJbhKNZ883aMoja9Adq7HvTVPPbtYlDJQLYw76e8aH6EqcUg/CcStULAoGBAONQ\nvuOOdKCyg6QXzqQsGwhjZlHq5K0S1QpgQeUFKXnfisLkW/44yad2iW0Yv2hyOdcY\nts4ygGEP19vjqhcPWNIiRYlf7ufnKHPJjol+qm9PC2Y2HOUHXvIZGTc2Xzhv6yfe\nogO0kRg7sH25VnXjGmgeuvRJRhKyyyOLzZWW4dZBAoGAcZKOGeIjd3lwQs3c2w0o\nYP029BdP589M+IDpUJxuYmb4eFlc3zIbzD74DFzXzgeqhI9KduAcwE87zUgxyaVE\nJ7rWUfv7cLmSKUe0FYLz+r66x2EFeGDfEhl/GWuXgl3b2IeXdRGZv7w+QfE0REIs\ncdr047nIjh5o5BuU1cWUt1c=\n-----END PRIVATE KEY-----\n",
+  "client_email": "emeg-system@emeg-system.iam.gserviceaccount.com",
+  "client_id": "116026394675841618000",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/emeg-system%40emeg-system.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

@@ -2,28 +2,56 @@ const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config();
-
 const app = express();
 const PORT = process.env.PORT || 3000;
-
-// Middleware para parsear JSON
-app.use(express.json());
-
-// Habilitar CORS
 const cors = require('cors');
 app.use(cors());
+app.use(express.json());
+require('dotenv').config();
 
 // Variáveis de ambiente para GitHub
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
 const REPO_OWNER = 'Nicholas1Front';
 const REPO_NAME = 'emeg_system';
-const CLIENTS_EQUIPAMENTS_FILE_PATH = 'apps/backend/data/clients_equipaments.json';
 const SERVICES_FILE_PATH = 'apps/backend/data/services.json';
 const LATEST_BUDGET_FILE_PATH = `apps/backend/data/latest_budget_number.json`;
 const BRANCH = 'main';
 
-// Função auxiliar para verificar atualização do GitHub Pages
+// Variaveis de ambiente para Google Drive
+const { google } = require('googleapis');
+const fs = require('fs');
+const path = require('path');
+const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
+const auth = new google.auth.GoogleAuth({
+    credentials,
+    scopes: ['https://www.googleapis.com/auth/drive'],
+});
+const drive = google.drive({ version: 'v3', auth });
+const DATA_FOLDER_ID = '1A-XuRr2ZIhQ7Zl8MENQrlyrkzK4I5plf'; // drive/emeg_system/apps/backend/data
+const CLIENTS_FOLDER_ID = '1H2oQHIL2-5QEpgPCEGoou9PzhT6ZbiEK';  // drive/Clientes
+
+async function getFolderId(folderName, parentId) {
+    const response = await drive.files.list({
+        q: `'${parentId}' in parents and name = '${folderName}' and mimeType = 'application/vnd.google-apps.folder' and trashed = false`,
+        fields: 'files(id)',
+    });
+
+    return response.data.files.length > 0 ? response.data.files[0].id : null;
+}
+
+async function createFolder(folderName, parentId) {
+    const response = await drive.files.create({
+        requestBody: {
+            name: folderName,
+            mimeType: 'application/vnd.google-apps.folder',
+            parents: [parentId],
+        },
+        fields: 'id',
+    });
+
+    return response.data.id;
+}
+
 const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
     let isUpdated = false;
     const maxAttempts = 10;
@@ -43,7 +71,6 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
     return isUpdated;
 };
 
-// Endpoint para atualizar o arquivo JSON no GitHub (clients_equipaments)
 app.post('/update-clients-equipaments', async (req, res) => {
     try {
         const { clients_equipaments_array } = req.body;
@@ -52,49 +79,48 @@ app.post('/update-clients-equipaments', async (req, res) => {
             return res.status(400).send('A variável clients_equipaments_array é obrigatória.');
         }
 
-        // 1. Busca o arquivo atual do GitHub
-        const response = await axios.get(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CLIENTS_EQUIPAMENTS_FILE_PATH}?ref=${BRANCH}`, {
-            headers: {
-                Authorization: `Bearer ${GITHUB_TOKEN}`,
-                Accept: 'application/vnd.github.v3+json',
+        // Criar o arquivo JSON temporário
+        const filePath = path.join(__dirname, 'clients_equipaments.json');
+        fs.writeFileSync(filePath, JSON.stringify(clients_equipaments_array, null, 2));
+
+        // Substituir arquivo existente no Google Drive
+        const response = await drive.files.create({
+            requestBody: {
+                name: 'clients_equipaments.json',
+                mimeType: 'application/json',
+                parents: [DATA_FOLDER_ID],
+            },
+            media: {
+                mimeType: 'application/json',
+                body: fs.createReadStream(filePath),
             },
         });
 
-        const fileSha = response.data.sha;
+        // Remover arquivo local após upload
+        fs.unlinkSync(filePath);
 
-        // 2. Atualiza o conteúdo com os novos dados
-        const updatedContent = Buffer.from(JSON.stringify(clients_equipaments_array, null, 2)).toString('base64');
+        console.log('Arquivo atualizado no Google Drive:', response.data.id);
 
-        // 3. Atualiza o arquivo no GitHub
-        await axios.put(
-            `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${CLIENTS_EQUIPAMENTS_FILE_PATH}`,
-            {
-                message: 'Update clients data',
-                content: updatedContent,
-                sha: fileSha,
-                branch: BRANCH,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${GITHUB_TOKEN}`,
-                    Accept: 'application/vnd.github.v3+json',
-                },
+        // Verificar e criar pastas para clientes
+        for (const client of clients_equipaments_array) {
+            const clientName = client.name; // Supondo que o nome do cliente está na chave 'name'
+            if (!clientName) continue;
+
+            const folderId = await getFolderId(clientName, CLIENTS_FOLDER_ID);
+
+            if (!folderId) {
+                const newFolderId = await createFolder(clientName, CLIENTS_FOLDER_ID);
+                console.log(`Pasta criada para cliente: ${clientName} (ID: ${newFolderId})`);
             }
-        );
-
-        // 4. Verifica se o arquivo foi atualizado no GitHub Pages
-        const isUpdated = await checkGitHubPagesUpdate(CLIENTS_EQUIPAMENTS_FILE_PATH, clients_equipaments_array);
-
-        if (!isUpdated) {
-            return res.status(500).send('Commit realizado, mas o GitHub Pages não foi atualizado a tempo.');
         }
 
-        res.send('Dados atualizados com sucesso no GitHub Pages!');
+        res.send('Arquivo atualizado e pastas de clientes verificadas com sucesso no Google Drive!');
     } catch (error) {
-        console.error(`[Erro /update-clients-equipaments]: ${error.response ? error.response.data : error.message}`);
-        res.status(500).send('Erro ao atualizar os dados.');
+        console.error(`[Erro /update-clients-equipaments]: ${error.message}`);
+        res.status(500).send('Erro ao atualizar os dados no Google Drive.');
     }
 });
+
 
 // Endpoint para atualizar o arquivo JSON no GitHub (services)
 app.post('/update-services', async (req, res) => {

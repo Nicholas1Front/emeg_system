@@ -1,18 +1,27 @@
 [
   {
-    "name": "ADAO (+55 98 8303-3406/ADAO)",
+    "name": "ADAO",
+    "contact":[ "(+55 98 8303-3406/adao)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 15-190 PSP-0198"
     ]
   },
   {
-    "name": "ADRIANO (970298025)",
+    "name": "ADRIANO",
+    "contact":[ "(970298025)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 15-190 PSP-0198"
     ]
   },
   {
-    "name": "AGROPECUÁRIA ANTAS LTDA (PRESIDENCIA@HOSPITALSAODOMINGOS.COM.BR)",
+    "name": "AGROPECUÁRIA ANTAS LTDA",
+    "contact":[ "(presidencia@hospitalsaodomingos.com.br)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "MINI CARREGADEIRA MC85",
       "CAMINHÃO FORD CARGO 1119 PSQ-9647",
@@ -39,29 +48,44 @@
     ]
   },
   {
-    "name": "AGROSERRA (VAGNER / +55 99 8155-1737)",
+    "name": "AGROSERRA",
+    "contact":[ "(vagner / +55 99 8155-1737)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDAUTO TKA 43700"
     ]
   },
   {
-    "name": "ALPHA ENGENHARIA  (+55 32 9111-7076/ELDER)",
+    "name": "ALPHA ENGENHARIA",
+    "contact":[ "(+55 32 9111-7076/elder)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": []
   },
   {
     "name": "AMPLA MANUTENÇÃO E SERVIÇOS LTDA",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 24.280 ; CM 003 ; KPO7D59"
     ]
   },
   {
     "name": "ANDERSSON",
+    "contact":[ "(+55 32 9111-7076/elder)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDAUTO ARGOS 20.5"
     ]
   },
   {
-    "name": "ARAUJO GUINDASTES (GERENCIA@ARAUJOGUINDASTES.COM.BR/DÁRIO)",
+    "name": "ARAUJO GUINDASTES",
+    "contact":[ "(gerencia@araujoguindastes.com.br/dário)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY STC 75",
       "GUINDASTE SANY STC 300",
@@ -82,7 +106,10 @@
     ]
   },
   {
-    "name": "AST ELEVAÇÕES (DIRETORIA@ASTELEVACOES.COM.BR / TÁSSIO)",
+    "name": "AST ELEVAÇÕES",
+    "contact":[ "(diretoria@astelevacoes.com.br / tássio)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDAUTO FORD CARGO 2429 OJI6C68",
       "GUINDAUTO MERCEDES ATRON 2324 QFS-4307",
@@ -98,7 +125,10 @@
     ]
   },
   {
-    "name": "BETONPOXI (MAXLIMA@BETONPOXI.COM.BR / MAX)",
+    "name": "BETONPOXI",
+    "contact":[ "(maxlima@betonpoxi.com.br / max)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO BASCULANTE VOLKSWAGEN 26-280 PGG-3996",
       "CAMINHÃO VOLKSWAGEN PGG-5688",
@@ -111,7 +141,10 @@
     ]
   },
   {
-    "name": "BRASIL LAU RENT (+55 11 91207-0462 / JEFERSON)",
+    "name": "BRASIL LAU RENT",
+    "contact":[ "(+55 11 91207-0462 / jeferson)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE TADANO RT",
       "PANORAMIC P 720 MTC-003",
@@ -130,7 +163,10 @@
     ]
   },
   {
-    "name": "CAMPOS MOVIMENTAÇÕES (+55 98 8247-0262 / LUCAS)",
+    "name": "CAMPOS MOVIMENTAÇÕES",
+    "contact":[ "(+55 98 8247-0262 / lucas)"],
+    "cnpj_cpf": null,
+    "locality" : ["BALSAS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 31.280 RXA2D24",
       "CAMINHÃO VOLKSWAGEN 31.280 RWL4I03",
@@ -140,32 +176,47 @@
   },
   {
     "name": "CARLOS MAGNO",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "FORD RANGER 2.8 MOTOR POWER STROKE"
     ]
   },
   {
-    "name": "CERÂMICA SÃO JOSÉ (+55 98 8532-8348)",
+    "name": "CERÂMICA SÃO JOSÉ",
+    "contact":[ "(+55 98 8532-8348)"],
+    "cnpj_cpf": null,
+    "locality" : ["DUQUE BACELAR/MA"],
     "equipaments": [
       "CARREGADEIRA W20 E",
       "CARREGADEIRA W20 F"
     ]
   },
   {
-    "name": "CLASI SEGURANÇA (FELIPE.SILVA@GRUPOCLASI.COM.BR / FELIPE)",
+    "name": "CLASI SEGURANÇA",
+    "contact":[ "(felipe.silva@grupoclasi.com.br / felipe)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO MERCEDES ACCELO PTR-6993",
       "CAMINHÃO MERCEDES ACCELO SMU6F30"
     ]
   },
   {
-    "name": "CONCRENORTE (55639222-9064/ TAÍS)",
+    "name": "CONCRENORTE",
+    "contact":[ "(55639222-9064/ taís)"],
+    "cnpj_cpf": null,
+    "locality" : [],
     "equipaments": [
       "GUINDASTE SANY STC 50"
     ]
   },
   {
-    "name": "COSMEPEÇAS (SILVIA)",
+    "name": "COSMEPEÇAS",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "MOTONIVELADORA NEW HOLLAND",
       "CAMINHÃO VOLKSWAGEN HPL-2941",
@@ -180,19 +231,28 @@
     ]
   },
   {
-    "name": "CSS (JULIANO/ 9885018952)",
+    "name": "CSS",
+    "contact":[ "(juliano/ 9885018952)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO FORD CARGO 2423 NZW4F11"
     ]
   },
   {
-    "name": "CTRL ENGENHARIA E MANUTENÇÃO (+55 98 8157-8519/ MAYARA)",
+    "name": "CTRL ENGENHARIA E MANUTENÇÃO",
+    "contact":[ "(+55 98 8157-8519/ mayara)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINCHO HIDRÁULICO GIRATÓRIO COM CABO DE AÇO 900KG - LD-E04021W - STROM"
     ]
   },
   {
     "name": "DESTACK ( EDIVALDO / +55 98 8165-0225)",
+    "contact":[ "( edivaldo / +55 98 8165-0225)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 15-180",
       "CAMINHÃO VOLKSWAGEN 24-280",
@@ -202,14 +262,20 @@
     ]
   },
   {
-    "name": "DESTAK (DAVI)",
+    "name": "DESTAK",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "EMPILHADEIRA HYSTER",
       "CAMINHÃO OJQ-2221"
     ]
   },
   {
-    "name": "DÍNAMO ENGENHARIA (LIVIO ANDRADE)",
+    "name": "DÍNAMO ENGENHARIA",
+    "contact":["gerencia@gerencia.com", "mudança@mudança", "soper@opers"],
+    "cnpj_cpf": "26242052000168",
+    "locality" : ["SÃO LUÍS/MA, BACABAL/MA, FAZENDA SUMAUMA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 15-190 PSW-1647",
       "GUINDASTE SANY STC 30",
@@ -224,19 +290,28 @@
     ]
   },
   {
-    "name": "E G LIMA TRANSPORTES ('+55 98 8404-2798/EGMUNCK@GMAIL.COM)",
+    "name": "E G LIMA TRANSPORTES",
+    "contact":[ "('+55 98 8404-2798/egmunck@gmail.com)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO FORD CARGO NHH-2630"
     ]
   },
   {
-    "name": "EBES ENGENHARIA (LINDI / +55 98 8784-4793)",
+    "name": "EBES ENGENHARIA",
+    "contact":[ "(lindi / +55 98 8784-4793)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE ZOOMLION QY70"
     ]
   },
   {
-    "name": "ECO SUC (JASTEL/ JASTEL@UOL.COM.BR)",
+    "name": "ECO SUC",
+    "contact":[ "(jastel/ jastel@uol.com.br)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHONETE DODGE RAM HOH6E51",
       "CAMINHÃO VOLKSWAGEN WORKER JWE-7051",
@@ -244,13 +319,19 @@
     ]
   },
   {
-    "name": "ECOLIMP (999935179/FLÁVIO)",
+    "name": "ECOLIMP",
+    "contact":[ "(999935179/flávio)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO FORD CARGO OJH-7760"
     ]
   },
   {
-    "name": "EDRO ENGENHARIA (+55 98 8704-5060/EDUARDO)",
+    "name": "EDRO ENGENHARIA",
+    "contact":[ "(+55 98 8704-5060/eduardo)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO FORD CARGO  1519 PMJ-9096",
       "RETROESCAVADEIRA JCB",
@@ -262,19 +343,28 @@
     ]
   },
   {
-    "name": "ELIAS (+55 98 8404-2798)",
+    "name": "ELIAS",
+    "contact":[ "(+55 98 8404-2798)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO FORD CARGO NZM-6032"
     ]
   },
   {
-    "name": "ENERGOATO (6230974171)",
+    "name": "ENERGOATO",
+    "contact":[ "(+62 30974171)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 24-260 PRX-1328"
     ]
   },
   {
     "name": "ENEVA (FABIENNE.LOPES@ENEVA.COM.BR /FABIENNE)",
+    "contact":[ "(fabienne.lopes@eneva.com.br /fabienne)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY STC 600",
       "EMPILHADEIRA HYSTER MODELO FT70E DE 3.100 TON.",
@@ -282,7 +372,10 @@
     ]
   },
   {
-    "name": "ENGECOM ENG (GILSONTEIXEIRA2216@GMAIL.COM/(31) 3241-1834)",
+    "name": "ENGECOM ENG",
+    "contact":[ "(gilsonteixeira2216@gmail.com/(31) 3241-1834)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 13-190 OIV-6178 CM-19",
       "CAMINHÃO VOLKSWAGEN 24.260 OJL-8624",
@@ -308,32 +401,47 @@
     ]
   },
   {
-    "name": "EQUIPAR (98970298025/ADRIANO)",
+    "name": "EQUIPAR",
+    "contact":[ "(98970298025/adriano)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 13.180 PSP-0198"
     ]
   },
   {
     "name": "ESTÊNIO",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO MERCEDES ATRON HOP-7882"
     ]
   },
   {
-    "name": "FARMER SILOS E MONTAGENS (ERIKA / 9982852045)",
+    "name": "FARMER SILOS E MONTAGENS",
+    "contact":[ "(erika / 9982852045)"],
+    "cnpj_cpf": null,
+    "locality" : ["BALSAS/MA"],
     "equipaments": [
       "GUINDASTE XCMG QY70"
     ]
   },
   {
     "name": "FONTEK SERVICE ",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "EMPILHADEIRA CMH",
       "CAMINHÃO SCANIA 112HW"
     ]
   },
   {
-    "name": "FORMILOC LOCADORA DE VEÍCULOS (FISCAL@FORMILOC.COM.BR)",
+    "name": "FORMILOC LOCADORA DE VEÍCULOS",
+    "contact":[ "(fiscal@formiloc.com.br)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE MADAL MC23",
       "CAMINHÃO OJQ-2432",
@@ -356,13 +464,19 @@
     ]
   },
   {
-    "name": "GALFLEX (COMERCIAL@GALFLEX.COM.BR/CLAUDEMI)",
+    "name": "GALFLEX",
+    "contact":[ "(comercial@galflex.com.br/claudemi)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY STC 800"
     ]
   },
   {
-    "name": "HERMONT (HERMONT@HERMONT.COM.BR/HERMES)",
+    "name": "HERMONT",
+    "contact":[ "(hermont@hermont.com.br/hermes)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO MERCEDES 2324  OXZ-1728",
       "GUINDASTE SANY STC-75 MWV-8947",
@@ -377,7 +491,10 @@
     ]
   },
   {
-    "name": "HOSPITAL SÃO DOMINGOS (PRESIDENCIA@HOSPITALSAODOMINGOS.COM.BR/ MURILO)",
+    "name": "HOSPITAL SÃO DOMINGOS",
+    "contact":[ "(presidencia@hospitalsaodomingos.com.br/ murilo)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "MINI CARREGADEIRA MC85",
       "CAMINHÃO FORD CARGO 1119 PSQ-9647",
@@ -404,25 +521,37 @@
     ]
   },
   {
-    "name": "ILUMINAR MATERIAIS ELÉTRICOS (+55 98 8815-5428 / ANDERSON)",
+    "name": "ILUMINAR MATERIAIS ELÉTRICOS",
+    "contact":[ "(+55 98 8815-5428 / anderson)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "RETROESCAVADEIRA JCB C+"
     ]
   },
   {
     "name": "IVAN",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHAO VOLVO CVP-1484"
     ]
   },
   {
-    "name": "JARBAS (+55 9888535609 / JARBAS)",
+    "name": "JARBAS",
+    "contact":[ "(+55 9888535609 / jarbas)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHAO VOLKSWAGEN NHS-2586"
     ]
   },
   {
-    "name": "JCA EMPREENDIMENTOS (983345-1546)",
+    "name": "JCA EMPREENDIMENTOS",
+    "contact":[ "(983345-1546)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "TRATOR DE ESTEIRA D6T",
       "RETROESCAVADEIRA EH04",
@@ -433,25 +562,37 @@
   },
   {
     "name": "JOEL",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHAO FORD 1519 PS0OJ58",
       "CAMINHAO VOLKSWAGEN MSL-0688"
     ]
   },
   {
-    "name": "JOHNNY (981150687)",
+    "name": "JOHNNY",
+    "contact":[ "(981150687)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHAO VOLKSWAGEN HWT-6019"
     ]
   },
   {
     "name": "JPW ENGENHARIA",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDAUTO ARGOS 20.6"
     ]
   },
   {
-    "name": "JR (+55 98 9976-5324/BARBOSA)",
+    "name": "JR",
+    "contact":[ "(+55 98 9976-5324/barbosa)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 19-320 GZV-6950",
       "CAMINHÃO MERCEDES 2425",
@@ -459,19 +600,28 @@
     ]
   },
   {
-    "name": "L M M PIRES ( EVERTON / +55 99 8837-6021 )",
+    "name": "L M M PIRES",
+    "contact":[ "( everton / +55 99 8837-6021 )"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY STC 600"
     ]
   },
   {
-    "name": "LIDER GUINDASTES (+55 98 9142-8991 / BERNARDO)",
+    "name": "LIDER GUINDASTES",
+    "contact":[ "(+55 98 9142-8991 / bernardo)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY PGF-0870"
     ]
   },
   {
-    "name": "LOCAR (FG.ANDRIOLI@LOCAR.COM.BR /ADRIANO)",
+    "name": "LOCAR",
+    "contact":[ "(fg.andrioli@locar.com.br /adriano)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE XCMG QY70",
       "GUINDASTE ZOOMLION QY60",
@@ -481,13 +631,19 @@
     ]
   },
   {
-    "name": "LOCARES LOCAÇÕES LTDA (MANUTENCAO@LOCARES.COM.BR / WAGNER)",
+    "name": "LOCARES LOCAÇÕES LTDA",
+    "contact":[ "(manutencao@locares.com.br / wagner)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "MANIPULADOR NEW HOLLAND LM1745 TAG 12"
     ]
   },
   {
-    "name": "LUA NOVA LTDA (+55 98 84288690 / PAULO)",
+    "name": "LUA NOVA LTDA",
+    "contact":[ "(manutencao@locares.com.br / wagner)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE XCMG 25 TON.",
       "CAMINHAO FORD OJE-5242",
@@ -499,7 +655,10 @@
     ]
   },
   {
-    "name": "MACTRON SERVIÇOS (988551699 / SANDRO)",
+    "name": "MACTRON SERVIÇOS",
+    "contact":[ "(988551699 / sandro)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKWAGEN 13.190 PWQ5H92",
       "RENAULT LOGAN RFU5C87",
@@ -509,14 +668,20 @@
     ]
   },
   {
-    "name": "MAMUTH TRANSPORTES DE MÁQUINAS LTDA (GERSON / MANUTENCAO@MAMUTH.COM.BR)",
+    "name": "MAMUTH TRANSPORTES DE MÁQUINAS LTDA",
+    "contact":[ "(gerson / manutencao@mamuth.com.br)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE GROOVE 220",
       "GUINDASTE XCMG 220 FFN-7963"
     ]
   },
   {
-    "name": "MAXXUM (MONIKE.LOPES@MAXXUMMA.COM/MONIKE LOPES)",
+    "name": "MAXXUM",
+    "contact":[ "(monike.lopes@maxxumma.com/monike lopes)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE XCMG QY70",
       "EMPILHADEIRA YALE 2.5 TON",
@@ -526,58 +691,88 @@
     ]
   },
   {
-    "name": "MC COMÉRCIO E LOCAÇÃO (+55 99 9203-8661/ROMÁRIO)",
+    "name": "MC COMÉRCIO E LOCAÇÃO",
+    "contact":[ "(+55 99 9203-8661/romário)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": []
   },
   {
-    "name": "MECBRUN INDUSTRIAL (KATIAROCHA@MECBRUN.COM.BR)",
+    "name": "MECBRUN INDUSTRIAL",
+    "contact":[ "(katiarocha@mecbrun.com.br)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO MERCEDES AXOR 3131 QXF-1740"
     ]
   },
   {
-    "name": "METAL MS (DEIVID.DIAS@METALURGICAMS.COM / DEIVID)",
+    "name": "METAL MS",
+    "contact":[ "(deivid.dias@metalurgicams.com / deivid)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 24.280 MLD-9788"
     ]
   },
   {
-    "name": "METAL PRATA (9998189-2111)",
+    "name": "METAL PRATA",
+    "contact":[ "(9998189-2111)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDAUTO FORD CARGO 2422 NVN-2374"
     ]
   },
   {
-    "name": "MINEIRO (+55 63 8405-8007)",
+    "name": "MINEIRO",
+    "contact":[ "(+55 63 8405-8007)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": []
   },
   {
-    "name": "MIP ENGENHARIA (DIONLENO.NUNES@MIP.COM.BR/DION LENON)",
+    "name": "MIP ENGENHARIA",
+    "contact":[ "(dionleno.nunes@mip.com.br/dion lenon)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 24-280 QPH-8027",
       "CAMINHÃO VOLKSWAGEN 24-250 GZB-5598 FROTA 20.04.0056"
     ]
   },
   {
-    "name": "MONTCALM (FERNANDA.DIAS@MONTCALM.COM.BR/FERNANDA DIAS)",
+    "name": "MONTCALM",
+    "contact":[ "(fernanda.dias@montcalm.com.br/fernanda dias)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY STC 800"
     ]
   },
   {
     "name": "MONTEC SILOS E MONTAGENS LTDA",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : [],
     "equipaments": [
       "GUINDASTE XCMG QY70K"
     ]
   },
   {
-    "name": "NORTE CARGAS (ROBERTO NASCIMENTO / +55 98 8300-0136)",
+    "name": "NORTE CARGAS",
+    "contact":[ "(roberto nascimento / +55 98 8300-0136)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "EMPILHADEIRA HYSTER H50CT- BR"
     ]
   },
   {
-    "name": "OMEGA (KARLA.SANCHES@OMEGASERVICE.COM.BR / KARLA)",
+    "name": "OMEGA",
+    "contact":[ "(karla.sanches@omegaservice.com.br / karla)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY STC 300 OTU-8815",
       "GUINDASTE BANTAN TELEKRUISER 18 TON.",
@@ -594,18 +789,27 @@
   },
   {
     "name": "P.A.D MONTAGENS E MANUTENÇÃO INDUSTRIAL ",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE TEREX LT 1070"
     ]
   },
   {
     "name": "PAVIRROL",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO FORD OXS-4994"
     ]
   },
   {
-    "name": "PELICANO CONSTRUÇÕES S.A (EDINALDO.OLIVEIRA@PELICANO.ENG.BR)",
+    "name": "PELICANO CONSTRUÇÕES S.A",
+    "contact":[ "(edinaldo.oliveira@pelicano.eng.br)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 24-250 FROTA CM 225",
       "GUINDAUTO NRR1291 FROTA 101003",
@@ -652,14 +856,20 @@
     ]
   },
   {
-    "name": "PETROSUC (98988712811)",
+    "name": "PETROSUC",
+    "contact":[ "(98988712811)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN WORKER MVX5H85",
       "CAMINHÃO VOLKSWAGEN WORKER JWE-7051"
     ]
   },
   {
-    "name": "PHM MECÂNICA (PHM.MA@PHM.MECANICA.COM.BR/ANDREIA)",
+    "name": "PHM MECÂNICA",
+    "contact":[ "(phm.ma@phm.mecanica.com.br/andreia)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 15180 GUINDAUTO PALFINGER",
       "CAMINHÃO VOLKSWAGEN 24-220 WORKER HNE-4220",
@@ -667,7 +877,10 @@
     ]
   },
   {
-    "name": "PREFEITURA DUQUE BACELAR (EMANUELLE )",
+    "name": "PREFEITURA DUQUE BACELAR",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["DUQUE BACELAR/MA"],
     "equipaments": [
       "CARREGADEIRA CASE W20E",
       "CARREGADEIRA NEW HOLLAND W130",
@@ -676,42 +889,63 @@
   },
   {
     "name": "PREFEITURA IGARAPÉ DO MEIO",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["IGARAPÉ DO MEIO/MA"],
     "equipaments": [
       "MOTONIVELADORA CATERPILLAR 120K"
     ]
   },
   {
-    "name": "PREMIUM LOCAÇOES (ELIVELBER)",
+    "name": "PREMIUM LOCAÇOES",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY QY100"
     ]
   },
   {
-    "name": "PRESTARE MONTAGEM SERVIÇOS (PRESTARE.BALSAS@OUTLOOK.COM)",
+    "name": "PRESTARE MONTAGEM SERVIÇOS",
+    "contact":[ "(prestare.balsas@outlook.com)"],
+    "cnpj_cpf": null,
+    "locality" : ["BALSAS/MA"],
     "equipaments": [
       "GUINDASTE MADAL MD30"
     ]
   },
   {
-    "name": "PRO SERVICE (+55 98 8821-8280/ RAIUMUNDO)",
+    "name": "PRO SERVICE",
+    "contact":[ "(+55 98 8821-8280/ raiumundo)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE XCMG QY 70"
     ]
   },
   {
-    "name": "PROJEART (ADEMAR/+55 85 9945-0357)",
+    "name": "PROJEART",
+    "contact":[ "(ademar/+55 85 9945-0357)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY STC 600"
     ]
   },
   {
-    "name": "RAIMUNDO SANTA RITA (+55 98 9139-0001)",
+    "name": "RAIMUNDO SANTA RITA ",
+    "contact":[ "(raimundo/+55 98 9139-0001)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO MERCEDES ATRON HPC2E37"
     ]
   },
   {
-    "name": "ROMÂNIO (9986074118)",
+    "name": "ROMÂNIO",
+    "contact":[ "(românio/9986074118)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDAUTO VOLKSWAGEN PLACA HOU-5897",
       "CAMINHÃO SCANIA 112 H KBB-5010",
@@ -719,7 +953,10 @@
     ]
   },
   {
-    "name": "SENTEL (ADMINISTRACAO@SENTELLTDA.COM.BR /ROGÉRIO)",
+    "name": "SENTEL",
+    "contact":[ "(administracao@sentelltda.com.br /rogério)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO MERCEDES GUINDAUTO ARGOS JLA-3438",
       "CAMINHÃO MERCEDES L1218 LVZ-2108",
@@ -739,25 +976,37 @@
     ]
   },
   {
-    "name": "SJTM ( HUDSON )",
+    "name": "SJTM",
+    "contact":[ "(gerencia@sjtm-ma.com.br)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO MERCEDES ACCELO PSR-3094"
     ]
   },
   {
-    "name": "SLZLOG EXPRESS LTDA (98 8895-1515 / SERGIO)",
+    "name": "SLZLOG EXPRESS LTDA",
+    "contact":[ "(98 8895-1515 / sergio)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO IVECO TRUCK 7 TON. OSQ-0904"
     ]
   },
   {
-    "name": "SOUSA RABELO (+55 34 9153-0927/ERICK)",
+    "name": "SOUSA RABELO",
+    "contact":[ "(+55 34 9153-0927/erick)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE SANY STC 75"
     ]
   },
   {
-    "name": "SUCATA SÃO JOÃO (+55 98 8303-3406/ADAO)",
+    "name": "SUCATA SÃO JOÃO",
+    "contact":[ "(+55 98 8303-3406/adao)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHAO IVECO NXG-9647",
       "CAMINHAO MERCEDES ATEGO OLK-9388",
@@ -768,13 +1017,19 @@
     ]
   },
   {
-    "name": "TECNOVITA (IVAN)",
+    "name": "TECNOVITA",
+    "contact":[ "ivan"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN WORKER PSX-1730"
     ]
   },
   {
-    "name": "TRANSUL (8132264685)",
+    "name": "TRANSUL",
+    "contact":[ "(8132264685)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "GUINDASTE IMAP IMK 30.5 NHM-5128",
       "EMPILHADEIRA YALE 2.5 TON C025L TIPO LP",
@@ -783,7 +1038,10 @@
     ]
   },
   {
-    "name": "USIMIG MANUTENÇÃO E SERVIÇOS (ÂNGELO / 9491347805)",
+    "name": "USIMIG MANUTENÇÃO E SERVIÇOS",
+    "contact":[ "(ângelo / 9491347805)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 31.280 RXA2D24",
       "CAMINHÃO VOLKSWAGEN 31.280 RWL4I03",
@@ -792,19 +1050,28 @@
     ]
   },
   {
-    "name": "VIRT (LUCIANACRISTINAPINHEIRO@GMAIL.COM/LUCIANA)",
+    "name": "VIRT",
+    "contact":[ "(lucianacristinapinheiro@gmail.com/luciana)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CARREGADEIRA SEM 638 QC"
     ]
   },
   {
-    "name": "ZEZÉ (991390001)",
+    "name": "ZEZÉ",
+    "contact":[ "(991390001)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO MERCEDES HPC-2437"
     ]
   },
   {
-    "name": "ZIRANLOG TRANSPORTES (559192006731/MAURÍCIO)",
+    "name": "ZIRANLOG TRANSPORTES",
+    "contact":[ "(559192006731/maurício)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "EMPILHADEIRA YALE NP-O5",
       "CONTRA-PESOS DA EMPILHADEIRA YALE NP-O5",
@@ -814,7 +1081,10 @@
     ]
   },
   {
-    "name": "ZORTEA CONSTRUÇÕES LTDA (TALITA.SANTOS@ZORTEA.COM.BR / TALITA)",
+    "name": "ZORTEA CONSTRUÇÕES LTDA",
+    "contact":[ "(talita.santos@zortea.com.br / talita)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "RETROESCAVADEIRA JCB 0005",
       "GUINDASTE SANY STC 800 GDH 0016",
