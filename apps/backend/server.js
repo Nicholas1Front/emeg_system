@@ -71,6 +71,21 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
     return isUpdated;
 };
 
+app.get('/get-clients-equipaments', async(req, res) => {
+    try {
+        const fileId = '1UWcKgI5tEbSr5egmWXwlBVc4b73fuXuV'; // drive/emeg_system/apps/backend/data//clients_equipaments.json
+        const response = await drive.files.get({
+            fileId,
+            alt: 'media',
+        });
+
+        res.json(response.data);
+    } catch (error) {
+        console.error('Erro ao buscar JSON do Google Drive:', error);
+        res.status(500).send('Erro ao buscar os dados.');
+    }
+})
+
 app.post('/update-clients-equipaments', async (req, res) => {
     try {
         const { clients_equipaments_array } = req.body;
