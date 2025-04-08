@@ -19,8 +19,6 @@ const BRANCH = 'main';
 
 // Variaveis de ambiente para Google Drive
 const { google } = require('googleapis');
-const fs = require('fs');
-const path = require('path');
 const credentials = JSON.parse(process.env.GOOGLE_APPLICATION_CREDENTIALS_JSON);
 const auth = new google.auth.GoogleAuth({
     credentials,
@@ -98,23 +96,37 @@ app.post('/update-clients-equipaments', async (req, res) => {
         const filePath = path.join(__dirname, 'clients_equipaments.json');
         fs.writeFileSync(filePath, JSON.stringify(clients_equipaments_array, null, 2));
 
-        // Substituir arquivo existente no Google Drive
-        const response = await drive.files.create({
-            requestBody: {
+        const existingFiles = await drive.files.list({
+            q: `'${DATA_FOLDER_ID}' in parents and name = 'clients_equipaments.json' and trashed = false`,
+            fields: 'files(id, name)',
+          });
+          
+          if (existingFiles.data.files.length > 0) {
+            // Se existir, atualiza o conteúdo
+            const fileId = existingFiles.data.files[0].id;
+            await drive.files.update({
+              fileId,
+              media: {
+                mimeType: 'application/json',
+                body: fs.createReadStream(filePath),
+              },
+            });
+            console.log('Arquivo atualizado no Google Drive.');
+          } else {
+            // Se não existir, cria o arquivo
+            await drive.files.create({
+              requestBody: {
                 name: 'clients_equipaments.json',
                 mimeType: 'application/json',
                 parents: [DATA_FOLDER_ID],
-            },
-            media: {
+              },
+              media: {
                 mimeType: 'application/json',
                 body: fs.createReadStream(filePath),
-            },
-        });
-
-        // Remover arquivo local após upload
-        fs.unlinkSync(filePath);
-
-        console.log('Arquivo atualizado no Google Drive:', response.data.id);
+              },
+            });
+            console.log('Arquivo criado no Google Drive.');
+          }
 
         // Verificar e criar pastas para clientes
         for (const client of clients_equipaments_array) {
