@@ -5,6 +5,9 @@
   "dependencies": {
     "googleapis": "^133.0.0"
   },
+  "scripts": {
+    "vercel-build": "export NODE_OPTIONS=--openssl-legacy-provider && npm install"
+  },
   "engines": {
     "node": "18.x"
   }
