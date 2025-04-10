@@ -32,7 +32,7 @@ export default async function handler(req, res) {
       alt: 'media',
     });
 
-    res.status(200).json(fileContent.data);
+    res.status(200).json(response.data);
   } catch (error) {
     console.error('Erro ao buscar JSON do Google Drive:', error);
     res.status(500).json({ message: 'Erro ao buscar os dados no Google Drive.' });
