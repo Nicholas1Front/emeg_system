@@ -16,26 +16,32 @@ export default async function handler(req, res) {
   const DATA_FOLDER_ID = process.env.DATA_FOLDER_ID;
 
   try {
+    console.log('📂 DATA_FOLDER_ID:', DATA_FOLDER_ID);
+
     const response = await drive.files.list({
-      q: `'${DATA_FOLDER_ID}' in parents and name = 'clients_equipaments.json' and trashed = false`,
+      q: `'${DATA_FOLDER_ID}' in parents and trashed = false`,
       fields: 'files(id, name)',
     });
 
-    if (response.data.files.length === 0) {
-      console.warn('Arquivo clients_equipaments.json não encontrado na pasta:', DATA_FOLDER_ID);
-      return res.status(404).json({ message: 'Arquivo clients_equipaments.json não encontrado.' });
+    const arquivos = response.data.files;
+    console.log('📁 Arquivos encontrados na pasta:', arquivos.map(f => f.name));
+
+    const file = arquivos.find(f => f.name === 'clients_equipaments.json');
+
+    if (!file) {
+      console.warn('❌ Arquivo clients_equipaments.json não encontrado.');
+      return res.status(404).json({ message: 'Arquivo não encontrado no Google Drive.' });
     }
 
-    const fileId = response.data.files[0].id;
-
     const fileContent = await drive.files.get({
-      fileId,
+      fileId: file.id,
       alt: 'media',
     });
 
+    console.log('✅ JSON carregado com sucesso');
     res.status(200).json(fileContent.data);
   } catch (error) {
-    console.error('Erro ao buscar JSON do Google Drive:', error.response?.data || error.message);
+    console.error('🔥 Erro completo:', error.response?.data || error.message || error);
     res.status(500).json({ message: 'Erro ao buscar os dados no Google Drive.' });
   }
-} 
+}
