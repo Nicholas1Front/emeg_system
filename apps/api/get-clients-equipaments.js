@@ -22,6 +22,7 @@ export default async function handler(req, res) {
     });
 
     if (response.data.files.length === 0) {
+      console.warn('Arquivo clients_equipaments.json não encontrado na pasta:', DATA_FOLDER_ID);
       return res.status(404).json({ message: 'Arquivo clients_equipaments.json não encontrado.' });
     }
 
@@ -32,9 +33,9 @@ export default async function handler(req, res) {
       alt: 'media',
     });
 
-    res.status(200).json(response.data);
+    res.status(200).json(fileContent.data);
   } catch (error) {
-    console.error('Erro ao buscar JSON do Google Drive:', error);
+    console.error('Erro ao buscar JSON do Google Drive:', error.response?.data || error.message);
     res.status(500).json({ message: 'Erro ao buscar os dados no Google Drive.' });
   }
-}
+} 
