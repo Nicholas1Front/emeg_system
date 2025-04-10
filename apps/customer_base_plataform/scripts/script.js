@@ -4,7 +4,7 @@ let clients_equipaments_array = [];
 
 async function getClientsData(){
     try{
-        const response = await fetch(`https://emeg-system.vercel.app/backend/api/get-clients-equipaments`);
+        const response = await fetch(`https://emeg-system.vercel.app/api/get-clients-equipaments`);
         if(!response.ok){
             throw new Error(`HTTP Error ! Status : ${response.status}`);
         }
