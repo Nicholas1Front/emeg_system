@@ -23,6 +23,7 @@ async function getClientsData(){
             return 0;
         });
 
+        console.log(clientsArray_response);
         return clientsArray_response;
     }
     catch(error){
