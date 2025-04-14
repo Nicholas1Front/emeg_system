@@ -24,6 +24,11 @@ const auth = new google.auth.GoogleAuth({
     credentials,
     scopes: ['https://www.googleapis.com/auth/drive'],
 });
+const oauth2Client = new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URI
+  );
 const drive = google.drive({ version: 'v3', auth });
 const DATA_FOLDER_ID = process.env.DATA_FOLDER_ID; // drive/emeg_system/apps/backend/data
 const CLIENTS_FOLDER_ID = process.env.CLIENTS_FOLDER_ID;  // drive/Clientes
@@ -68,6 +73,33 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
 
     return isUpdated;
 };
+
+app.get('/auth', (req, res) => {
+    const authUrl = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      scope: ['https://www.googleapis.com/auth/drive'],
+      prompt: 'consent' // força gerar refresh_token
+    });
+    res.redirect(authUrl);
+});
+
+app.get('/oauth2callback', async (req, res) => {
+    const { code } = req.query;
+    if (!code) return res.status(400).send('Código de autorização ausente');
+  
+    try {
+      const { tokens } = await oauth2Client.getToken(code);
+      oauth2Client.setCredentials(tokens);
+  
+      // Salva os tokens localmente (temporário, depois pode usar banco)
+      fs.writeFileSync('tokens.json', JSON.stringify(tokens));
+  
+      res.send('✅ Autenticado com sucesso! Você pode fechar essa aba.');
+    } catch (err) {
+      console.error('Erro ao trocar o código por token:', err);
+      res.status(500).send('Erro na autenticação');
+    }
+});
 
 app.get('/get-clients-equipaments', async(req, res) => {
     try {
@@ -308,7 +340,6 @@ app.post('/update-inventory', async (req, res) => {
         res.status(500).send('Erro ao atualizar os itens do inventário.');
     }
 });
-
 
 // Roda o servidor
 app.listen(PORT, () => {
