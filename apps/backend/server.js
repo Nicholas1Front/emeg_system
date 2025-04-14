@@ -71,7 +71,7 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
 
 app.get('/get-clients-equipaments', async(req, res) => {
     try {
-        const fileId = process.env.CLIENTS_EQUIPAMENTS_FILE_ID; // drive/emeg_system/apps/backend/data//clients_equipaments.json
+        const fileId = process.env.CLIENTS_EQUIPAMENTS_JSON_FILE_ID; // drive/emeg_system/apps/backend/data//clients_equipaments.json
         const response = await drive.files.get({
             fileId,
             alt: 'media',
