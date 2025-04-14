@@ -25,8 +25,8 @@ const auth = new google.auth.GoogleAuth({
     scopes: ['https://www.googleapis.com/auth/drive'],
 });
 const drive = google.drive({ version: 'v3', auth });
-const DATA_FOLDER_ID = '1A-XuRr2ZIhQ7Zl8MENQrlyrkzK4I5plf'; // drive/emeg_system/apps/backend/data
-const CLIENTS_FOLDER_ID = '1H2oQHIL2-5QEpgPCEGoou9PzhT6ZbiEK';  // drive/Clientes
+const DATA_FOLDER_ID = process.env.DATA_FOLDER_ID; // drive/emeg_system/apps/backend/data
+const CLIENTS_FOLDER_ID = process.env.CLIENTS_FOLDER_ID;  // drive/Clientes
 
 async function getFolderId(folderName, parentId) {
     const response = await drive.files.list({
@@ -71,7 +71,7 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
 
 app.get('/get-clients-equipaments', async(req, res) => {
     try {
-        const fileId = '1UWcKgI5tEbSr5egmWXwlBVc4b73fuXuV'; // drive/emeg_system/apps/backend/data//clients_equipaments.json
+        const fileId = process.env.CLIENTS_EQUIPAMENTS_FILE_ID; // drive/emeg_system/apps/backend/data//clients_equipaments.json
         const response = await drive.files.get({
             fileId,
             alt: 'media',
