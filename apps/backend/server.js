@@ -1,3 +1,4 @@
+const { Readable } = require('stream');
 const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
@@ -49,9 +50,9 @@ const uploadTokenToDrive = async (auth, token) => {
   };
   const media = {
     mimeType: 'application/json',
-    body: Buffer.from(JSON.stringify(token, null, 2)),
+    body: Readable.from([JSON.stringify(token, null, 2)]),
   };
-
+  
   const existing = await drive.files.list({
     q: `'${process.env.DATA_FOLDER_ID}' in parents and name = 'tokens.json' and trashed = false`,
     fields: 'files(id)',
