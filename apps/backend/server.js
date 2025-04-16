@@ -126,14 +126,15 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
 };
 
 app.get('/auth', (req, res) => {
-  const oauth2Client = createOAuthClient();
-  const url = oauth2Client.generateAuthUrl({
-    access_type: 'offline',
-    scope: ['https://www.googleapis.com/auth/drive'],
-    prompt: 'consent',
+    const oauth2Client = createOAuthClient();
+    const url = oauth2Client.generateAuthUrl({
+      access_type: 'offline',
+      prompt: 'consent',
+      scope: ['https://www.googleapis.com/auth/drive']
+    });
+    res.redirect(url);
   });
-  res.redirect(url);
-});
+  
 
 app.get('/oauth2callback', async (req, res) => {
   const code = req.query.code;
