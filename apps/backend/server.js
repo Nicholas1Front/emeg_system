@@ -32,6 +32,54 @@ const oauth2Client = new google.auth.OAuth2(
 const drive = google.drive({ version: 'v3', auth });
 const DATA_FOLDER_ID = process.env.DATA_FOLDER_ID; // drive/emeg_system/apps/backend/data
 const CLIENTS_FOLDER_ID = process.env.CLIENTS_FOLDER_ID;  // drive/Clientes
+const createOAuthClient = () => {
+  return new google.auth.OAuth2(
+    process.env.GOOGLE_CLIENT_ID,
+    process.env.GOOGLE_CLIENT_SECRET,
+    process.env.GOOGLE_REDIRECT_URI
+  );
+};
+
+const uploadTokenToDrive = async (auth, token) => {
+  const drive = google.drive({ version: 'v3', auth });
+  const fileMetadata = {
+    name: 'tokens.json',
+    mimeType: 'application/json',
+    parents: [process.env.DATA_FOLDER_ID],
+  };
+  const media = {
+    mimeType: 'application/json',
+    body: Buffer.from(JSON.stringify(token, null, 2)),
+  };
+
+  const existing = await drive.files.list({
+    q: `'${process.env.DATA_FOLDER_ID}' in parents and name = 'tokens.json' and trashed = false`,
+    fields: 'files(id)',
+  });
+
+  if (existing.data.files.length > 0) {
+    await drive.files.update({
+      fileId: existing.data.files[0].id,
+      media,
+    });
+  } else {
+    await drive.files.create({ requestBody: fileMetadata, media });
+  }
+};
+
+const downloadTokenFromDrive = async (auth) => {
+  const drive = google.drive({ version: 'v3', auth });
+  const list = await drive.files.list({
+    q: `'${process.env.DATA_FOLDER_ID}' in parents and name = 'tokens.json' and trashed = false`,
+    fields: 'files(id)',
+  });
+
+  if (!list.data.files.length) return null;
+
+  const fileId = list.data.files[0].id;
+  const res = await drive.files.get({ fileId, alt: 'media' });
+  return res.data;
+};
 
 async function getFolderId(folderName, parentId) {
     const response = await drive.files.list({
@@ -75,46 +123,59 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
 };
 
 app.get('/auth', (req, res) => {
-    const authUrl = oauth2Client.generateAuthUrl({
+    const oauth2Client = createOAuthClient();
+    const url = oauth2Client.generateAuthUrl({
       access_type: 'offline',
       scope: ['https://www.googleapis.com/auth/drive'],
-      prompt: 'consent' // força gerar refresh_token
+      prompt: 'consent',
     });
-    res.redirect(authUrl);
-});
-
-app.get('/oauth2callback', async (req, res) => {
-    const { code } = req.query;
-    if (!code) return res.status(400).send('Código de autorização ausente');
+    res.redirect(url);
+  });
+  
+  app.get('/oauth2callback', async (req, res) => {
+    const code = req.query.code;
+    const oauth2Client = createOAuthClient();
   
     try {
       const { tokens } = await oauth2Client.getToken(code);
       oauth2Client.setCredentials(tokens);
-  
-      // Salva os tokens localmente (temporário, depois pode usar banco)
-      fs.writeFileSync('tokens.json', JSON.stringify(tokens));
-  
-      res.send('✅ Autenticado com sucesso! Você pode fechar essa aba.');
+      await uploadTokenToDrive(oauth2Client, tokens);
+      res.send('✅ Autenticado com sucesso! Token salvo no Google Drive.');
     } catch (err) {
-      console.error('Erro ao trocar o código por token:', err);
+      console.error('Erro ao obter token:', err);
       res.status(500).send('Erro na autenticação');
     }
-});
-
-app.get('/get-clients-equipaments', async(req, res) => {
+  });
+  
+  app.get('/get-clients-equipaments', async (req, res) => {
+    const oauth2Client = createOAuthClient();
+  
     try {
-        const fileId = process.env.CLIENTS_EQUIPAMENTS_JSON_FILE_ID; // drive/emeg_system/apps/backend/data//clients_equipaments.json
-        const response = await drive.files.get({
-            fileId,
-            alt: 'media',
-        });
-
-        res.json(response.data);
-    } catch (error) {
-        console.error('Erro ao buscar JSON do Google Drive:', error);
-        res.status(500).send('Erro ao buscar os dados.');
+      const tokens = await downloadTokenFromDrive(oauth2Client);
+      if (!tokens) return res.status(401).json({ message: 'Token não encontrado. Faça login em /auth.' });
+  
+      oauth2Client.setCredentials(tokens);
+      const drive = google.drive({ version: 'v3', auth: oauth2Client });
+  
+      const folderId = process.env.DATA_FOLDER_ID;
+      const list = await drive.files.list({
+        q: `'${folderId}' in parents and name = 'clients_equipaments.json' and trashed = false`,
+        fields: 'files(id, name)',
+      });
+  
+      if (!list.data.files.length) {
+        return res.status(404).json({ message: 'Arquivo clients_equipaments.json não encontrado.' });
+      }
+  
+      const fileId = list.data.files[0].id;
+      const fileContent = await drive.files.get({ fileId, alt: 'media' });
+  
+      res.json(fileContent.data);
+    } catch (err) {
+      console.error('Erro ao buscar JSON do Drive:', err);
+      res.status(500).json({ message: 'Erro ao buscar o arquivo.' });
     }
-})
+  });
 
 app.post('/update-clients-equipaments', async (req, res) => {
     try {
