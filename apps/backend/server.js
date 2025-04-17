@@ -151,6 +151,22 @@ app.get('/oauth2callback', async (req, res) => {
   }
 });
 
+app.get('/debug-token', async (req, res) => {
+  try {
+    const tokens = await downloadTokenFromDrive();
+    if (!tokens) return res.status(404).send('Nenhum token salvo no Drive.');
+
+    res.json({
+      message: '✅ Token lido com sucesso!',
+      tokens,
+    });
+  } catch (err) {
+    console.error('Erro ao carregar token:', err);
+    res.status(500).send('Erro ao carregar token.');
+  }
+});
+
+
 app.get('/get-clients-equipaments', async (req, res) => {
   const oauth2Client = createOAuthClient();
 
