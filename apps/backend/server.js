@@ -126,16 +126,16 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
 };
 
 app.get('/auth', (req, res) => {
-    const oauth2Client = createOAuthClient();
-    const url = oauth2Client.generateAuthUrl({
-      access_type: 'offline',
-      prompt: 'consent',
-      scope: ['https://www.googleapis.com/auth/drive']
-    });
-    res.redirect(url);
+  const oauth2Client = createOAuthClient();
+  const url = oauth2Client.generateAuthUrl({
+    access_type: 'offline',
+    prompt: 'consent',
+    scope: ['https://www.googleapis.com/auth/drive']
   });
-  
+  res.redirect(url);
+});
 
+// /oauth2callback - troca o código por token e salva localmente
 app.get('/oauth2callback', async (req, res) => {
   const code = req.query.code;
   const oauth2Client = createOAuthClient();
@@ -143,11 +143,13 @@ app.get('/oauth2callback', async (req, res) => {
   try {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
-    await uploadTokenToDrive(oauth2Client, tokens);
-    res.send('✅ Autenticado com sucesso! Token salvo no Google Drive.');
+
+    // Salva localmente o token
+    fs.writeFileSync('tokens.json', JSON.stringify(tokens));
+    res.send('✅ Token salvo localmente com sucesso.');
   } catch (err) {
     console.error('Erro ao obter token:', err);
-    res.status(500).send('Erro na autenticação');
+    res.status(500).send('Erro ao autenticar.');
   }
 });
 
@@ -166,14 +168,14 @@ app.get('/debug-token', async (req, res) => {
   }
 });
 
-
 app.get('/get-clients-equipaments', async (req, res) => {
-  const oauth2Client = createOAuthClient();
-
   try {
-    const tokens = await downloadTokenFromDrive();
-    if (!tokens) return res.status(401).json({ message: 'Token não encontrado. Faça login em /auth.' });
+    if (!fs.existsSync('tokens.json')) {
+      return res.status(401).send('Token não encontrado. Faça login em /auth.');
+    }
 
+    const tokens = JSON.parse(fs.readFileSync('tokens.json'));
+    const oauth2Client = createOAuthClient();
     oauth2Client.setCredentials(tokens);
 
     const drive = google.drive({ version: 'v3', auth: oauth2Client });
@@ -185,18 +187,19 @@ app.get('/get-clients-equipaments', async (req, res) => {
     });
 
     if (!list.data.files.length) {
-      return res.status(404).json({ message: 'Arquivo clients_equipaments.json não encontrado.' });
+      return res.status(404).send('Arquivo clients_equipaments.json não encontrado.');
     }
 
     const fileId = list.data.files[0].id;
-    const fileContent = await drive.files.get({ fileId, alt: 'media' });
+    const response = await drive.files.get({ fileId, alt: 'media' });
 
-    res.json(fileContent.data);
+    res.json(response.data);
   } catch (err) {
     console.error('Erro ao buscar JSON do Drive:', err);
-    res.status(500).json({ message: 'Erro ao buscar o arquivo.' });
+    res.status(500).send('Erro ao buscar JSON.');
   }
 });
+
 
 app.post('/update-clients-equipaments', async (req, res) => {
     try {
