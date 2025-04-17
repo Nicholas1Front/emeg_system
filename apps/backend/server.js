@@ -33,6 +33,7 @@ const oauth2Client = new google.auth.OAuth2(
 const drive = google.drive({ version: 'v3', auth });
 const DATA_FOLDER_ID = process.env.DATA_FOLDER_ID; // drive/emeg_system/apps/backend/data
 const CLIENTS_FOLDER_ID = process.env.CLIENTS_FOLDER_ID;  // drive/Clientes
+
 const createOAuthClient = () => {
   return new google.auth.OAuth2(
     process.env.GOOGLE_CLIENT_ID,
@@ -41,22 +42,25 @@ const createOAuthClient = () => {
   );
 };
 
-const uploadTokenToDrive = async (auth, token) => {
+// ✅ Usar boot token apenas para ler o tokens.json
+const getBootAuth = () => {
+  return new google.auth.OAuth2();
+};
+
+const uploadTokenToDrive = async (token) => {
+  const auth = getBootAuth();
+  auth.setCredentials({ access_token: process.env.GOOGLE_BOOT_TOKEN });
   const drive = google.drive({ version: 'v3', auth });
-  const fileMetadata = {
-    name: 'tokens.json',
-    mimeType: 'application/json',
-    parents: [process.env.DATA_FOLDER_ID],
-  };
-  const media = {
-    mimeType: 'application/json',
-    body: Readable.from([JSON.stringify(token, null, 2)]),
-  };
 
   const existing = await drive.files.list({
     q: `'${process.env.DATA_FOLDER_ID}' in parents and name = 'tokens.json' and trashed = false`,
     fields: 'files(id)',
   });
+
+  const media = {
+    mimeType: 'application/json',
+    body: Readable.from([JSON.stringify(token, null, 2)]),
+  };
 
   if (existing.data.files.length > 0) {
     await drive.files.update({
@@ -64,13 +68,21 @@ const uploadTokenToDrive = async (auth, token) => {
       media,
     });
   } else {
-    await drive.files.create({ requestBody: fileMetadata, media });
+    await drive.files.create({
+      requestBody: {
+        name: 'tokens.json',
+        mimeType: 'application/json',
+        parents: [process.env.DATA_FOLDER_ID],
+      },
+      media,
+    });
   }
 };
 
 const downloadTokenFromDrive = async () => {
-  const tempClient = createOAuthClient();
-  const drive = google.drive({ version: 'v3', auth: tempClient });
+  const auth = getBootAuth();
+  auth.setCredentials({ access_token: process.env.GOOGLE_BOOT_TOKEN });
+  const drive = google.drive({ version: 'v3', auth });
 
   const list = await drive.files.list({
     q: `'${process.env.DATA_FOLDER_ID}' in parents and name = 'tokens.json' and trashed = false`,
@@ -80,8 +92,8 @@ const downloadTokenFromDrive = async () => {
   if (!list.data.files.length) return null;
 
   const fileId = list.data.files[0].id;
-  const res = await drive.files.get({ fileId, alt: 'media' });
-  return res.data;
+  const response = await drive.files.get({ fileId, alt: 'media' });
+  return response.data;
 };
 
 async function getFolderId(folderName, parentId) {
@@ -135,7 +147,6 @@ app.get('/auth', (req, res) => {
   res.redirect(url);
 });
 
-// /oauth2callback - troca o código por token e salva localmente
 app.get('/oauth2callback', async (req, res) => {
   const code = req.query.code;
   const oauth2Client = createOAuthClient();
@@ -144,37 +155,19 @@ app.get('/oauth2callback', async (req, res) => {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
 
-    // Salva localmente o token
-    fs.writeFileSync('tokens.json', JSON.stringify(tokens));
-    res.send('✅ Token salvo localmente com sucesso.');
+    await uploadTokenToDrive(tokens);
+    res.send('✅ Token salvo no Google Drive com sucesso.');
   } catch (err) {
     console.error('Erro ao obter token:', err);
-    res.status(500).send('Erro ao autenticar.');
-  }
-});
-
-app.get('/debug-token', async (req, res) => {
-  try {
-    const tokens = await downloadTokenFromDrive();
-    if (!tokens) return res.status(404).send('Nenhum token salvo no Drive.');
-
-    res.json({
-      message: '✅ Token lido com sucesso!',
-      tokens,
-    });
-  } catch (err) {
-    console.error('Erro ao carregar token:', err);
-    res.status(500).send('Erro ao carregar token.');
+    res.status(500).send('Erro na autenticação.');
   }
 });
 
 app.get('/get-clients-equipaments', async (req, res) => {
   try {
-    if (!fs.existsSync('tokens.json')) {
-      return res.status(401).send('Token não encontrado. Faça login em /auth.');
-    }
+    const tokens = await downloadTokenFromDrive();
+    if (!tokens) return res.status(401).send('Token não encontrado no Drive. Faça login em /auth.');
 
-    const tokens = JSON.parse(fs.readFileSync('tokens.json'));
     const oauth2Client = createOAuthClient();
     oauth2Client.setCredentials(tokens);
 
@@ -199,7 +192,6 @@ app.get('/get-clients-equipaments', async (req, res) => {
     res.status(500).send('Erro ao buscar JSON.');
   }
 });
-
 
 app.post('/update-clients-equipaments', async (req, res) => {
     try {
