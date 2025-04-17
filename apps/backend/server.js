@@ -137,6 +137,57 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
     return isUpdated;
 };
 
+app.get('/', async (req, res) => {
+  const results = {
+    server: true,
+    env: true,
+    googleDrive: false,
+    tokenValido: false,
+    arquivosJson: false,
+  };
+
+  // Testa variáveis de ambiente essenciais
+  const requiredEnv = [
+    'GOOGLE_CLIENT_ID',
+    'GOOGLE_CLIENT_SECRET',
+    'GOOGLE_REDIRECT_URI',
+    'GOOGLE_BOOT_TOKEN',
+    'DATA_FOLDER_ID'
+  ];
+
+  for (const key of requiredEnv) {
+    if (!process.env[key]) {
+      results.env = false;
+      break;
+    }
+  }
+
+  try {
+    const tokens = await downloadTokenFromDrive();
+    if (tokens && tokens.access_token) results.tokenValido = true;
+
+    const oauth2Client = createOAuthClient();
+    oauth2Client.setCredentials(tokens);
+
+    const drive = google.drive({ version: 'v3', auth: oauth2Client });
+    const list = await drive.files.list({
+      q: `'${process.env.DATA_FOLDER_ID}' in parents and trashed = false`,
+      fields: 'files(name)',
+    });
+
+    const fileNames = list.data.files.map(f => f.name);
+    if (fileNames.includes('clients_equipaments.json')) {
+      results.arquivosJson = true;
+    }
+
+    results.googleDrive = true;
+  } catch (e) {
+    console.error('[Health check] erro de integração:', e.message);
+  }
+
+  res.json(results);
+});
+
 app.get('/auth', (req, res) => {
   const oauth2Client = createOAuthClient();
   const url = oauth2Client.generateAuthUrl({
