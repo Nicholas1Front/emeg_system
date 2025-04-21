@@ -1,14 +1,16 @@
-const { Readable } = require('stream');
 const express = require('express');
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 const app = express();
+const { Dropbox } = require('dropbox');
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 app.use(cors());
 app.use(express.json());
 require('dotenv').config();
+
+const dropbox = new Dropbox({ accessToken: process.env.DROPBOX_ACCESS_TOKEN });
 
 // Variáveis de ambiente para GitHub
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
@@ -37,100 +39,78 @@ const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
     return isUpdated;
 };
 
-app.get('/get-clients-equipaments', async (req, res) => {
+// Health check
+app.get('/', async (req, res) => {
+  const results = {
+    server: true,
+    env: !!process.env.DROPBOX_ACCESS_TOKEN,
+    dropboxAccess: false,
+    jsonFileFound: false
+  };
+
   try {
-    const tokens = await downloadTokenFromDrive();
-    if (!tokens) return res.status(401).send('Token não encontrado no Drive. Faça login em /auth.');
+    const list = await dropbox.filesListFolder({ path: '/emeg-system-data' });
+    const files = list.result.entries.map(f => f.name);
 
-    const oauth2Client = createOAuthClient();
-    oauth2Client.setCredentials(tokens);
-
-    const drive = google.drive({ version: 'v3', auth: oauth2Client });
-    const folderId = process.env.DATA_FOLDER_ID;
-
-    const list = await drive.files.list({
-      q: `'${folderId}' in parents and name = 'clients_equipaments.json' and trashed = false`,
-      fields: 'files(id, name)',
-    });
-
-    if (!list.data.files.length) {
-      return res.status(404).send('Arquivo clients_equipaments.json não encontrado.');
+    if (files.includes('clients_equipaments.json')) {
+      results.jsonFileFound = true;
     }
 
-    const fileId = list.data.files[0].id;
-    const response = await drive.files.get({ fileId, alt: 'media' });
+    results.dropboxAccess = true;
+  } catch (e) {
+    console.error('[Health Check] Erro:', e.message);
+  }
 
-    res.json(response.data);
+  res.json(results);
+});
+
+// GET - Buscar arquivo JSON no Dropbox
+app.get('/get-clients-equipaments', async (req, res) => {
+  try {
+    const response = await dropbox.filesDownload({ path: '/emeg-systemdata/clients_equipaments.json' });
+    const buffer = response.result.fileBinary;
+    const json = JSON.parse(buffer.toString());
+    res.json(json);
   } catch (err) {
-    console.error('Erro ao buscar JSON do Drive:', err);
-    res.status(500).send('Erro ao buscar JSON.');
+    console.error('Erro ao buscar JSON:', err.message);
+    res.status(500).json({ message: 'Erro ao buscar dados do Dropbox.' });
   }
 });
 
+// POST - Atualizar arquivo JSON no Dropbox
 app.post('/update-clients-equipaments', async (req, res) => {
-    try {
-        const { clients_equipaments_array } = req.body;
-
-        if (!clients_equipaments_array) {
-            return res.status(400).send('A variável clients_equipaments_array é obrigatória.');
-        }
-
-        // Criar o arquivo JSON temporário
-        const filePath = path.join(__dirname, 'clients_equipaments.json');
-        fs.writeFileSync(filePath, JSON.stringify(clients_equipaments_array, null, 2));
-
-        const existingFiles = await drive.files.list({
-            q: `'${DATA_FOLDER_ID}' in parents and name = 'clients_equipaments.json' and trashed = false`,
-            fields: 'files(id, name)',
-          });
-          
-          if (existingFiles.data.files.length > 0) {
-            // Se existir, atualiza o conteúdo
-            const fileId = existingFiles.data.files[0].id;
-            await drive.files.update({
-              fileId,
-              media: {
-                mimeType: 'application/json',
-                body: fs.createReadStream(filePath),
-              },
-            });
-            console.log('Arquivo atualizado no Google Drive.');
-          } else {
-            // Se não existir, cria o arquivo
-            await drive.files.create({
-              requestBody: {
-                name: 'clients_equipaments.json',
-                mimeType: 'application/json',
-                parents: [DATA_FOLDER_ID],
-              },
-              media: {
-                mimeType: 'application/json',
-                body: fs.createReadStream(filePath),
-              },
-            });
-            console.log('Arquivo criado no Google Drive.');
-          }
-
-        // Verificar e criar pastas para clientes
-        for (const client of clients_equipaments_array) {
-            const clientName = client.name; // Supondo que o nome do cliente está na chave 'name'
-            if (!clientName) continue;
-
-            const folderId = await getFolderId(clientName, CLIENTS_FOLDER_ID);
-
-            if (!folderId) {
-                const newFolderId = await createFolder(clientName, CLIENTS_FOLDER_ID);
-                console.log(`Pasta criada para cliente: ${clientName} (ID: ${newFolderId})`);
-            }
-        }
-
-        res.send('Arquivo atualizado e pastas de clientes verificadas com sucesso no Google Drive!');
-    } catch (error) {
-        console.error(`[Erro /update-clients-equipaments]: ${error.message}`);
-        res.status(500).send('Erro ao atualizar os dados no Google Drive.');
+  try {
+    const { clients_equipaments_array } = req.body;
+    if (!clients_equipaments_array || !Array.isArray(clients_equipaments_array)) {
+      return res.status(400).json({ message: 'clients_equipaments_array é obrigatório e deve ser um array.' });
     }
-});
 
+    // Upload do JSON
+    await dropbox.filesUpload({
+      path: '/data/clients_equipaments.json',
+      mode: { '.tag': 'overwrite' },
+      contents: Buffer.from(JSON.stringify(clients_equipaments_array, null, 2))
+    });
+
+    // Criar pastas se não existirem
+    for (const client of clients_equipaments_array) {
+      if (!client.name) continue;
+
+      try {
+        await dropbox.filesCreateFolderV2({ path: `/clientes/${client.name}` });
+      } catch (e) {
+        if (!e.message.includes('folder_conflict')) {
+          console.warn(`Erro ao criar pasta de ${client.name}:`, e.message);
+        }
+      }
+    }
+
+    res.status(200).json({ message: 'Atualizado com sucesso no Dropbox.' });
+  } catch (err) {
+    console.error('Erro ao atualizar JSON:', err.message);
+    res.status(500).json({ message: 'Erro ao atualizar dados no Dropbox.' });
+  }
+});
 
 // Endpoint para atualizar o arquivo JSON no GitHub (services)
 app.post('/update-services', async (req, res) => {
