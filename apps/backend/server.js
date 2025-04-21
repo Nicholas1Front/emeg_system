@@ -87,7 +87,7 @@ app.post('/update-clients-equipaments', async (req, res) => {
 
     // Upload do JSON
     await dropbox.filesUpload({
-      path: '/data/clients_equipaments.json',
+      path: '/emeg-system-data/clients_equipaments.json',
       mode: { '.tag': 'overwrite' },
       contents: Buffer.from(JSON.stringify(clients_equipaments_array, null, 2))
     });
