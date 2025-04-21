@@ -206,7 +206,7 @@ app.get('/oauth2callback', async (req, res) => {
     const { tokens } = await oauth2Client.getToken(code);
     oauth2Client.setCredentials(tokens);
 
-    await uploadTokenToDrive(tokens);
+    /* await uploadTokenToDrive(tokens); */
     res.send('✅ Token salvo no Google Drive com sucesso.');
   } catch (err) {
     console.error('Erro ao obter token:', err);
