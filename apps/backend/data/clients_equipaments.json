@@ -163,20 +163,10 @@
     ]
   },
   {
-<<<<<<< HEAD
     "name": "CAMPOS MOVIMENTAÇÕES",
     "contact":[ "(+55 98 8247-0262 / lucas)"],
     "cnpj_cpf": null,
     "locality" : ["BALSAS/MA"],
-=======
-    "name": "CACAU",
-    "equipaments": [
-      "FIORINO OXW6G36"
-    ]
-  },
-  {
-    "name": "CAMPOS MOVIMENTAÇÕES (+55 98 8247-0262 / LUCAS)",
->>>>>>> 1472c3cd02b42d1329ab5c32b3f583c8deed78c4
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 31.280 RXA2D24",
       "CAMINHÃO VOLKSWAGEN 31.280 RWL4I03",
@@ -223,18 +213,10 @@
     ]
   },
   {
-<<<<<<< HEAD
     "name": "COSMEPEÇAS",
     "contact":[ ],
     "cnpj_cpf": null,
     "locality" : ["SÃO LUÍS/MA"],
-=======
-    "name": "CONSTRUTORA ESCUDO ",
-    "equipaments": []
-  },
-  {
-    "name": "COSMEPEÇAS (SILVIA)",
->>>>>>> 1472c3cd02b42d1329ab5c32b3f583c8deed78c4
     "equipaments": [
       "MOTONIVELADORA NEW HOLLAND",
       "CAMINHÃO VOLKSWAGEN HPL-2941",
@@ -784,12 +766,6 @@
     ]
   },
   {
-<<<<<<< HEAD
-    "name": "NORTE CARGAS",
-    "contact":[ "(roberto nascimento / +55 98 8300-0136)"],
-    "cnpj_cpf": null,
-    "locality" : ["SÃO LUÍS/MA"],
-=======
     "name": "MUNDIAL TRANSPORTES ( +55 94 9181-0222)",
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 31.280 RWL4123"
@@ -797,7 +773,6 @@
   },
   {
     "name": "NORTE CARGAS (ROBERTO NASCIMENTO / +55 98 8300-0136)",
->>>>>>> 1472c3cd02b42d1329ab5c32b3f583c8deed78c4
     "equipaments": [
       "EMPILHADEIRA HYSTER H50CT- BR"
     ]
@@ -900,14 +875,7 @@
     ]
   },
   {
-<<<<<<< HEAD
-    "name": "PHM MECÂNICA",
-    "contact":[ "(phm.ma@phm.mecanica.com.br/andreia)"],
-    "cnpj_cpf": null,
-    "locality" : ["SÃO LUÍS/MA"],
-=======
     "name": "PHM SERVICES & SOLUTIONS LTDA (PHM.MA@PHM.MECANICA.COM.BR/ANDREIA)",
->>>>>>> 1472c3cd02b42d1329ab5c32b3f583c8deed78c4
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 15180 GUINDAUTO PALFINGER",
       "CAMINHÃO VOLKSWAGEN 24-220 WORKER HNE-4220",
