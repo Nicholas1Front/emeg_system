@@ -3,7 +3,7 @@ let clientsEquipamentsArray = []
 // clients_equipaments.json
 async function getClientsData(){
     try{
-        const response = await fetch(`https://nicholas1front.github.io/emeg_system/apps/backend/data/clients_equipaments.json?timestamp=${new Date().getTime()}`);
+        const response = await fetch(`https://emeg-system.onrender.com/get-clients-equipaments`);
 
         if (!response.ok){
             throw new Error(`HTTP Error ! Status : ${response.status}`);
@@ -1178,7 +1178,7 @@ async function updateBudgetNumberData(){
 
         latest_budget_number.latestNumber = number; 
 
-        const response = await fetch('https://emeg-orc.onrender.com/update-latest-budget-number', { 
+        const response = await fetch('https://emeg-system.onrender.com/update-latest-budget-number', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
