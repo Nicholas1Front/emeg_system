@@ -34,12 +34,19 @@ app.get('/', async (req, res) => {
     server: true,
     env: !!process.env.DROPBOX_ACCESS_TOKEN,
     dropboxAccess: false,
-    arquivos: {}
+    arquivos: {},
+    mensagem: 'Servidor rodando corretamente.'
   };
 
+  if (!process.env.DROPBOX_ACCESS_TOKEN) {
+    results.mensagem = '🔴 Variável de ambiente DROPBOX_ACCESS_TOKEN não configurada.';
+    return res.status(500).json(results);
+  }
+
   try {
-    const test = await dropbox.usersGetCurrentAccount();
-    results.dropboxAccess = !!test.result;
+    const account = await dropbox.usersGetCurrentAccount();
+    results.dropboxAccess = true;
+    results.mensagem = `🟢 Token ativo para: ${account.result.email}`;
 
     const arquivos = [
       { key: 'clients_equipaments.json', path: PATH_CLIENTS },
@@ -52,7 +59,8 @@ app.get('/', async (req, res) => {
       results.arquivos[arquivo.key] = await checkDropboxFile(arquivo.path);
     }
   } catch (e) {
-    console.error('[Health Check] Erro:', e.message);
+    results.dropboxAccess = false;
+    results.mensagem = `🔴 Erro ao acessar Dropbox: ${e.message}`;
   }
 
   res.json(results);
