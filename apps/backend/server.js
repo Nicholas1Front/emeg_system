@@ -61,7 +61,7 @@ app.get('/', async (req, res) => {
 // GET - Buscar arquivo JSON no Dropbox
 app.get('/get-clients-equipaments', async (req, res) => {
   try {
-    const response = await dropbox.filesDownload({ path: '/emeg-system-data/clients_equipaments.json' });
+    const response = await dropbox.filesDownload({ path: PATH_CLIENTS });
     const buffer = response.result.fileBinary;
     const json = JSON.parse(buffer.toString());
     res.json(json);
@@ -81,7 +81,7 @@ app.post('/update-clients-equipaments', async (req, res) => {
 
     // Upload do JSON
     await dropbox.filesUpload({
-      path: '/emeg-system-data/clients_equipaments.json',
+      path: PATH_CLIENTS,
       mode: { '.tag': 'overwrite' },
       contents: Buffer.from(JSON.stringify(clients_equipaments_array, null, 2))
     });
