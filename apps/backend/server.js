@@ -93,8 +93,11 @@ app.get('/dropbox/oauth2callback', async (req, res) => {
 
     const { access_token, refresh_token, expires_in } = response.data;
 
-    // Armazene de forma segura — para agora, podemos salvar no Dropbox em um arquivo
-    await dropbox.filesUpload({
+    // ⚠️ Criar instância do Dropbox com o access_token recém-gerado
+    const tempDropbox = new Dropbox({ accessToken: access_token });
+
+    // Salvar token em arquivo no próprio Dropbox
+    await tempDropbox.filesUpload({
       path: '/emeg-system-data/dropbox_token.json',
       mode: { '.tag': 'overwrite' },
       contents: Buffer.from(JSON.stringify({ access_token, refresh_token, expires_in, saved_at: Date.now() }, null, 2))
@@ -106,7 +109,6 @@ app.get('/dropbox/oauth2callback', async (req, res) => {
     res.status(500).send('Erro ao obter token do Dropbox.');
   }
 });
-
 
 // GET - Buscar arquivo JSON no Dropbox
 app.get('/get-clients-equipaments', async (req, res) => {
