@@ -1156,7 +1156,7 @@ getBudgetLatestNumber();
 
 async function getBudgetLatestNumber(){
     try{
-        const response = await fetch(`https://nicholas1front.github.io/emeg_system/apps/backend/data/latest_budget_number.json?timestamp=${new Date().getTime()}`);
+        const response = await fetch(`https://emeg-system.onrender.com/get-latest-budget-number`);
 
         if (!response.ok){
             throw new Error(`HTTP Error ! Status : ${response.status}`);

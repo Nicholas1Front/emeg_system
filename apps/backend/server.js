@@ -165,18 +165,12 @@ app.get('/get-latest-budget-number', async (req, res) => {
 
 app.post('/update-latest-budget-number', async (req, res) => {
   try {
-    const { number } = req.body;
-
-    if (typeof number !== 'number') {
-      return res.status(400).json({
-        message: 'O campo \"number\" é obrigatório e deve ser um número.'
-      });
-    }
+    const { latest_budget_number } = req.body;
 
     await dropbox.filesUpload({
       path: PATH_BUDGET_NUM,
       mode: { '.tag': 'overwrite' },
-      contents: Buffer.from(JSON.stringify({ number }, null, 2))
+      contents: Buffer.from(JSON.stringify({ latest_budget_number }, null, 2))
     });
 
     res.status(200).json({ message: 'latest_budget_number.json atualizado com sucesso.' });
@@ -200,18 +194,18 @@ app.get('/get-inventory', async (req, res) => {
 
 app.post('/update-inventory', async (req, res) => {
   try {
-    const { inventory_array } = req.body;
+    const { itens_array } = req.body;
 
-    if (!inventory_array || !Array.isArray(inventory_array)) {
+    if (!itens_array || !Array.isArray(itens_array)) {
       return res.status(400).json({
-        message: 'inventory_array é obrigatório e deve ser um array.'
+        message: 'itens_array é obrigatório e deve ser um array.'
       });
     }
 
     await dropbox.filesUpload({
       path: PATH_INVENTORY,
       mode: { '.tag': 'overwrite' },
-      contents: Buffer.from(JSON.stringify(inventory_array, null, 2))
+      contents: Buffer.from(JSON.stringify(itens_array, null, 2))
     });
 
     res.status(200).json({ message: 'inventory.json atualizado com sucesso no Dropbox.' });
