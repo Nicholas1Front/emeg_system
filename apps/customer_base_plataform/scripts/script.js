@@ -8,6 +8,8 @@ async function verifyServerStatus(){
         let serverStatus = await response.json();
 
         console.log(serverStatus);
+
+        return serverStatus;
     }
     catch(error){
         console.error(`Failed to load json : ${error}`);

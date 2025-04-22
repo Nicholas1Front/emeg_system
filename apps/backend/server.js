@@ -66,6 +66,50 @@ app.get('/', async (req, res) => {
   res.json(results);
 });
 
+app.get('/auth-dropbox', (req, res) => {
+  const params = new URLSearchParams({
+    response_type: 'code',
+    client_id: process.env.DROPBOX_CLIENT_ID,
+    redirect_uri: process.env.DROPBOX_REDIRECT_URI,
+    token_access_type: 'offline', // Garante o refresh_token
+  });
+
+  const authUrl = `https://www.dropbox.com/oauth2/authorize?${params.toString()}`;
+  res.redirect(authUrl);
+});
+
+app.get('/dropbox/oauth2callback', async (req, res) => {
+  const code = req.query.code;
+  if (!code) return res.status(400).send('Código de autorização não encontrado.');
+
+  try {
+    const response = await axios.post('https://api.dropboxapi.com/oauth2/token', new URLSearchParams({
+      code,
+      grant_type: 'authorization_code',
+      client_id: process.env.DROPBOX_CLIENT_ID,
+      client_secret: process.env.DROPBOX_CLIENT_SECRET,
+      redirect_uri: process.env.DROPBOX_REDIRECT_URI,
+    }).toString(), {
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+    });
+
+    const { access_token, refresh_token, expires_in } = response.data;
+
+    // Armazene de forma segura — para agora, podemos salvar no Dropbox em um arquivo
+    await dropbox.filesUpload({
+      path: '/emeg-system-data/dropbox_token.json',
+      mode: { '.tag': 'overwrite' },
+      contents: Buffer.from(JSON.stringify({ access_token, refresh_token, expires_in, saved_at: Date.now() }, null, 2))
+    });
+
+    res.send('✅ Dropbox autenticado com sucesso. O token foi salvo com segurança.');
+  } catch (err) {
+    console.error('Erro na troca de token:', err.message);
+    res.status(500).send('Erro ao obter token do Dropbox.');
+  }
+});
+
+
 // GET - Buscar arquivo JSON no Dropbox
 app.get('/get-clients-equipaments', async (req, res) => {
   try {
