@@ -10,8 +10,6 @@ app.use(cors());
 app.use(express.json());
 require('dotenv').config();
 
-const dropbox = new Dropbox({ accessToken: process.env.DROPBOX_ACCESS_TOKEN });
-
 const DROPBOX_FOLDER = '/emeg-system-data';
 const PATH_CLIENTS = `${DROPBOX_FOLDER}/clients_equipaments.json`;
 const PATH_SERVICES = `${DROPBOX_FOLDER}/services.json`;
@@ -28,7 +26,7 @@ async function checkDropboxFile(path) {
   }
 }
 
-// ✅ Health check
+/* // ✅ Health check
 app.get('/', async (req, res) => {
   const results = {
     server: true,
@@ -64,7 +62,7 @@ app.get('/', async (req, res) => {
   }
 
   res.json(results);
-});
+}); */
 
 app.get('/auth-dropbox', (req, res) => {
   const params = new URLSearchParams({
