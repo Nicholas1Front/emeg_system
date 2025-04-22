@@ -12,51 +12,45 @@ require('dotenv').config();
 
 const dropbox = new Dropbox({ accessToken: process.env.DROPBOX_ACCESS_TOKEN });
 
-// Variáveis de ambiente para GitHub
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO_OWNER = 'Nicholas1Front';
-const REPO_NAME = 'emeg_system';
-const SERVICES_FILE_PATH = 'apps/backend/data/services.json';
-const LATEST_BUDGET_FILE_PATH = `apps/backend/data/latest_budget_number.json`;
-const BRANCH = 'main';
+const DROPBOX_FOLDER = '/emeg-system-data';
+const PATH_CLIENTS = `${DROPBOX_FOLDER}/clients_equipaments.json`;
+const PATH_SERVICES = `${DROPBOX_FOLDER}/services.json`;
+const PATH_INVENTORY = `${DROPBOX_FOLDER}/inventory.json`;
+const PATH_BUDGET_NUM = `${DROPBOX_FOLDER}/latest_budget_number.json`;
 
-const checkGitHubPagesUpdate = async (filePath, expectedContent) => {
-    let isUpdated = false;
-    const maxAttempts = 10;
-    let attempts = 0;
+// 🔍 Função para verificar se um arquivo existe no Dropbox
+async function checkDropboxFile(path) {
+  try {
+    await dropbox.filesGetMetadata({ path });
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
 
-    while (!isUpdated && attempts < maxAttempts) {
-        await new Promise(r => setTimeout(r, 5000)); // Espera 5 segundos antes de verificar novamente
-        const githubPagesResponse = await axios.get(`https://nicholas1front.github.io/emeg_system/${filePath}`);
-        const currentContent = await githubPagesResponse.data;
-
-        if (JSON.stringify(currentContent) === JSON.stringify(expectedContent)) {
-            isUpdated = true;
-        }
-        attempts++;
-    }
-
-    return isUpdated;
-};
-
-// Health check
+// ✅ Health check
 app.get('/', async (req, res) => {
   const results = {
     server: true,
     env: !!process.env.DROPBOX_ACCESS_TOKEN,
     dropboxAccess: false,
-    jsonFileFound: false
+    arquivos: {}
   };
 
   try {
-    const list = await dropbox.filesListFolder({ path: '/emeg-system-data' });
-    const files = list.result.entries.map(f => f.name);
+    const test = await dropbox.usersGetCurrentAccount();
+    results.dropboxAccess = !!test.result;
 
-    if (files.includes('clients_equipaments.json')) {
-      results.jsonFileFound = true;
+    const arquivos = [
+      { key: 'clients_equipaments.json', path: PATH_CLIENTS },
+      { key: 'services.json', path: PATH_SERVICES },
+      { key: 'inventory.json', path: PATH_INVENTORY },
+      { key: 'latest_budget_number.json', path: PATH_BUDGET_NUM },
+    ];
+
+    for (const arquivo of arquivos) {
+      results.arquivos[arquivo.key] = await checkDropboxFile(arquivo.path);
     }
-
-    results.dropboxAccess = true;
   } catch (e) {
     console.error('[Health Check] Erro:', e.message);
   }
@@ -112,164 +106,111 @@ app.post('/update-clients-equipaments', async (req, res) => {
   }
 });
 
+app.get('/get-services', async (req, res) => {
+  try {
+    const response = await dropbox.filesDownload({ path: PATH_SERVICES });
+    const buffer = response.result.fileBinary;
+    const services = JSON.parse(buffer.toString());
+    res.status(200).json(services);
+  } catch (err) {
+    console.error('Erro ao buscar services.json:', err.message);
+    res.status(500).json({ message: 'Erro ao buscar services.json no Dropbox.' });
+  }
+});
+
+
 // Endpoint para atualizar o arquivo JSON no GitHub (services)
 app.post('/update-services', async (req, res) => {
-    try {
-        const { services_array } = req.body;
+  try {
+    const { services_array } = req.body;
 
-        if (!services_array) {
-            return res.status(400).send('A variável services_array é obrigatória.');
-        }
-
-        // 1. Busca o arquivo atual do GitHub
-        const response = await axios.get(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${SERVICES_FILE_PATH}?ref=${BRANCH}`, {
-            headers: {
-                Authorization: `Bearer ${GITHUB_TOKEN}`,
-                Accept: 'application/vnd.github.v3+json',
-            },
-        });
-
-        const fileSha = response.data.sha;
-
-        // 2. Atualiza o conteúdo com os novos dados
-        const updatedContent = Buffer.from(JSON.stringify(services_array, null, 2)).toString('base64');
-
-        // 3. Atualiza o arquivo no GitHub
-        await axios.put(
-            `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${SERVICES_FILE_PATH}`,
-            {
-                message: 'Update services data',
-                content: updatedContent,
-                sha: fileSha,
-                branch: BRANCH,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${GITHUB_TOKEN}`,
-                    Accept: 'application/vnd.github.v3+json',
-                },
-            }
-        );
-
-        // 4. Verifica se o arquivo foi atualizado no GitHub Pages
-        const isUpdated = await checkGitHubPagesUpdate(SERVICES_FILE_PATH, services_array);
-
-        if (!isUpdated) {
-            return res.status(500).send('Commit realizado, mas o GitHub Pages não foi atualizado a tempo.');
-        }
-
-        res.send('Dados de serviços atualizados com sucesso no GitHub Pages!');
-    } catch (error) {
-        console.error(`[Erro /update-services]: ${error.response ? error.response.data : error.message}`);
-        res.status(500).send('Erro ao atualizar os dados de serviços.');
+    if (!services_array || !Array.isArray(services_array)) {
+      return res.status(400).json({
+        message: 'services_array é obrigatório e deve ser um array.'
+      });
     }
+
+    await dropbox.filesUpload({
+      path: PATH_SERVICES,
+      mode: { '.tag': 'overwrite' },
+      contents: Buffer.from(JSON.stringify(services_array, null, 2))
+    });
+
+    res.status(200).json({ message: 'Arquivo services.json atualizado com sucesso no Dropbox.' });
+  } catch (err) {
+    console.error('Erro ao atualizar services.json:', err.message);
+    res.status(500).json({ message: 'Erro ao atualizar o arquivo services.json no Dropbox.' });
+  }
 });
 
-// Endpoint para atualizar o arquivo JSON no GitHub (latest_budget_number)
+app.get('/get-latest-budget-number', async (req, res) => {
+  try {
+    const response = await dropbox.filesDownload({ path: PATH_BUDGET_NUM });
+    const buffer = response.result.fileBinary;
+    const json = JSON.parse(buffer.toString());
+    res.status(200).json(json);
+  } catch (err) {
+    console.error('Erro ao buscar latest_budget_number.json:', err.message);
+    res.status(500).json({ message: 'Erro ao buscar latest_budget_number.json no Dropbox.' });
+  }
+});
+
 app.post('/update-latest-budget-number', async (req, res) => {
-    try {
-        const { latest_budget_number } = req.body;
+  try {
+    const { number } = req.body;
 
-        if (latest_budget_number === undefined) {
-            return res.status(400).send('A variável latest_budget_number é obrigatória.');
-        }
-
-        // 1. Busca o arquivo atual do GitHub
-        const response = await axios.get(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${LATEST_BUDGET_FILE_PATH}?ref=${BRANCH}`, {
-            headers: {
-                Authorization: `Bearer ${GITHUB_TOKEN}`,
-                Accept: 'application/vnd.github.v3+json',
-            },
-        });
-
-        const fileSha = response.data.sha;
-
-        // 2. Atualiza o conteúdo com os novos dados
-        const updatedContent = Buffer.from(JSON.stringify({ latest_budget_number }, null, 2)).toString('base64');
-
-        // 3. Atualiza o arquivo no GitHub
-        await axios.put(
-            `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${LATEST_BUDGET_FILE_PATH}`,
-            {
-                message: 'Update latest budget number',
-                content: updatedContent,
-                sha: fileSha,
-                branch: BRANCH,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${GITHUB_TOKEN}`,
-                    Accept: 'application/vnd.github.v3+json',
-                },
-            }
-        );
-
-        // 4. Verifica se o arquivo foi atualizado no GitHub Pages
-        const isUpdated = await checkGitHubPagesUpdate(LATEST_BUDGET_FILE_PATH, { latest_budget_number });
-
-        if (!isUpdated) {
-            return res.status(500).send('Commit realizado, mas o GitHub Pages não foi atualizado a tempo.');
-        }
-
-        res.send('Número do último orçamento atualizado com sucesso no GitHub Pages!');
-    } catch (error) {
-        console.error(`[Erro /update-latest-budget-number]: ${error.response ? error.response.data : error.message}`);
-        res.status(500).send('Erro ao atualizar o número do último orçamento.');
+    if (typeof number !== 'number') {
+      return res.status(400).json({
+        message: 'O campo \"number\" é obrigatório e deve ser um número.'
+      });
     }
+
+    await dropbox.filesUpload({
+      path: PATH_BUDGET_NUM,
+      mode: { '.tag': 'overwrite' },
+      contents: Buffer.from(JSON.stringify({ number }, null, 2))
+    });
+
+    res.status(200).json({ message: 'latest_budget_number.json atualizado com sucesso.' });
+  } catch (err) {
+    console.error('Erro ao atualizar latest_budget_number.json:', err.message);
+    res.status(500).json({ message: 'Erro ao atualizar latest_budget_number.json no Dropbox.' });
+  }
 });
 
-// Endpoint para atualizar o arquivo JSON no GitHub (inventory)
+app.get('/get-inventory', async (req, res) => {
+  try {
+    const response = await dropbox.filesDownload({ path: PATH_INVENTORY });
+    const buffer = response.result.fileBinary;
+    const json = JSON.parse(buffer.toString());
+    res.status(200).json(json);
+  } catch (err) {
+    console.error('Erro ao buscar inventory.json:', err.message);
+    res.status(500).json({ message: 'Erro ao buscar inventory.json no Dropbox.' });
+  }
+});
+
 app.post('/update-inventory', async (req, res) => {
-    try {
-        const { itens_array } = req.body;
+  try {
+    const { inventory_array } = req.body;
 
-        if (!itens_array) {
-            return res.status(400).send('A variável itens_array é obrigatória.');
-        }
-
-        // 1. Busca o arquivo atual do GitHub
-        const INVENTORY_FILE_PATH = 'apps/backend/data/inventory.json';
-        const response = await axios.get(`https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${INVENTORY_FILE_PATH}?ref=${BRANCH}`, {
-            headers: {
-                Authorization: `Bearer ${GITHUB_TOKEN}`,
-                Accept: 'application/vnd.github.v3+json',
-            },
-        });
-
-        const fileSha = response.data.sha;
-
-        // 2. Atualiza o conteúdo com os novos dados
-        const updatedContent = Buffer.from(JSON.stringify(itens_array, null, 2)).toString('base64');
-
-        // 3. Atualiza o arquivo no GitHub
-        await axios.put(
-            `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/contents/${INVENTORY_FILE_PATH}`,
-            {
-                message: 'Update inventory data',
-                content: updatedContent,
-                sha: fileSha,
-                branch: BRANCH,
-            },
-            {
-                headers: {
-                    Authorization: `Bearer ${GITHUB_TOKEN}`,
-                    Accept: 'application/vnd.github.v3+json',
-                },
-            }
-        );
-
-        // 4. Verifica se o arquivo foi atualizado no GitHub Pages
-        const isUpdated = await checkGitHubPagesUpdate(INVENTORY_FILE_PATH, itens_array);
-
-        if (!isUpdated) {
-            return res.status(500).send('Commit realizado, mas o GitHub Pages não foi atualizado a tempo.');
-        }
-
-        res.send('Itens do inventário atualizados com sucesso no GitHub Pages!');
-    } catch (error) {
-        console.error(`[Erro /update-inventory]: ${error.response ? error.response.data : error.message}`);
-        res.status(500).send('Erro ao atualizar os itens do inventário.');
+    if (!inventory_array || !Array.isArray(inventory_array)) {
+      return res.status(400).json({
+        message: 'inventory_array é obrigatório e deve ser um array.'
+      });
     }
+
+    await dropbox.filesUpload({
+      path: PATH_INVENTORY,
+      mode: { '.tag': 'overwrite' },
+      contents: Buffer.from(JSON.stringify(inventory_array, null, 2))
+    });
+
+    res.status(200).json({ message: 'inventory.json atualizado com sucesso no Dropbox.' });
+  } catch (err) {
+    console.error('Erro ao atualizar inventory.json:', err.message);
+    res.status(500).json({ message: 'Erro ao atualizar inventory.json no Dropbox.' });
+  }
 });
 
 // Roda o servidor

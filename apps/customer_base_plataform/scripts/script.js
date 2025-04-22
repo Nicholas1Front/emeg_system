@@ -1,10 +1,26 @@
+async function verifyServerStatus(){
+    try{
+        const response = await fetch(`https://emeg-system.onrender.com/`);
+        if(!response.ok){
+            throw new Error(`HTTP Error ! Status : ${response.status}`);
+        }
+
+        let serverStatus = await response.json();
+
+        console.log(serverStatus);
+    }
+    catch(error){
+        console.error(`Failed to load json : ${error}`);
+    }    
+}
+
 // get clients data from github
 
 let clients_equipaments_array = [];
 
 async function getClientsData(){
     try{
-        const response = await fetch(`https://emeg-system.vercel.app/api/get-clients-equipaments`);
+        const response = await fetch(`https://emeg-system.onrender.com/get-clients-equipaments`);
         if(!response.ok){
             throw new Error(`HTTP Error ! Status : ${response.status}`);
         }

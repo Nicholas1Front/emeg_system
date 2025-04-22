@@ -29,16 +29,16 @@ select{
     height: 100%;
     position: fixed;
     z-index:1000;
-    display: none;
+    display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     cursor:not-allowed;
 }
 
 .overlay-for-loading > .loading-container{
     width:100%;
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     color: #fff;
@@ -53,6 +53,38 @@ select{
     font-size: 25px;
 }
 
+.overlay-for-loading > .message-container{
+    width:70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.overlay-for-loading > .message-container > i{
+    font-size:75px;
+    margin-bottom:0.5rem;
+}
+
+.overlay-for-loading > .message-container > h2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.overlay-for-loading > .message-container > h2 > span{
+    font-size: 17px;
+    font-weight: normal;
+    font-style: italic;
+    margin-top:0.1rem;
+}
+
+.overlay-for-loading > .message-container > p{
+    margin-top:2rem;
+    font-size:17px;
+    text-align: center;
+}
+
 .overlay{
     top:0;
     left:0;
@@ -63,7 +95,7 @@ select{
     display: none;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
 }
 
 /* confirmation-popup */
@@ -157,7 +189,6 @@ select{
 /* customer-base-plataform-container */
 .customer-base-plataform-container{
     max-width: 1920px;
-    /* filter: blur(9px); */
 }
 
 .customer-base-plataform-header{
@@ -1702,7 +1733,7 @@ select{
 
 .consult-client-section{
     width:100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     margin:1.5rem 0;
