@@ -1,6 +1,12 @@
-async function verifyServerStatus(){
+// server status and get-clients-equipaments data
+
+// elements
+const serverOverlay = document.querySelector(".server-overlay");
+const serverErrorMsg = document.querySelector("#server-error-msg");
+
+async function getServerStatus(){
     try{
-        const response = await fetch(`https://emeg-system.onrender.com/`);
+        const response = await fetch(`https://emeg-system.onrender.com`);
         if(!response.ok){
             throw new Error(`HTTP Error ! Status : ${response.status}`);
         }
@@ -15,6 +21,37 @@ async function verifyServerStatus(){
         console.error(`Failed to load json : ${error}`);
     }    
 }
+
+async function verifyServerStatus(){
+    const serverStatusObject = await getServerStatus();
+    let serverStatus = true;
+
+    serverErrorMsg.innerText = "";
+
+    if(!serverStatusObject.server || !serverStatusObject.env || serverStatusObject.dropboxAccess == false){
+        serverStatus = false;
+    }
+
+    serverStatusObject.archives.forEach((archive)=>{
+        archive === false;
+        serverStatus = false
+    })
+
+    if(!serverStatus){
+        serverErrorMsg.innerText = serverStatusObject;
+        await showHtmlElement([serverOverlay], "flex");
+        return;
+    }else{
+        await showHtmlElement([loadingOverlay], "flex");
+        clients_equipaments_array = await getClientsData();
+        await hideHtmlElement([loadingOverlay]);
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async()=>{
+    await verifyServerStatus();
+});
+
 
 // get clients data from github
 
@@ -48,14 +85,6 @@ async function getClientsData(){
         console.error(`Failed to load json : ${error}`);
     }
 }
-
-//booting
-async function Initialize_clients_equipaments_array(){
-    clients_equipaments_array = await getClientsData();
-    return clients_equipaments_array;
-}
-
-Initialize_clients_equipaments_array();
 
 //update json 
 
@@ -113,17 +142,17 @@ async function updateClientsData() {
 
 async function sendToServerProcess(){
 
-    await showHtmlElement([overlayForLoading], "flex");
+    await showHtmlElement([loadingOverlay], "flex");
 
     let result = await updateClientsData();
 
     if(!result){
-        await hideHtmlElement([overlayForLoading]);
+        await hideHtmlElement([loadingOverlay]);
         await showServerMessagePopup("errorMsg", "Erro ao enviar dados ! Tente novamente !")
         return;
     }
 
-    await hideHtmlElement([overlayForLoading]);
+    await hideHtmlElement([loadingOverlay]);
     await showServerMessagePopup("sucessMsg", "Dados enviados com sucesso !");
 
     await showMessagePopup("sucessMsg", "Dados atualizados com sucesso !");
@@ -211,12 +240,12 @@ async function validateOnlyNumbers(param){
 // loading screen
 
 //elements
-const overlayForLoading = document.querySelector(".overlay-for-loading");
+const loadingOverlay = document.querySelector(".loading-overlay");
 
 // confirmation popup
 
 // elements
-const overlay = document.querySelector(".overlay");
+const confirmationOverlay = document.querySelector(".confirmation-overlay");
 const closeConfirmationPopupBtn = document.querySelector("#close-confirmation-popup-btn");
 const confirmationPasswordInput = document.querySelector("#confirmation-password-input");
 const wrongPasswordSpan = document.querySelector(".wrong-password-span");
@@ -227,13 +256,13 @@ let functionToBeExecutedGlobal;
 let msgPopupContentGlobal;
 
 function showConfirmationPopup(){
-    overlay.style.display = "flex";
+    confirmationOverlay.style.display = "flex";
     customerBasePlataformContainer.style.filter = "blur(9px)";
     wrongPasswordSpan.style.display = "none";
 }
 
 function closeConfirmationPopup(){
-    overlay.style.display="none";
+    confirmationOverlay.style.display="none";
     customerBasePlataformContainer.style.filter = "blur(0)"
 }
 

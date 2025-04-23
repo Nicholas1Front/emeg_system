@@ -48,7 +48,7 @@ app.get('/', async (req, res) => {
     server: true,
     env: !!process.env.DROPBOX_REFRESH_TOKEN,
     dropboxAccess: false,
-    arquivos: {},
+    archives: {},
     mensagem: '',
   };
 
@@ -61,9 +61,9 @@ app.get('/', async (req, res) => {
     for (const path of paths) {
       try {
         await dropbox.filesGetMetadata({ path });
-        status.arquivos[path] = true;
+        status.archives[path] = true;
       } catch {
-        status.arquivos[path] = false;
+        status.archives[path] = false;
       }
     }
 
