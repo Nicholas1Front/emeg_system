@@ -2043,7 +2043,7 @@ footer{
     z-index: -4;
     background-color: #d61e1e;
     position:absolute;
-    margin-top:16.5rem;
+    margin-top:21.1rem;
     width:100%;
     display: flex;
     justify-content: center;
@@ -2052,6 +2052,6 @@ footer{
 
 footer h3{
     font-size:14px;
-    padding:0.9rem 0;
+    padding:0.9rem 2rem;
     font-weight: normal;
 }

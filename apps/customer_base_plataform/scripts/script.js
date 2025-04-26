@@ -935,7 +935,7 @@ async function addEquipamentProcess(){
         showMessagePopup("errorMsg","O campo 'Equipamentos' não pode estar vazio !")
         return;
     }
-    equipamentName.trim();
+    let equipamentName = addEquipamentInput.value.trim();
 
     let equipamentsArray = [];
 
@@ -1656,7 +1656,7 @@ async function deleteEquipamentProcess(){
 deleteEquipamentLink.addEventListener("click", ()=>{
     backHomeProcess();
     hideHtmlElement([mainHubSection]);
-    showHtmlElement([deleteElementSection],"flex");
+    showHtmlElement([deleteEquipamentSection],"flex");
 })
 
 deleteEquipament_clientInput.addEventListener("input", async()=>{
