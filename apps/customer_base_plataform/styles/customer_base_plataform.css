@@ -38,7 +38,7 @@ select{
 
 .loading-overlay > .loading-container{
     width:100%;
-    display: none;
+    display: flex;
     flex-direction: column;
     align-items: center;
     color: #fff;

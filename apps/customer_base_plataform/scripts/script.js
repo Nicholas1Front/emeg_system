@@ -23,6 +23,7 @@ async function getServerStatus(){
 }
 
 async function verifyServerStatus(){
+    await showHtmlElement([loadingOverlay], "flex");
     const serverStatusObject = await getServerStatus();
     let serverStatus = true;
 
@@ -32,19 +33,21 @@ async function verifyServerStatus(){
         serverStatus = false;
     }
 
-    serverStatusObject.archives.forEach((archive)=>{
-        archive === false;
-        serverStatus = false
-    })
+    for ( key in serverStatusObject.archives){
+        if(serverStatusObject.archives[key] === false){
+            serverStatus = false;
+        }
+    }
 
     if(!serverStatus){
+        await hideHtmlElement([loadingOverlay]); 
         serverErrorMsg.innerText = serverStatusObject;
         await showHtmlElement([serverOverlay], "flex");
         return;
     }else{
-        await showHtmlElement([loadingOverlay], "flex");
         clients_equipaments_array = await getClientsData();
         await hideHtmlElement([loadingOverlay]);
+        await showServerMessagePopup("sucessMsg", "Servidor funcionando corretamente !");
     }
 }
 
@@ -115,7 +118,7 @@ async function verifyDataBeforeSend(){
 
 async function updateClientsData() {
     try {
-        const response = await fetch('https://emeg-orc.onrender.com/update-clients-equipaments', { 
+        const response = await fetch('https://emeg-system.onrender.com/update-clients-equipaments', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -130,7 +133,7 @@ async function updateClientsData() {
 
         const result = await response.text();
 
-        console.log('Dados atualizados com sucesso no backend e GitHub Pages:', result);
+        console.log('Dados atualizados com sucesso no backend :', result);
 
         return true;
 
@@ -212,13 +215,37 @@ async function backHomeProcess(){
 
 // clear inputs and other inputs
 
-async function upperCaseThisInput([...inputs]){
-    inputs.forEach((input)=>{
-        input.addEventListener("input", async()=>{
-            input.value = input.value.toUpperCase();
-        })
-    })
-}   
+// elements
+
+let allInputs;
+
+async function upperCaseAllInputs(){
+    
+    setTimeout(()=>{
+        allInputs = [
+            document.querySelector("#add-client-input_name"),
+            ...document.querySelectorAll(".add-client-input_locality"),
+            ...addEquipamentSection.querySelectorAll("input"),
+            document.querySelector("#edit-client_client-input-search"),
+            document.querySelector("#edit-client-input_name"),
+            ...document.querySelectorAll(".edit-client-input_locality"),
+            ...editEquipamentSection.querySelectorAll("input"),
+            ...deleteClientSection.querySelectorAll("input"),
+            ...deleteEquipamentSection.querySelectorAll("input"),
+            ...consultClientSection.querySelectorAll("input"),
+        ];
+
+        console.log(allInputs);
+    
+        for(let i=0; i < allInputs.length; i++){
+            allInputs[i].addEventListener("input", ()=>{
+                allInputs[i].value = allInputs[i].value.toUpperCase();
+            })
+        }
+
+    },300);
+
+}
 
 async function clearAllInputs(){
     let All_inputs = document.querySelectorAll("input");
@@ -236,6 +263,9 @@ async function clearAllInputs(){
 async function validateOnlyNumbers(param){
     return param.replace(/[^0-9,]/g,"")
 }
+
+// booting
+upperCaseAllInputs();
 
 // loading screen
 
@@ -509,7 +539,7 @@ async function addClientContactInput(){
     `
     <div class="input-control">
         <input type="text" class="add-client-input_contact" autocomplete="off" placeholder="Digite o contato do cliente...">
-                <button class="delete-contact-input-btn">
+            <button class="delete-contact-input-btn">
                     <i class="fa-solid fa-trash"></i>
                 </button>
     </div>
@@ -530,13 +560,13 @@ async function createLocalitySuggestions(localityInput, optionsControl, optionCl
     optionsControl.innerHTML = "";
 
     clients_equipaments_array.forEach((client)=>{
-        if(client.locality.length !== 0){
+        if(client.locality.length != 0){
             for(i = 0; i < client.locality.length; i++){
                 allLocalities.push(client.locality[i]);
             }
         }
-    })
-
+    });
+    
     allLocalities.sort((a,b)=>{
         if(a < b){
             return -1;
@@ -590,8 +620,8 @@ async function createLocalitySuggestions(localityInput, optionsControl, optionCl
         })
     })
 
-    console.log(localityInput.value);
-    console.log(allLocalities);
+    /* console.log(localityInput.value);
+    console.log(allLocalities); */
 
     await showHtmlElement([optionsControl], "block");
 }
@@ -689,6 +719,10 @@ async function addClient(){
     });
 
     console.log(newClient);
+
+    clients_equipaments_array.push(newClient);
+
+    console.log(clients_equipaments_array);
 };
 
 async function addClient_validationProcess(){
@@ -728,11 +762,6 @@ async function addClient_validationProcess(){
 
 // booting
 
-upperCaseThisInput([
-    addClientInput_name,
-    addClientInput_firstLocality
-]);
-
 addClient_handleDeleteLocality();
 
 // event listerner
@@ -741,15 +770,6 @@ addClientLink.addEventListener("click", async()=>{
     await backHomeProcess();
     await showHtmlElement([addClientSection], "flex");
     await addClient_handleAllLocalityInputs();
-
-    addClientInput_allLocalities = document.querySelectorAll(".add-client-input_locality");
-
-    for(let i = 0; i < addClientInput_allLocalities.length; i++){
-        addClientInput_allLocalities[i].addEventListener("input", async()=>{
-            addClientInput_allLocalities[i].value = addClientInput_allLocalities[i].value.toUpperCase();
-        })
-    }
-
 })
 
 addClientInput_cnpj_cpf.addEventListener("input", async(event)=>{
@@ -766,6 +786,7 @@ addClientInput_cnpj_cpf.addEventListener("input", async(event)=>{
 addContactInputBtn.addEventListener("click", async()=>{
     await addClientContactInput();
     await addClient_handleDeleteContact();
+    upperCaseAllInputs();
 })
 
 addLocalityInputBtn.addEventListener("click", async()=>{
@@ -779,6 +800,7 @@ addLocalityInputBtn.addEventListener("click", async()=>{
     }
     
     await addClient_handleAllLocalityInputs();
+    upperCaseAllInputs();
 })
 
 addClientBtn.addEventListener("click",async ()=>{
@@ -896,8 +918,6 @@ async function verifyClientInput_searchBtn(
 
 async function addEquipamentLogic(){
 
-    let equipamentName = addEquipamentInput.value.toUpperCase();
-
     equipamentName.trim();
 
     clients_equipaments_array.forEach((client)=>{
@@ -913,8 +933,6 @@ async function addEquipamentProcess(){
         showMessagePopup("errorMsg","O campo 'Equipamentos' não pode estar vazio !")
         return;
     }
-
-    let equipamentName = addEquipamentInput.value.toUpperCase();
     equipamentName.trim();
 
     let equipamentsArray = [];
@@ -1280,12 +1298,14 @@ editClientInput_cnpj_cpf.addEventListener("input", async(event)=>{
 addContactInputBtn_editClient.addEventListener("click", async()=>{
    addContactInput_editClient();
    editClient_handleDeleteContact();
+   upperCaseAllInputs();
 })
 
 addLocalityInputBtn_editClient.addEventListener("click", async()=>{
     addLocalityInput_editClient();
     editClient_handleDeleteLocality();
     editClient_handleAllLocalityInputs();
+    upperCaseAllInputs();
 })
 
 editClientBtn.addEventListener("click", ()=>{
@@ -1561,7 +1581,7 @@ deleteClientBtn.addEventListener("click", ()=>{
 // delete-equipament-section
 
 // elements
-const deleteElementSection = document.querySelector(".delete-equipament-section");
+const deleteEquipamentSection = document.querySelector(".delete-equipament-section");
 const deleteEquipament_clientSelectList = document.querySelector("#delete-equipament_client-select-list");
 const deleteEquipament_clientInput = document.querySelector("#delete-equipament_client-input");
 const deleteEquipament_clientOptionsControl = document.querySelector(".delete-equipament_client-options-control")

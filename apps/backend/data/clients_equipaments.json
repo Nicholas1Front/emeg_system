@@ -767,12 +767,18 @@
   },
   {
     "name": "MUNDIAL TRANSPORTES ( +55 94 9181-0222)",
+    "contact":[ ],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 31.280 RWL4123"
     ]
   },
   {
-    "name": "NORTE CARGAS (ROBERTO NASCIMENTO / +55 98 8300-0136)",
+    "name": "NORTE CARGAS",
+    "contact":["(roberto nascimento / +55 98 8300-0136)"],
+    "cnpj_cpf": null,
+    "locality" : ["SÃO LUÍS/MA"],
     "equipaments": [
       "EMPILHADEIRA HYSTER H50CT- BR"
     ]
@@ -875,7 +881,10 @@
     ]
   },
   {
-    "name": "PHM SERVICES & SOLUTIONS LTDA (PHM.MA@PHM.MECANICA.COM.BR/ANDREIA)",
+    "name": "PHM SERVICES & SOLUTIONS LTDA",
+    "contact":["(phm.ma@phm.mecanica.com.br/andreia)"],
+    "cnpj_cpf": null,
+    "locality" : ["DUQUE BACELAR/MA"],
     "equipaments": [
       "CAMINHÃO VOLKSWAGEN 15180 GUINDAUTO PALFINGER",
       "CAMINHÃO VOLKSWAGEN 24-220 WORKER HNE-4220",
