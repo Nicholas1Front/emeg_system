@@ -220,30 +220,30 @@ async function backHomeProcess(){
 let allInputs;
 
 async function upperCaseAllInputs(){
-    
-    setTimeout(()=>{
-        allInputs = [
-            document.querySelector("#add-client-input_name"),
-            ...document.querySelectorAll(".add-client-input_locality"),
-            ...addEquipamentSection.querySelectorAll("input"),
-            document.querySelector("#edit-client_client-input-search"),
-            document.querySelector("#edit-client-input_name"),
-            ...document.querySelectorAll(".edit-client-input_locality"),
-            ...editEquipamentSection.querySelectorAll("input"),
-            ...deleteClientSection.querySelectorAll("input"),
-            ...deleteEquipamentSection.querySelectorAll("input"),
-            ...consultClientSection.querySelectorAll("input"),
-        ];
+    let equipamentSection_add = document.querySelector(".add-equipament-section");
+    let equipamentSection_edit = document.querySelector(".edit-equipament-section");
+    let clientSection_delete = document.querySelector(".delete-client-section");
+    let equipamentSection_delete = document.querySelector(".delete-equipament-section");
+    let clientSection_consult = document.querySelector(".consult-client-section");
 
-        console.log(allInputs);
-    
-        for(let i=0; i < allInputs.length; i++){
-            allInputs[i].addEventListener("input", ()=>{
-                allInputs[i].value = allInputs[i].value.toUpperCase();
-            })
-        }
+    allInputs = [
+        document.querySelector("#add-client-input_name"),
+        ...document.querySelectorAll(".add-client-input_locality"),
+        ...equipamentSection_add.querySelectorAll("input"),
+        document.querySelector("#edit-client_client-input-search"),
+        document.querySelector("#edit-client-input_name"),
+        ...document.querySelectorAll(".edit-client-input_locality"),
+        ...equipamentSection_edit.querySelectorAll("input"),
+        ...clientSection_delete.querySelectorAll("input"),
+        ...equipamentSection_delete.querySelectorAll("input"),
+        ...clientSection_consult.querySelectorAll("input"),
+    ];
 
-    },300);
+    for(let i=0; i < allInputs.length; i++){
+        allInputs[i].addEventListener("input", ()=>{
+            allInputs[i].value = allInputs[i].value.toUpperCase();
+        })
+    }
 
 }
 
@@ -265,6 +265,7 @@ async function validateOnlyNumbers(param){
 }
 
 // booting
+
 upperCaseAllInputs();
 
 // loading screen
@@ -768,6 +769,7 @@ addClient_handleDeleteLocality();
 
 addClientLink.addEventListener("click", async()=>{
     await backHomeProcess();
+    await hideHtmlElement([mainHubSection]);
     await showHtmlElement([addClientSection], "flex");
     await addClient_handleAllLocalityInputs();
 })
@@ -960,6 +962,7 @@ async function addEquipamentProcess(){
 
 addEquipamentLink.addEventListener("click", ()=>{
     backHomeProcess();
+    hideHtmlElement([mainHubSection]);
     showHtmlElement([addEquipamentSection],"flex");
 });
 
@@ -1247,8 +1250,8 @@ async function editClient_validationProcess(){
     let clientSearched_json = JSON.stringify(clientSearched);
     let clientEdited_json = JSON.stringify(clientEdited);
 
-    console.log(clientSearched_json);
-    console.log(clientEdited_json);
+    /* console.log(clientSearched_json);
+    console.log(clientEdited_json); */
     
     if(clientSearched_json === clientEdited_json){
         await showMessagePopup("errorMsg", "O cliente editado não pode ser igual ao anterior ! Tente novamente !");
@@ -1264,6 +1267,7 @@ async function editClient_validationProcess(){
 //event listeners
 editClientLink.addEventListener("click", ()=>{
     backHomeProcess();
+    hideHtmlElement([mainHubSection]);
     showHtmlElement([editClientSection],"flex");
 })
 
@@ -1487,7 +1491,11 @@ async function editEquipamentProcess(){
 editEquipamentLink.addEventListener("click", ()=>{
     backHomeProcess();
     showHtmlElement([editEquipamentSection],"flex");
-    hideHtmlElement([editEquipament_equipamentSearchControl,editEquipament_equipamentEditControl])
+    hideHtmlElement([
+        editEquipament_equipamentSearchControl,
+        editEquipament_equipamentEditControl,
+        mainHubSection
+    ])
 })
 
 editEquipament_clientInput.addEventListener("input", async ()=>{
@@ -1563,6 +1571,7 @@ async function deleteClientProcess(){
 
 deleteClientLink.addEventListener("click", ()=>{
     backHomeProcess();
+    hideHtmlElement([mainHubSection]);
     showHtmlElement([deleteClientSection],"flex");
 });
 
@@ -1646,6 +1655,7 @@ async function deleteEquipamentProcess(){
 
 deleteEquipamentLink.addEventListener("click", ()=>{
     backHomeProcess();
+    hideHtmlElement([mainHubSection]);
     showHtmlElement([deleteElementSection],"flex");
 })
 
@@ -1864,7 +1874,7 @@ async function consultClientProcess(){
 
 consultClientLink.addEventListener("click", ()=>{
     backHomeProcess();
-    hideHtmlElement([resultConsultContainer]);
+    hideHtmlElement([resultConsultContainer, mainHubSection]);
     showHtmlElement([consultClientSection], "flex");
 });
 
