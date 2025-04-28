@@ -1,4 +1,61 @@
-let clientsEquipamentsArray = []
+// server status and get-clients-equipaments data
+
+// elements
+const serverOverlay = document.querySelector(".server-overlay");
+const serverErrorMsg = document.querySelector("#server-error-msg");
+
+async function getServerStatus(){
+    try{
+        const response = await fetch(`https://emeg-system.onrender.com`);
+        if(!response.ok){
+            throw new Error(`HTTP Error ! Status : ${response.status}`);
+        }
+
+        let serverStatus = await response.json();
+
+        console.log(serverStatus);
+
+        return serverStatus;
+    }
+    catch(error){
+        console.error(`Failed to load json : ${error}`);
+    }    
+}
+
+async function verifyServerStatus(){
+    await showHtmlElement([loadingOverlay], "flex");
+    const serverStatusObject = await getServerStatus();
+    let serverStatus = true;
+
+    serverErrorMsg.innerText = "";
+
+    if(!serverStatusObject.server || !serverStatusObject.env || serverStatusObject.dropboxAccess == false){
+        serverStatus = false;
+    }
+
+    for ( key in serverStatusObject.archives){
+        if(serverStatusObject.archives[key] === false){
+            serverStatus = false;
+        }
+    }
+
+    if(!serverStatus){
+        await hideHtmlElement([loadingOverlay]); 
+        serverErrorMsg.innerText = serverStatusObject;
+        await showHtmlElement([serverOverlay], "flex");
+        return;
+    }else{
+        clients_equipaments_array = await getClientsData();
+        await hideHtmlElement([loadingOverlay]);
+        await showServerMessagePopup("sucessMsg", "Servidor funcionando corretamente !");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async()=>{
+    await verifyServerStatus();
+});
+
+let clients_equipaments_array = []
 
 // clients_equipaments.json
 async function getClientsData(){
@@ -18,14 +75,6 @@ async function getClientsData(){
         console.log(`Failed to load json : ${error}`);
     }
 }
-
-async function initialize_clients_arary(){
-    clientsEquipamentsArray = await getClientsData();
-}
-
-//booting
-
-initialize_clients_arary();
 
 // message popup
 
@@ -220,11 +269,11 @@ async function createClientInputSuggestions(
     notIdentifiedClient.innerHTML = "(NÃO IDENTIFICADO)";
     optionsControl.appendChild(notIdentifiedClient);
 
-    console.log(clientsEquipamentsArray);
+    console.log(clients_equipaments_array);
 
     let itensSearched = [];
 
-    clientsEquipamentsArray.forEach((client)=>{
+    clients_equipaments_array.forEach((client)=>{
         if(client.name.includes(inputClient.value)){
             itensSearched.push(client.name);
         }
@@ -275,7 +324,7 @@ async function createEquipamentsInputSuggestions(
 
     let allEquipaments= [];
 
-    clientsEquipamentsArray.forEach((client)=>{
+    clients_equipaments_array.forEach((client)=>{
         if(client.name === clientInput.value){
             client.equipaments.forEach((equipament)=>{
                 allEquipaments.push(equipament);
@@ -329,25 +378,6 @@ async function createEquipamentsInputSuggestions(
     })
 }
 
-async function validateSelectsProcess(){
-    if(clientInput.value === ""){
-        await showMessagePopup("Digite ou selecione um cliente !", "errorMsg");
-        return;
-    }
-
-    if(equipamentInput.value === ""){
-        await showMessagePopup("Digite ou selecione um equipamento !", "errorMsg");
-        return;
-    }
-
-    if(dateInput.value === "" || completionDeadlineInput.value === "" || paymentTermsInput.value === "" || guaranteeInput.value === ""){
-        await showMessagePopup("Alguns campos estão vazios !", "adviceMsg");
-    };
-
-    await showHtmlElement([partsSection,servicesSection,totalBudgetProdSection,observationsSection,expensesSection,generateBudgetSection], "block");
-    await hideHtmlElement([nextStepContainer]);
-}
-
 //booting
 
 upperCaseInputs([
@@ -375,10 +405,6 @@ equipamentInput.addEventListener("input", ()=>{
         "equipament-input-option"
     );
 })
-
-infosNextStepBtn.addEventListener("click", ()=>{
-    validateSelectsProcess();
-});
 
 closeMsgBtn.addEventListener("click", ()=>{
     closeMessagePopup();
@@ -856,219 +882,15 @@ upperCaseInputs([
     observationsTextarea
 ])
 
-// expenses-section
-
-// elements 
-
-const expensesSection = document.querySelector(".expenses-section");
-const expensesAddedItemsControl = document.querySelector(".expenses-added-items-control");
-const expenseQuantInput = document.querySelector("#expense-quant-input");
-const expenseDescriptionInput = document.querySelector("#expense-description-input");
-const expenseUnitValueInput = document.querySelector("#expense-unit-value-input");
-const expenseAdditemBtn = document.querySelector("#expense-add-item-btn");
-
-// functions
-
-async function createExpenseItem(quantString, descriptionString, unitValueString){
-    let quant = parseInt(quantString);
-
-    let unitValue = parseFloat(unitValueString.replace(",", "."));
-    unitValueString = formatToBrl(unitValue);
-
-    let totalValue =  quant * unitValue;
-
-    let totalValueString = formatToBrl(totalValue);
-
-    const itemString =
-    `
-        <div class="expenses-item">
-            <div class="expenses-item-content">
-                <span class="expense-quant-span">${quantString}</span>
-                <span class="expense-description-span">${descriptionString.toUpperCase()}</span>
-                <span class="expense-unit-value-span">${unitValueString}</span>
-                <span class="expense-total-value-span">${totalValueString}</span>
-                <div class="edit-btn-control">
-                    <button class="edit-btn-of-expenses">
-                        <i class="fa-solid fa-pen" aria-hidden="true"></i>
-                    </button>
-                </div>
-
-                <div class="delete-btn-control">
-                    <button class="delete-btn-of-expenses">
-                        <i class="fa-solid fa-trash" aria-hidden="true"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    `;
-
-    const parser = new DOMParser();
-
-    const doc = parser.parseFromString(itemString, 'text/html');
-
-    const itemHtml  = doc.body.firstChild;
-
-    expensesAddedItemsControl.appendChild(itemHtml);
-}
-
-async function updateTotal_expenseSection(){
-    const expenseTotalValueSpan = document.querySelectorAll(".expense-total-value-span");
-    let totalValueOfExpenses = 0;
-
-    if(expenseTotalValueSpan !== null ||expenseTotalValueSpan !== undefined){
-        expenseTotalValueSpan.forEach((span)=>{
-            let value = span.innerText;
-            value = currencyToFloatNum(value);
-
-            totalValueOfExpenses += value;
-        })
-    }
-
-    if(expenseTotalValueSpan === null ||expenseTotalValueSpan === undefined){
-        totalValueOfExpenses = 0
-    }
-
-    totalValueOfExpenses = formatToBrl(totalValueOfExpenses);
-
-    const expensesItemTotalSpan = document.querySelector(".expenses-item-total-span");
-    expensesItemTotalSpan.innerHTML = "";
-    expensesItemTotalSpan.innerHTML = totalValueOfExpenses;
-}
-
-async function deleteItem_expenseItem(element){
-    element.remove();
-    await updateTotal_expenseSection();
-
-    await handleAllEventListeners_expensesItem();
-}
-
-async function editItem_expenseItem(element, elementIndex){
-    let expenseQuantSpan = document.querySelectorAll(".expense-quant-span");
-    let expenseDescriptionSpan = document.querySelectorAll(".expense-description-span");
-    let expenseUnitValueSpan = document.querySelectorAll(".expense-unit-value-span");
-
-    expenseQuantInput.value = expenseQuantSpan[elementIndex].innerText;
-    expenseDescriptionInput.value = expenseDescriptionSpan[elementIndex].innerText;
-
-    let unitValueUpdated = currencyToStringFormat(expenseUnitValueSpan[elementIndex].innerText);
-
-    expenseUnitValueInput.value = unitValueUpdated;
-
-    await handleAllEventListeners_expensesItem();
-
-    setTimeout(async()=>{
-        await deleteItem_expenseItem(element);
-    },1)
-
-    await updateTotal_expenseSection();
-}
-
-async function handleAllEventListeners_expensesItem(){
-    let expensesItem = document.querySelectorAll(".expenses-item");
-    let editBtnOfExpenses = document.querySelectorAll(".edit-btn-of-expenses");
-    let deleteBtnOfExpenses = document.querySelectorAll(".delete-btn-of-expenses");
-
-    if(expensesItem[0] === undefined || expensesItem.length == 0){
-        return
-    }
-
-    for(let i = 0; i < expensesItem.length; i++){
-        editBtnOfExpenses[i].removeEventListener("click", editItem_expenseItem);
-        deleteBtnOfExpenses[i].removeEventListener("click", deleteItem_expenseItem);
-    }
-
-    for(let i = 0; i < expensesItem.length; i++){
-        editBtnOfExpenses[i].addEventListener("click", ()=>{
-            editItem_expenseItem(expensesItem[i], i);
-        });
-
-        deleteBtnOfExpenses[i].addEventListener("click", ()=>{
-            deleteItem_expenseItem(expensesItem[i]);
-        })
-    }
-}
-
-async function addExpenseItemProcess(){
-    // input validation
-
-    if(expenseQuantInput.value === "" && expenseDescriptionInput.value === "" && expenseUnitValueInput.value === "" ){
-        await showMessagePopup("Insira as informações dos gastos com o serviço antes de prosseguir !", "errorMsg");
-        return;
-    }
-
-    if(expenseQuantInput.value === ""){
-        await showMessagePopup("Insira a quantidade de gastos !", "errorMsg");
-        return;
-    }
-
-    if (expenseDescriptionInput.value === ""){
-        await showMessagePopup("Insira a descrição do gasto aplicado !", "errorMsg");
-        return;
-    }
-
-    if(expenseUnitValueInput.value === ""){
-        await showMessagePopup("Insira o valor do gasto aplicado !", "errorMsg");
-        return;
-    }
-
-    await createExpenseItem(expenseQuantInput.value,expenseDescriptionInput.value,expenseUnitValueInput.value);
-    await updateTotal_expenseSection();
-
-    await handleAllEventListeners_expensesItem();
-
-    await clearInputs([
-        expenseQuantInput,
-        expenseDescriptionInput,
-        expenseUnitValueInput,
-    ])
-}
-
-// booting
-
-upperCaseInputs([
-    expenseDescriptionInput
-]);
-
-handleAllEventListeners_expensesItem();
-updateTotal_expenseSection();
-
-// event listeners
-
-expenseQuantInput.addEventListener("input", (event)=>{
-    const updateValue = validateOnlyNumbers(event.target.value);
-
-    event.target.value = updateValue;
-})
-
-expenseUnitValueInput.addEventListener("input", (event) => {
-    const updateValue = validateOnlyNumbers(event.target.value);
-
-    event.target.value = updateValue;
-});
-
-expenseUnitValueInput.addEventListener("keydown", async (event)=>{
-    if(event.key === "Enter"){
-        await addExpenseItemProcess();
-
-        expenseQuantInput.focus();
-    }
-})
-
-expenseAdditemBtn.addEventListener("click", async ()=>{
-    await addExpenseItemProcess();
-
-    expenseQuantInput.focus();
-})  
-
 // loading screen
 
 //elements
-const overlayForLoading = document.querySelector(".overlay-for-loading");
+const loadingOverlay = document.querySelector(".loading-overlay");
 
 // confirmation popup
 
 // elements
-const overlay = document.querySelector(".overlay");
+const confirmationOverlay = document.querySelector(".confirmation-overlay");
 const closeConfirmationPopupBtn = document.querySelector("#close-confirmation-popup-btn");
 const confirmationPasswordInput = document.querySelector("#confirmation-password-input");
 const wrongPasswordSpan = document.querySelector(".wrong-password-span");
@@ -1076,13 +898,13 @@ const confirmationPopupBtn = document.querySelector("#confirmation-popup-btn");
 const confirmationPassword = "88320940";
 
 async function showConfirmationPopup(){
-    overlay.style.display = "flex";
+    confirmationOverlay.style.display = "flex";
     budgetProduction.style.filter = "blur(9px)";
     wrongPasswordSpan.style.display = "none";
 }
 
 async function closeConfirmationPopup(){
-    overlay.style.display="none";
+    confirmationOverlay.style.display="none";
     budgetProduction.style.filter = "blur(0)"
 }
 
@@ -1204,17 +1026,17 @@ async function updateBudgetNumberData(){
 }
 
 async function sendToServerProcess(){
-    await showHtmlElement([overlayForLoading], "flex");
+    await showHtmlElement([loadingOverlay], "flex");
 
     const response = await updateBudgetNumberData();
 
     if(!response){
-        await hideHtmlElement([overlayForLoading]);
+        await hideHtmlElement([loadingOverlay]);
         await showServerMessagePopup("errorMsg", "Erro ao enviar os dados ! Tente novamente !");
         return;
     }
 
-    await hideHtmlElement([overlayForLoading]);
+    await hideHtmlElement([loadingOverlay]);
     await showServerMessagePopup("sucessMsg","Dados enviados com sucesso !");
 
     await showMessagePopup("Dados atualizados com sucesso !","sucessMsg");
