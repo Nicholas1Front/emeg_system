@@ -171,6 +171,10 @@ async function hideHtmlElement([...elements]){
 
 // clear html element
 
+// elements
+
+const allInputs = document.querySelectorAll("input");
+
 async function clearHtmlElement([...elements]){
     elements.forEach((element)=>{
         element.innerHTML = "";
@@ -178,13 +182,20 @@ async function clearHtmlElement([...elements]){
 }
 
 // upperCase inputs
-function upperCaseInputs([...inputs]){
-    inputs.forEach((input)=>{
-        input.addEventListener("input",()=>{
+function upperCaseInputs() {
+    allInputs.forEach((input)=>{
+        input.addEventListener("input", ()=>{
+            let start = input.selectionStart;
+            let end = input.selectionEnd;
+
             input.value = input.value.toUpperCase();
+
+            input.setSelectionRange(start, end);
         })
     })
 }
+
+upperCaseInputs();
 
 // javascript date to brasil date
 
@@ -378,16 +389,6 @@ async function createEquipamentsInputSuggestions(
     })
 }
 
-//booting
-
-upperCaseInputs([
-    clientInput,
-    equipamentInput,
-    guaranteeInput,
-    paymentTermsInput,
-    completionDeadlineInput
-])
-
 //event listeners
 
 clientInput.addEventListener("input", ()=>{
@@ -423,7 +424,7 @@ const partAddItemBtn = document.querySelector("#part-add-item-btn");
 //functions
 
 function validateOnlyNumbers(param){
-    return param.replace(/[^0-9,]/g,"")
+    return param.replace(/[^0-9,-]/g,"")
 }
 
 async function clearInputs([...inputs]){
@@ -647,11 +648,6 @@ async function addPartItemProcess(){
 //booting
 
 handleAllEventListeners_partsItem();
-
-upperCaseInputs([
-    partDescriptionInput
-])
-
 updateTotal_servicesAndParts();
 
 // event listerers
@@ -792,7 +788,6 @@ async function handleAllEventListeners_servicesItem(){
     }
 }
 
-
 async function addServiceItemProcess(){
     //validation inputs
 
@@ -831,10 +826,6 @@ async function addServiceItemProcess(){
 //booting
 
 handleAllEventListeners_servicesItem();
-
-upperCaseInputs([
-    serviceDescriptionInput
-])
 
 // event listeners
 
@@ -875,12 +866,6 @@ const totalBudgetProdSection = document.querySelector(".total-budget-prod-sectio
 
 const observationsSection = document.querySelector(".observations-section");
 const observationsTextarea = document.querySelector("#observations-textarea");
-
-// booting
-
-upperCaseInputs([
-    observationsTextarea
-])
 
 // loading screen
 

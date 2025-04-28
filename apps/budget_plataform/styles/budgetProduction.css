@@ -234,7 +234,7 @@
 
 #budget-production{
     max-width:1920px;
-    display: block;
+    display: none;
 }
 
 /* msg-control */
