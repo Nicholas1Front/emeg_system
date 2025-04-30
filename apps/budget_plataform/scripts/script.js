@@ -48,6 +48,7 @@ async function verifyServerStatus(){
         clients_equipaments_array = await getClientsData();
         await hideHtmlElement([loadingOverlay]);
         await showServerMessagePopup("sucessMsg", "Servidor funcionando corretamente !");
+        await getBudgetLatestNumber()
     }
 }
 
@@ -182,7 +183,7 @@ async function clearHtmlElement([...elements]){
 }
 
 // upperCase inputs
-function upperCaseInputs() {
+async function upperCaseInputs() {
     allInputs.forEach((input)=>{
         input.addEventListener("input", ()=>{
             let start = input.selectionStart;
@@ -959,8 +960,6 @@ let latest_budget_number = {
 
 // functions
 
-getBudgetLatestNumber();
-
 async function getBudgetLatestNumber(){
     try{
         const response = await fetch(`https://emeg-system.onrender.com/get-latest-budget-number`);
@@ -1362,6 +1361,11 @@ function backHomeProcess(){
 //event listerner
 
 generateBudgetBtn.addEventListener("click", async ()=>{
+    if(clientInput.value === ""){
+        await showMessagePopup("Insira o cliente antes de prosseguir !","errorMsg");
+        return;
+    }
+
     if(budgetNumberSpan.innerText === ""){
         await confirmationProcess();
         return;

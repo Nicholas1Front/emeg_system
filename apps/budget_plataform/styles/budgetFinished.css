@@ -7,7 +7,7 @@
 #budget-finished{
     max-width: 210mm; 
     margin : 0 auto;
-    display: block;
+    display: none;
 }
 
 #budget-finished h3, h4,span{
@@ -33,23 +33,18 @@
     justify-content: center;
     align-items:center;
     width:100%;
+    padding:6px 0;
     background-color: #d61e1e;
+    color:#fff;
     border-radius:25px;
 }
 
-.header-logo-control-of-budget-finished{
-    width:50%;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    padding:0.8rem 0;
-    color: white;
-}    
+.header-logo-container img{
+    width:6%;
+}
 
-.header-logo-control-of-budget-finished img{
-    width:15%;
-    height: 15%;
-    margin-right:1rem;
+.header-logo-container h3{
+    margin-left:1rem;
 }
 
 .clients-equipaments-header-container > .header-title-container{
@@ -90,6 +85,7 @@
 }
 
 .client-and-equipament-container{
+    width:100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -136,6 +132,7 @@
 
 .other-budget-informations-control h4{
     width:100%;
+    text-align: center;
     color: #d61e1e;
 }
 
@@ -164,19 +161,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #d61e1e;
-    padding:8px 0;
+    padding:5px 0;
     margin-bottom:10px;
     border-radius:25px;
+    color:#000;
 }
 
 .aplied-parts-introduction-title-container > .line-control > .line{
-    background-color: #fff;
+    background-color: #d61e1e;
 }
 
 .aplied-parts-introduction-title-container h3{
     width:fit-content;
-    color: white;
 }
 
 .aplied-parts-items-title-container{
@@ -223,7 +219,7 @@
     justify-content: center;
     align-items: center;
     width:100%;
-    padding:8px 0;
+    padding:5px 0;
     font-style: italic;
 }
 
@@ -241,7 +237,7 @@
 .aplied-parts-no-content-span{
     width: 100%;
     text-align: center;
-    padding:8px 0;
+    padding:5px 0;
     font-weight:500;
 }
 
@@ -283,15 +279,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #d61e1e;
-    color:#fff;
-    padding:8px 0;
+    color:#000;
+    padding:5px 0;
     margin-bottom:10px;
     border-radius:25px;
 }
 
 .services-performed-introduction-title-container > .line-control > .line{
-    background-color: #fff;
+    background-color: #d61e1e;
 }
 
 .services-performed-item-title-container{
@@ -318,7 +313,7 @@
     display : flex;
     justify-content: center;
     align-items: center;
-    padding:8px 0;
+    padding:5px 0;
 }
 
 .serv-performed-number-item-span,
@@ -342,7 +337,7 @@
     width:100%;
     text-align: center;
     font-weight: 500;
-    padding:8px 0;
+    padding:5px 0;
 }
 
 .services-performed-items-total-container{
@@ -363,39 +358,6 @@
     align-items : center;
     padding:5px 0;
     color: #fff;
-}
-
-/* observations-made-section */
-
-.observations-made-section{
-    width:100%;
-    margin-top:1rem;
-}
-
-.observations-made-title-container{
-    width:100%;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-}
-
-.observations-made-content-container{
-    width:100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin:15px 0;
-}
-
-.observations-made-content-container span{
-    width:90%;
-    height:60px;
-    border:1px solid #d61e1e; 
-    border-radius:25px;
-    text-align:center;
-    padding-top:10px;
-    padding-right:12px;
-    padding-left:12px;
 }
 
 /* total-budget-section */
@@ -436,7 +398,7 @@
     justify-content: center;
     align-items:center;
     background-color: #e3e3e3;
-    padding:12px 0;
+    padding:8px 0;
     font-weight: 500;
     font-style: italic;
 }
@@ -454,7 +416,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding:12px 0;
+    padding:8px 0;
     background-color: #d61e1e;
     color:#fff;
     border-bottom-left-radius: 25px;
@@ -465,6 +427,38 @@
 .total-of-budget-control span{
     width:50%;
     text-align: center;
+}
+
+/* observations-made-section */
+
+.observations-made-section{
+    width:100%;
+    margin-top:1rem;
+}
+
+.observations-made-title-container{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.observations-made-content-container{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:15px 0;
+}
+
+.observations-made-content-container span{
+    width:95%;
+    padding:10px;
+    border:1px solid #d61e1e; 
+    border-radius:25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* document-border-division */

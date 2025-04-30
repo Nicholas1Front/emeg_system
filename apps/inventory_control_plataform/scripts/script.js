@@ -1,10 +1,67 @@
+// server status and get-clients-equipaments data
+
+// elements
+const serverOverlay = document.querySelector(".server-overlay");
+const serverErrorMsg = document.querySelector("#server-error-msg");
+
+async function getServerStatus(){
+    try{
+        const response = await fetch(`https://emeg-system.onrender.com`);
+        if(!response.ok){
+            throw new Error(`HTTP Error ! Status : ${response.status}`);
+        }
+
+        let serverStatus = await response.json();
+
+        console.log(serverStatus);
+
+        return serverStatus;
+    }
+    catch(error){
+        console.error(`Failed to load json : ${error}`);
+    }    
+}
+
+async function verifyServerStatus(){
+    await showHtmlElement([loadingOverlay], "flex");
+    const serverStatusObject = await getServerStatus();
+    let serverStatus = true;
+
+    serverErrorMsg.innerText = "";
+
+    if(!serverStatusObject.server || !serverStatusObject.env || serverStatusObject.dropboxAccess == false){
+        serverStatus = false;
+    }
+
+    for ( key in serverStatusObject.archives){
+        if(serverStatusObject.archives[key] === false){
+            serverStatus = false;
+        }
+    }
+
+    if(!serverStatus){
+        await hideHtmlElement([loadingOverlay]); 
+        serverErrorMsg.innerText = serverStatusObject;
+        await showHtmlElement([serverOverlay], "flex");
+        return;
+    }else{
+        itens_array = await getInventoryItens();
+        await hideHtmlElement([loadingOverlay]);
+        await showServerMessagePopup("sucessMsg", "Servidor funcionando corretamente !");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async()=>{
+    await verifyServerStatus();
+});
+
 // get inventory data from inventory.json
 
 let itens_array = null;
 
 async function getInventoryItens(){
     try{
-        const response = await fetch(`https://nicholas1front.github.io/emeg_system/apps/backend/data/inventory.json`);
+        const response = await fetch(`https://emeg-system.onrender.com/get-inventory`);
 
         if (!response.ok){
             throw new Error(`HTTP Error ! Status : ${response.status}`);
@@ -32,19 +89,11 @@ async function getInventoryItens(){
     }
 }
 
-// booting
-
-async function initialize_itens_array(){
-    itens_array = await getInventoryItens();
-}
-
-initialize_itens_array();
-
 // update itens data
 
 async function updateItensData(){
     try {
-        const response = await fetch('https://emeg-orc.onrender.com/update-inventory', { 
+        const response = await fetch('https://emeg-system.onrender.com/update-inventory', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -73,22 +122,25 @@ async function updateItensData(){
 // upperCase inputs
 
 // elements
-const allInputs = document.querySelectorAll("input")
+let allInputs = document.querySelectorAll("input");
 
 // functions
-async function upperCaseInputs([...inputs]){
-    inputs.forEach((input)=>{
+async function upperCaseInputs() {
+    allInputs.forEach((input)=>{
         input.addEventListener("input", ()=>{
+            let start = input.selectionStart;
+            let end = input.selectionEnd;
+
             input.value = input.value.toUpperCase();
+
+            input.setSelectionRange(start, end);
         })
     })
 }
 
-// event listerners
+// booting
 
-for(let i = 0 ; i < allInputs.length ; i++){
-    upperCaseInputs([allInputs[i]]);
-}
+upperCaseInputs();
 
 // show or hide elements
 
@@ -218,14 +270,14 @@ closeMessagePopupBtn.addEventListener("click", ()=>{
 // loading screen
 
 //elements
-const overlayForLoading = document.querySelector(".overlay-for-loading");
+const loadingOverlay = document.querySelector(".loading-overlay");
 
 // confirmation popup
 
 // elements
 
 const inventoryControlSystemContainer = document.querySelector(".inventory-control-system-container");
-const overlay = document.querySelector(".overlay");
+const confirmationOverlay = document.querySelector(".confirmation-overlay");
 const closeConfirmationPopupBtn = document.querySelector("#close-confirmation-popup-btn");
 const confirmationPasswordInput = document.querySelector("#confirmation-password-input");
 const wrongPasswordSpan = document.querySelector(".wrong-password-span");
@@ -236,13 +288,13 @@ let functionToBeExecutedGlobal;
 let msgPopupContentGlobal;
 
 function showConfirmationPopup(){
-    overlay.style.display = "flex";
+    confirmationOverlay.style.display = "flex";
     inventoryControlSystemContainer.style.filter = "blur(9px)";
     wrongPasswordSpan.style.display = "none";
 }
 
 function closeConfirmationPopup(){
-    overlay.style.display="none";
+    confirmationOverlay.style.display="none";
     inventoryControlSystemContainer.style.filter = "blur(0)"
 }
 
@@ -903,17 +955,17 @@ async function verifyDataBeforeSend(){
 }
 
 async function sendToServerProcess(){
-    await showHtmlElement([overlayForLoading],"flex");
+    await showHtmlElement([loadingOverlay],"flex");
 
     const response =  await updateItensData();
 
     if(!response){
-        await hideHtmlElement([overlayForLoading]);
+        await hideHtmlElement([loadingOverlay]);
         await showServerMessagePopup("errorMsg", "Erro ao enviar os dados ! Tente novamente !");
         return;
     }
 
-    await hideHtmlElement([overlayForLoading]);
+    await hideHtmlElement([loadingOverlay]);
     await showServerMessagePopup("sucessMsg","Dados enviados com sucesso !");
 
     await showMessagePopup("sucessMsg","Dados atualizados com sucesso !");
