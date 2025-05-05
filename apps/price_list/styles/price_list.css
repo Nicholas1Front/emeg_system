@@ -31,9 +31,9 @@ select:focus{
     outline:1px solid #d61e1e;
 }
 
-/* overlay-for-loading */
+/* loading-overlay */
 
-.overlay-for-loading{
+.loading-overlay{
     top:0;
     left:0;
     width: 100%;
@@ -43,11 +43,11 @@ select:focus{
     display: none;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
     cursor:not-allowed;
 }
 
-.overlay-for-loading > .loading-container{
+.loading-overlay > .loading-container{
     width:100%;
     display: flex;
     flex-direction: column;
@@ -55,16 +55,18 @@ select:focus{
     color: #fff;
 }
 
-.overlay-for-loading > .loading-container i{
+.loading-overlay > .loading-container i{
     font-size:75px;
     margin-bottom:0.5rem;
 }
 
-.overlay-for-loading > .loading-container span{
+.loading-overlay > .loading-container span{
     font-size: 25px;
 }
 
-.overlay{
+/* server-overlay */
+
+.server-overlay{
     top:0;
     left:0;
     width: 100%;
@@ -74,10 +76,55 @@ select:focus{
     display: none;
     justify-content: center;
     align-items: center;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.8);
+}
+
+.server-overlay > .message-container{
+    width:70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+}
+
+.server-overlay > .message-container > i{
+    font-size:75px;
+    margin-bottom:0.5rem;
+}
+
+.server-overlay > .message-container > h2{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.server-overlay > .message-container > h2 > span{
+    font-size: 17px;
+    font-weight: normal;
+    font-style: italic;
+    margin-top:0.1rem;
+}
+
+.server-overlay > .message-container > p{
+    margin-top:2rem;
+    font-size:17px;
+    text-align: center;
 }
 
 /* confirmation-popup */
+
+.confirmation-overlay{
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index:1000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.8);
+}
 
 .confirmation-popup{
     background-color: #000;

@@ -1,9 +1,66 @@
+// server status and get-clients-equipaments data
+
+// elements
+const serverOverlay = document.querySelector(".server-overlay");
+const serverErrorMsg = document.querySelector("#server-error-msg");
+
+async function getServerStatus(){
+    try{
+        const response = await fetch(`https://emeg-system.onrender.com`);
+        if(!response.ok){
+            throw new Error(`HTTP Error ! Status : ${response.status}`);
+        }
+
+        let serverStatus = await response.json();
+
+        console.log(serverStatus);
+
+        return serverStatus;
+    }
+    catch(error){
+        console.error(`Failed to load json : ${error}`);
+    }    
+}
+
+async function verifyServerStatus(){
+    await showHtmlElement([loadingOverlay], "flex");
+    const serverStatusObject = await getServerStatus();
+    let serverStatus = true;
+
+    serverErrorMsg.innerText = "";
+
+    if(!serverStatusObject.server || !serverStatusObject.env || serverStatusObject.dropboxAccess == false){
+        serverStatus = false;
+    }
+
+    for ( key in serverStatusObject.archives){
+        if(serverStatusObject.archives[key] === false){
+            serverStatus = false;
+        }
+    }
+
+    if(!serverStatus){
+        await hideHtmlElement([loadingOverlay]); 
+        serverErrorMsg.innerText = serverStatusObject;
+        await showHtmlElement([serverOverlay], "flex");
+        return;
+    }else{
+        services_array = await getServicesData();
+        await hideHtmlElement([loadingOverlay]);
+        await showServerMessagePopup("sucessMsg", "Servidor funcionando corretamente !");
+    }
+}
+
+document.addEventListener("DOMContentLoaded", async()=>{
+    await verifyServerStatus();
+});
+
 //get services from services.json
 let services_array = [];
 
 async function getServicesData(){
     try{
-        const response = await fetch(`https://nicholas1front.github.io/emeg_system/apps/backend/data/services.json?timestamp=${new Date().getTime()}`);
+        const response = await fetch(`https://emeg-system.onrender.com/get-services`);
 
         const resultArray = await response.json();
 
@@ -21,19 +78,11 @@ async function getServicesData(){
     }
 }
 
-async function initialize_services_array(){
-    services_array = await getServicesData();
-
-    return services_array;
-}
-
-initialize_services_array();
-
 // update services data
 
 async function updateServiceData(){
     try {
-        const response = await fetch('https://emeg-orc.onrender.com/update-services', { 
+        const response = await fetch('https://emeg-system.onrender.com/update-services', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,19 +113,22 @@ async function updateServiceData(){
 const allInputs = document.querySelectorAll("input")
 
 // functions
-async function upperCaseInputs([...inputs]){
-    inputs.forEach((input)=>{
+async function upperCaseInputs() {
+    allInputs.forEach((input)=>{
         input.addEventListener("input", ()=>{
+            let start = input.selectionStart;
+            let end = input.selectionEnd;
+
             input.value = input.value.toUpperCase();
+
+            input.setSelectionRange(start, end);
         })
     })
 }
 
-// event listerners
+// booting
 
-for(let i = 0 ; i < allInputs.length ; i++){
-    upperCaseInputs([allInputs[i]]);
-}
+upperCaseInputs();
 
 // show or hide elements
 
@@ -225,14 +277,14 @@ closeMessagePopupBtn.addEventListener("click", ()=>{
 // loading screen
 
 //elements
-const overlayForLoading = document.querySelector(".overlay-for-loading");
+const loadingOverlay = document.querySelector(".loading-overlay");
 
 
 // confirmation popup
 
 // elements
 const priceListSystemContainer = document.querySelector(".price-list-system-container");
-const overlay = document.querySelector(".overlay");
+const confirmationOverlay = document.querySelector(".confirmation-overlay");
 const closeConfirmationPopupBtn = document.querySelector("#close-confirmation-popup-btn");
 const confirmationPasswordInput = document.querySelector("#confirmation-password-input");
 const wrongPasswordSpan = document.querySelector(".wrong-password-span");
@@ -243,13 +295,13 @@ let functionToBeExecutedGlobal;
 let msgPopupContentGlobal;
 
 function showConfirmationPopup(){
-    overlay.style.display = "flex";
+    confirmationOverlay.style.display = "flex";
     priceListSystemContainer.style.filter = "blur(9px)";
     wrongPasswordSpan.style.display = "none";
 }
 
 function closeConfirmationPopup(){
-    overlay.style.display="none";
+    confirmationOverlay.style.display="none";
     priceListSystemContainer.style.filter = "blur(0)"
 }
 

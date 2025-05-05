@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tabela de preços</title>
-    <!-- <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/price_list/styles/price_list.css"> -->
-     <link rel="stylesheet" href="../price_list/styles/price_list.css"/>
+    <link rel="stylesheet" href="C:\Program Files (x86)\emeg_system\apps\price_list\styles\price_list.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,14 +13,28 @@
 </head>
 <body>
 
-    <div class="overlay-for-loading">
+    <div class="loading-overlay">
         <div class="loading-container">
             <i class="fa-solid fa-circle-notch fa-spin"></i>
             <span>Carregando...</span>
         </div>
     </div>
 
-    <div class="overlay">
+    <div class="server-overlay">
+        <div class="message-container">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h2>
+                ERRO NO SERVIDOR !
+                <span>error 404</span>
+            </h2>
+
+            <p>Lamentamos informar que houve um erro no servidor. Recarregar a página pode resolver o problema, porém caso não funcionar contate o desenvolvedor com os detalhes do erro mencionado</p>
+
+            <p id="server-error-msg"></p>
+        </div>
+    </div>
+
+    <div class="confirmation-overlay">
 
         <div class="confirmation-popup">
 
@@ -70,7 +83,7 @@
     <div class="price-list-system-container">
         <header>
             <div class="back-hub-apps-control">
-                <a href="https://nicholas1front.github.io/emeg_system/apps/main_hub/main_hub.html">
+                <a href="C:\Program Files (x86)\emeg_system\apps\main_hub\main_hub.html">
                     <i class="fa-solid fa-house"></i>
                     <span>Voltar para o hub de apps</span>
                 </a>
@@ -81,7 +94,7 @@
             <h2>Tabela de preços</h2>
 
             <div class="help-page-link-control">
-                <a href="https://nicholas1front.github.io/emeg_system/apps/price_list/help_price_list.html">
+                <a href="C:\Program Files (x86)\emeg_system\apps\price_list\help_price_list.html">
                     <i class="fa-solid fa-circle-question"></i>
                     <span>Ajuda</span>
                 </a>
@@ -362,10 +375,9 @@
         </section>
 
         <footer>
-            <h3>© EMEG Guindaste - Todos os Direitos Reservados.</h3>
+            <h3>© EMEG Guindaste - Todos os Direitos Reservados. v.4.0.0</h3>
         </footer>
     </div>
-    <!-- <script src="https://nicholas1front.github.io/emeg_system/apps/price_list/scripts/script.js"></script> -->
-    <script src="../price_list/scripts/script.js"></script>
+    <script src="C:\Program Files (x86)\emeg_system\apps\price_list\scripts\script.js"></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajuda para Criação de Orçamento</title>
-    <link rel="stylesheet" href="https://nicholas1front.github.io/emeg_system/apps/budget_plataform/styles/help_budget_plataform.css"/>
+    <link rel="stylesheet" href="C:\Program Files (x86)\emeg_system\apps\budget_plataform\styles\help_budget_plataform.css"/>
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
 
     <header>
         <div class="back-budget-plataform-control">
-            <a href="https://nicholas1front.github.io/emeg_system/apps/budget_plataform/budget_plataform.html">
+            <a href="C:\Program Files (x86)\emeg_system\apps\budget_plataform\budget_plataform.html">
                 <i class="fa-solid fa-house"></i>
                 <span>Voltar para a Criação de Orçamento</span>
             </a>
@@ -63,7 +63,6 @@
 
                 <p><strong>"Dados para Preenchimento"</strong> é o cabeçalho do orçamento, ou seja, as informações exigidas nos campos são necessárias e importantes para identificar o orçamento, tornando-o mais detalhado e preciso tanto para a EMEG quanto para o cliente que solicitou o orçamento.</p>
 
-                <p>Após todas as informações serem devidamente inseridas em seus respectivos campos, o <strong>botão "Próximo Passo"</strong> deve ser clicado para que o sistema possa liberar com segurança as demais áreas de preenchimento do orçamento.</p>
                 <p>Abaixo, seguem algumas informações sobre o preenchimento destes campos:</p>
             </div>
 
@@ -210,23 +209,6 @@
         </div>
     </section>
 
-    <section class="expenses-section">
-        <div class="container">
-            <div class="title-container">
-                <h3><i class="fa-solid fa-money-bill-trend-up"></i> Gastos aplicados</h3>
-            </div>
-
-            <div class="text-container">
-                <p>Esta seção é tão importante e necessária quanto qualquer outra do sistema. Como o próprio nome indica, esta parte é <strong>responsável por registrar e gerenciar os gastos com cada serviço executado</strong>, garantindo um controle preciso de todas as movimentações.</p>
-            
-                <p>Seu <strong>funcionamento é semelhante ao da estrutura de adição, edição e exclusão de itens das seções de Peças ou Serviços</strong>. No entanto, diferentemente do restante do sistema, esta parte não ficará visível na versão finalizada do orçamento, sendo acessível apenas na etapa de criação e produção para controle interno dos gastos aplicados. Por possuir a mesma estrutura de itens, é essencial que a <strong>quantidade, descrição e valor unitário sejam inseridos corretamente</strong>, pois a ausência de qualquer uma dessas informações resultará em uma <strong>mensagem de erro</strong>.</p>
-            
-                <p>Descrever cada gasto de forma correta e precisa é fundamental para garantir a conformidade e o controle sobre os dados.</p>
-            </div>
-            
-        </div>
-    </section>
-
     <section class="generate-budget-section">
         <div class="container">
             <div class="title-container">
@@ -240,7 +222,7 @@
 
                 <p>Para manter o controle sobre a numeração automática dos orçamentos, foi criado um <strong>servidor responsável por receber e processar as numerações de cada novo orçamento.</strong> Quando um novo orçamento é gerado, o sistema precisa completar o carregamento dessa numeração antes de exibi-la e enviá-la ao servidor, <strong>evitando erros de sincronização</strong>. É essencial <strong>aguardar a conclusão desse processo</strong> para garantir que a numeração correta seja exibida e enviada. Caso ocorra algum problema durante a exibição ou o envio, <strong>o sistema exibirá uma mensagem de erro</strong> detalhando a causa.</p>
 
-                <p>Uma vez gerado o orçamento, são liberadas três opções: <strong>Salvar em HTML</strong>, <strong>Salvar em PDF</strong> e <strong>Voltar para a Página Inicial</strong>.</p>
+                <p>Uma vez gerado o orçamento, são liberadas três opções: <strong>Salvar em HTML</strong>, <strong>Salvar em PDF</strong> e <strong>Voltar para a edição do orçamento</strong>.</p>
             </div>
 
             <div class="steps-container">
@@ -286,7 +268,7 @@
                     <div class="title-container">
                         <h3>
                             <i class="fa-solid fa-house"></i>
-                            Voltar para a Página Inicial
+                            Voltar para a edição do orçamento
                         </h3>
                     </div>
 
@@ -311,7 +293,7 @@
                     <i class="fa-solid fa-triangle-exclamation"></i>
                 </h3>
 
-                <p>Este sistema conta com mensagens de erro ou de atenção que indicam que algo não está correto. No caso deste sistema, as <strong>mensagens de erro</strong> aparecem quando a lógica do sistema não é seguida corretamente ou quando informações importantes e obrigatórias estão faltando.</p>
+                <p>Este sistema conta com mensagens de erro ou de atenção que indicam que algo não está correto. No caso deste sistema, as <strong>mensagens de erro</strong> aparecem quando a lógica do sistema não é seguida corretamente ou quando informações importantes e obrigatórias estão faltando. Além disso o sistema também conta com avisos e mensagens sobre o estado de funcionamento do servidor</p>
 
                 <p>Já as <strong>mensagens de atenção</strong> aparecem pelo mesmo motivo. Apesar de serem informações ou dados importantes, elas podem ficar de fora, pois não irão influenciar negativamente no fluxo do sistema.</p>
 
@@ -326,7 +308,7 @@
     </section>
 
     <footer>
-        <h3>© EMEG Guindaste - Todos os Direitos Reservados.</h3>
+        <h3>© EMEG Guindaste - Todos os Direitos Reservados. v.4.0.0</h3>
     </footer>
 
 </body>
