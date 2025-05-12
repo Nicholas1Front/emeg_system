@@ -4,43 +4,27 @@ Este repositório contém um conjunto de sistemas desenvolvidos como ferramentas
 
 ## Projetos Desenvolvidos
 
-### 1. **Hub Principal de Apps** (já desenvolvido)
+### 1. **Hub Principal de Apps**
 Um sistema simples que funciona como um **hub** para concentrar todos os sistemas e ferramentas deste repositório.
 
-- [Hub principal de apps](https://nicholas1front.github.io/emeg_system/apps/main_hub/main_hub.html)
-
-### 2. **Criação de Orçamentos** (já desenvolvido)
+### 2. **Criação de Orçamentos**
 Ferramenta destinada à criação de orçamentos, utilizando informações dos clientes cadastrados. Ela oferece funcionalidades como controle de itens, geração de orçamentos em formato HTML ou PDF. Esta ferramenta também conta com um sistema de enumeração para o orçamentos de forma automática fazendo a alteração do arquivo `latest_budget_number.json` através do servidor **Render**.
 
-- [Ajuda com Criação de orçamentos](https://nicholas1front.github.io/emeg_system/apps/budget_plataform/help_budget_plataform.html)
-
-### 3. **Controle de Clientes** (já desenvolvido)
+### 3. **Controle de Clientes**
 Sistema para gerenciar as informações dos clientes. As funcionalidades incluem a **adição, edição e exclusão de dados de clientes**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `clients_equipaments.json` usando a API do GitHub.
 
-- [Ajuda com Controle de clientes](https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/help_customer_base_plataform.html)
-
-### 4. **Tabela de Preços** (já desenvolvido)
+### 4. **Tabela de Preços**
 Sistema para manter e consultar uma tabela de preços dos serviços e equipamentos oferecidos. As funcionalidades incluem : pesquisa de serviços especifícos, consulta de todos os serviços existentes, **adição, exclusão e edição de dados de serviços**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `services.json` usando a API do GitHub.
 
-- [Ajuda com Tabela de preços](https://nicholas1front.github.io/emeg_system/apps/price_list/help_price_list.html)
-
-### 5. **Controle de Estoque** (já desenvolvido)
+### 5. **Controle de Estoque**
 Sistema para manter e gerenciar o estoque de itens, entre eles : peças, ferramentas e materiais. As funcionalidades incluem : pesquisa de itens especifícos, consulta de itens em falta, consulta de itens existentes, **adição, exclusão e edição de dados de serviços**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `inventory.json` usando a API do GitHub.
-
-- [Ajuda com Controle de estoque](https://nicholas1front.github.io/emeg_system/apps/inventory_control_plataform/help_inventory_control.html)
-
-### 6. **Controle de Funcionários** (em breve)
-Sistema para gerenciar o cadastro e informações dos funcionários da empresa.
 
 ## Como Instalar e Usar
 
-Esses sistemas foram projetados para serem utilizados por meio de download das páginas em HTML, ou diretamente pelos links hospedados no GitHub Pages:
+Todos os sistemas foram projetados para serem usado localmente através de conexão com internet. A forma de instalação é simples :
 
-- [Hub principal de apps](https://nicholas1front.github.io/emeg_system/apps/main_hub/main_hub.html)
-- [Criação de orçamentos](https://nicholas1front.github.io/emeg_system/apps/budget_plataform/budget_plataform.html)
-- [Controle de clientes](https://nicholas1front.github.io/emeg_system/apps/customer_base_plataform/customer_base_plataform.html)
-- [Tabela de preços](https://nicholas1front.github.io/emeg_system/apps/price_list/price_list.html)
-- [Controle de estoque](https://nicholas1front.github.io/emeg_system/apps/inventory_control_plataform/inventory_control.html)
+1. Fazer download da pasta `emeg_system` na pasta `Program Files (x86)`
+2. Se necessário descompactar a pasta baixada e assim todos os sistemas estarão prontos para serem usados
 
 ### Requisitos
 Para usar o sistema, você só precisa de um navegador moderno.
@@ -57,6 +41,7 @@ Este conjunto de sistemas foi desenvolvido para atender às necessidades especí
 - **Backend**:
   - GitHub API (para manipulação dos dados do sistema de clientes)
   - Render (para hospedar o backend do sistema de controle de clientes)
+  - Dropbox API (para hospedar e armazenar os arquivos .json )
 - **Outras ferramentas**:
   - Font Awesome (ícones)
   - Google Fonts (tipografia)
