@@ -8,16 +8,16 @@ Este repositório contém um conjunto de sistemas desenvolvidos como ferramentas
 Um sistema simples que funciona como um **hub** para concentrar todos os sistemas e ferramentas deste repositório.
 
 ### 2. **Criação de Orçamentos**
-Ferramenta destinada à criação de orçamentos, utilizando informações dos clientes cadastrados. Ela oferece funcionalidades como controle de itens, geração de orçamentos em formato HTML ou PDF. Esta ferramenta também conta com um sistema de enumeração para o orçamentos de forma automática fazendo a alteração do arquivo `latest_budget_number.json` através do servidor **Render**.
+Ferramenta destinada à criação de orçamentos, utilizando informações dos clientes cadastrados. Ela oferece funcionalidades como controle de itens, geração de orçamentos em formato HTML ou PDF. Esta ferramenta também conta com um sistema de enumeração para o orçamentos de forma automática fazendo a alteração do arquivo `latest_budget_number.json` através do servidor **Render**, onde o mesmo arquivo é manipulado pela API do Dropbox.
 
 ### 3. **Controle de Clientes**
-Sistema para gerenciar as informações dos clientes. As funcionalidades incluem a **adição, edição e exclusão de dados de clientes**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `clients_equipaments.json` usando a API do GitHub.
+Sistema para gerenciar as informações dos clientes. As funcionalidades incluem a **adição, edição e exclusão de dados de clientes**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `clients_equipaments.json` usando a API do Dropbox.
 
 ### 4. **Tabela de Preços**
-Sistema para manter e consultar uma tabela de preços dos serviços e equipamentos oferecidos. As funcionalidades incluem : pesquisa de serviços especifícos, consulta de todos os serviços existentes, **adição, exclusão e edição de dados de serviços**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `services.json` usando a API do GitHub.
+Sistema para manter e consultar uma tabela de preços dos serviços e equipamentos oferecidos. As funcionalidades incluem : pesquisa de serviços especifícos, consulta de todos os serviços existentes, **adição, exclusão e edição de dados de serviços**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `services.json` usando a API do Dropbox.
 
 ### 5. **Controle de Estoque**
-Sistema para manter e gerenciar o estoque de itens, entre eles : peças, ferramentas e materiais. As funcionalidades incluem : pesquisa de itens especifícos, consulta de itens em falta, consulta de itens existentes, **adição, exclusão e edição de dados de serviços**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `inventory.json` usando a API do GitHub.
+Sistema para manter e gerenciar o estoque de itens, entre eles : peças, ferramentas e materiais. As funcionalidades incluem : pesquisa de itens especifícos, consulta de itens em falta, consulta de itens existentes, **adição, exclusão e edição de dados de serviços**. Através de um servidor web integrado ao **Render**, o sistema faz commit e push dos dados no arquivo `inventory.json` usando a API do Dropbox.
 
 ## Como Instalar e Usar
 
