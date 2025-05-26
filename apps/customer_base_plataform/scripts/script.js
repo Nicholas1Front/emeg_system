@@ -919,6 +919,7 @@ async function verifyClientInput_searchBtn(
 }
 
 async function addEquipamentLogic(){
+    let equipamentName = addEquipamentInput.value;
 
     equipamentName.trim();
 
