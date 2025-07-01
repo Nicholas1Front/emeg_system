@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar orçamento EMEG</title>
-    <link rel="stylesheet" href="C:\Program Files (x86)/emeg_system/apps/budget_plataform/styles/budgetProduction.css">
-    <link rel="stylesheet" href="C:\Program Files (x86)/emeg_system/apps/budget_plataform/styles/budgetFinished.css">
+    <title>Sistema de orçamentos</title>
+    <!-- <link rel="stylesheet" href="C:\Program Files (x86)/emeg_system/apps/budget_plataform/styles/budgetProduction.css">
+    <link rel="stylesheet" href="C:\Program Files (x86)/emeg_system/apps/budget_plataform/styles/budgetFinished.css"> -->
+    <link rel="stylesheet" href="../budget_plataform/styles/budgetProduction.css">
+    <link rel="stylesheet" href="../budget_plataform/styles/budgetFinished.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -94,7 +96,7 @@
             </div>
 
             <div class="header-title-control">
-                <h2>Sistema web de criação de orçamentos</h2>
+                <h2>Sistema de orçamentos</h2>
             </div>
 
             <div class="help-page-link-control">
@@ -191,191 +193,56 @@
 
         </section>
 
-        <section class="parts-section">
+        <section class="items-section">
             <div class="container">
+                <div class="title-container">
+                    <div class="line"></div>
+                    <h2>PEÇAS E SERVIÇOS</h2>
+                    <div class="line"></div>
+                </div>
 
-                <div class="parts-container">
+                <div class="items-label-container">
+                    <h3 class="item-description-h3">Descrição do item</h3>
+                    <h3>Quantidade</h3>
+                    <h3>Tipo do item</h3>
+                    <h3>Valor unitário</h3>
+                    <h3>Adicionar item</h3>
+                </div>
 
-                    <div class="parts-title-container">
-                        <div class="horizontal-line-control">
-                            <div class="horizontal-line"></div>
-                        </div>
+                <div class="items-input-container">
+                    <input type="text" class="item-description-input" autocomplete="off" placeholder="Insira a descrição da peça ou serviço..."/>
+                    <input type="number" class="item-quant-input" autocomplete="off" placeholder="Insira a quantidade..."/>
+                    <input type="text" class="item-type-input" list="items-types-datalist" placeholder="Selecione o tipo do item..." autocomplete="off"/>
+                    <datalist id="items-types-datalist">
+                        <option value="PEÇA">PEÇA</option>
+                        <option value="SERVIÇO">SERVIÇO</option>
+                    </datalist>
+                    <input type="text" class="item-unit-value-input"autocomplete="off"/>
+                    <button class="add-item-button"><i class="fa-solid fa-plus"></i></button>
+                </div>
 
-                        <div class="title-control">
-                            <h2>PEÇAS APLICADAS</h2>
-                        </div>
+                <div class="items-container">
 
-                        <div class="horizontal-line-control">
-                            <div class="horizontal-line"></div>
-                        </div>
+                    <div class="items-title-container">
+                        <h3 class="item-description-h3">Descrição do item</h3>
+                        <h3>Quantidade</h3>
+                        <h3>Tipo do item</h3>
+                        <h3>Valor unitário</h3>
+                        <h3>Valor total</h3>
+                        <h3>Excluir item</h3>
                     </div>
 
-                    <div class="parts-input-container">
-
-                        <div class="parts-input-control">
-
-                            <div class="quant-control">
-                                <h3>Quantidade</h3>
-                                <input type="text" name="quant-input" id="part-quant-input" autocomplete="off" placeholder="1...">
-                            </div>
-
-                            <div class="part-description-control">
-                                <h3>Descrição da peça aplicada</h3>
-                                <input type="text" name="part-description-input" id="part-description-input" placeholder="DESCRIÇÃO DA PEÇA APLICADA..." autocomplete="off"/>
-                            </div>
-
-                            <div class="unit-value-control">
-                                <h3>Valor unitário</h3>
-                                <input type="text" name="unit-value-input" id="part-unit-value-input" placeholder="R$ 1.500,00..." autocomplete="off">
-                            </div>
-
-                            <div class="add-item-control">
-                                <h3>Adicionar item</h3>
-                                <button id="part-add-item-btn"><i class="fa-solid fa-plus"></i></button>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="parts-added-items-container">
-
-                        <div class="parts-added-items-control">
-
-                            <div class="parts-added-items-title-control">
-
-                                <div class="quant-title-control">
-                                    <h3>Quantidade</h3>
-                                </div>
-
-                                <div class="description-title-control">
-                                    <h3>Descrição das peças Aplicadas</h3>
-                                </div>
-
-                                <div class="unit-value-title-control">
-                                    <h3>Valor Unitário</h3>
-                                </div>
-
-                                <div class="total-value-title-control">
-                                    <h3>Valor total</h3>
-                                </div>
-
-                                <div class="edit-title-control">
-                                    <h3>Editar item</h3>
-                                </div>
-
-                                <div class="delete-title-control">
-                                    <h3>Deletar item</h3>
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <div class="parts-item-total">
-                            <h3>Valor total das peças aplicadas</h3>
-
-                            <span class="parts-item-total-span"></span>
-                        </div>
-
+                    <div class="item-control">
+                        <input type="text" class="item-description-input" autocomplete="off"/>
+                        <input type="number" class="item-quant-input" autocomplete="off"/>
+                        <input type="text" class="item-type-input" list="items-types-datalist" placeholder="Selecione o tipo do item..." autocomplete="off"/>
+                        <input type="text" class="item-unit-value-input"autocomplete="off"/>
+                        <span class="item-total-value-span"></span>
+                        <button class="delete-item-btn"><i class="fa-solid fa-trash-can"></i></button>
                     </div>
 
                 </div>
             </div>
-        </section>
-
-        <section class="services-section">
-            <div class="container">
-
-                <div class="services-container">
-
-                    <div class="services-title-container">
-                        <div class="horizontal-line-control">
-                            <div class="horizontal-line"></div>
-                        </div>
-
-                        <div class="title-control">
-                            <h2>SERVIÇOS EXECUTADOS</h2>
-                        </div>
-
-                        <div class="horizontal-line-control">
-                            <div class="horizontal-line"></div>
-                        </div>
-                    </div>
-
-                    <div class="services-input-container">
-
-                        <div class="services-input-control">
-                            <div class="quant-control">
-                                <h3>Quantidade</h3>
-                                <input type="text" name="quant-input" id="service-quant-input" autocomplete="off" placeholder="1..."/>
-                            </div>
-
-                            <div class="part-description-control">
-                                <h3>Descrição da peça aplicada</h3>
-                                <input type="text" name="part-description-input" id="service-description-input" placeholder="DESCRIÇÃO DO SERVIÇO EXECUTADO..." autocomplete="off"/>
-                            </div>
-
-                            <div class="unit-value-control">
-                                <h3>Valor unitário</h3>
-                                <input type="text" name="unit-value-input" id="service-unit-value-input" placeholder="R$ 1.500,00..." autocomplete="off"/>
-                            </div>
-
-                            <div class="add-item-control">
-                                <h3>Adicionar item</h3>
-                                <button id="service-add-item-btn"><i class="fa-solid fa-plus"></i></button>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <div class="services-added-items-container"> <!--width:100%; -->
-
-                        <div class="services-added-items-control"> <!--display flex ; flex-direction:column , align-items:center-->
-
-                            <div class="services-added-items-title-control">
-
-                                <div class="quant-title-control">
-                                    <h3>Quantidade</h3>
-                                </div>
-
-                                <div class="description-title-control">
-                                    <h3>Descrição dos serviços executados</h3>
-                                </div>
-
-                                <div class="unit-value-title-control">
-                                    <h3>Valor Unitário</h3>
-                                </div>
-
-                                <div class="total-value-title-control">
-                                    <h3>Valor total</h3>
-                                </div>
-
-                                <div class="edit-title-control">
-                                    <h3>Editar item</h3>
-                                </div>
-
-                                <div class="delete-title-control">
-                                    <h3>Deletar item</h3>
-                                </div>
-
-                            </div>
-                            
-    
-                        </div>
-
-                        <div class="services-item-total">
-                            <h3>Valor total dos serviços executados</h3>
-
-                            <span class="services-item-total-span"></span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
         </section>
 
         <section class="total-budget-prod-section">
@@ -536,79 +403,6 @@
 
             </section>
 
-            <section class="aplied-parts-section">
-
-                <div class="aplied-parts-container">
-
-                    <div class="aplied-parts-introduction-title-container">
-                        <div class="line-control">
-                            <div class="line"></div>
-                        </div>
-
-                        <h3>PEÇAS APLICADAS</h3>
-
-                        <div class="line-control">
-                            <div class="line"></div>
-                        </div>
-                    </div>
-
-                    <div class="aplied-parts-items-title-container">
-                        <h4 class="item-title-h4">ITEM</h4>
-                        <h4 class="quant-title-h4">QUANT</h4>
-                        <h4 class="description-title-h4">DESCRIÇÃO</h4>
-                        <h4 class="unit-value-title-h4">VALOR UNITÁRIO</h4>
-                        <h4 class="total-value-title-h4">VALOR TOTAL</h4>
-                    </div>
-
-                    <div class="aplied-parts-items-container">
-                        
-                    </div>
-
-                    <div class="aplied-parts-items-total-container">
-                        <h4>VALOR TOTAL DAS PEÇAS APLICADAS</h4>
-                        <span class="total-of-aplied-parts-span"></span>
-                    </div>
-                </div>
-
-            </section>
-            <section class="services-performed-section">
-
-                <div class="services-performed-container">
-
-                    <div class="services-performed-introduction-title-container">
-
-                        <div class="line-control">
-                            <div class="line"></div>
-                        </div>
-
-                        <h3>SERVIÇOS EXECUTADOS</h3>
-
-                        <div class="line-control">
-                            <div class="line"></div>
-                        </div>
-
-                    </div>
-
-                    <div class="services-performed-item-title-container">
-                        <h4 class="item-title-h4">ITEM</h4>
-                        <h4 class="quant-title-h4">QUANT</h4>
-                        <h4 class="description-title-h4">DESCRIÇÃO</h4>
-                        <h4 class="unit-value-title-h4">VALOR UNITÁRIO</h4>
-                        <h4 class="total-value-title-h4">VALOR TOTAL</h4>
-                    </div>
-
-                    <div class="services-performed-items-container">
-                        
-                    </div>
-
-                    <div class="services-performed-items-total-container">
-                        <h4>VALOR TOTAL DOS SERVIÇOS EXECUTADOS</h4>
-                        <span class="total-of-services-performed-items-span"></span>
-                    </div>
-
-                </div>
-            </section>
-
             <section class="total-budget-section">
 
                 <div class="total-budget-container">
@@ -691,6 +485,7 @@
         <h3>© EMEG Guindaste - Todos os Direitos Reservados. v.4.0.0</h3>
     </footer>
 
-    <script src="C:\Program Files (x86)/emeg_system/apps/budget_plataform/scripts/script.js"></script>
+    <!-- <script src="C:\Program Files (x86)/emeg_system/apps/budget_plataform/scripts/script.js"></script> -->
+    <script src="../budget_plataform/scripts/script.js"></script>
 </body>
 </html>
