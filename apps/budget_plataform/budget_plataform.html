@@ -217,7 +217,7 @@
                         <option value="PEÇA">PEÇA</option>
                         <option value="SERVIÇO">SERVIÇO</option>
                     </datalist>
-                    <input type="text" class="item-unit-value-input"autocomplete="off"/>
+                    <input type="text" class="item-unit-value-input"autocomplete="off" placeholder="Insira o preço unitário..."/>
                     <button class="add-item-button"><i class="fa-solid fa-plus"></i></button>
                 </div>
 
@@ -233,13 +233,17 @@
                     </div>
 
                     <div class="item-control">
-                        <input type="text" class="item-description-input" autocomplete="off"/>
-                        <input type="number" class="item-quant-input" autocomplete="off"/>
-                        <input type="text" class="item-type-input" list="items-types-datalist" placeholder="Selecione o tipo do item..." autocomplete="off"/>
-                        <input type="text" class="item-unit-value-input"autocomplete="off"/>
-                        <span class="item-total-value-span"></span>
-                        <button class="delete-item-btn"><i class="fa-solid fa-trash-can"></i></button>
+                        <div class="item">
+                            <input type="text" class="item-description-input" autocomplete="off"/>
+                            <input type="number" class="item-quant-input" autocomplete="off"/>
+                            <input type="text" class="item-type-input" list="items-types-datalist" placeholder="Selecione o tipo do item..." autocomplete="off"/>
+                            <input type="text" class="item-unit-value-input"autocomplete="off"/>
+                            <span class="item-total-value-span">R$ 0,00</span>
+                            <button class="delete-item-btn"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
                     </div>
+
+                    <div class="items-container-bottom"></div>
 
                 </div>
             </div>
