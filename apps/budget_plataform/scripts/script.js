@@ -234,6 +234,39 @@ function brDate_to_JsDate(dateElement){
     return dateString;
 }
 
+// format to currency
+
+//elements
+const BRL = value => currency(value, { symbol: "R$ ", decimal: ",", separator: ".", precision: 2 });
+
+async function currencyToNumber(currencyValue){
+    if(currencyValue === undefined || currencyValue === NaN){
+        currencyValue = 0;
+    }
+
+    currencyValue = BRL(currencyValue);
+
+    let numberInString = currencyValue.value.toString();
+    numberInString = numberInString.replace(".",",");
+
+    console.log(numberInString);
+
+    return numberInString
+}
+
+async function numberToCurrency(numberValue){
+
+    if(numberValue === undefined ||numberValue === NaN || numberValue === ""){
+        numberValue = 0;
+    };
+
+    numberValue = await BRL(numberValue).format();
+
+    console.log(numberValue);
+
+    return numberValue;
+}
+
 //budget-production
 
 //header
@@ -400,9 +433,57 @@ equipamentInput.addEventListener("input", ()=>{
 
 closeMsgBtn.addEventListener("click", ()=>{
     closeMessagePopup();
-})
+});
 
+// items-section
 
+// elements
+const itemsSection = document.querySelector(".items-section");
+const itemsInputContainer = itemsSection.querySelector(".items-input-container");
+const itemControl = itemsSection.querySelector(".item-control");
+let allUnitValueInputs;
+
+// functions
+
+async function handleUnitValueInputs_itemsSection(){
+    let allUnitValueInputs = itemsSection.querySelectorAll(".item-unit-value-input");
+
+    console.log(allUnitValueInputs);
+
+    /* for(i = 0; i < allUnitValueInputs.length; i++){
+        let actualInput = allUnitValueInputs[i];
+        let cloneInput = actualInput.cloneNode(true);
+
+        actualInput.parentNode.replaceChild(cloneInput, actualInput); // replaces the actual input with a clone input
+    } */
+
+    for(let i=0; i < allUnitValueInputs.length; i++){
+        allUnitValueInputs[i].addEventListener("focusin", async()=>{
+            console.log(allUnitValueInputs[i].value);
+            allUnitValueInputs[i].value = await currencyToNumber(allUnitValueInputs[i].value);
+        });
+
+        allUnitValueInputs[i].addEventListener("focusout", async()=>{
+            allUnitValueInputs[i].value = await numberToCurrency(allUnitValueInputs[i].value);
+        });
+    }
+
+    /* setTimeout(()=>{
+        for(i=0; i < allUnitValueInputs.length; i++){
+            allUnitValueInputs[i].addEventListener("focusin", async()=>{
+                allUnitValueInputs[i].value = await numberToCurrency(allUnitValueInputs[i].value);
+            });
+
+            allUnitValueInputs[i].addEventListener("focusout", async()=>{
+                allUnitValueInputs[i].value = await currencyToNumber(allUnitValueInputs[i].value);
+            });
+        }
+    },200) */
+}
+
+// event listeners and booting
+
+handleUnitValueInputs_itemsSection();
 
 //total-budget-prod-section
 
@@ -756,4 +837,4 @@ savePdfBtn.addEventListener("click", ()=>{
 
 backBudgetBtn.addEventListener("click", ()=>{
     backHomeProcess();
-}) 
+})

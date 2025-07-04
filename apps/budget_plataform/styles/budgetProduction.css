@@ -739,6 +739,15 @@ header{
     flex-direction: column;
 }
 
+.items-section > .container > .items-container > .item-control > .no-content-span{
+    width:100%;
+    text-align: center;
+    padding:1rem 0;
+    background-color: #e7e7e7;
+    border-left: 1px solid #d61e1e;
+    border-right:1px solid #d61e1e;
+}
+
 .items-section > .container > .items-container > .item-control > .item{
     width:100%;
     display: flex;
@@ -767,6 +776,10 @@ header{
 
 .items-section > .container > .items-container > .item-control > .item > .item-description-input{
     width:50%;
+}
+
+.items-section > .container > .items-container > .item-control > .item  > span{
+    cursor:copy;
 }
 
 .items-section > .container > .items-container > .items-container-bottom{

@@ -210,7 +210,7 @@
                 </div>
 
                 <div class="items-input-container">
-                    <input type="text" class="item-description-input" autocomplete="off" placeholder="Insira a descrição da peça ou serviço..."/>
+                    <input type="text" class="item-description-input" autocomplete="off" placeholder="Insira a descrição do item..."/>
                     <input type="number" class="item-quant-input" autocomplete="off" placeholder="Insira a quantidade..."/>
                     <input type="text" class="item-type-input" list="items-types-datalist" placeholder="Selecione o tipo do item..." autocomplete="off"/>
                     <datalist id="items-types-datalist">
@@ -233,11 +233,13 @@
                     </div>
 
                     <div class="item-control">
+                        <span class="no-content-span">Nenhum item adicionado</span>
+
                         <div class="item">
-                            <input type="text" class="item-description-input" autocomplete="off"/>
-                            <input type="number" class="item-quant-input" autocomplete="off"/>
+                            <input type="text" class="item-description-input" autocomplete="off" placeholder="Insira a descrição do item..."/>
+                            <input type="number" class="item-quant-input" autocomplete="off" placeholder="Insira a quantidade..."/>
                             <input type="text" class="item-type-input" list="items-types-datalist" placeholder="Selecione o tipo do item..." autocomplete="off"/>
-                            <input type="text" class="item-unit-value-input"autocomplete="off"/>
+                            <input type="text" class="item-unit-value-input"autocomplete="off" placeholder="Insira o preço unitário..."/>
                             <span class="item-total-value-span">R$ 0,00</span>
                             <button class="delete-item-btn"><i class="fa-solid fa-trash-can"></i></button>
                         </div>
@@ -490,6 +492,7 @@
     </footer>
 
     <!-- <script src="C:\Program Files (x86)/emeg_system/apps/budget_plataform/scripts/script.js"></script> -->
+     <script src="https://unpkg.com/currency.js@~2.0.0/dist/currency.min.js"></script>
     <script src="../budget_plataform/scripts/script.js"></script>
 </body>
 </html>
