@@ -239,7 +239,7 @@ function brDate_to_JsDate(dateElement){
 //elements
 const BRL = value => currency(value, { symbol: "R$ ", decimal: ",", separator: ".", precision: 2 });
 
-async function currencyToNumber(currencyValue){
+async function currencyToString(currencyValue){
     if(currencyValue === undefined || currencyValue === NaN){
         currencyValue = 0;
     }
@@ -249,9 +249,17 @@ async function currencyToNumber(currencyValue){
     let numberInString = currencyValue.value.toString();
     numberInString = numberInString.replace(".",",");
 
-    console.log(numberInString);
-
     return numberInString
+}
+
+async function currencyToNumber(currencyValue){
+    if(currencyValue === undefined || currencyValue === NaN){
+        currencyValue = 0;
+    }
+
+    currencyValue = BRL(currencyValue);
+
+    return currencyValue.value
 }
 
 async function numberToCurrency(numberValue){
@@ -261,8 +269,6 @@ async function numberToCurrency(numberValue){
     };
 
     numberValue = await BRL(numberValue).format();
-
-    console.log(numberValue);
 
     return numberValue;
 }
@@ -435,60 +441,214 @@ closeMsgBtn.addEventListener("click", ()=>{
     closeMessagePopup();
 });
 
-// items-section
+// items-section and total-budget-prod-section
 
 // elements
 const itemsSection = document.querySelector(".items-section");
 const itemsInputContainer = itemsSection.querySelector(".items-input-container");
+const itemUnitValueInput_itemsInputContainer = itemsInputContainer.querySelector(".item-unit-value-input");
+const addItemBtn = itemsInputContainer.querySelector(".add-item-button");
 const itemControl = itemsSection.querySelector(".item-control");
-let allUnitValueInputs;
+const noContentSpan = itemControl.querySelector(".no-content-span");
+
+const totalBudgetProdSection = document.querySelector(".total-budget-prod-section");
 
 // functions
 
-async function handleUnitValueInputs_itemsSection(){
-    let allUnitValueInputs = itemsSection.querySelectorAll(".item-unit-value-input");
+async function addItemProcess(){
+    const itemDescriptionInput = itemsInputContainer.querySelector(".item-description-input");
+    const itemQuantInput = itemsInputContainer.querySelector(".item-quant-input");
+    const itemTypeInput = itemsInputContainer.querySelector(".item-type-input");
+    const itemUnitValueInput = itemsInputContainer.querySelector(".item-unit-value-input");
 
-    console.log(allUnitValueInputs);
-
-    /* for(i = 0; i < allUnitValueInputs.length; i++){
-        let actualInput = allUnitValueInputs[i];
-        let cloneInput = actualInput.cloneNode(true);
-
-        actualInput.parentNode.replaceChild(cloneInput, actualInput); // replaces the actual input with a clone input
-    } */
-
-    for(let i=0; i < allUnitValueInputs.length; i++){
-        allUnitValueInputs[i].addEventListener("focusin", async()=>{
-            console.log(allUnitValueInputs[i].value);
-            allUnitValueInputs[i].value = await currencyToNumber(allUnitValueInputs[i].value);
-        });
-
-        allUnitValueInputs[i].addEventListener("focusout", async()=>{
-            allUnitValueInputs[i].value = await numberToCurrency(allUnitValueInputs[i].value);
-        });
+    if(itemDescriptionInput.value === "" || itemQuantInput.value === "" || itemTypeInput.value === "" || itemUnitValueInput.value === ""){
+        await showMessagePopup("Insira todos os campos do item !" , "errorMsg");
+        return;
     }
 
-    /* setTimeout(()=>{
-        for(i=0; i < allUnitValueInputs.length; i++){
-            allUnitValueInputs[i].addEventListener("focusin", async()=>{
-                allUnitValueInputs[i].value = await numberToCurrency(allUnitValueInputs[i].value);
-            });
+    await hideHtmlElement([noContentSpan]);
 
-            allUnitValueInputs[i].addEventListener("focusout", async()=>{
-                allUnitValueInputs[i].value = await currencyToNumber(allUnitValueInputs[i].value);
-            });
+    let itemQuantValue = parseFloat(itemQuantInput.value);
+
+    let itemUnitValue = await currencyToNumber(itemUnitValueInput.value);
+    let itemTotalValue = itemUnitValue * itemQuantValue;
+    itemTotalValue = await numberToCurrency(itemTotalValue);
+
+    await createItemInHtml(itemTotalValue);
+
+    let allItems = itemControl.querySelectorAll(".item");
+    lastItem = allItems[allItems.length - 1];
+
+    lastItem.querySelector(".item-description-input").value = itemDescriptionInput.value;
+    lastItem.querySelector(".item-quant-input").value = itemQuantValue;
+    lastItem.querySelector(".item-type-input").value = itemTypeInput.value;
+    lastItem.querySelector(".item-unit-value-input").value = await numberToCurrency(itemUnitValue);
+
+    await handleAllItemInputs();
+    await sumTotalOfItens();
+    await handleDeleteItemButton();
+}
+
+async function createItemInHtml(totalValue){
+    const itemString = `
+        <div class="item">
+            <input type="text" class="item-description-input" autocomplete="off" placeholder="Insira a descrição do item..."/>
+            <input type="number" class="item-quant-input" autocomplete="off" placeholder="Insira a quantidade..."/>
+            <input type="text" class="item-type-input" list="items-types-datalist" placeholder="Selecione o tipo do item..." autocomplete="off"/>
+            <input type="text" class="item-unit-value-input"autocomplete="off" placeholder="Insira o preço unitário..."/>
+            <span class="item-total-value-span">${totalValue}</span>
+            <button class="delete-item-btn"><i class="fa-solid fa-trash-can"></i></button>
+        </div>
+    `;
+
+    const parser = new DOMParser();
+
+    const doc = parser.parseFromString(itemString, 'text/html');
+
+    const itemHtml  = doc.body.firstChild;
+
+    itemControl.appendChild(itemHtml);
+}
+
+async function handleAllItemInputs(){
+
+    let allItems = itemControl.querySelectorAll(".item");
+
+    for(let i = 0; i < allItems.length; i++){
+        let actualItem = allItems[i];
+        let cloneItem = actualItem.cloneNode(true);
+
+        actualItem.parentNode.replaceChild(cloneItem, actualItem); // replaces the actual item with a clone item
+    }
+
+    allItems = itemControl.querySelectorAll(".item");
+
+    for(let i=0; i < allItems.length; i++){
+        allItems[i].querySelector(".item-unit-value-input").addEventListener("focusin", async()=>{
+            console.log(allItems[i].querySelector(".item-unit-value-input").value);
+            allItems[i].querySelector(".item-unit-value-input").value = await currencyToString(allItems[i].querySelector(".item-unit-value-input").value);
+        });
+
+        allItems[i].querySelector(".item-unit-value-input").addEventListener("focusout", async()=>{
+            allItems[i].querySelector(".item-unit-value-input").value = await numberToCurrency(allItems[i].querySelector(".item-unit-value-input").value);
+        });
+
+        allItems[i].querySelector(".item-unit-value-input").addEventListener("keydown", async(event)=>{
+            if(event.key === "Enter"){
+                allItems[i].querySelector(".item-unit-value-input").value = await numberToCurrency(allItems[i].querySelector(".item-unit-value-input").value);
+
+                await sumTotalOfItens();
+            }
+        });
+
+        allItems[i].querySelector(".item-quant-input").addEventListener("focusout", async()=>{
+            await sumTotalOfItens();
+        });
+
+        allItems[i].querySelector(".item-quant-input").addEventListener("keydown", async(event)=>{
+            if(event.key === "Enter"){
+                await sumTotalOfItens();
+            }
+        })
+    }
+}
+
+async function handleDeleteItemButton(){
+    let allDeleteItemBtns = itemControl.querySelectorAll(".delete-item-btn");
+
+    for(let i=0; i < allDeleteItemBtns.length; i++){
+        let actualBtn = allDeleteItemBtns[i];
+        let cloneBtn = actualBtn.cloneNode(true);
+
+        actualBtn.parentNode.replaceChild(cloneBtn, actualBtn);
+    }
+
+    let allItems = itemControl.querySelectorAll(".item");
+    allDeleteItemBtns = itemControl.querySelectorAll(".delete-item-btn");
+
+    console.log(allDeleteItemBtns)
+
+    for(let i = 0;i < allDeleteItemBtns.length; i++){
+        allDeleteItemBtns[i].addEventListener("click", async()=>{
+            allItems[i].remove();
+            await handleAllItemInputs();
+
+            allItems = itemControl.querySelectorAll(".item");
+
+            if(allItems.length === 0){
+                await showHtmlElement([noContentSpan], "block");
+            }
+
+            await sumTotalOfItens();
+        })
+    }
+}
+
+async function sumTotalOfItens(){
+    let allItems = itemControl.querySelectorAll(".item");
+    let totalOfPartsValue = 0;
+    let totalOfServicesValue = 0;
+
+    if(allItems.length > 0){
+        for(let i = 0; i < allItems.length; i++){
+            let itemQuant = await currencyToNumber(allItems[i].querySelector(".item-quant-input").value);
+            let itemUnitValue = await currencyToNumber(allItems[i].querySelector(".item-unit-value-input").value)
+            let itemTotalValue = itemQuant * itemUnitValue;
+
+            if(allItems[i].querySelector(".item-type-input").value === "PEÇA"){
+                totalOfPartsValue += itemTotalValue;
+            }
+
+            if(allItems[i].querySelector(".item-type-input").value === "SERVIÇO"){
+                totalOfServicesValue += itemTotalValue;
+            }
+
+            let itemTotalSpan = allItems[i].querySelector(".item-total-value-span");
+            itemTotalSpan.innerHTML = "";
+            itemTotalSpan.innerHTML = await numberToCurrency(itemTotalValue);
         }
-    },200) */
+    }
+
+    totalBudgetProdSection.querySelector(".total-of-parts-display-span").innerHTML = "";
+    totalBudgetProdSection.querySelector(".total-of-services-display-span").innerHTML = "";
+    totalBudgetProdSection.querySelector(".total-of-budget-display-span").innerHTML = "";
+
+    totalBudgetProdSection.querySelector(".total-of-parts-display-span").innerHTML = await numberToCurrency(totalOfPartsValue);
+    totalBudgetProdSection.querySelector(".total-of-services-display-span").innerHTML = await numberToCurrency(totalOfServicesValue);
+    totalBudgetProdSection.querySelector(".total-of-budget-display-span").innerHTML = await numberToCurrency(totalOfPartsValue + totalOfServicesValue);
 }
 
 // event listeners and booting
 
-handleUnitValueInputs_itemsSection();
+setTimeout(async()=>{
+    let allItems = itemControl.querySelectorAll(".item");
 
-//total-budget-prod-section
+    if(allItems.length > 0){
+        await handleAllItemInputs();
+        await handleDeleteItemButton();
+    }
+},300);
 
-//elements
-const totalBudgetProdSection = document.querySelector(".total-budget-prod-section");
+itemUnitValueInput_itemsInputContainer.addEventListener("focusin", async()=>{
+    itemUnitValueInput_itemsInputContainer.value = await currencyToString(itemUnitValueInput_itemsInputContainer.value);
+})
+
+itemUnitValueInput_itemsInputContainer.addEventListener("focusout", async()=>{
+    itemUnitValueInput_itemsInputContainer.value = await numberToCurrency(itemUnitValueInput_itemsInputContainer.value);
+})
+
+itemUnitValueInput_itemsInputContainer.addEventListener("keydown", async(event)=>{
+    if(event.key === "Enter"){
+        itemUnitValueInput_itemsInputContainer.value = await numberToCurrency(itemUnitValueInput_itemsInputContainer.value)
+        setTimeout(async()=>{
+            await addItemProcess();
+        },500);
+    }
+});
+
+addItemBtn.addEventListener("click", async()=>{
+    await addItemProcess();
+})
 
 // observations-section
 

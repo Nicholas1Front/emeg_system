@@ -766,6 +766,7 @@ header{
     width:10%;
     text-align: center;
     border-radius:25px;
+    font-size: 15px;
     padding:8px 0;
     padding-left:8px;
     margin:0 8px;
@@ -776,10 +777,6 @@ header{
 
 .items-section > .container > .items-container > .item-control > .item > .item-description-input{
     width:50%;
-}
-
-.items-section > .container > .items-container > .item-control > .item  > span{
-    cursor:copy;
 }
 
 .items-section > .container > .items-container > .items-container-bottom{
