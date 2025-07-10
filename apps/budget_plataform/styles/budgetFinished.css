@@ -148,6 +148,100 @@
     text-align: center;
 }
 
+/* items-added-section */
+
+.items-added-section{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width:100%;
+}
+
+.items-added-section > .title-container{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width:100%;
+}
+
+.items-added-section > .items-label-container{
+    margin-top:1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    background-color: #d61e1e;
+    color:#fff;
+    padding:4px 0;
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.items-added-section > .items-label-container > h3{
+    width:12.50%;
+    text-align: center;
+    margin:0 5px;
+}
+
+.items-added-section > .items-label-container > .description-h3_item-added-label{
+    width:50%;
+}
+
+.items-added-section > .items-added-container{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.items-added-section > .items-added-container > .item-added{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:5px 0;
+    border-left:1px solid #d61e1e;
+    border-right:1px solid #d61e1e;
+    background-color: #e3e3e3;
+    font-weight: 500;
+}
+
+.items-added-section > .items-added-container > .no-items-added-span{
+    text-align: center;
+    width:100%;
+    padding:5px 0;
+    border-left:1px solid #d61e1e;
+    border-right:1px solid #d61e1e;
+    background-color: #e3e3e3;
+    font-weight: 500;
+    display: none;
+}
+
+.items-added-section > .items-added-container > .item-added > span{
+    width:12.50%;
+    text-align: center;
+    margin: 0 5px;
+}
+
+.items-added-section > .items-added-container > .item-added > .item-added-index-span{
+    font-size:13px;
+    position: absolute;
+    font-weight: 500;
+    margin-right:56%;
+}
+
+.items-added-section > .items-added-container > .item-added > .description-span_item-added{
+    width:50%;
+}
+
+.items-added-section > .items-added-bottom{
+    width:100%;
+    background-color: #d61e1e;
+    padding:4px 0;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+}
+
 /* total-budget-section */
 
 .total-budget-section{

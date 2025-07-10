@@ -51,8 +51,8 @@ async function verifyServerStatus(){
         await getBudgetLatestNumber()
     }
 }
-/* 
-document.addEventListener("DOMContentLoaded", async()=>{
+
+/* document.addEventListener("DOMContentLoaded", async()=>{
     await verifyServerStatus();
 }); */
 
@@ -446,6 +446,9 @@ closeMsgBtn.addEventListener("click", ()=>{
 // elements
 const itemsSection = document.querySelector(".items-section");
 const itemsInputContainer = itemsSection.querySelector(".items-input-container");
+const itemDescriptionInput_itemsInputContainer = itemsInputContainer.querySelector(".item-description-input");
+const itemQuantInput_itemsInputContainer = itemsInputContainer.querySelector(".item-quant-input");
+const itemTypeInput_itemsInputContainer = itemsInputContainer.querySelector(".item-type-input");
 const itemUnitValueInput_itemsInputContainer = itemsInputContainer.querySelector(".item-unit-value-input");
 const addItemBtn = itemsInputContainer.querySelector(".add-item-button");
 const itemControl = itemsSection.querySelector(".item-control");
@@ -487,6 +490,13 @@ async function addItemProcess(){
     await handleAllItemInputs();
     await sumTotalOfItens();
     await handleDeleteItemButton();
+
+    await clearInputs([
+        itemDescriptionInput_itemsInputContainer,
+        itemQuantInput_itemsInputContainer,
+        itemTypeInput_itemsInputContainer,
+        itemUnitValueInput_itemsInputContainer
+    ]);
 }
 
 async function createItemInHtml(totalValue){
@@ -840,6 +850,9 @@ const completionDeadlineSpanResult = document.querySelector("#completion-deadlin
 const guaranteeSpanResult = document.querySelector("#guarantee-span-result");
 const dateSpanResult = document.querySelector("#date-span-result");
 
+const itemsAddedSection = document.querySelector(".items-added-section");
+const itemsAddedContainer = itemsAddedSection.querySelector(".items-added-container");
+
 const totalOfPartsSpan = document.querySelector(".total-of-parts-span");
 const totalOfServicesSpan = document.querySelector(".total-of-services-span");
 const totalOfBudgetSpan = document.querySelector(".total-of-budget-span");
@@ -894,6 +907,63 @@ async function addHeaderFinishedProcess(){
     document.querySelector("title").textContent = `ORÇAMENTO ${budgetNumberSpan.innerText}${budgetYearSpan.innerText} ${clientSpanResult.innerText} ${equipamentSpanResult.innerText}`;
 }
 
+async function createAddedItemHtml(index,description,quant,type,unitValue,totalValue){
+    const itemString = 
+    `
+        <div class="item-added">
+            <span class="item-added-index-span">${index}</span>
+            <span class="description-span_item-added">${description}</span>
+            <span class="quant-span_item-added">${quant}</span>
+            <span class="type-span_item-added">${type}</span>
+            <span class="unit-value-span_item-added">${unitValue}</span>
+            <span class="total-value-span_item-added">${totalValue}</span>
+        </div>
+    `;
+
+    const parser = new DOMParser();
+
+    const doc = parser.parseFromString(itemString, 'text/html');
+
+    const itemHtml  = doc.body.firstChild;
+
+    itemsAddedContainer.appendChild(itemHtml);
+};
+
+async function addItemsFinishedProcess(){
+    const addedItems = itemsAddedContainer.querySelectorAll(".item-added");
+
+    if(addedItems.length > 0){
+        addedItems.forEach((item)=>{
+            item.remove();
+        });
+    }
+
+    const allItems = itemControl.querySelectorAll(".item");
+
+    if(allItems.length === 0){
+        await showHtmlElement([itemsAddedContainer.querySelector(".no-items-added-span")], "block");
+        return;
+    }
+
+    for(let i = 0; i < allItems.length; i++){
+        let itemIndex = i + 1;
+        let itemDescription = allItems[i].querySelector(".item-description-input").value;
+        let itemQuant = allItems[i].querySelector(".item-quant-input").value;
+        let itemType = allItems[i].querySelector(".item-type-input").value;
+        let itemUnitValue = allItems[i].querySelector(".item-unit-value-input").value;
+        let itemTotalValue = allItems[i].querySelector(".item-total-value-input").value;
+
+        await createAddedItemHtml(
+            itemIndex,
+            itemDescription,
+            itemQuant,
+            itemType,
+            itemUnitValue,
+            itemTotalValue
+        );
+    }
+}
+
 async function addObservationsFinishedProcess(){
     observationsMadeSpan.innerHTML = "";
 
@@ -912,6 +982,8 @@ async function displayBudgetProcess(){
     //display header informations
     
     await addHeaderFinishedProcess();
+
+    await addItemsFinishedProcess();
 
     await addObservationsFinishedProcess();
 }
@@ -978,6 +1050,25 @@ generateBudgetBtn.addEventListener("click", async ()=>{
         await showMessagePopup("Insira o cliente antes de prosseguir !","errorMsg");
         return;
     }
+
+    if(equipamentInput.value === ""){
+        await showMessagePopup("Insira o equipamento antes de prosseguir !","errorMsg");
+        return;
+    }
+
+    const allItems = itemControl.querySelectorAll(".item");
+
+    allItems.forEach((item)=>{
+        if(
+        item.querySelector(".item-description-input").value === "" || 
+        item.querySelector(".item-quant-input").value === "" ||
+        item.querySelector(".item-type-input").value === "" ||
+        item.querySelector(".item-unit-value-input").value === ""
+        ){
+            showMessagePopup("Insira todos os campos do item antes de prosseguir !","errorMsg");
+            return;
+        }
+    })
 
     if(budgetNumberSpan.innerText === ""){
         await confirmationProcess();
