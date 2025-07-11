@@ -681,6 +681,10 @@ header{
     border:1px solid #969696;
 }
 
+.items-section > .container > .items-input-container > input:focus{
+    outline-color:#d61e1e;
+}
+
 .items-section > .container > .items-input-container > .item-description-input{
     width:60%;
 }
@@ -775,6 +779,10 @@ header{
     border:1px solid #969696;
     background-color: #fff;
     text-align: center;
+}
+
+.items-section > .container > .items-container > .item-control > .item > input:focus{
+    outline-color:#d61e1e;
 }
 
 .items-section > .container > .items-container > .item-control > .item > .item-description-input{

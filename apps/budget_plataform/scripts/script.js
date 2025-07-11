@@ -52,9 +52,9 @@ async function verifyServerStatus(){
     }
 }
 
-/* document.addEventListener("DOMContentLoaded", async()=>{
+document.addEventListener("DOMContentLoaded", async()=>{
     await verifyServerStatus();
-}); */
+});
 
 let clients_equipaments_array = []
 
@@ -169,7 +169,6 @@ async function hideHtmlElement([...elements]){
     })
 }
 
-
 // clear html element
 
 // elements
@@ -240,11 +239,16 @@ function brDate_to_JsDate(dateElement){
 const BRL = value => currency(value, { symbol: "R$ ", decimal: ",", separator: ".", precision: 2 });
 
 async function currencyToString(currencyValue){
-    if(currencyValue === undefined || currencyValue === NaN){
+    if(currencyValue === undefined || currencyValue === NaN || currencyValue === ""){
         currencyValue = 0;
     }
 
-    currencyValue = BRL(currencyValue);
+    currencyValue = await BRL(currencyValue);
+
+    if(currencyValue.value === 0){
+        currencyValue = "";
+        return currencyValue
+    }
 
     let numberInString = currencyValue.value.toString();
     numberInString = numberInString.replace(".",",");
@@ -497,6 +501,8 @@ async function addItemProcess(){
         itemTypeInput_itemsInputContainer,
         itemUnitValueInput_itemsInputContainer
     ]);
+
+    itemDescriptionInput.focus();
 }
 
 async function createItemInHtml(totalValue){
@@ -951,7 +957,7 @@ async function addItemsFinishedProcess(){
         let itemQuant = allItems[i].querySelector(".item-quant-input").value;
         let itemType = allItems[i].querySelector(".item-type-input").value;
         let itemUnitValue = allItems[i].querySelector(".item-unit-value-input").value;
-        let itemTotalValue = allItems[i].querySelector(".item-total-value-input").value;
+        let itemTotalValue = allItems[i].querySelector(".item-total-value-span").innerText;
 
         await createAddedItemHtml(
             itemIndex,
@@ -984,6 +990,14 @@ async function displayBudgetProcess(){
     await addHeaderFinishedProcess();
 
     await addItemsFinishedProcess();
+
+    totalOfPartsSpan.innerHTML = "";
+    totalOfServicesSpan.innerHTML = "";
+    totalOfBudgetSpan.innerHTML = "";
+
+    totalOfPartsSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-parts-display-span");
+    totalOfServicesSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-services-display-span")
+    totalOfBudgetSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-budget-display-span")
 
     await addObservationsFinishedProcess();
 }
