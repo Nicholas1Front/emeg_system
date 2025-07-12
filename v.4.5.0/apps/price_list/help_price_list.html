@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajuda Tabela de preços</title>
+    <link rel="stylesheet" href="C:\Program Files (x86)\emeg_system\v.4.5.0\apps\price_list\styles\help_price_list.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8bf43e84bd.js" crossorigin="anonymous"></script><!--Font awesome-->
+</head>
+<body>
+    <header>
+        <div class="back-customer-plataform-control">
+            <a href="C:\Program Files (x86)\emeg_system\v.4.5.0\apps\price_list\price_list.html">
+                <i class="fa-solid fa-house"></i>
+                <span>Voltar para o Tabela de preços</span>
+            </a>
+        </div>
+
+        <img src="https://nicholas1front.github.io/emeg_system/assets/images/emeg_symbol_white.png">
+
+        <h2>Ajuda com o tabela de preços</h2>
+        
+    </header>
+
+    <section class="title-section">
+        <div class="container">
+            <div class="title-container">
+                <h2>
+                    Bem-vindo à página de ajuda!
+                    <div class="line"></div>
+                </h2>
+                <h4>Aqui você encontrará um guia completo para utilizar o sistema de tabela de preços de forma correta e eficiente.</h4>
+            </div>
+        </div>
+    </section>
+
+    <section class="introduction-usage-system-section">
+        <div class="container">
+            <div class="title-container">
+                <h2>O que é ? Como funciona ?
+                    <div class="line"></div>
+                </h2>
+            </div>
+
+            <p>O <redbold>sistema de tabela de preço EMEG</redbold> é a ferramenta que pode ser utilizada na consulta de preços de todos os serviços ou de um serviço especifico e que também pode ser utilizada para adição, exclusão ou edição de serviços na tabela.Ele funciona de forma local em seu computador, mas requer conexão com a internet para acessar e sincronizar as informações com a nuvem. Este sistema foi projetado para ser usado juntamente com o <redbold>sistema de criação de orçamentos</redbold>, onde a ideia é que o usuário pesquise o serviço antes de colocar no orçamento.</p>
+        </div>
+    </section>
+
+    <section class="main-hub-section">
+        <div class="container">
+            <div class="title-container">
+                <div class="line"></div>
+                <div class="title-control">
+                    <h2>Opções de ajuda</h2>
+                    <p>Abaixo selecione a opção na qual você deseja ajuda</p>
+                </div>
+                <div class="line"></div>
+            </div>
+
+            <div class="button-container">
+                <button id="consult-item-price-list-btn">
+                    Pesquisa de item especifico
+                    <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                </button>
+
+                <button id="whole-price-list-btn">
+                    Mostrar tabela completa
+                    <i class="fa-solid fa-clipboard-list"></i>
+                </button>
+
+                <button id="edit-price-list-btn">
+                    Editar tabela
+                    <i class="fa-solid fa-pen-to-square"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="consult-item-price-list-section">
+
+        <div class="back-main-hub-control">
+            <button class="back-main-hub-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+            <h3>// Ajuda : Pesquisa de item especifico</h3>
+        </div>
+
+        <section class="feature-introduction-section">
+            <div class="container">
+                <div class="text-container">
+                    <h3>
+                        Pesquisa de item especifico
+                        <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                    </h3>
+
+                    <p>Quando este botão é clicado o usuário é levado a uma <redbold>área de pesquisa e exibição de resultados</redbold>, onde de acordo com os parametros de pesquisa passado o sistema se encarregará de exibir os serviços correspondentes como resultado em uma tabela e se o mesmo não encontrar nenhum resultado irá informar</p>
+
+                    <p>É recomendado o uso desta funcionalidade no momento de preencher os valores de um serviço em um orçamento, para que haja sempre conformidade entre os orçamentos e os valores descritos na tabela.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="correct-format-section">
+            <div class="container">
+                <div class="text-container">
+                    <h3>
+                        Preenchimento e pesquisa correta
+                        <i class="fa-solid fa-circle-check"></i>
+                    </h3>
+
+                    <p>Como primeiro parametro de pesquisa, é necessário escolher o <redbold>tipo de serviço</redbold> o qual o item inclui, caso esse parametro não seja colocado o programa irá pesquisar entre todos os serviços da tabela. É importante lembrar que esta pesquisa é indicada para achar um item especifico, sendo assim quanto mais especificação melhores serão os resultados como mostrado na imagem abaixo.</p>
+
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/consult_item_price_list_screenshot.png"/>
+                </div>
+
+                <div class="text-container">
+                    <p>Depois de selecionado o tipo de serviço é necessário descrever o serviço desejado como a imagem acima mostra. Este sistema possui uma ferramenta de sugestões onde conforme o usuário digita , e de acordo com o tipo de serviço selecionado, esta ferramenta vai criando sugestões com base nos serviços existentes visando assim facilitar o modo de pesquisa.</p>
+
+                    <p>Após feita a <redbold>descrição do serviço</redbold> que se deseja pesquisar basta clicar no <redbold>botão de Pesquisa</redbold> que o sistema irá gerar uma tabela de acordo com os parametros de pesquisa passados : <redbold>tipo de serviço e descrição do serviço</redbold>, como mostra a imagem abaixo.Importante apontar que o sistema <redbold>não fará a pesquisa se a descrição do serviço estiver vazia</redbold> !  Caso o sistema não encontre o que foi digitado, será informado na tabela que não existem serviços correspondentes.</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/consult_item_price_list_searched_screenshot.png"/>
+                </div>
+            </div>
+        </section>
+
+        <section class="error-msg-section">
+            <div class="container">
+                <div class="title-container">
+                    <h3>
+                        Mensagens do sistema
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </h3>
+                </div>
+
+                <div class="text-container">
+                    <p><redbold>Em caso de falta de informações ou dados inseridos de maneira incorreta</redbold> este sistema avisará o usuário por meio de avisos popup que aparecerão na tela. Nestes popups estará contida a mensagem do que esta motivando o erro.</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/message-popup_screenshot.png"/>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="whole-price-list-section">
+        <div class="back-main-hub-control">
+            <button class="back-main-hub-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+            <h3>// Ajuda : Mostrar tabela completa</h3>
+        </div>
+
+        <section class="feature-introduction-section">
+            <div class="container">
+                <div class="text-container">
+                    <h3>
+                        Mostrar tabela completa
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </h3>
+
+                    <p>Quando este botão é clicado o usuário é levado a uma <redbold>área de exibição de resultados</redbold> mostrando todos os serviços presentes no sistema, e seus respectivos preços e tipos.</p>
+
+                    <p>É recomendado o uso dessa funcionalidade para <redbold>analisar todos os serviços de uma maneira geral</redbold>, outra recomendação para esta funcionalidade é quando os <redbold>dados do sistema sofrem uma alteração</redbold>, explicando melhor quando o usuário <redbold>adiciona um serviço, exclui um serviço ou edita um serviço</redbold> é recomendado usar esta funcionalidade para verificar tais alterações.</p>
+
+                    <p>Abaixo um exemplo de como a tabela é disposta ao usuário quando o faz uso do botão de <redbold>mostrar tabela completa</redbold></p>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/whole_pricelist_screenshot.png" />
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <section class="edit-price-list-section">
+        <div class="back-main-hub-control">
+            <button class="back-main-hub-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+            <h3>// Ajuda : Editar tabela</h3>
+        </div>
+
+        <section class="feature-introduction-section">
+            <div class="container">
+                <div class="text-container">
+                    <h3>
+                        Editar tabela
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </h3>
+
+                    <p>Quando este botão é clicado o usuário é levado a uma <redbold>área de adição, exclusão, edição e envio de dados no sistema.</redbold> Como o proprio nome diz essa sessão do sistema é responsável pela edição e manipulação da tabela por isso deve ser tratada com cautela.</p>
+
+                    <p>Essa parte do sistema possui quatro botões : <redbold>Adicionar item a tabela, Excluir item da tabela, Editar item da tabela, Enviar dados para o servidor</redbold></p>
+                </div>
+
+            </div>
+        </section>
+
+        <section class="password-system-section">
+            <div class="container">
+                <div class="text-container">
+                    <div class="title-container">
+                        <h3>Confirmação por senha <i class="fa-solid fa-lock"></i></h3>
+                    </div>
+                    <p>Ao realizar ações como <redbold>"Adicionar", "Editar", "Excluir" ou "Enviar ao servidor"</redbold>, o sistema solicitará uma confirmação de senha para garantir a segurança e evitar alterações acidentais.</p>
+                    <p>Lembre-se: este sistema serve para gerenciar dados importantes, então <redbold>toda ação é de responsabilidade do usuário</redbold>, sendo importante ter atenção redobrada ao manuseá-los.</p>
+                </div>
+    
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/confirmation_password_screenshot.png" />
+                </div>
+            </div>
+        </section>
+
+        <section class="add-service-section">
+            <div class="container">
+                <div class="title-container">
+                    <h3>Adicionar item a tabela <i class="fa-solid fa-square-plus"></i></h3>
+                </div>
+
+                <div class="text-container">
+                    <p>Assim que este botão é clicado o usuário será apresentado a 3 campos para inserção de dados relacionados ao item que pretende-se adicionar a tabela</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/add_item_pricelist_screenshot.png" />
+                </div>
+
+                <div class="text-container">
+                    <p>Como a imagem acima mostra, o primeiro campo refere-se ao <redbold>tipo de serviço</redbold> que o item terá, o segundo campo refere-se a <redbold>descrição do serviço</redbold> que o item terá e por fim o terceiro campo refere-se ao <redbold>preço/valor</redbold> que o item terá. Para que o processo de adição do item realmente aconteça <redbold>nenhum destes campos pode estar vazio</redbold></p>
+
+                    <p>Quanto a forma de preenchimento da descrição do serviço é estritamente necessário que a mesma siga uma <redbold>estrutura para que as informações sejam padronizadas</redbold>, abaixo segue a forma de estruturação de preenchimento dos dados e um exemplo do mesmo.</p>
+
+                    <div class="structure-container">
+                        <div class="structure-control">
+                            <div class="title-container">
+                                <h3>Estrutura de preenchimento <i class="fa-solid fa-file-invoice"></i></h3>
+                            </div>
+    
+                            <span>DESCRIÇÃO DO SERVIÇO COMPLETA E RESUMIDA (EQUIPAMENTO REFERENTE)</span>
+                        </div>
+
+                        <div class="symbol-control">
+                            <i class="fa-regular fa-circle-right"></i>
+                        </div>
+
+                        <div class="structure-control">
+                            <div class="title-container">
+                                <h3>Exemplo de preenchimento completo <i class="fa-solid fa-file-circle-check"></i></h3>
+                            </div>
+    
+                            <span>TROCA REPARO CILINDRO DE ELEVAÇÃO (GUINDASTE SANY)</span>
+                        </div>
+                    </div>
+
+                    <p>Após todos os campos serem preenchidos corretamente <redbold>o botão Adicionar item</redbold> pode ser clicado para dar prosseguimento ao processo de adição. Caso haja algum problema que impeça o sistema de adicionar o item especificado <redbold>como falta de dados ou item já existente</redbold>, o mesmo irá retornar uma <redbold>mensagem de erro</redbold> apontando onde o erro se encontra.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="delete-service-section">
+            <div class="container">
+                <div class="title-container">
+                    <h3>
+                        Excluir item da tabela <i class="fa-solid fa-square-minus"></i>
+                    </h3>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/delete_item_pricelist_screenshot.png"/>
+                </div>
+
+                <div class="text-container">
+                    <p>Nesta área do sistema existem 2 campos de inserção, com o primeiro campo sendo o <redbold>tipo de serviço que o item que se deseja excluir possuí</redbold>, é estritamente necessário selecionar o tipo de serviço pois somente quando um destes é selecionado o campo seguinte é liberado para inserção de dados.</p>
+
+                    <p>No outro campo temos a <redbold>descrição do serviço do item que se deseja excluir</redbold>, este campo conta com um sistema de sugestões da mesma forma que área de pesquisa possuí. Conforme o usuário for digitando as opções com os itens existentes de acordo com a descrição digitada aparecerão para serem clicadas</p>
+
+                    <p>Por fim ao lado do campo de descrição de serviço existe um <redbold>visualizador de valor/preço dos serviços</redbold> que, se o item digitado ou selecionado existir no sistema o visualizador mostrará o valor/preço deste item. Entretanto caso <redbold>a descrição esteja incompleta ou o item não exista</redbold> o visualizador não mostrará nenhum valor/preço.</p>
+
+                    <p>Com todos os campos preenchidos <redbold>o botão Excluir item</redbold> pode ser clicado para dar prosseguimento com o processo de exclusão, porém é importante apontar que <redbold>caso o item informado não exista ou algum dos campos estiver vazio</redbold> o sistema irá retornar uma <redbold>mensagem de erro</redbold> acusando onde o erro ocorrido se encontra.</p>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="edit-service-section">
+            <div class="container">
+                <div class="title-container">
+                    <h3>
+                        Editar item da tabela <i class="fa-solid fa-square-pen"></i>
+                    </h3>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/edit_item_pricelist_screenshot.png"/>
+                </div>
+
+                <div class="text-container">
+                    <p>Assim como na área de exclusão de itens, existem 2 campos para inserção de dados sendo o primeiro campo <redbold>tipo de serviço</redbold> que o item que se deseja editar possuí, também é <redbold>estritamente necessário selecionar o tipo de serviço</redbold> já que o próximo campo só é liberado quando uma opção é selecionada.</p>
+
+                    <p>Após o campo de tipo de serviço, temos o campo de <redbold>descrição do serviço</redbold> que também conta com um sistema de sugestões que aparecem conforme o que é digitado neste campo. Juntamente com este campo temos o <redbold>visualizador de preço</redbold> que foi selecionado ou digitado no campo de descrição corresponder a um serviço existente no sistema, este visualizador <redbold>mostrará o preço correspondente</redbold>.</p>
+
+                    <p>Após a conclusão desses dois campos o <redbold>botão Próximo passo</redbold> pode ser clicado e se o que foi inserido nos campos mencionados anteriormente <redbold>corresponder a um serviço existente</redbold> o sistema irá liberar a área de edição do item mencionado. Importante citar que se o que estiver nos dois campos <redbold>não corresponder a nenhum serviço existente</redbold> o sistema irá retornar uma <redbold>mensagem de erro</redbold> informando que nenhum serviço foi encontrado.</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/edit_item_other_are_pricelist_screenshot.png" />
+                </div>
+
+                <div class="text-container">
+                    <p>Como mostra a imagem acima, após o botão Próximo passo ser clicado e esta outra área ser liberada o usuário é levado a outros três campos de inserção de dados para edição do item mencionado anteriormente. Os campos são semelhantes a os anteriores do sistema : <redbold>tipo de serviço , descrição do serviço e preço/valor do serviço.</redbold></p>
+
+                    <p>Após serem inseridos os novos dados para edição e atualização do item, <redbold>o botão Editar item</redbold> pode ser clicado, entretanto é de suma importância que <redbold>o novo item não seja igual ao anterior e nem mesmo igual a um item já existente</redbold> no sistema pois se assim acontecer o sistema irá retornar uma <redbold>mensagem de erro</redbold> informando que os dados inseridos para a edição do item estão incorretos e o programa não pode prosseguir com a ação desejada. Se o dados estiverem corretos o sistema irá prosseguir com a edição do item.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="send-server-steps-section">
+            <div class="container">
+                <div class="title-container">
+                    <h3>
+                        Enviar alterações para o servidor <i class="fa-solid fa-paper-plane"></i>
+                    </h3>
+                </div>
+
+                <div class="text-container">
+                    <p>Após feita qualquer alteração no sistema, seja Adicionar um item, Excluir ou Editar, é necessário <redbold>enviar essas alterações para o servidor</redbold> para que essas mudanças sejam internalizadas no sistema. É importante somente fazer uso deste botão Enviar alterações para o servidor somente quando realmente existerem alterações no sistema, pois se o mesmo detectar que não existem alterações o programa não permitirá prosseguir com a ação de envio retornando uma <redbold>mensagem de erro</redbold>.</p>
+                </div>
+
+                <div class="step-container">
+                    <div class="step-control">
+                        <h3>
+                            <i class="fa-solid fa-file-signature"></i>
+                            Realize as alterações necessárias
+                        </h3>
+                        <p>Com as informações organizadas, faça as alterações no sistema, sempre prestando atenção aos detalhes para evitar a inserção de dados incorretos.</p>
+                    </div>
+                </div>
+    
+                <div class="arrow-symbol-container">
+                    <i class="fa-regular fa-circle-down"></i>
+                </div>
+    
+                <div class="step-container">
+                    <div class="step-control">
+                        <h3>
+                            <i class="fa-solid fa-file-export"></i>
+                            Envie os dados ao servidor
+                        </h3>
+                        <p>Após finalizar as alterações, clique em <redbold>"Enviar ao servidor"</redbold> para sincronizar as informações com a nuvem.</p>
+                    </div>
+                </div>
+    
+                <div class="arrow-symbol-container">
+                    <i class="fa-regular fa-circle-down"></i>
+                </div>
+    
+                <div class="step-container">
+                    <div class="step-control">
+                        <h3>
+                            <i class="fa-solid fa-clock-rotate-left"></i>
+                            Aguarde o processamento
+                        </h3>
+                        <p>Depois de confirmar a senha, o sistema precisará de um tempo para processar as informações. <redbold>Não feche a página</redbold> até que o processo seja concluído. Uma vez finalizado, você poderá sair com segurança.</p>
+                    </div>
+                </div>                
+            </div>
+        </section>
+
+        <section class="error-msg-section">
+            <div class="container">
+                <div class="title-container">
+                    <h3>
+                        Mensagens do sistema
+                        <i class="fa-solid fa-triangle-exclamation"></i>
+                    </h3>
+                </div>
+
+                <div class="text-container">
+                    <p>Este sistema conta com mensagens de erro que indicam que algo não está correto. No caso deste sistema, as <strong>mensagens de erro</strong> aparecem quando a lógica do sistema não é seguida corretamente ou quando informações importantes e obrigatórias estão faltando. Além disso o sistema também conta com avisos e mensagens sobre o estado de funcionamento do servidor</p>
+                </div>
+
+                <div class="image-container">
+                    <img src="https://nicholas1front.github.io/emeg_system/assets/images/message-popup_screenshot.png"/>
+                </div>
+            </div>
+        </section>
+    </section>
+
+    <footer>
+        <h3>© EMEG Guindaste - Todos os Direitos Reservados. v.4.5.0</h3>
+    </footer>
+
+    <script src="C:\Program Files (x86)\emeg_system\v.4.5.0\apps\price_list\scripts\help_price_list_script.js"></script>
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ajuda Controle de estoque</title>
+        <link rel="stylesheet" href="C :\Program Files (x86)\emeg_system\v.4.5.0\apps\inventory_control_plataform\styles\help_inventory_control.css">
+        <!-- Google Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/8bf43e84bd.js" crossorigin="anonymous"></script><!--Font awesome-->
+    </head>
+    <body>
+        <header>
+            <div class="back-inventory-control">
+                <a href="C:\Program Files (x86)\emeg_system\v.4.5.0\apps\inventory_control_plataform\inventory_control.html">
+                    <i class="fa-solid fa-house"></i>
+                    <span>Voltar para o Controle de estoque</span>
+                </a>
+            </div>
+
+            <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/emeg_symbol_white.png">
+
+            <h2>Ajuda com o controle de estoque</h2>
+            
+        </header>
+
+        <section class="title-section">
+            <div class="container">
+                <div class="title-container">
+                    <h2>
+                        Bem-vindo à página de ajuda!
+                        <div class="line"></div>
+                    </h2>
+                    <h4>Aqui você encontrará um guia completo para utilizar o sistema de controle de estoque de forma correta e eficiente.</h4>
+                </div>
+            </div>
+        </section>
+
+        <section class="introduction-usage-system-section">
+            <div class="container">
+                <div class="title-container">
+                    <h2>O que é ? Como funciona ?
+                        <div class="line"></div>
+                    </h2>
+                </div>
+
+                <p>O <redbold>sistema de controle de estoque EMEG</redbold> é a ferramenta que pode ser utilizada na consulta de todos os itens ou de um item especifíco conforme os mesmos estão listados no banco de dados, este sistema também conta com a adição, exclusão , edição e envio de dados sobre os itens para o servidor .Ele funciona de forma local em seu computador, mas requer conexão com a internet para acessar e sincronizar as informações com a nuvem. Este sistema foi projetado visando suprir a necessidade constante de <strong>verificação de peças , ferramentas e materiais gerais</strong> que são usados para a manutenção de serviços e do proprio espaço fisíco da empresa.</p>
+            </div>
+        </section>
+
+        <section class="main-hub-section">
+            <div class="container">
+                <div class="title-container">
+                    <div class="line"></div>
+                    <div class="title-control">
+                        <h2>Opções de ajuda</h2>
+                        <p>Abaixo selecione a opção na qual você deseja ajuda</p>
+                    </div>
+                    <div class="line"></div>
+                </div>
+
+                <div class="button-container">
+                    <button id="consult-inventory-btn">
+                        Pesquisar item especifico do estoque
+                        <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                    </button>
+
+                    <button id="inventory-show-btn">
+                        Mostrar todo estoque
+                        <i class="fa-solid fa-clipboard-list"></i>
+                    </button>
+
+                    <button id="edit-inventory-show-btn">
+                        Editar itens do inventário
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="consult-inventory-section">
+            <div class="back-main-hub-control">
+                <button class="back-main-hub-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Ajuda : Pesquisa de item especifico</h3>
+            </div>
+
+            <section class="feature-introduction-section">
+                <div class="container">
+                    <div class="text-container">
+                        <h3>
+                            Pesquisa de Item Específico
+                            <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                        </h3>
+                        <p>
+                            Quando este botão é clicado, o usuário é levado a uma 
+                            <strong>área de pesquisa e exibição de resultados</strong>, onde, de acordo com os parâmetros de pesquisa fornecidos, o sistema exibirá os itens correspondentes como resultado em uma tabela. 
+                            Caso nenhum item seja encontrado, o sistema informará ao usuário.
+                        </p>
+                        <p>
+                            É <strong>recomendado utilizar essa funcionalidade</strong> para realizar uma pesquisa mais refinada, buscando uma peça ou ferramenta específica. 
+                            Essa pesquisa pode ser realizada pela própria equipe de manutenção.
+                        </p>
+                    </div>
+                </div>
+            </section>
+            
+            <section class="correct-format-section">
+                <div class="container">
+                    <div class="text-container">
+                        <h3>
+                            Preenchimento e Pesquisa Correta
+                            <i class="fa-solid fa-circle-check"></i>
+                        </h3>
+                        <p>
+                            Como <strong>primeiro parâmetro de pesquisa</strong>, é necessário digitar ou escolher o tipo do item desejado. 
+                            É importante destacar que este sistema possui uma <strong>ferramenta de sugestões</strong> que, conforme o item ou grupo de itens existir no banco de dados, oferecerá opções para autocompletar o campo do tipo de serviço. 
+                            Veja o exemplo na imagem abaixo. 
+                            Entretanto, caso deseje realizar uma pesquisa sem preencher o tipo de item, é possível usar apenas o nome/descrição do item. 
+                            Contudo, <strong>recomenda-se especificar o máximo possível</strong> para obter resultados mais precisos.
+                        </p>
+                        <p>
+                            Para o <strong>segundo parâmetro de pesquisa</strong>, temos o nome/descrição do item, que também conta com o mesmo sistema de sugestões. 
+                            Este sistema funciona da seguinte forma: 
+                            - Se o campo "tipo de item" estiver vazio, o programa sugerirá itens com base no nome digitado, pesquisando em todos os itens do banco de dados. 
+                            - Se o campo "tipo de item" estiver preenchido com categorias como <strong>PEÇA</strong> ou <strong>FERRAMENTA</strong>, as sugestões no campo de nome/descrição serão limitadas aos itens relacionados a esse tipo específico.
+                        </p>
+                    </div>
+                    <div class="image-container">
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/consult_inventory_type_and_name_item_screenshot.png" alt="Exemplo de pesquisa por tipo e nome de item">
+                    </div>
+                    <div class="text-container">
+                        <p>
+                            Após definir os parâmetros e clicar no botão de pesquisa, o sistema realizará a busca de acordo com os critérios fornecidos (tipo de item e nome/descrição). 
+                            Se a pesquisa for bem-sucedida, os resultados serão exibidos em uma tabela, como mostrado na imagem a seguir. 
+                            Caso contrário, o sistema exibirá uma mensagem informando que o item não existe no banco de dados. 
+                            Isso pode ocorrer devido a <strong>erros de digitação</strong> ou à <strong>inexistência do item pesquisado</strong>. 
+                            É importante ressaltar que a funcionalidade de pesquisa <strong>não funcionará caso o campo "nome/descrição do item" esteja vazio</strong>.
+                        </p>
+                    </div>
+                    <div class="image-container">
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/consult_inventory_searched-item-screenshot.png" alt="Resultado da pesquisa por itens">
+                    </div>
+                </div>
+            </section>
+            
+            <section class="error-msg-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>
+                            Mensagens do sistema
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </h3>
+                    </div>
+    
+                    <div class="text-container">
+                        <p><redbold>Em caso de falta de informações ou dados inseridos de maneira incorreta</redbold> este sistema avisará o usuário por meio de avisos popup que aparecerão na tela. Nestes popups estará contida a mensagem do que esta motivando o erro.</p>
+                    </div>
+    
+                    <div class="image-container">
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/message-popup_screenshot.png"/>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+
+        <section class="inventory-show-section">
+            <div class="back-main-hub-control">
+                <button class="back-main-hub-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Ajuda : Mostrar todo estoque</h3>
+            </div>
+
+            <section class="feature-introduction-section">
+                <div class="container">
+                    <div class="text-container">
+                        <h3>
+                            Mostrar todo estoque
+                            <i class="fa-solid fa-clipboard-list"></i>
+                        </h3>
+
+                        <p>
+                            Quando este botão é clicado, o usuário é levado a uma <strong>página de exibição das informações dos itens</strong>. 
+                            Nesta página, há dois botões principais:
+                            <strong>Consultar itens em falta</strong> e <strong>Consultar itens existentes no estoque</strong>. 
+                            Esses botões, respectivamente, mostram as informações dos itens que estão em falta e dos itens disponíveis no estoque, como ilustrado nas imagens abaixo.
+                        </p>
+                        
+                        <p>
+                            O uso dessa funcionalidade é <strong>indicado para analisar todos os itens de forma geral</strong>, permitindo um planejamento mais eficaz na compra de materiais e ferramentas. 
+                            Outra recomendação de uso é para <strong>verificar alterações realizadas no sistema</strong>, como adicionar, excluir ou editar itens. 
+                            Utilizar essa funcionalidade pode ser de <strong>grande valor</strong> para validar as informações gerais dos itens e garantir a conformidade dos dados no sistema.
+                        </p>
+                        
+                    </div>
+
+                    <div class="image-container">
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/missing_items_inventory_control_plataform_screenshot.png"/>
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/have_items_inventory_control_plataform_screenshot.png"/>
+                    </div>
+                </div>
+            </section>
+
+        </section>
+
+        <section class="edit-inventory-show-section">
+            <div class="back-main-hub-control">
+                <button class="back-main-hub-btn"><i class="fa-solid fa-arrow-left-long"></i> Voltar para a página inicial</button>
+                <h3>// Ajuda : Pesquisa de item especifico</h3>
+            </div>
+
+            <section class="feature-introduction-section">
+                <div class="container">
+                    <div class="text-container">
+                        <h3>
+                            Editar tabela
+                            <i class="fa-solid fa-pen-to-square"></i>
+                        </h3>
+    
+                        <p>Quando este botão é clicado o usuário é levado a uma <redbold>área de adição, exclusão, edição e envio de dados no sistema.</redbold> Como o proprio nome diz essa sessão do sistema é responsável pela edição e manipulação da tabela por isso deve ser tratada com cautela.</p>
+    
+                        <p>Essa parte do sistema possui quatro botões : <redbold>Adicionar item ao inventário, Excluir item do inventário, Editar item do inventário e  Enviar dados para o servidor</redbold></p>
+                    </div>
+    
+                </div>
+            </section>
+
+            <section class="password-system-section">
+                <div class="container">
+                    <div class="text-container">
+                        <div class="title-container">
+                            <h3>Confirmação por senha <i class="fa-solid fa-lock"></i></h3>
+                        </div>
+                        <p>Ao realizar ações como <redbold>"Adicionar", "Editar", "Excluir" ou "Enviar ao servidor"</redbold>, o sistema solicitará uma confirmação de senha para garantir a segurança e evitar alterações acidentais.</p>
+                        <p>Lembre-se: este sistema serve para gerenciar dados importantes, então <redbold>toda ação é de responsabilidade do usuário</redbold>, sendo importante ter atenção redobrada ao manuseá-los.</p>
+                    </div>
+        
+                    <div class="image-container">
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/confirmation_password_screenshot.png" />
+                    </div>
+                </div>
+            </section>
+
+            <section class="add-item-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>Adicionar item ao inventário <i class="fa-solid fa-square-plus"></i></h3>
+                    </div>
+
+                    <div class="text-container">
+                        <p>
+                            Quando o botão <strong>Adicionar item ao inventário</strong> é clicado, o usuário é direcionado a uma área para inserir as informações de um novo item. 
+                            Esta área possui 4 campos para inserção de dados: 
+                            <strong>tipo do item, nome/descrição do item, estado do item e quantidade</strong>.
+                        </p>
+                    
+                        <p>
+                            Explicando cada campo, respectivamente:
+                        </p>
+
+                        <p>- O campo <strong>tipo de item</strong> refere-se ao tipo do item (por exemplo: peça, ferramenta, material, etc.) e conta com uma ferramenta de sugestões que se ativa conforme o usuário digita.</p>
+
+                        <p>- O campo <strong>nome/descrição do item</strong> exige uma descrição precisa e detalhada do item que será adicionado, para evitar divergências nos nomes dentro do sistema de inventário.</p>
+                    
+                        <p>
+                            O campo <strong>estado do item</strong> indica se o item existe ou está em falta no inventário. Caso o item exista, o campo <strong>quantidade</strong> deve ser preenchido com a quantidade disponível. As imagens abaixo ilustram como os campos devem ser preenchidos.
+                        </p>
+                    </div>
+                    
+                    <div class="image-container">
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/add_item_inventory_control_plataform_screenshot.png" alt="Exemplo de preenchimento do formulário de inventário"/>
+                    
+                        <div class="arrow-control">
+                            <i class="fa-regular fa-circle-down"></i>
+                        </div>
+                    
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/add_item__example_inventory_control_plataform_screenshot.png" alt="Exemplo de preenchimento com dados inseridos"/>
+                    </div>
+                    
+                    <div class="text-container">
+                        <p>
+                            É importante destacar que a <strong>estrutura de preenchimento</strong> deve seguir o modelo mostrado nas imagens, para garantir a <strong>padronização das nomenclaturas</strong>. 
+                            Outro ponto relevante é que <strong>nenhum dos campos pode estar vazio</strong>. Caso o sistema detecte campos não preenchidos, ele exibirá uma mensagem de erro. 
+                            Da mesma forma, se o item for igual a um item já existente no inventário, o sistema retornará uma mensagem informando que o novo item não pode ser idêntico ao item já registrado.
+                        </p>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <section class="edit-item-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>Editar item do inventário <i class="fa-solid fa-pen-to-square"></i></h3>
+                    </div>
+
+                    <div class="introduction-container">
+                        <div class="text-container">
+                            <p>
+                                A primeira parte da edição de itens começa com a pesquisa da existência do item, para que o usuário possa prosseguir com o processo de edição do item encontrado. 
+                                Para isso, o usuário é apresentado a dois campos para inserção de dados: 
+                                <strong>tipo do item</strong> e <strong>nome/descrição do item</strong>. Ambos os campos possuem uma ferramenta de sugestões, que exibe tanto os itens existentes quanto os nomes sugeridos, conforme o usuário digita, como mostrado na imagem abaixo.
+                            </p>
+                            <p>
+                                Após inserir os dados corretamente e clicar no botão <strong>"Pesquisar item"</strong>, o sistema irá realizar a busca com os parâmetros fornecidos. Se o item existir, ele será exibido. 
+                                No entanto, se o que for inserido for inválido ou se o item não existir, o sistema retornará uma mensagem de erro informando que o item não foi encontrado ou não existe.
+                            </p>
+                        </div>
+                    
+                        <div class="image-container">
+                            <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/edit_item_search_inventory_control_plataform_screenshot.png" alt="Exemplo de busca de item para edição no inventário">
+                        </div>
+                    </div>
+                    
+                    <div class="searched-container">
+                        <div class="text-container">
+                            <p>
+                                Caso o item realmente exista, o sistema exibirá as informações do item e disponibilizará os campos para inserção dos dados, já com as informações existentes. 
+                                Como mostrado na imagem abaixo, o usuário pode editar o <strong>tipo do item</strong>, <strong>nome/descrição do item</strong>, <strong>estado do item</strong> e <strong>quantidade do item</strong>. 
+                                É importante destacar que o item editado não pode ser igual ao anterior. Portanto, é <strong>estritamente necessário verificar as novas informações</strong> antes de salvar, pois, caso contrário, o sistema retornará uma mensagem de erro informando que as informações estão incorretas.
+                            </p>
+                        </div>
+                    
+                        <div class="image-container">
+                            <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/delete_item_searched_inventory_control_plataform_screenshot.png" alt="Exemplo de edição de item no inventário">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="delete-item-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>
+                            Excluir item do inventário <i class="fa-solid fa-square-minus"></i>
+                        </h3>
+                    </div>
+
+                    <div class="introduction-container">
+                        <div class="text-container">
+                            <p>
+                                Nesta área do sistema, o usuário é inicialmente apresentado a dois campos para inserir o <strong>tipo do item</strong> e o <strong>nome/descrição</strong> do item. 
+                                Como mostrado na imagem ao lado, o sistema buscará a existência do item. 
+                                Caso as informações inseridas estejam incorretas ou o item não exista no banco de dados, o sistema retornará uma mensagem de erro informando que o item desejado não foi encontrado ou não existe.
+                            </p>
+                        </div>
+                    
+                        <div class="image-container">
+                            <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/delete_item_search_inventory_control_plataform_screenshot.png" alt="Exemplo de busca de item no sistema">
+                        </div>
+                    </div>
+                    
+                    <div class="action-delete-item-container">
+                        <div class="image-container">
+                            <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/delete_item_searched_inventory_control_plataform_screenshot.png" alt="Exemplo de item encontrado para exclusão">
+                        </div>
+                    
+                        <div class="text-container">
+                            <p>
+                                Caso o item inserido exista, o sistema exibirá os dados do item, como mostrado na imagem à esquerda, com todas as informações atuais do item. 
+                                Em seguida, o botão <strong>Excluir item</strong> estará disponível, permitindo que o usuário confirme a exclusão do item específico.
+                            </p>
+                    
+                            <p>
+                                É importante destacar que esta ação irá <strong>excluir permanentemente o item do banco de dados</strong> do sistema, apagando todas as informações relacionadas a ele. 
+                                Caso o usuário deseje apenas indicar que o item está <strong>EM FALTA</strong>, ele deve utilizar o botão <strong>Editar item do inventário</strong>.
+                            </p>
+                        </div>
+                    </div>
+                    
+                </div>
+            </section>
+
+            <section class="send-server-steps-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>
+                            Enviar alterações para o servidor <i class="fa-solid fa-paper-plane"></i>
+                        </h3>
+                    </div>
+    
+                    <div class="text-container">
+                        <p>Após feita qualquer alteração no sistema, seja Adicionar um item, Excluir ou Editar, é necessário <redbold>enviar essas alterações para o servidor</redbold> para que essas mudanças sejam internalizadas no sistema. É importante somente fazer uso deste botão Enviar alterações para o servidor somente quando realmente existerem alterações no sistema, pois se o mesmo detectar que não existem alterações o programa não permitirá prosseguir com a ação de envio retornando uma <redbold>mensagem de erro</redbold>.</p>
+                    </div>
+    
+                    <div class="step-container">
+                        <div class="step-control">
+                            <h3>
+                                <i class="fa-solid fa-file-signature"></i>
+                                Realize as alterações necessárias
+                            </h3>
+                            <p>Com as informações organizadas, faça as alterações no sistema, sempre prestando atenção aos detalhes para evitar a inserção de dados incorretos.</p>
+                        </div>
+                    </div>
+        
+                    <div class="arrow-symbol-container">
+                        <i class="fa-regular fa-circle-down"></i>
+                    </div>
+        
+                    <div class="step-container">
+                        <div class="step-control">
+                            <h3>
+                                <i class="fa-solid fa-file-export"></i>
+                                Envie os dados ao servidor
+                            </h3>
+                            <p>Após finalizar as alterações, clique em <redbold>"Enviar ao servidor"</redbold> para sincronizar as informações com a nuvem.</p>
+                        </div>
+                    </div>
+        
+                    <div class="arrow-symbol-container">
+                        <i class="fa-regular fa-circle-down"></i>
+                    </div>
+        
+                    <div class="step-container">
+                        <div class="step-control">
+                            <h3>
+                                <i class="fa-solid fa-clock-rotate-left"></i>
+                                Aguarde o processamento
+                            </h3>
+                            <p>Depois de confirmar a senha, o sistema precisará de um tempo para processar as informações. <redbold>Não feche a página</redbold> até que o processo seja concluído. Uma vez finalizado, você poderá sair com segurança.</p>
+                        </div>
+                    </div>                
+                </div>
+            </section>
+    
+            <section class="error-msg-section">
+                <div class="container">
+                    <div class="title-container">
+                        <h3>
+                            Mensagens do sistema
+                            <i class="fa-solid fa-triangle-exclamation"></i>
+                        </h3>
+                    </div>
+    
+                    <div class="text-container">
+                        <p>Em caso de falta de informações ou dados inseridos de maneira incorreta este sistema avisará o usuário por meio de avisos popup que aparecerão na tela. Nestes popups estará contida a mensagem do que esta motivando o erro. Este sistema conta com mensagens de erro que indicam que algo não está correto. No caso deste sistema, as <strong>mensagens de erro</strong> aparecem quando a lógica do sistema não é seguida corretamente ou quando informações importantes e obrigatórias estão faltando. Além disso o sistema também conta com avisos e mensagens sobre o estado de funcionamento do servidor</p>
+                    </div>
+    
+                    <div class="image-container">
+                        <img src="https://nicholas1front.github.io/emeg_system/v.4.5.0/assets/images/message-popup_screenshot.png"/>
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <footer>
+            <h3>© EMEG Guindaste - Todos os Direitos Reservados. v.4.5.0</h3>
+        </footer>
+
+    </body>
+
+    <script src="C:\Program Files (x86)\emeg_system\v.4.5.0\apps\inventory_control_plataform\scripts\help_inventory_control_plataform.js"></script>
+
+</html>

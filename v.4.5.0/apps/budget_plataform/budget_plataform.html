@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de orçamentos</title>
+    <link rel="stylesheet" href="C:\Program Files (x86)/emeg_system/v.4.5.0/apps/budget_plataform/styles/budgetProduction.css">
+    <link rel="stylesheet" href="C:\Program Files (x86)/emeg_system/v.4.5.0/apps/budget_plataform/styles/budgetFinished.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/8bf43e84bd.js" crossorigin="anonymous"></script><!--Font awesome-->
+</head>
+<body>
+    
+    <div class="loading-overlay">
+        <div class="loading-container">
+            <i class="fa-solid fa-circle-notch fa-spin"></i>
+            <span>Carregando...</span>
+        </div>
+    </div>
+
+    <div class="server-overlay">
+        <div class="message-container">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <h2>
+                ERRO NO SERVIDOR !
+                <span>error 404</span>
+            </h2>
+
+            <p>Lamentamos informar que houve um erro no servidor. Recarregar a página pode resolver o problema, porém caso não funcionar contate o desenvolvedor com os detalhes do erro mencionado</p>
+
+            <p id="server-error-msg"></p>
+        </div>
+    </div>
+
+    <div class="confirmation-overlay">
+
+        <div class="confirmation-popup">
+
+            <button id="close-confirmation-popup-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="title-control">
+                <i class="fa-solid fa-unlock"></i>
+                <h2>Digite a senha para continuar !</h2>
+            </div>
+
+            <div class="input-control">
+                <input type="password" name="confirmation-password-input" id="confirmation-password-input" placeholder="Digite a senha aqui...">
+                <span class="wrong-password-span">Senha incorreta !</span>
+                <button id="confirmation-popup-btn">CONFIRMAR</button>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="server-message-popup">
+        <button class="close-server-message-popup-btn">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="server-message-control">
+            <i class="fa-solid fa-circle-check"></i>
+            <span class="server-message-span">Dados enviados com sucesso !</span>
+        </div>
+    </div>
+
+    <div class="msg-control">
+        <div class="msg-close-control">
+            <button id="close-msg-btn"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+
+        <div class="msg-content-control">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <span class="msg-span">Selecione um cliente !</span>
+        </div>
+    </div>
+    
+    <div id="budget-production">
+
+        <header>
+            
+            <div class="back-hub-apps-control">
+                <a href="C:\Program Files (x86)\emeg_system\v.4.5.0\apps\main_hub\main_hub.html"><i class="fa-solid fa-house"></i><span>Voltar para o hub de apps</span></a>
+            </div>
+
+            <div class="header-logo-control-of-budget-prod">
+                <img src="https://nicholas1front.github.io/emeg_system/assets/images/emeg_symbol_white.png">
+            </div>
+
+            <div class="header-title-control">
+                <h2>Sistema de orçamentos</h2>
+            </div>
+
+            <div class="help-page-link-control">
+                <a href="C:\Program Files (x86)\emeg_system\v.4.5.0\apps\budget_plataform\help_budget_plataform.html">
+                    <i class="fa-solid fa-circle-question"></i>
+                    <span>Ajuda</span>
+                </a>
+            </div>
+        </header>
+
+        <section class="informations-section">
+            
+            <div class="container">
+                <div class="informations-container">
+
+                    <div class="informations-title-container">
+                        <div class="horizontal-line-control">
+                            <div class="horizontal-line"></div>
+                        </div>
+
+                        <div class="title-control">
+                            <h2>DADOS PARA PREENCHIMENTO</h2>
+                        </div>
+
+                        <div class="horizontal-line-control">
+                            <div class="horizontal-line"></div>
+                        </div>
+
+                    </div>
+                    <div class="clients-equipaments-container">
+
+                        <div class="clients-select-control">
+                            <h3><i class="fa-solid fa-user-tie"></i>Cliente</h3>
+
+    
+                            <div class="client-input-control">
+                                <input type="text" id="client-input" autocomplete="off" placeholder="Insira o nome do cliente..."/>
+
+                                <div class="client-input-options-control">
+                                    <div class="client-input-option">NÃO IDENTIFICADO</div>
+                                </div>
+
+                            </div>
+                        </div>
+    
+                        <div class="equipaments-select-control">
+                            <h3><i class="fa-solid fa-truck"></i>Equipamento</h3>
+
+                            <div class="equipament-input-control">
+                                <input type="text" id="equipament-input" autocomplete="off" placeholder="Insira o modelo do equipamento..."/>
+
+                                <div class="equipament-input-options-control">
+                                    <div class="equipament-input-option">CAMINHÃO POPULOP</div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                    <div class="general-information-container">
+                        
+                        <div class="general-information-control">
+
+                            <div class="date-control">
+                                <h3><i class="fa-solid fa-calendar-days"></i>Data de entrada</h3>
+        
+                                <input type="date" name="date-input" id="date-input">
+                            </div>
+        
+                            <div class="completion-deadline-control">
+                                <h3><i class="fa-solid fa-stopwatch"></i>Prazo estimado</h3>
+        
+                                <input type="text" name="completion-deadline-input" id="completion-deadline-input" placeholder="7 DIAS...">
+                            </div>
+
+                            <div class="payment-terms-control">
+                                <h3><i class="fa-solid fa-coins"></i>Condição de pagamento</h3>
+        
+                                <input type="text" name="payment-terms-input" id="payment-terms-input" placeholder="21 DIAS...">
+                            </div>
+
+                            <div class="guarantee-control">
+                                <h3><i class="fa-solid fa-award"></i>Garantia</h3>
+        
+                                <input type="text" name="guarantee-input" id="guarantee-input" placeholder="30 DIAS...">
+                            </div>
+
+                        </div>
+    
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+        <section class="items-section">
+            <div class="container">
+                <div class="title-container">
+                    <div class="line"></div>
+                    <h2>PEÇAS E SERVIÇOS</h2>
+                    <div class="line"></div>
+                </div>
+
+                <div class="items-label-container">
+                    <h3 class="item-description-h3">Descrição do item</h3>
+                    <h3>Quantidade</h3>
+                    <h3>Tipo do item</h3>
+                    <h3>Valor unitário</h3>
+                    <h3>Adicionar item</h3>
+                </div>
+
+                <div class="items-input-container">
+                    <input type="text" class="item-description-input" autocomplete="off" placeholder="Insira a descrição do item..."/>
+                    <input type="number" class="item-quant-input" autocomplete="off" placeholder="Insira a quantidade..."/>
+                    <input type="text" class="item-type-input" list="items-types-datalist" placeholder="Selecione o tipo do item..." autocomplete="off"/>
+                    <datalist id="items-types-datalist">
+                        <option value="PEÇA">PEÇA</option>
+                        <option value="SERVIÇO">SERVIÇO</option>
+                    </datalist>
+                    <input type="text" class="item-unit-value-input"autocomplete="off" placeholder="Insira o preço unitário..."/>
+                    <button class="add-item-button"><i class="fa-solid fa-plus"></i></button>
+                </div>
+
+                <div class="items-container">
+
+                    <div class="items-title-container">
+                        <h3 class="item-description-h3">Descrição do item</h3>
+                        <h3>Quantidade</h3>
+                        <h3>Tipo do item</h3>
+                        <h3>Valor unitário</h3>
+                        <h3>Valor total</h3>
+                        <h3>Excluir item</h3>
+                    </div>
+
+                    <div class="item-control">
+                        <span class="no-content-span">Nenhum item adicionado</span>
+                    </div>
+
+                    <div class="items-container-bottom"></div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="total-budget-prod-section">
+
+            <div class="container">
+
+                <div class="total-budget-prod-container">
+
+                    <div class="total-budget-prod-title-container">
+                        <div class="horizontal-line-control">
+                            <div class="horizontal-line"></div>
+                        </div>
+
+                        <div class="title-control">
+                            <h2>VALOR TOTAL DO ORÇAMENTO</h2>
+                        </div>
+
+                        <div class="horizontal-line-control">
+                            <div class="horizontal-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="total-budget-prod-content-container">
+                        <div class="total-of-parts-display-control">
+                            <h3>VALOR TOTAL DAS PEÇAS APLICADAS</h3>
+                            <span class="total-of-parts-display-span">R$ 0,00</span>
+                        </div>
+                        <div class="total-of-services-display-control">
+                            <h3>VALOR TOTAL DOS SERVIÇOS EXECUTADOS</h3>
+                            <span class="total-of-services-display-span">R$ 0,00</span>
+                        </div>
+                        <div class="total-of-budget-display-control">
+                            <h3>VALOR TOTAL DO ORÇAMENTO</h3>
+                            <span class="total-of-budget-display-span">R$ 0,00</span>
+                        </div>                        
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="observations-section">
+
+            <div class="container">
+
+                <div class="observations-container">
+
+                    <div class="observations-title-container">
+
+                        <div class="horizontal-line-control">
+                            <div class="horizontal-line"></div>
+                        </div>
+
+                        <div class="title-control">
+                            <h2>OBSERVAÇÕES GERAIS</h2>
+                        </div>
+
+                        <div class="horizontal-line-control">
+                            <div class="horizontal-line"></div>
+                        </div>
+                    </div>
+
+                    <div class="observations-textarea-container">
+
+                        <div class="textarea-control">
+                            <textarea name="observations-textarea" id="observations-textarea" placeholder="DIGITE AQUI OBSERVAÇÕES GERAIS SE NECESSÁRIO..."></textarea>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="generate-budget-section">
+
+            <div class="container">
+
+                <div class="generate-budget-control">
+
+                    <button id="generate-budget-btn"><i class="fa-solid fa-file-circle-plus"></i> GERAR ORÇAMENTO</button>
+
+                </div>
+
+            </div>
+
+        </section>
+        
+    </div><!--budget-production-->
+
+    <div id="budget-finished">
+
+        <div class="budget-finished-content-container">
+            
+            <section class="clients-equipaments-header">
+
+                <div class="clients-equipaments-header-container">
+
+                    <div class="header-logo-container">
+                        <img src="https://nicholas1front.github.io/emeg_system/assets/images/emeg_symbol_white.png"/>
+                        <h3>ORÇAMENTO 
+                            <span id="budget-number-span"></span>
+                            <span id="budget-year-span"></span>
+                        </h3>
+                    </div>
+
+                    <div class="header-title-container">
+
+                        <h3>INFORMAÇÕES GERAIS</h3>
+                        
+                        <div class="line-control">
+                            <div class="line"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="budget-data-informations-container">
+                        <div class="client-and-equipament-container">
+                            <div class="client-and-equipament-control">
+                                <h4><i class="fa-solid fa-user-tie"></i>CLIENTE</h4>
+                                <span id="client-span-result"></span>
+                            </div>
+
+                            <div class="client-and-equipament-control">
+                                <h4><i class="fa-solid fa-truck"></i>EQUIPAMENTO</h4>
+                                <span id="equipament-span-result"></span>
+                            </div>
+                        </div>
+                        
+                        <div class="other-budget-informations-container">
+                            <div class="other-budget-informations-control">
+                                <h4><i class="fa-solid fa-coins"></i>COND. PAGAMENTO</h4>
+                                <span id="payment-terms-span-result"></span>
+                            </div>
+
+                            <div class="other-budget-informations-control">
+                                <h4><i class="fa-solid fa-stopwatch"></i>PRAZO ESTIMADO</h4>
+                                <span id="completion-deadline-span-result"></span>
+                            </div>
+
+                            <div class="other-budget-informations-control">
+                                <h4><i class="fa-solid fa-award"></i>GARANTIA</h4>
+                                <span id="guarantee-span-result"></span>
+                            </div>
+
+                            <div class="other-budget-informations-control">
+                                <h4><i class="fa-solid fa-calendar-days"></i>DATA DE ENTRADA</h4>
+                                <span id="date-span-result"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="items-added-section">
+                <div class="title-container">
+                    <h3>PEÇAS E SERVIÇOS</h3>
+                    <div class="line-control">
+                        <div class="line"></div>
+                    </div>
+                </div>
+
+                <div class="items-label-container">
+                    <h3 class="description-h3_item-added-label">DESCRIÇÃO</h3>
+                    <h3>QUANT.</h3>
+                    <h3>TIPO</h3>
+                    <h3>V.UNIT</h3>
+                    <h3>V.TOTAL</h3>
+                </div>
+
+                <div class="items-added-container">
+                    <span class="no-items-added-span">NENHUMA PEÇA OU SERVIÇO ADICIONADO AO ORÇAMENTO</span>
+                </div>
+
+                <div class="items-added-bottom"></div>
+            </section>
+
+            <section class="total-budget-section">
+
+                <div class="total-budget-container">
+
+                    <div class="total-budget-title-container">
+
+                        <div class="line-control">
+                            <div class="line"></div>
+                        </div>
+
+                        <h3>TOTAL DE CUSTOS</h3>
+
+                        <div class="line-control">
+                            <div class="line"></div>
+                        </div>
+                    </div>
+
+                    <div class="total-budget-content-container">
+                        <div class="total-of-parts-control">
+                            <h4>VALOR TOTAL DAS PEÇAS APLICADAS</h4>
+                            <span class="total-of-parts-span"></span>
+                        </div>
+                        <div class="total-of-services-control">
+                            <h4>VALOR TOTAL DOS SERVIÇOS EXECUTADOS</h4>
+                            <span class="total-of-services-span"></span>
+                        </div>
+                        <div class="total-of-budget-control">
+                            <h4>VALOR TOTAL DO ORÇAMENTO</h4>
+                            <span class="total-of-budget-span"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="observations-made-section">
+
+                <div class="observations-made-container">
+
+                    <div class="observations-made-title-container">
+
+                        <h3>OBSERVAÇÕES</h3>
+
+                        <div class="line-control">
+                            <div class="line"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="observations-made-content-container">
+                        
+                        <span class="observations-made-span">
+                            
+                        </span>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+
+        <div class="document-border-division">
+            
+            <div class="border-line"></div>
+
+        </div>
+
+        <div class="save-document-container">
+            <button id="save-document-html-btn"><i class="fa-solid fa-file-code"></i>SALVAR EM HTML</button>
+            <button id="save-document-pdf-btn"><i class="fa-solid fa-file-pdf"></i>SALVAR EM PDF</button>
+        </div>
+
+        <div class="back-budget-container">
+            <button id="back-budget-btn"><i class="fa-solid fa-house"></i> VOLTAR PARA EDIÇÃO DO ORÇAMENTO</button>
+        </div>
+    </div>
+
+    <footer>
+        <h3>© EMEG Guindaste - Todos os Direitos Reservados. v.4.0.0</h3>
+    </footer>
+
+    <script src="https://unpkg.com/currency.js@~2.0.0/dist/currency.min.js"></script>
+    <script src="C:\Program Files (x86)/emeg_system/v.4.5.0/apps/budget_plataform/scripts/script.js"></script>
+</body>
+</html>
