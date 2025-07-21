@@ -223,13 +223,6 @@
     margin: 0 5px;
 }
 
-.items-added-section > .items-added-container > .item-added > .item-added-index-span{
-    font-size:13px;
-    position: absolute;
-    font-weight: 500;
-    margin-right:56%;
-}
-
 .items-added-section > .items-added-container > .item-added > .description-span_item-added{
     width:50%;
 }

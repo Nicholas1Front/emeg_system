@@ -173,7 +173,7 @@ async function hideHtmlElement([...elements]){
 
 // elements
 
-const allInputs = document.querySelectorAll("input");
+let allInputs = document.querySelectorAll("input");
 
 async function clearHtmlElement([...elements]){
     elements.forEach((element)=>{
@@ -183,6 +183,8 @@ async function clearHtmlElement([...elements]){
 
 // upperCase inputs
 async function upperCaseInputs() {
+    allInputs = document.querySelectorAll("input");
+
     allInputs.forEach((input)=>{
         input.addEventListener("input", ()=>{
             let start = input.selectionStart;
@@ -502,6 +504,7 @@ async function addItemProcess(){
         itemUnitValueInput_itemsInputContainer
     ]);
 
+    await upperCaseInputs();
     itemDescriptionInput.focus();
 }
 
@@ -913,11 +916,10 @@ async function addHeaderFinishedProcess(){
     document.querySelector("title").textContent = `ORÇAMENTO ${budgetNumberSpan.innerText}${budgetYearSpan.innerText} ${clientSpanResult.innerText} ${equipamentSpanResult.innerText}`;
 }
 
-async function createAddedItemHtml(index,description,quant,type,unitValue,totalValue){
+async function createAddedItemHtml(description,quant,type,unitValue,totalValue){
     const itemString = 
     `
         <div class="item-added">
-            <span class="item-added-index-span">${index}</span>
             <span class="description-span_item-added">${description}</span>
             <span class="quant-span_item-added">${quant}</span>
             <span class="type-span_item-added">${type}</span>
@@ -952,7 +954,6 @@ async function addItemsFinishedProcess(){
     }
 
     for(let i = 0; i < allItems.length; i++){
-        let itemIndex = i + 1;
         let itemDescription = allItems[i].querySelector(".item-description-input").value;
         let itemQuant = allItems[i].querySelector(".item-quant-input").value;
         let itemType = allItems[i].querySelector(".item-type-input").value;
@@ -960,7 +961,6 @@ async function addItemsFinishedProcess(){
         let itemTotalValue = allItems[i].querySelector(".item-total-value-span").innerText;
 
         await createAddedItemHtml(
-            itemIndex,
             itemDescription,
             itemQuant,
             itemType,
@@ -995,9 +995,9 @@ async function displayBudgetProcess(){
     totalOfServicesSpan.innerHTML = "";
     totalOfBudgetSpan.innerHTML = "";
 
-    totalOfPartsSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-parts-display-span");
-    totalOfServicesSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-services-display-span")
-    totalOfBudgetSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-budget-display-span")
+    totalOfPartsSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-parts-display-span").innerText;
+    totalOfServicesSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-services-display-span").innerText
+    totalOfBudgetSpan.innerHTML = totalBudgetProdSection.querySelector(".total-of-budget-display-span").innerText
 
     await addObservationsFinishedProcess();
 }
@@ -1014,20 +1014,7 @@ function saveAsHtml(){
 
 function backHomeProcess(){
     clientInput.value = clientSpanResult.innerText;
-
-    if(clientSpanResult.innerText === "(NÃO IDENTIFICADO)"){
-        showHtmlElement([notIdentifiedInput], "block");
-        hideHtmlElement([equipamentInput]);
-
-        notIdentifiedInput.value = equipamentSpanResult.innerText;
-    }
-
-    if(clientSpanResult.innerText !== "(NÃO IDENTIFICADO)"){
-        showHtmlElement([equipamentInput], "block");
-        hideHtmlElement([notIdentifiedInput]);
-
-        equipamentInput.value  = equipamentSpanResult.innerText
-    }
+    equipamentInput.value  = equipamentSpanResult.innerText;
 
     paymentTermsInput.value = paymentTermsSpanResult.innerText;
     completionDeadlineInput.value = completionDeadlineSpanResult.innerText;
