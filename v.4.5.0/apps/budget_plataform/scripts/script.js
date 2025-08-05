@@ -1038,6 +1038,18 @@ function backHomeProcess(){
         guaranteeInput.value = "";
     }
 
+    let allItemsAdded = itemsAddedContainer.querySelectorAll(".item-added");
+
+    let allItemsProduction = itemControl.querySelectorAll(".item");
+
+    for(let i = 0; i < allItemsAdded.length; i++){
+
+        allItemsProduction[i].querySelector('.item-description-input').value = allItemsAdded[i].querySelector(".description-span_item-added").innerHTML;
+        allItemsProduction[i].querySelector('.item-quant-input').value = allItemsAdded[i].querySelector(".quant-span_item-added").innerHTML;    
+        allItemsProduction[i].querySelector('.item-type-input').value = allItemsAdded[i].querySelector(".type-span_item-added").innerHTML;
+        allItemsProduction[i].querySelector('.item-unit-value-input').value = allItemsAdded[i].querySelector(".unit-value-span_item-added").innerHTML;
+    }
+
     showHtmlElement([budgetProduction],"block");
     hideHtmlElement([budgetFinished]);
     document.querySelector("title").textContent = "Criar orçamento EMEG";
