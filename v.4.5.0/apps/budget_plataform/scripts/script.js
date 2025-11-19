@@ -495,7 +495,6 @@ async function addItemProcess(){
 
     await handleAllItemInputs();
     await sumTotalOfItens();
-    await handleDeleteItemButton();
 
     await clearInputs([
         itemDescriptionInput_itemsInputContainer,
@@ -572,37 +571,6 @@ async function handleAllItemInputs(){
     }
 }
 
-async function handleDeleteItemButton(){
-    let allDeleteItemBtns = itemControl.querySelectorAll(".delete-item-btn");
-
-    for(let i=0; i < allDeleteItemBtns.length; i++){
-        let actualBtn = allDeleteItemBtns[i];
-        let cloneBtn = actualBtn.cloneNode(true);
-
-        actualBtn.parentNode.replaceChild(cloneBtn, actualBtn);
-    }
-
-    let allItems = itemControl.querySelectorAll(".item");
-    allDeleteItemBtns = itemControl.querySelectorAll(".delete-item-btn");
-
-    console.log(allDeleteItemBtns)
-
-    for(let i = 0;i < allDeleteItemBtns.length; i++){
-        allDeleteItemBtns[i].addEventListener("click", async()=>{
-            allItems[i].remove();
-            await handleAllItemInputs();
-
-            allItems = itemControl.querySelectorAll(".item");
-
-            if(allItems.length === 0){
-                await showHtmlElement([noContentSpan], "block");
-            }
-
-            await sumTotalOfItens();
-        })
-    }
-}
-
 async function sumTotalOfItens(){
     let allItems = itemControl.querySelectorAll(".item");
     let totalOfPartsValue = 0;
@@ -644,7 +612,6 @@ setTimeout(async()=>{
 
     if(allItems.length > 0){
         await handleAllItemInputs();
-        await handleDeleteItemButton();
     }
 },300);
 
@@ -668,6 +635,27 @@ itemUnitValueInput_itemsInputContainer.addEventListener("keydown", async(event)=
 addItemBtn.addEventListener("click", async()=>{
     await addItemProcess();
 })
+
+itemControl.addEventListener("click", async(event)=>{
+    let btn = event.target.closest(".delete-item-btn");
+
+    if(!btn) return;
+
+    let itemToDelete = btn.closest(".item");
+    if(!itemToDelete) return;
+
+    itemToDelete.remove();
+    
+    await handleAllItemInputs();
+
+    const allItems = itemControl.querySelectorAll(".item");
+
+    if(allItems.length === 0){
+        await showHtmlElement([noContentSpan], "block");
+    }
+
+    await sumTotalOfItens();
+});
 
 // observations-section
 
