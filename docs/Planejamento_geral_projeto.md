@@ -19,13 +19,13 @@ Tecnologias base (definidas até agora):
 
 ### Checklist
 
-* [ ] Definir escopo do **core (MVP)**
-* [ ] Definir stack final (libs, ORM, padrões)
-* [ ] Criar repositório (Git)
-* [ ] Definir convenções de código
-* [ ] Estruturar pastas do backend
-* [ ] Estruturar pastas do frontend
-* [ ] Definir fluxo básico de ambientes (dev / prod)
+* [X] Definir escopo do **core (MVP)**
+* [X] Definir stack final (libs, ORM, padrões)
+* [X] Criar repositório (Git)
+* [] Definir convenções de código
+* [] Estruturar pastas do backend
+* [] Estruturar pastas do frontend
+* [] Definir fluxo básico de ambientes (dev / prod)
 
 ### Decisões técnicas
 
