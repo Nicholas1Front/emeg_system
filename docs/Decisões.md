@@ -60,3 +60,33 @@ O que isso impacta no projeto.
 - O sistema atual passa a ser tratado como legado e será gradualmente descontinuado.
 - O projeto exigirá maior rigor com segurança, organização e tratamento de dados.
 - A arquitetura adotada facilita expansão futura (IA, financeiro, RH).
+
+## 09/01/2025 – Estrutura modular das rotas (routes) e padronização de nomenclatura
+
+### Decisão:
+- Utilizar pasta "/routes" para modular todas rotas e indexar em "/routes/index.js"
+- Padronizar nomenclatura de arquivos (camel case pra frontend e underline case para backend)
+
+### Motivo:
+- Evitar futuro retrabalho e confusão quanto as diversas rotas que serão geradas
+- Evitar erros de caminho de arquivos tanto para o backend quanto para o frontend
+
+### Consequência:
+- Exigir um pouco de atenção ao nomear arquivos importantes
+- Atenção para sempre indexar as novas rotas em "routes/index.js"
+
+## 2026-01-09 – Separação entre módulos de negócio e infraestrutura
+
+### Decisão:
+- Utilizar `/modules` apenas para domínios de negócio.
+- Manter `routes`, `middlewares`, `config`, `database` e `utils` fora de `/modules`.
+
+### Motivo:
+- Clareza de responsabilidades.
+- Facilitar manutenção e crescimento do projeto.
+- Evitar acoplamento entre infraestrutura e regras de negócio.
+
+### Consequência:
+- Estrutura mais organizada desde o início.
+- Menos retrabalho conforme o projeto cresce.
+

@@ -6,45 +6,48 @@ Este documento define a **estrutura base do repositório**, bem como as **tecnol
 
 ## 📁 Estrutura de Pastas (Visão Geral)
 
-```txt
-projeto/
-├── backend/
-│   ├── src/
-│   │   ├── app.js
-│   │   ├── server.js
-│   │   ├── config/
-│   │   ├── database/
-│   │   ├── modules/
-│   │   ├── middlewares/
-│   │   ├── utils/
-│   │   └── routes.js
-│   │
-│   ├── package.json
-│   ├── .env
-│   └── README.md
-│
-├── frontend/
-│   ├── src/
-│   │   ├── api/
-│   │   ├── components/
-│   │   ├── pages/
-│   │   ├── layouts/
-│   │   ├── hooks/
-│   │   ├── services/
-│   │   ├── utils/
-│   │   └── App.jsx
-│   │
-│   ├── package.json
-│   └── README.md
-│
-├── docs/
-│   ├── PLANEJAMENTO_GERAL.md
-│   ├── DECISIONS.md
-│   ├── ESTRUTURA_GERAL.md
-│   └── README.md
-│
-└── README.md
 ```
+backend/
+    src/
+        config/
+        controllers/
+        database/
+        middlewares/
+        modules/
+            auth/
+            budgets/
+            clients/
+            equipaments/
+            worker_orders
+        routes/
+            index.js
+        services/
+        utils/
+        app.js
+        server.js
+    backend_README.md
+    package-lock.json
+    package.json
+frontend/
+    src/
+        api/
+        components/
+        pages/
+        layouts/
+        hooks/
+        services/
+        utils/
+        App.jsx
+    package.json
+    frontend_README.md
+docs/
+    Estrutura_geral_projeto.md
+    Planejamento_geral_projeto.md
+    Decisões.md
+
+
+```
+
 
 ---
 
@@ -54,6 +57,9 @@ projeto/
 * `docs` é a **fonte da verdade** do projeto
 * Cada módulo do backend deve ser **autônomo**
 * Services são obrigatórios (controller nunca fala direto com banco)
+* Nomenclatura de arquivos e pastas
+    - Para o backend será o underline case : auth_routes.js
+    - Para o frontend será o camel case : headerComponent.jsx
 
 ---
 
