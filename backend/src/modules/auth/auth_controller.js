@@ -1,5 +1,5 @@
 const authService = require('./auth_service');
-const { loginSchema } = require('./auth.schema');
+const { loginSchema } = require('./auth_schema');
 
 class AuthController{
     async login(req, res){

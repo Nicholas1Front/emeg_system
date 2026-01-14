@@ -1,14 +1,13 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const prisma = require('../../database/prisma');
 
 class AuthService {
     async login({email, password}){
         // Temporário para testes
-        const user = {
-            id : 1,
-            email : "admin@gmail.com",
-            passwordHash : await bcrypt.hash("123456", 10) 
-        }
+        const user = await prisma.user.findUnique({
+            where : {email}
+        })
 
         if(user.email !== email){
             throw new Error("Invalid email")
@@ -20,13 +19,19 @@ class AuthService {
             throw new Error("Invalid password")
         }
 
-        const token = jwt.sign(
-            {sub : user.id},
-            process.env.JWT_SECRET,
-            {expiresIn : '1d'}
-        )
+        const response = {
+            token : jwt.sign(
+                {sub : user.id},
+                {role : user.role},
+                process.env.JWT_SECRET,
+                {expiresIn : '1d'}
+            ),
+            name : user.name,
+            email : user.email,
+            role : user.role
+        }
 
-        return {token};
+        return {response};
     }
 }
 

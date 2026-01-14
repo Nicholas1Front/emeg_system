@@ -13,14 +13,19 @@ backend/
         controllers/
         database/
         middlewares/
+            auth_middleware.js
         modules/
             auth/
+                auth_controller.js
+                auth_service.js
+                auth_schema.js
             budgets/
             clients/
             equipaments/
             worker_orders
         routes/
             index.js
+            auth_routes.js
         services/
         utils/
         app.js
@@ -48,6 +53,8 @@ docs/
 
 ```
 
+- 
+
 
 ---
 
@@ -60,7 +67,7 @@ docs/
 * Nomenclatura de arquivos e pastas
     - Para o backend será o underline case : auth_routes.js
     - Para o frontend será o camel case : headerComponent.jsx
-
+* Nunca editar diretamente no banco sempre fazer pelo Knex
 ---
 
 ## ☁️ Infraestrutura / Cloud (Decisão Inicial)
@@ -99,7 +106,7 @@ docs/
 ### Banco de Dados
 
 * PostgreSQL
-* ORM: **Prisma** (decisão recomendada)
+* ORM: **Knex**
 
 ### Autenticação
 

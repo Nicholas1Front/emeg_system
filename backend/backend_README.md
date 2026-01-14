@@ -15,21 +15,24 @@ Backend responsável por toda a regra de negócio do sistema:
 - Node.js
 - Express
 - PostgreSQL
-- Prisma ORM
+- Knex ORM
 - JWT para autenticação
 - Zod para validação
 
 
-## Estrutura
+## Estrutura e regras importantes
 - `src/modules` → módulos de negócio
 - `src/services` → regras e validações
 - `src/controllers` → entrada das requisições
+- `src/repository` → manipulação do banco de dados
+- `src/schema` → validação dos campos via zod
+- `src/routes` → rotas/endpoints
+___
 
-
-## Regras Importantes
 - Controllers não acessam o banco diretamente
-- Toda escrita no banco passa por Services
+- Quando aplicável, toda escrita deve ser feita pelo repository. Caso contrário pelo service
 - IA nunca escreve diretamente no banco
+- /Modules servem para agrupar dominios tais como /users, /auth, /budgets e etc...
 
 
 ## Execução (dev)
@@ -43,3 +46,11 @@ npm run dev
 
 ## Observações
 - Backend tem que ser desenvolvido para sempre ser escalável. Este projeto terá updates no futuro
+
+## Alguns comandos úteis
+
+### Para criar uma migration
+
+```
+npx knex migrate:latest_addition
+```

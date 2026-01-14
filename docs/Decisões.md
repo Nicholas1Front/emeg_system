@@ -75,7 +75,7 @@ O que isso impacta no projeto.
 - Exigir um pouco de atenção ao nomear arquivos importantes
 - Atenção para sempre indexar as novas rotas em "routes/index.js"
 
-## 2026-01-09 – Separação entre módulos de negócio e infraestrutura
+## 09/01/2026 – Separação entre módulos de negócio e infraestrutura
 
 ### Decisão:
 - Utilizar `/modules` apenas para domínios de negócio.
@@ -90,3 +90,45 @@ O que isso impacta no projeto.
 - Estrutura mais organizada desde o início.
 - Menos retrabalho conforme o projeto cresce.
 
+## 12/01/2026 – Mudança na estrutura de users
+
+### Decisão:
+- Criar endpoints e lógica para criação, edição e exclusão de usuários
+
+### Motivo:
+- Facilitar o acesso e manipulação do sistema
+- Promover organização ao titular qualquer ação no sistema :
+    * Exemplo : Usuário com ID @ criou este orçamentou ou fez esta anotação
+
+### Consequência:
+- Um esforço um pouco maior na construção do service, controller e schema
+- Maior organização desde o principio da aplicação visando sempre apontar os users
+
+## 13/01/2026 – Uso do Prisma como ORM
+
+### Decisão:
+- Usar Prisma para estruturar o banco de dados fazendo uso dos Models e migrations
+
+### Motivo:
+- Promover segurança nos dados do database ao fazer mudanças estruturais
+- Para localizar mais facilmente o histórico de migrations no banco
+
+### Consequência:
+- Sempre ao fazer migrations nomear corretamente
+- Estruturar corretamente schema.prisma
+
+## 14/01/2026 – Mudança da ORM de Prisma para Knex
+
+### Decisão:
+- Migrar do Prisma para Knex
+- Terminar localmente auth e users e subir para VPS
+
+### Motivo:
+- Prisma estava dando uma série de erros (na versão do Node, Typescript para commonJs e etc)
+- Knex mais didático, simples e tem menos abstração de dados
+- Subir logo após auth e users para se habituar logo ao ambiente de produção e a cenários reais
+
+### Consequência:
+- Continuar a estruturar e a fazer migrations ou qualquer outra alteração no banco de modo correto e organizado
+- Ficar atento ao uso de repository.js (serão necessários a partir de hoje)
+- Achar a melhor VPS tanto para desenvolvimento quanto para produção (que seja estável, escalavel, didáticae simples)

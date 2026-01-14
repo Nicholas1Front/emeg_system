@@ -23,9 +23,9 @@ Tecnologias base (definidas até agora):
 * [X] Definir stack final (libs, ORM, padrões)
 * [X] Criar repositório (Git)
 * [X] Definir convenções de código
-* [...] Estruturar pastas do backend
-* [] Estruturar pastas do frontend
-* [] Definir fluxo básico de ambientes (dev / prod)
+* [X] Estruturar pastas do backend
+* [X] Estruturar pastas do frontend
+* [X] Definir fluxo básico de ambientes (dev / prod)
 
 ### Decisões técnicas
 
@@ -41,14 +41,15 @@ Tecnologias base (definidas até agora):
 
 ### Funcionalidades
 
-* Login
+* Login, Adição, exclusão e edição de users
 * Geração de JWT
 * Proteção de rotas
 * Controle simples de roles
 
 ### Checklist
 
-* [ ] Model de usuários
+* [X] Install prisma e config do model para users
+* [...] Model de usuários
 * [ ] Hash de senha
 * [ ] Login
 * [ ] Middleware JWT
