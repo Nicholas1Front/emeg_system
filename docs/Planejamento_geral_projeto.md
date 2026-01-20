@@ -51,10 +51,10 @@ Tecnologias base (definidas até agora):
 * [X] Install prisma e config do model para users
 * [X] Model de usuários
 * [X] Hash de senha
-* [...] Login, register, delete, update(to admin e user data), find
+* [X] Login, register, delete, update(to admin e user data), find
 * [X] Middleware JWT
-* [ ] Refresh token (opcional)
-* [ ] Testes básicos
+* [Não executado] Refresh token (opcional)
+* [X] Testes básicos
 
 ---
 
