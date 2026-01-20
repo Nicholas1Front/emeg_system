@@ -8,10 +8,15 @@ Este documento define a **estrutura base do repositório**, bem como as **tecnol
 
 ```
 backend/
+    docs/
+        backend_README.md
     src/
         config/
         controllers/
         database/
+            migrations/
+                ...
+            knex.js
         middlewares/
             auth_middleware.js
         modules/
@@ -19,10 +24,8 @@ backend/
                 auth_controller.js
                 auth_service.js
                 auth_schema.js
-            budgets/
-            clients/
-            equipaments/
-            worker_orders
+            users/
+                developing...
         routes/
             index.js
             auth_routes.js
@@ -30,10 +33,14 @@ backend/
         utils/
         app.js
         server.js
-    backend_README.md
+    .env
+    .gitignore
+    knexfile.js
     package-lock.json
     package.json
 frontend/
+    docs/    
+        frontend_README.md
     src/
         api/
         components/
@@ -44,7 +51,6 @@ frontend/
         utils/
         App.jsx
     package.json
-    frontend_README.md
 docs/
     Estrutura_geral_projeto.md
     Planejamento_geral_projeto.md

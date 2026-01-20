@@ -1,37 +1,51 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const prisma = require('../../database/prisma');
+const AuthRepository = require('./auth_repository');
 
 class AuthService {
     async login({email, password}){
         // Temporário para testes
-        const user = await prisma.user.findUnique({
-            where : {email}
-        })
+        const user = await AuthRepository.findByEmail(email);
 
-        if(user.email !== email){
-            throw new Error("Invalid email")
+        if(!user){
+            throw new Error("User not found")
         }
 
-        const passwordMatch = await bcrypt.compare(password, user.passwordHash);
+        const passwordMatch = await bcrypt.compare(password, user.password_hash);
 
         if(!passwordMatch){
             throw new Error("Invalid password")
         }
 
-        const response = {
-            token : jwt.sign(
-                {sub : user.id},
-                {role : user.role},
-                process.env.JWT_SECRET,
-                {expiresIn : '1d'}
-            ),
+        const token = jwt.sign({
+            sub : user.id,
+            role : user.role
+        }, 
+        process.env.JWT_SECRET,
+        {
+            expiresIn : '1d'
+        })
+
+        return {
+            token,
+            name : user.name,
+            email : user.email,
+            role : user.role
+        };
+    }
+    async me(userId){
+        const user = await AuthRepository.findById(userId);
+
+        if(!user){
+            throw new Error("User not found");
+        }
+
+        return {
+            id : user.id,
             name : user.name,
             email : user.email,
             role : user.role
         }
-
-        return {response};
     }
 }
 

@@ -35,7 +35,7 @@ Tecnologias base (definidas até agora):
 
 ---
 
-## 2️⃣ Core – Autenticação
+## 2️⃣ Core – Autenticação e Users
 
 ⏱️ Estimativa: 3 a 4 dias
 
@@ -49,10 +49,10 @@ Tecnologias base (definidas até agora):
 ### Checklist
 
 * [X] Install prisma e config do model para users
-* [...] Model de usuários
-* [ ] Hash de senha
-* [ ] Login
-* [ ] Middleware JWT
+* [X] Model de usuários
+* [X] Hash de senha
+* [...] Login, register, delete, update(to admin e user data), find
+* [X] Middleware JWT
 * [ ] Refresh token (opcional)
 * [ ] Testes básicos
 
