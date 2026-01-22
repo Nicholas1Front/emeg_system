@@ -9,11 +9,14 @@ Tecnologias base (definidas até agora):
 * **Banco de dados:** PostgreSQL
 * **Arquitetura:** MVC / Services
 * **Autenticação:** JWT
-* **Infra:** Cloud (VPS)
+* **Infra:** 
+    - Neon para database
+    - Render para web service
+    - Na fase de desenvolvimento serão essas duas VPS o que pode vir a mudar quando subir para produção !
 
 ---
 
-## 1️⃣ Fase 0 – Preparação do Projeto (Fundação)
+## Preparação do Projeto (Fundação) [X]
 
 ⏱️ Estimativa: 3 a 5 dias
 
@@ -35,7 +38,7 @@ Tecnologias base (definidas até agora):
 
 ---
 
-## 2️⃣ Core – Autenticação e Users
+## Autenticação e Users [X]
 
 ⏱️ Estimativa: 3 a 4 dias
 
@@ -55,10 +58,31 @@ Tecnologias base (definidas até agora):
 * [X] Middleware JWT
 * [Não executado] Refresh token (opcional)
 * [X] Testes básicos
+---
+
+## VPS/Cloud - Database e Web service [...]
+
+⏱️ Estimativa: 1 a 2 dias
+
+### Objetivo
+
+Colocar o projeto para rodar na nuvem (tanto database , quanto webservice)
+
+### Funcionalidades
+
+* Persistir dados na Cloud
+* Ambiente p/ desenvolvimento e p/ produção
+
+### Checklist
+
+* [ ] Criar database no Neon
+* [ ] Criar webservice no Render
+* [ ] Conectar database no webservice
+* [ ] Testar conexão de ambos via endpoint
 
 ---
 
-## 3️⃣ Core – Anotações / Agenda Diária
+## Anotações / Agenda Diária [ Próximo a ser desenvolvido ]
 
 ⏱️ Estimativa: 4 a 6 dias
 
@@ -82,7 +106,7 @@ Substituir agenda física por sistema digital diário.
 
 ---
 
-## 4️⃣ Core – Clientes
+## Clientes []
 
 ⏱️ Estimativa: 4 a 6 dias
 
@@ -103,7 +127,7 @@ Substituir agenda física por sistema digital diário.
 
 ---
 
-## 5️⃣ Core – Equipamentos
+## Equipamentos []
 
 ⏱️ Estimativa: 3 a 5 dias
 
@@ -121,7 +145,7 @@ Substituir agenda física por sistema digital diário.
 
 ---
 
-## 6️⃣ Core – Tabela de Itens / Preços
+## Tabela de Itens / Preços []
 
 ⏱️ Estimativa: 3 a 4 dias
 
@@ -144,7 +168,7 @@ Base de referência para peças e serviços.
 
 ---
 
-## 7️⃣ Core – Orçamentos
+## Orçamentos
 
 ⏱️ Estimativa: 6 a 8 dias
 
@@ -164,7 +188,7 @@ Base de referência para peças e serviços.
 
 ---
 
-## 8️⃣ Core – Ordem de Serviço
+## Ordem de Serviço
 
 ⏱️ Estimativa: 6 a 8 dias
 
@@ -184,7 +208,7 @@ Base de referência para peças e serviços.
 
 ---
 
-## 9️⃣ Módulo de Relatórios e Laudos
+## Módulo de Relatórios e Laudos []
 
 ⏱️ Estimativa: 5 a 7 dias
 
@@ -202,7 +226,7 @@ Base de referência para peças e serviços.
 
 ---
 
-## 🔟 Módulo Financeiro
+## Módulo Financeiro []
 
 ⏱️ Estimativa: 7 a 10 dias
 
@@ -223,7 +247,7 @@ Base de referência para peças e serviços.
 
 ---
 
-## 1️⃣1️⃣ Módulo IA (Assistente)
+## Módulo IA (Assistente) []
 
 ⏱️ Estimativa: 6 a 10 dias
 
@@ -245,7 +269,7 @@ Base de referência para peças e serviços.
 
 ---
 
-## 1️⃣2️⃣ Módulo RH (Futuro)
+## Módulo RH (Futuro) []
 
 ⏱️ Estimativa: a definir
 
@@ -257,21 +281,7 @@ Base de referência para peças e serviços.
 * Faltas
 * Bonificações
 
----
-
-## 1️⃣3️⃣ Infraestrutura e Segurança
-
-⏱️ Contínuo
-
-### Checklist
-
-* [ ] VPS
-* [ ] Backup automático
-* [ ] Logs
-* [ ] HTTPS
-* [ ] Controle de acesso
-
----
+___
 
 ## 📌 Observações finais
 

@@ -132,3 +132,22 @@ O que isso impacta no projeto.
 - Continuar a estruturar e a fazer migrations ou qualquer outra alteração no banco de modo correto e organizado
 - Ficar atento ao uso de repository.js (serão necessários a partir de hoje)
 - Achar a melhor VPS tanto para desenvolvimento quanto para produção (que seja estável, escalavel, didáticae simples)
+
+## 21/01/2026 – Neon como database e Render como webservice
+
+### Decisão:
+- Subir projeto para as VPS's especifícas
+- Neon como storage/database
+- Render como webservice/server
+- **Serão usadas no desenvolvimento e em produção**
+
+### Motivo:
+- Neon para database e Render para server funcionam muito bem no free tier (ótimo para desenvolvimento)
+- Gastos de usage em ambos são fixos e/ou bem calculados (não ultrapassam muito no per usage)
+- Separar responsabilidades irá facilitar na manutenção , upgrade e upscaling 
+- Dados sensíveis e secretos são processados com maior segurança pelos servidores dos detentores das VPS's
+
+### Consequência:
+- Enfrentar cenários reais de tempo de resposta, spin down, limits per usage e etc
+- Melhor dimensão de uso dos dados (armazenamento e tempo de resposta)
+- Atenção com dados sensíveis (.env por exemplo)
