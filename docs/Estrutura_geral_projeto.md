@@ -16,28 +16,28 @@ backend/
         database/
             migrations/
                 ...
+            scripts/
             knex.js
         middlewares/
-            auth_middleware.js
+            auth_middleware.js ✅
+            admin_middleware.js ✅
         modules/
-            auth/
-                auth_controller.js
-                auth_service.js
-                auth_schema.js
-            users/
-                developing...
+            auth/✅
+            users/✅
+            notes/ ⚒️
         routes/
             index.js
-            auth_routes.js
+            auth_routes.js ✅
+            users_routes.js ✅
         services/
         utils/
         app.js
         server.js
     .env
     .gitignore
-    knexfile.js
-    package-lock.json
-    package.json
+    knexfile.js ✅
+    package-lock.json ✅
+    package.json ✅
 frontend/
     docs/    
         frontend_README.md
@@ -80,18 +80,11 @@ docs/
 
 ### Recomendação principal: **VPS tradicional**
 
-**Provedores indicados:**
+**Provedores escolhidos:**
 
-* Hetzner (melhor custo-benefício)
-* DigitalOcean (mais simples)
-* Vultr (alternativa sólida)
-
-### Stack na VPS
-
-* Ubuntu LTS
-* Node.js (LTS)
-* PostgreSQL
-* Nginx (reverse proxy)
+* Render (webservice)
+* Neon (database)
+* Cloudflare (storage)
 
 ### Motivos da escolha
 
@@ -131,7 +124,7 @@ docs/
 
 ### Uploads / Arquivos (futuro)
 
-* multer
+* Cloudflare
 
 ### PDF / Relatórios (futuro)
 

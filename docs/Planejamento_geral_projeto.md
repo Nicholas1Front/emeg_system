@@ -16,19 +16,19 @@ Tecnologias base (definidas até agora):
 
 ---
 
-## Preparação do Projeto (Fundação) [X]
+## Preparação do Projeto (Fundação) [✅]
 
 ⏱️ Estimativa: 3 a 5 dias
 
 ### Checklist
 
-* [X] Definir escopo do **core (MVP)**
-* [X] Definir stack final (libs, ORM, padrões)
-* [X] Criar repositório (Git)
-* [X] Definir convenções de código
-* [X] Estruturar pastas do backend
-* [X] Estruturar pastas do frontend
-* [X] Definir fluxo básico de ambientes (dev / prod)
+* [✅] Definir escopo do **core (MVP)**
+* [✅] Definir stack final (libs, ORM, padrões)
+* [✅] Criar repositório (Git)
+* [✅] Definir convenções de código
+* [✅] Estruturar pastas do backend
+* [✅] Estruturar pastas do frontend
+* [✅] Definir fluxo básico de ambientes (dev / prod)
 
 ### Decisões técnicas
 
@@ -38,7 +38,7 @@ Tecnologias base (definidas até agora):
 
 ---
 
-## Autenticação e Users [X]
+## Autenticação e Users [✅]
 
 ⏱️ Estimativa: 3 a 4 dias
 
@@ -51,16 +51,16 @@ Tecnologias base (definidas até agora):
 
 ### Checklist
 
-* [X] Install prisma e config do model para users
-* [X] Model de usuários
-* [X] Hash de senha
-* [X] Login, register, delete, update(to admin e user data), find
-* [X] Middleware JWT
+* [✅] Install prisma e config do model para users
+* [✅] Model de usuários
+* [✅] Hash de senha
+* [✅] Login, register, delete, update(to admin e user data), find
+* [✅] Middleware JWT
 * [Não executado] Refresh token (opcional)
-* [X] Testes básicos
+* [✅] Testes básicos
 ---
 
-## VPS/Cloud - Database e Web service [...]
+## VPS/Cloud - Database e Web service [✅]
 
 ⏱️ Estimativa: 1 a 2 dias
 
@@ -82,7 +82,7 @@ Colocar o projeto para rodar na nuvem (tanto database , quanto webservice)
 
 ---
 
-## Anotações / Agenda Diária [ Próximo a ser desenvolvido ]
+## Anotações / Agenda Diária [...]
 
 ⏱️ Estimativa: 4 a 6 dias
 
@@ -94,7 +94,6 @@ Substituir agenda física por sistema digital diário.
 
 * Anotações por dia
 * Texto livre
-* Vinculação opcional com cliente, equipamento, orçamento ou OS
 
 ### Checklist
 
@@ -103,6 +102,32 @@ Substituir agenda física por sistema digital diário.
 * [ ] Filtro por data
 * [ ] Filtro por relação
 * [ ] Integração com autenticação
+
+---
+
+## Anexos / attachments []
+
+⏱️ Estimativa: 4 a 7 dias
+
+### Objetivo
+
+Criar modulo para armazenar anexos de maneira genérica (para todos os modulos), e também implementar um storage para esses mesmo anexos
+
+### Funcionalidades
+
+* Anexar arquivos (imagens, docs e etc...) que apontarão para features especifícas :
+    * Ordem de serviço
+    * Laudo técnico
+    * Relatório e outros
+* Filtrar informações (tamanho, tipo de arquivo, nome do arquivo e etc) e filtrar para onde aponta / a quem pertence (se pertence a uma ordem de serviço, laudo e etc...)
+
+### Checklist
+
+* [ ] Model de anexos
+* [ ] CRUD completo
+* [ ] Filtros de infos e apontamentos
+* [ ] Integração com storage
+* [ ] Teste unitários
 
 ---
 

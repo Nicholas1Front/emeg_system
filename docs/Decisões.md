@@ -151,3 +151,22 @@ O que isso impacta no projeto.
 - Enfrentar cenários reais de tempo de resposta, spin down, limits per usage e etc
 - Melhor dimensão de uso dos dados (armazenamento e tempo de resposta)
 - Atenção com dados sensíveis (.env por exemplo)
+
+## 26/01/2026 – Criar modulo de anexos de forma genérica
+
+### Decisão:
+- Criar modulo de anexos após modulo de anotações
+- Cloudflare para armazenar arquivos , database só aponta
+- Modulo de anexos é independente em suas funções porém anexo sempre é ligado a uma feature especifica
+
+### Motivo:
+- Com anexos sendo um modulo, poderão e serão reutilizados em todo o projeto e em todas features
+- Para poupar o banco de dados pesados (evitando backup e carregamento lento)
+- Evitar desorganização com "anexos soltos"
+- Organizar anexos sempre por feature (este grupo de anexos X pertence a feature Y)
+
+### Consequência:
+- Evitar refatoração e duplicação de código (um modulo só comanda todos os anexos)
+- Considerar fortemente Cloudflare como um novo custo
+- Assumir nova responsabilidade para implementar Cloudflare (storage) e database
+- Vigiar e observar sempre as regras de negócios para uma feature receber anexos (nunca aceitar anexos soltos)
