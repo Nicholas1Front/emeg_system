@@ -1,4 +1,3 @@
-const { th } = require('zod/v4/locales');
 const userRepository = require('./user_repository');
 const bcrypt = require('bcrypt');
 

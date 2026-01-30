@@ -170,3 +170,18 @@ O que isso impacta no projeto.
 - Considerar fortemente Cloudflare como um novo custo
 - Assumir nova responsabilidade para implementar Cloudflare (storage) e database
 - Vigiar e observar sempre as regras de negócios para uma feature receber anexos (nunca aceitar anexos soltos)
+
+## 30/01/2026 – Somente admin exclui notas / All users podem ver notas
+
+### Decisão:
+- Somente user com role de admin poderá excluir e editar todas as notas
+- user owner pode editar própria nota 
+- todos os users podem consultar todas as notas do sistema
+
+### Motivo:
+- Evitar exclusão por acidente por parte de user normal, sempre passa para o admin fazer a limpeza de notas (delete)
+- Anotações é algo utilizado por toda empresa então todos os users poderão consultar
+
+### Consequência:
+- Admin terá mais responsabilidades porém mais controle nas ações de exclusão e update
+- Anotações será um modulo comum a todos os usuários e reflitirá em todos os outros modulos
