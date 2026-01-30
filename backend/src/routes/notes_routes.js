@@ -31,3 +31,4 @@ router.delete(
     notesController.deleteNote
 )
 
+module.exports = router;
