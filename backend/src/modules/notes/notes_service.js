@@ -9,7 +9,7 @@ class NotesService{
     }){
 
         if(!title || title.length === 0){
-            title = new Date().toDateString();
+            title = new Date().toISOString().split('T')[0];
         };
 
         const note = await NotesRepository.create({
