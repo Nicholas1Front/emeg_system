@@ -8,9 +8,9 @@ class NotesService{
         date_reference
     }){
 
-        if(!title || title.length === 0){
-            title = new Date().toISOString().split('T')[0];
-        };
+        date_reference = date_reference.toISOString().split('T')[0];
+
+        title = `${title} - ${date_reference}`;
 
         const note = await NotesRepository.create({
             title,
