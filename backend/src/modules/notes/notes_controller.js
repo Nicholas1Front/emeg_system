@@ -50,7 +50,7 @@ class NotesController{
         catch(err){
             return res.status(400).json({
                 message : 'Error updating note',
-                error : err
+                error : err.message
             })
         }
     }

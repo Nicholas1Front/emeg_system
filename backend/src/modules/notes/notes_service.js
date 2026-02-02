@@ -42,10 +42,7 @@ class NotesService{
             throw new Error('Note not found');
         }
 
-        const isAdmin = requesterRole === 'admin';
-        const isOwner = note.creator_id === requesterId;
-
-        if(!isAdmin && !isOwner){
+        if(requesterRole !== 'admin' && note.creator_id !== requesterId){
             throw new Error('Unauthorized access');
         }
 
