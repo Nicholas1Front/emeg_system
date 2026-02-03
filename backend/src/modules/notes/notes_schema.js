@@ -16,8 +16,8 @@ const updateNoteSchema = z.object({
 )
 
 const findNoteSchema = z.object({
-    id : z.string().uuid().optional(),
-    creator_id : z.string().uuid().optional(),
+    id : z.coerce.number().int().positive().optional(),
+    creator_id : z.coerce.number().int().positive().optional(),
     date_reference_start : z.coerce.date().optional(),
     date_reference_end : z.coerce.date().optional()
 }).refine(

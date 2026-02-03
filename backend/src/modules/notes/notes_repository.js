@@ -55,6 +55,14 @@ class NotesRepository{
             query.whereBetween('date_reference', [date_reference_start, date_reference_end]);
         }
 
+        if(date_reference_start && !date_reference_end){
+            query.where('date_reference', '>=', date_reference_start);
+        }
+
+        if(!date_reference_start && date_reference_end){
+            query.where('date_reference', '<=', date_reference_end);
+        }
+
         return query.orderBy('date_reference', 'desc');
     }
 
