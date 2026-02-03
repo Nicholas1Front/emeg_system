@@ -44,7 +44,7 @@ class NotesService{
 
         const note = notes[0];
 
-        if(requesterRole !== 'admin' && note.creator_id !== requesterId){
+        if(requesterRole !== 'admin' && Number(note.creator_id) !== Number(requesterId)){
             throw new Error('Unauthorized access');
         }
 

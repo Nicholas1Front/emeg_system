@@ -20,7 +20,7 @@ function authMiddleware(req,res,next){
         )
 
         req.user = {
-            id : Number(decoded.sub),
+            id : decoded.sub,
             role : decoded.role
         }
 
