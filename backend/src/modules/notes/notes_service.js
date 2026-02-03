@@ -34,15 +34,15 @@ class NotesService{
         content,
         date_reference
     }){
-        const note = await NotesRepository.find({
+        const notes = await NotesRepository.find({
             id : noteId
         });
 
-        if(!note || note.length === 0){
+        if(!notes || notes.length === 0){
             throw new Error('Note not found');
         }
 
-        note = note[0];
+        const note = notes[0];
 
         if(requesterRole !== 'admin' && note.creator_id !== requesterId){
             throw new Error('Unauthorized access');
