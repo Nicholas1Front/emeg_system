@@ -36,7 +36,7 @@ class NotesController{
             const note = await notesService.updateNote({
                 requesterId : req.user.id,
                 requesterRole : req.user.role,
-                noteId : req.params.id,
+                noteId : req.query.id,
                 title : data.title,
                 content : data.content,
                 date_reference : data.date_reference

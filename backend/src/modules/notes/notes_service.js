@@ -38,9 +38,11 @@ class NotesService{
             id : noteId
         });
 
-        if(!note){
+        if(!note || note.length === 0){
             throw new Error('Note not found');
         }
+
+        note = note[0];
 
         if(requesterRole !== 'admin' && note.creator_id !== requesterId){
             throw new Error('Unauthorized access');
