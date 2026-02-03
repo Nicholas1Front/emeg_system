@@ -58,7 +58,7 @@ class NotesRepository{
         return query.orderBy('date_reference', 'desc');
     }
 
-    async delete(id){
+    async delete({id}){
         return await knex('notes').where({id}).delete();
     }
 }
