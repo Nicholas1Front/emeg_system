@@ -28,7 +28,8 @@ class NotesRepository{
         .update({
             title,
             content,
-            date_reference
+            date_reference,
+            update_at : knex.fn.now()
         })
         .returning('*');
 

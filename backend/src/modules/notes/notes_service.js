@@ -14,7 +14,11 @@ class NotesService{
 
         date_reference = date_reference.toISOString().split('T')[0];
 
-        title = `${title} - ${date_reference}`;
+        let date_Array = date_reference.split('-');
+
+        let date_formatted = `${date_Array[2]}/${date_Array[1]}/${date_Array[0]}`;
+
+        title = `${title} - ${date_formatted}`;
 
         const note = await NotesRepository.create({
             title,
