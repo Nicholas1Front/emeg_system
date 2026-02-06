@@ -75,14 +75,14 @@ Colocar o projeto para rodar na nuvem (tanto database , quanto webservice)
 
 ### Checklist
 
-* [ ] Criar database no Neon
-* [ ] Criar webservice no Render
-* [ ] Conectar database no webservice
-* [ ] Testar conexão de ambos via endpoint
+* [✅] Criar database no Neon
+* [✅] Criar webservice no Render
+* [✅] Conectar database no webservice
+* [✅] Testar conexão de ambos via endpoint
 
 ---
 
-## Anotações / Agenda Diária [...]
+## Anotações / Agenda Diária [✅]
 
 ⏱️ Estimativa: 4 a 6 dias
 
@@ -97,15 +97,15 @@ Substituir agenda física por sistema digital diário.
 
 ### Checklist
 
-* [ ] Model de notas
-* [ ] CRUD completo
-* [ ] Filtro por data
-* [ ] Filtro por relação
-* [ ] Integração com autenticação
+* [✅] Model de notas
+* [✅] CRUD completo
+* [✅] Filtro por data
+* [✅] Filtro por relação
+* [✅] Integração com autenticação
 
 ---
 
-## Anexos / attachments []
+## Anexos / attachments [...]
 
 ⏱️ Estimativa: 4 a 7 dias
 

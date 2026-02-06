@@ -44,23 +44,23 @@ class NotesRepository{
     }){
         const query = knex('notes');
 
-        if(id){
+        if(id !== undefined){
             query.where({id});
         }
 
-        if(creator_id){
+        if(creator_id !== undefined){
             query.where('creator_id', creator_id);
         }
 
-        if(date_reference_start && date_reference_end){
+        if(date_reference_start !== undefined && date_reference_end !== undefined){
             query.whereBetween('date_reference', [date_reference_start, date_reference_end]);
         }
 
-        if(date_reference_start && !date_reference_end){
+        if(date_reference_start !== undefined && date_reference_end === undefined){
             query.where('date_reference', '>=', date_reference_start);
         }
 
-        if(!date_reference_start && date_reference_end){
+        if(date_reference_start === undefined && date_reference_end !== undefined){
             query.where('date_reference', '<=', date_reference_end);
         }
 
