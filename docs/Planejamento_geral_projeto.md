@@ -123,7 +123,8 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 
 ### Checklist
 
-* [ ] Model de anexos
+* [✅] Configurar conta e ambiente Cloudflare
+* [...] Model de anexos
 * [ ] CRUD completo
 * [ ] Filtros de infos e apontamentos
 * [ ] Integração com storage
