@@ -1,10 +1,9 @@
-const {Router} = require('express');
+const { Router } = require('express');
 const multer = require('multer');
 
+const attachmentsController = require("../modules/attachments/attachments_controller");
 const authMiddleware = require("../middlewares/auth_middleware");
 const adminMiddleware = require("../middlewares/admin_middleware");
-
-const attachmentsController = require("../modules/attachments/attachments_controller");
 
 const router = Router();
 const upload = multer({
@@ -15,21 +14,21 @@ const upload = multer({
 })
 
 router.post(
-    "/create-attachment",
+    "/create",
     authMiddleware,
     upload.single('file'),
     attachmentsController.createAttachment
 )
 
 router.get(
-    "/delete-attachment/:id",
+    "/delete/:id",
     authMiddleware,
     adminMiddleware,
     attachmentsController.deleteAttachment
 )
 
 router.get(
-    "/get-attachment",
+    "/get",
     authMiddleware,
     attachmentsController.getAttachments
 )
