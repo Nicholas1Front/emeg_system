@@ -2,11 +2,7 @@ const {z} = require('zod');
 
 const createAttachmentSchema = z.object({
     entity_type : z.string().min(1),
-    entity_id : z.coerce.number().int().positive(),
-    original_name : z.string().min(1),
-    mime_type : z.string().min(1),
-    size : z.coerce.number().int().positive(),
-    created_by : z.coerce.number().int().positive()
+    entity_id : z.coerce.number().int().positive()
 });
 
 const findAttachmentSchema = z.object({

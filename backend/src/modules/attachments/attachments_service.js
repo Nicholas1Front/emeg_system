@@ -14,6 +14,10 @@ class AttachmentsService {
             throw new Error("No file provided");
         }
 
+        if(file.size <= 0){
+            throw new Error("File size must be greater than 0 bytes");
+        }
+
         if(file.size > max_file_size){
             throw new Error("File size exceeds the maximum allowed limit of 2GB");
         }
