@@ -15,7 +15,8 @@ class CloudflareR2Provider {
             credentials : {
                 accessKeyId : process.env.CLOUDFLARE_R2_ACCESS_KEY,
                 secretAccessKey : process.env.CLOUDFLARE_R2_SECRET_KEY
-            }
+            },
+            forcePathStyle : true
         })
 
         console.log("Endpoint:", process.env.CLOUDFLARE_R2_ENDPOINT_URL);
