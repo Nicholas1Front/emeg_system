@@ -23,20 +23,20 @@ class AttachmentsService {
         }
 
         const fileKey = CloudflareR2Provider.generateFileKey(
-            file.originalName,
+            file.originalname,
             entityType,
             entityId
         )
 
         const fileUrl = await CloudflareR2Provider.uploadFile({
             buffer : file.buffer,
-            mimeType : file.mimeType,
+            mimeType : file.mimetype,
             key : fileKey
         })
 
         const attachment = await attachmentRepository.create({
-            original_name : file.originalName,
-            mime_type : file.mimeType,
+            original_name : file.originalname,
+            mime_type : file.mimetype,
             size : file.size,
             url : fileUrl,
             storage_key : fileKey,
