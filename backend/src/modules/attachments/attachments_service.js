@@ -72,10 +72,6 @@ class AttachmentsService {
     async findAttachments(filters){
         const attachments = await attachmentRepository.find(filters);
 
-        if(attachments.length === 0 || !attachments){
-            throw new Error("No attachments found");
-        }
-
         return attachments;
     }
 }
