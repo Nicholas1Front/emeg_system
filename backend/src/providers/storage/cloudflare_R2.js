@@ -17,6 +17,10 @@ class CloudflareR2Provider {
                 secretAccessKey : process.env.CLOUDFLARE_R2_SECRET_KEY
             }
         })
+
+        console.log("Endpoint:", process.env.CLOUDFLARE_R2_ENDPOINT_URL);
+        console.log("Bucket:", process.env.CLOUDFLARE_R2_BUCKET);
+        console.log("AccessKey:", process.env.CLOUDFLARE_R2_ACCESS_KEY);
     }
 
     generateFileKey(originalName, entityType, entityId){
