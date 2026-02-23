@@ -11,7 +11,7 @@ class CloudflareR2Provider {
     constructor(){
         this.client = new S3Client({
             region: 'auto',
-            endpoint : process.env.CLOUDFLARE_R2_ENDPOINT,
+            endpoint : process.env.CLOUDFLARE_R2_ENDPOINT_URL,
             credentials : {
                 accessKeyId : process.env.CLOUDFLARE_R2_ACCESS_KEY,
                 secretAccessKey : process.env.CLOUDFLARE_R2_SECRET_KEY
