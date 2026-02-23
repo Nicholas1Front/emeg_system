@@ -20,7 +20,7 @@ router.post(
     attachmentsController.createAttachment
 )
 
-router.get(
+router.delete(
     "/delete/:id",
     authMiddleware,
     adminMiddleware,
