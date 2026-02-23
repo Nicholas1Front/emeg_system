@@ -32,7 +32,7 @@ class AttachmentsController{
         }catch(err){
             return res.status(400).json({
                 message : "Failed to upload attachment",
-                error : err.message
+                error : err
             })
         }
     }
