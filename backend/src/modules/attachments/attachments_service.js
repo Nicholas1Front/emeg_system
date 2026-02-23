@@ -69,7 +69,7 @@ class AttachmentsService {
         return { message : "Attachment deleted successfully" };
     }
 
-    async getAttachments(filters){
+    async findAttachments(filters){
         const attachments = await attachmentRepository.find(filters);
 
         if(attachments.length === 0 || !attachments){
