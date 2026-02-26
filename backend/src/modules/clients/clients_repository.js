@@ -89,7 +89,10 @@ class ClientsRepository{
         return query.orderBy('id', 'desc');
     }
 
-    async updateClient(id, data){
+    async updateClient({
+        id,
+        data
+    }){
         const client = await knex('clients')
             .where({ id })
             .update(data)
@@ -98,7 +101,10 @@ class ClientsRepository{
         return client[0];
     }
 
-    async updateContact(id, data){
+    async updateContact({
+        id,
+        data
+    }){
         const contact = await knex('clients_contacts')
             .where({ id })
             .update(data)

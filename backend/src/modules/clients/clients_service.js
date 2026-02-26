@@ -64,7 +64,7 @@ class ClientsService{
     async updateClient({
         requesterRole,
         targetClientId,
-        data
+        clientData
     }){
         if(requesterRole !== 'admin'){
             throw new Error('Only admins can update clients');
@@ -90,19 +90,28 @@ class ClientsService{
             throw new Error("Invalid document for PJ type");
         }
 
-        const updatedClient = await clientsRepository.updateClient(targetClientId, data);
+        const updatedClient = await clientsRepository.updateClient({
+            id : targetClientId,
+            data : clientData
+        });
 
         return updatedClient;
     }
 
-    async updateContact({targetContactId, data}){
+    async updateContact({
+        targetContactId,
+        contactData
+    }){
         const existingContact = await clientsRepository.findContacts({id : targetContactId});
 
         if(existingContact.length === 0){
             throw new Error('Contact not found');
         }
 
-        const updatedContact = await clientsRepository.updateContact(targetContactId, data);
+        const updatedContact = await clientsRepository.updateContact({
+            id : targetContactId,
+            data : contactData
+        });
 
         return updatedContact;
     }

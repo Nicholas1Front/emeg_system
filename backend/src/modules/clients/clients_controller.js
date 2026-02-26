@@ -7,7 +7,6 @@ const {
     findClientSchema,
     findContactSchema
 } = require("./clients_schema");
-const { raw } = require("../../database/knex");
 
 class ClientsController {
     async createClient(req, res){
@@ -23,7 +22,7 @@ class ClientsController {
         }catch(err){
             res.status(400).json({
                 message : "Failed to create client",
-                error : err
+                error : {err}
             })
         }
     }
@@ -40,7 +39,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to create contact",
-                error : err
+                error : {err}
             })
         }
     }
@@ -52,7 +51,7 @@ class ClientsController {
             const client = await clientsService.updateClient({
                 requesterRole : req.user.role,
                 targetClientId : req.params.id,
-                data : validatedClient
+                clientData : validatedClient
             })
 
             return res.status(200).json({
@@ -63,7 +62,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to update client",
-                error : err
+                error : {err}
             })
         }
     }
@@ -74,7 +73,7 @@ class ClientsController {
 
             const contact = await clientsService.updateContact({
                 targetContactId : req.params.id,
-                data : validatedContact
+                contactData : validatedContact
             });
 
             return res.status(201).json({
@@ -85,7 +84,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to update contact",
-                error : err
+                error : {err}
             })
         }
     }
@@ -105,7 +104,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to delete client",
-                error : err
+                error : {err}
             })
         }
     }
@@ -124,16 +123,14 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to delete contact",
-                error : err
+                error : {err}
             })
         }
     }
 
     async findClients(req,res){
         try{
-            const rawFilters = req.query
-
-            const filters = findClientSchema.parse(rawFilters);
+            const filters = findClientSchema.parse(req.query);
 
             const clients = await clientsService.findClients(filters);
 
@@ -144,16 +141,14 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to find clients",
-                error : err
+                error : {err}
             })
         }
     }
 
     async findContacts(req,res){
         try{
-            const rawFilters = req.query;
-
-            const filters = findContactSchema.parse(rawFilters);
+            const filters = findContactSchema.parse(req.query);
 
             const contacts = await clientsService.findContacts(filters);
 
@@ -164,7 +159,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to find contacts",
-                error : err
+                error : {err}
             })
         }
     }
