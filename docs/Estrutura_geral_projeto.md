@@ -11,8 +11,6 @@ backend/
     docs/
         backend_README.md
     src/
-        config/
-        controllers/
         database/
             migrations/
                 ...
@@ -24,15 +22,17 @@ backend/
         modules/
             auth/✅
             users/✅
-            notes/ ⚒️
+            notes/✅
+            attachments/✅
+            clients ... 
         routes/
-            index.js
+            index.js ✅
             auth_routes.js ✅
             users_routes.js ✅
-        services/
-        utils/
-        app.js
-        server.js
+            attachments_routes.js ✅
+            notes_routes.js ✅
+        app.js ...
+        server.js ...
     .env
     .gitignore
     knexfile.js ✅

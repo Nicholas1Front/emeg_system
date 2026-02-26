@@ -105,7 +105,7 @@ Substituir agenda física por sistema digital diário.
 
 ---
 
-## Anexos / attachments [...]
+## Anexos / attachments [✅]
 
 ⏱️ Estimativa: 4 a 7 dias
 
@@ -124,15 +124,15 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 ### Checklist
 
 * [✅] Configurar conta e ambiente Cloudflare
-* [...] Model de anexos
-* [ ] CRUD completo
-* [ ] Filtros de infos e apontamentos
-* [ ] Integração com storage
-* [ ] Teste unitários
+* [✅] Model de anexos
+* [✅] CRUD completo
+* [✅] Filtros de infos e apontamentos
+* [✅] Integração com storage
+* [✅] Teste unitários
 
 ---
 
-## Clientes []
+## Clientes [...]
 
 ⏱️ Estimativa: 4 a 6 dias
 
@@ -147,7 +147,6 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 
 * [ ] Model clients
 * [ ] Model client_contacts
-* [ ] Model client_addresses
 * [ ] CRUD completo
 * [ ] Integração com API CNPJ
 
