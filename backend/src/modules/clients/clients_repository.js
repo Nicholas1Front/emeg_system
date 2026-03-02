@@ -33,7 +33,13 @@ class ClientsRepository{
         return contact[0];
     }
 
-    async findClients(filters){
+    async findClients({
+        id,
+        name,
+        address,
+        document,
+        type
+    }){
         const query = knex('clients');
 
         if(filters.id !== undefined){
@@ -63,7 +69,13 @@ class ClientsRepository{
         return query.orderBy('id', 'desc');
     }
 
-    async findContacts(filters){
+    async findContacts({
+        id,
+        client_id,
+        name,
+        email,
+        phone
+    }){
         const query = knex('clients_contacts');
 
         if(filters.id !== undefined){

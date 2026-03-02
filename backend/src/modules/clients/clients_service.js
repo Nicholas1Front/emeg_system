@@ -33,7 +33,9 @@ class ClientsService{
     }
 
     async createClientContact(data){
-        const existingClient = await clientsRepository.findClients({id : data.client_id});
+        const existingClient = await clientsRepository.findClients({
+            id : data.client_id
+        });
 
         if(existingClient.length === 0){
             throw new Error("Client not found");
@@ -50,13 +52,25 @@ class ClientsService{
     }
 
     async findClients(filters){
-        const clients = await clientsRepository.findClients(filters);
+        const clients = await clientsRepository.findClients({
+            id : filters.id,
+            name : filters.name,
+            address : filters.address,
+            document : filters.document,
+            type : filters.type
+        });
 
         return clients;
     }
 
     async findContacts(filters){
-        const contacts = await clientsRepository.findContacts(filters);
+        const contacts = await clientsRepository.findContacts({
+            id : filters.id,
+            client_id : filters.client_id,
+            name : filters.name,
+            email : filters.email,
+            phone : filters.phone
+        });
 
         return contacts;
     }

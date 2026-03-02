@@ -22,7 +22,7 @@ class ClientsController {
         }catch(err){
             res.status(400).json({
                 message : "Failed to create client",
-                error : {err}
+                error : err.message
             })
         }
     }
@@ -39,7 +39,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to create contact",
-                error : {err}
+                error : err.message
             })
         }
     }
@@ -62,7 +62,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to update client",
-                error : {err}
+                error : err.message
             })
         }
     }
@@ -84,7 +84,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to update contact",
-                error : {err}
+                error : err.message
             })
         }
     }
@@ -104,7 +104,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to delete client",
-                error : {err}
+                error : err.message
             })
         }
     }
@@ -123,7 +123,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to delete contact",
-                error : {err}
+                error : err.message
             })
         }
     }
@@ -141,7 +141,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to find clients",
-                error : {err}
+                error : err.message
             })
         }
     }
@@ -159,7 +159,7 @@ class ClientsController {
         }catch(err){
             return res.status(400).json({
                 message : "Failed to find contacts",
-                error : {err}
+                error : err.message
             })
         }
     }
