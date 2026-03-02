@@ -42,26 +42,26 @@ class ClientsRepository{
     }){
         const query = knex('clients');
 
-        if(filters.id !== undefined){
-            query.where('id', filters.id);
+        if(id !== undefined){
+            query.where('id', id);
         }
 
-        if(filters.name !== undefined){
-            query.where('name', filters.name);
+        if(name !== undefined){
+            query.where('name', name);
         }
 
-        if(filters.address !== undefined){
-            query.where('address', filters.address);
+        if(address !== undefined){
+            query.where('address', address);
         }
 
-        if(filters.document !== undefined){
-            query.where('document', filters.document);
+        if(document !== undefined){
+            query.where('document', document);
         }
 
-        if(filters.type !== undefined){
-            if(filters.type === 'PF'){
+        if(type !== undefined){
+            if(type === 'PF'){
                 query.where('type', 'PF');
-            }else if(filters.type === 'PJ'){
+            }else if(type === 'PJ'){
                 query.where('type', 'PJ');
             }
         }
@@ -78,24 +78,24 @@ class ClientsRepository{
     }){
         const query = knex('clients_contacts');
 
-        if(filters.id !== undefined){
-            query.where('id', filters.id);
+        if(id !== undefined){
+            query.where('id', id);
         }
 
-        if(filters.client_id !== undefined){
-            query.where('client_id', filters.client_id);
+        if(client_id !== undefined){
+            query.where('client_id', client_id);
         }
 
-        if(filters.name !== undefined){
-            query.where('name', filters.name);
+        if(name !== undefined){
+            query.where('name', name);
         }
 
-        if(filters.email !== undefined){
-            query.where('email', filters.email);
+        if(email !== undefined){
+            query.where('email', email);
         }
 
-        if(filters.phone !== undefined){
-            query.where('phone', filters.phone);
+        if(phone !== undefined){
+            query.where('phone', phone);
         }
 
         return query.orderBy('id', 'desc');
