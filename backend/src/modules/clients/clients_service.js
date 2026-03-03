@@ -92,16 +92,18 @@ class ClientsService{
 
         const allowedTypes = ['PF', 'PJ'];
 
-        if(!allowedTypes.includes(clientData.type)){
-            throw new Error("Invalid client type");
-        }
+        if(clientData.type !== undefined && clientData.document !== undefined){
+            if(!allowedTypes.includes(clientData.type)){
+                throw new Error("Invalid client type");
+            }
 
-        if(clientData.type === 'PF' && clientData.document.length > 11){
-            throw new Error("Invalid document for PF type");
-        }
+            if(clientData.type === 'PF' && clientData.document.length > 11){
+                throw new Error("Invalid document for PF type");
+            }
 
-        if(clientData.type === 'PJ' && clientData.document.length > 14){
-            throw new Error("Invalid document for PJ type");
+            if(clientData.type === 'PJ' && clientData.document.length > 14){
+                throw new Error("Invalid document for PJ type");
+            }
         }
 
         const updatedClient = await clientsRepository.updateClient({
