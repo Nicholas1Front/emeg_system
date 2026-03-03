@@ -92,15 +92,15 @@ class ClientsService{
 
         const allowedTypes = ['PF', 'PJ'];
 
-        if(!allowedTypes.includes(data.type)){
+        if(!allowedTypes.includes(clientData.type)){
             throw new Error("Invalid client type");
         }
 
-        if(data.type === 'PF' && data.document.length > 11){
+        if(clientData.type === 'PF' && clientData.document.length > 11){
             throw new Error("Invalid document for PF type");
         }
 
-        if(data.type === 'PJ' && data.document.length > 14){
+        if(clientData.type === 'PJ' && clientData.document.length > 14){
             throw new Error("Invalid document for PJ type");
         }
 
