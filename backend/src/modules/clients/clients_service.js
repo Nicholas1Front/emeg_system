@@ -152,9 +152,9 @@ class ClientsService{
 
     }
 
-    async deleteContact(
+    async deleteContact({
         targetContactId
-    ){
+    }){
         const existingContact = await clientsRepository.findContacts({id : targetContactId});
 
         if(existingContact.length === 0){
