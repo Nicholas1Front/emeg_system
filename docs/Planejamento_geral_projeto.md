@@ -132,7 +132,7 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 
 ---
 
-## Clientes [...]
+## Clientes [✅]
 
 ⏱️ Estimativa: 4 a 6 dias
 
@@ -145,14 +145,14 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 
 ### Checklist
 
-* [ ] Model clients
-* [ ] Model client_contacts
-* [ ] CRUD completo
-* [ ] Integração com API CNPJ
+* [✅] Model clients
+* [✅] Model client_contacts
+* [✅] CRUD completo
+* [...] Integração com API CNPJ (Talvez/Posterior para frontend)
 
 ---
 
-## Equipamentos []
+## Equipamentos [...]
 
 ⏱️ Estimativa: 3 a 5 dias
 
@@ -160,7 +160,7 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 
 * Cadastro de equipamentos
 * Vínculo com cliente
-* Identificação simples (placa, frota, serial)
+* Identificação simples
 
 ### Checklist
 

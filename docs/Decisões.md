@@ -185,3 +185,33 @@ O que isso impacta no projeto.
 ### Consequência:
 - Admin terá mais responsabilidades porém mais controle nas ações de exclusão e update
 - Anotações será um modulo comum a todos os usuários e reflitirá em todos os outros modulos
+
+
+## 03/03/2026 – Somente admin pode excluir clientes
+
+### Decisão:
+- Somente user com role de admin poderá excluir clients
+- todos os users poderão editar, criar e consultar clients
+
+### Motivo:
+- Evitar exclusão por acidente por parte de user normal, sempre passa para o admin fazer o delete do client
+- Cadastrar e editar dados de um cliente são atividades corriqueiras portanto é necessário que seja de acesso de todos os users
+
+### Consequência:
+- Admin terá mais responsabilidades porém mais controle nas ações de exclusão e update
+- Assim como notes o modulo clients será um modulo comum a todos os users
+
+## 04/03/2026 – Soft delete / delete_at para algumas entidades
+
+### Decisão:
+- Fazer soft delete (delete_at some date) para algumas entidades
+- Refatorar modulos que já foram desenvolvidos para incluir o deleted_at
+
+### Motivo:
+- Manter rastreabilidade e histórico relacionado a entidades importantes como clients, equipaments, users
+- Refatorar a partir dessa data para que no futuro não venha a custar muito
+
+### Consequência:
+- Mudança nas funções de delete e get em alguns modulos
+- Criação de novas migrations para incluir deleted_at nas tables necessárias
+- Analisar racionalmente a necessidade do uso do soft delete ou do hard delete para entidades temporárias ou de importância menor
