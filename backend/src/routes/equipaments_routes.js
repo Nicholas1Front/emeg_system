@@ -18,8 +18,8 @@ router.put(
 )
 
 router.get(
-    '/find-equipament',
-    equipamentsController.findEquipament
+    '/get-equipament',
+    equipamentsController.getEquipament
 )
 
 router.delete(

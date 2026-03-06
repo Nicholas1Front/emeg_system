@@ -51,7 +51,7 @@ class EquipamentsController{
         }
     }
 
-    async findEquipament(req,res){
+    async getEquipament(req,res){
         try{
             const filters = findEquipamentSchema.parse(req.query);
 
