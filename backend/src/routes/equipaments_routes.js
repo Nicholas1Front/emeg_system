@@ -13,7 +13,7 @@ router.post(
 );
 
 router.put(
-    '/update-equipament',
+    '/update-equipament/:id',
     equipamentsController.updateEquipament
 )
 
@@ -23,7 +23,7 @@ router.get(
 )
 
 router.delete(
-    '/deactivate-equipament',
+    '/deactivate-equipament/:id',
     equipamentsController.deactivateEquipament
 )
 

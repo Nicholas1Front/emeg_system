@@ -10,7 +10,6 @@ const createEquipamentSchema = z.object({
 });
 
 const updateEquipamentSchema = z.object({
-    id : z.number().int().positive("Equipament ID must be a positive integer"),
     client_id: z.number().int().positive("Client ID must be a positive integer").optional(),
     name : z.string().min(1).optional(),
     brand : z.string().min(1).optional(),

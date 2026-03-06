@@ -35,7 +35,7 @@ class EquipamentsController{
             const equipamentData = updateEquipamentSchema.parse(req.body);
 
             const equipament = await equipamentsService.update({
-                id : equipamentData.id,
+                id : req.params.id,
                 client_id : equipamentData.client_id,
                 brand : equipamentData.brand,
                 name : equipamentData.name,
