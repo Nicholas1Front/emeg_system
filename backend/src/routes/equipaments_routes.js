@@ -8,7 +8,7 @@ const router = Router();
 router.use(authMiddleware);
 
 router.post(
-    '/crete-equipament',
+    '/create-equipament',
     equipamentsController.createEquipament
 );
 
