@@ -1,8 +1,7 @@
 const {z} = require('zod');
-const { id } = require('zod/v4/locales');
 
 const createEquipamentSchema = z.object({
-    client_id: z.number().int().positive("Client ID must be a positive integer"),
+    client_id: z.coerce.number().int().positive("Client ID must be a positive integer"),
     name : z.string().min(1, "Name is required"),
     brand : z.string().min(1, "Brand is required"),
     identification : z.string().min(1, "Identification is required"),
@@ -10,7 +9,7 @@ const createEquipamentSchema = z.object({
 });
 
 const updateEquipamentSchema = z.object({
-    client_id: z.number().int().positive("Client ID must be a positive integer").optional(),
+    client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
     name : z.string().min(1).optional(),
     brand : z.string().min(1).optional(),
     identification : z.string().min(1).optional()
@@ -20,8 +19,8 @@ const updateEquipamentSchema = z.object({
 );
 
 const findEquipamentSchema = z.object({
-    id : z.number().int().positive("Equipament ID must be a positive integer").optional(),
-    client_id: z.number().int().positive("Client ID must be a positive integer").optional(),
+    id : z.coerce.number().int().positive("Equipament ID must be a positive integer").optional(),
+    client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
     name : z.string().min(1).optional(),
     brand : z.string().min(1).optional(),
     identification : z.string().min(1).optional(),
