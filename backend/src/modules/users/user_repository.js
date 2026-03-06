@@ -1,4 +1,5 @@
 const knex = require('../../database/knex');
+const { update } = require('../equipaments/equipaments_repository');
 
 class UserRepository {
     async create(userData){
@@ -36,7 +37,8 @@ class UserRepository {
         .update({
             name : data.name,
             email : data.email,
-            password_hash : data.password
+            password_hash : data.password,
+            updated_at : knex.fn.now()
         })
         .returning(['id', 'name', 'email', 'role', 'created_at', 'updated_at']);
 

@@ -64,7 +64,10 @@ class EquipamentsRepository{
         id,
         data
     }){
-        const equipament = await knex('equipaments').where({id}).update(data).returning('*');
+        const equipament = await knex('equipaments').where({id}).update({
+            ...data,
+            updated_at: knex.fn.now()
+        }).returning('*');
 
         return equipament[0];
     }

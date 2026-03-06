@@ -107,7 +107,10 @@ class ClientsRepository{
     }){
         const client = await knex('clients')
             .where({ id })
-            .update(data)
+            .update({
+                ...data,
+                updated_at: knex.fn.now()
+            })
             .returning('*');
 
         return client[0];
@@ -119,7 +122,10 @@ class ClientsRepository{
     }){
         const contact = await knex('clients_contacts')
             .where({ id })
-            .update(data)
+            .update({
+                ...data,
+                updated_at: knex.fn.now()
+            })
             .returning('*');
 
         return contact[0];
