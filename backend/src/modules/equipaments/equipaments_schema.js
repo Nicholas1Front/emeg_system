@@ -15,7 +15,7 @@ const updateEquipamentSchema = z.object({
     brand : z.string().min(1).optional(),
     identification : z.string().min(1).optional()
 }).refine(
-    data => Object.keys(data).length > 1,
+    data => Object.keys(data).length > 0,
     {message : "At least one field must be provided for update"}
 );
 
@@ -27,7 +27,7 @@ const findEquipamentSchema = z.object({
     identification : z.string().min(1).optional(),
     includedDeleted : z.boolean().optional()
 }).refine(
-    data => Object.keys(data).length > 1,
+    data => Object.keys(data).length > 0,
     {message : "At least one field must be provided for get equipaments"}
 );
 
