@@ -25,7 +25,7 @@ class EquipamentsController{
         }catch(err){
             return res.status(500).json({
                 message : 'Error creating equipament',
-                error : err
+                error : err.message
             })
         }
     }
@@ -36,10 +36,7 @@ class EquipamentsController{
 
             const equipament = await equipamentsService.update({
                 id : req.params.id,
-                client_id : equipamentData.client_id,
-                brand : equipamentData.brand,
-                name : equipamentData.name,
-                identification : equipamentData.identification,
+                equipamentData : equipamentData
             });
 
             return res.status(200).json({
@@ -49,7 +46,7 @@ class EquipamentsController{
         }catch(err){
             return res.status(400).json({
                 message : 'Error updating equipament',
-                error : err
+                error : err.message
             })
         }
     }
@@ -74,7 +71,7 @@ class EquipamentsController{
         }catch(err){
             return res.status(400).json({
                 message : 'Error finding equipament',
-                error : err
+                error : err.message
             })
         }
     }
@@ -90,7 +87,7 @@ class EquipamentsController{
         }catch(err){
             return res.status(500).json({
                 message : 'Error deactivating equipament',
-                error : err
+                error : err.message
             })
         }
     }
