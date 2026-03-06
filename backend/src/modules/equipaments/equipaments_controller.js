@@ -55,14 +55,7 @@ class EquipamentsController{
         try{
             const filters = findEquipamentSchema.parse(req.query);
 
-            const equipaments = await equipamentsService.find({
-                id : filters.id,
-                client_id : filters.client_id,
-                brand : filters.brand,
-                name : filters.name,
-                identification : filters.identification,
-                includedDeleted : filters.includedDeleted
-            });
+            const equipaments = await equipamentsService.find(filters);
 
             return res.status(200).json({
                 message : 'Equipaments found successfully',
