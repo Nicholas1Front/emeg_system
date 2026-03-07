@@ -20,7 +20,7 @@ class UserRepository {
     }){
         const query = await knex('users');
 
-        if(includedDeactivated === undefined || includedDeactivated === false){
+        if(includedDeactivated === false){
             query.whereNull('deleted_at');
         }
 

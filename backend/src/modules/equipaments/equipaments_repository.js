@@ -25,7 +25,7 @@ class EquipamentsRepository{
         brand,
         name,
         identification,
-        includedDeleted = false
+        includedDeactivated
     }){
         const query = knex('equipaments');
 
@@ -33,7 +33,7 @@ class EquipamentsRepository{
             query.whereNull('deleted_at');
         }
 
-        if(includedDeleted){
+        if(includedDeactivated){
             query.whereNotNull('deleted_at');
         }
 
