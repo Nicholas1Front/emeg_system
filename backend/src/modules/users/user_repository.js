@@ -1,5 +1,4 @@
 const knex = require('../../database/knex');
-const { update } = require('../equipaments/equipaments_repository');
 
 class UserRepository {
     async create(userData){
@@ -12,44 +11,54 @@ class UserRepository {
 
         return user[0];
     }
-    async findById(id){
-        const user = await knex('users')
-        .where({id})
-        .first();
+    async find({
+        id,
+        email,
+        name,
+        role,
+        includedDeactivated
+    }){
+        const query = await knex('users');
 
-        return user;
-    }
-    async findByEmail(email){
-        const user = await knex('users')
-        .where({email})
-        .first();
+        if(includedDeactivated === undefined || includedDeactivated === false){
+            query.whereNull('deleted_at');
+        }
 
-        return user;
-    }
-    async findAll(){
-        const users = await knex('users').select('*');
+        if(includedDeactivated === true){
+            query.whereNotNull('deleted_at');
+        }
 
-        return users;
+        if(id !== undefined){
+            query.where('id', id);
+        }
+
+        if(email !== undefined){
+            query.where('email', email);
+        }
+
+        if(name !== undefined){
+            query.where('name', name);
+        }
+
+        if(role !== undefined){
+            query.where('role', role);
+        }
+
+        return query.orderBy('id','desc');
     }
-    async updateById(id, data){
+    async updateById({
+        id, 
+        data
+    }){
         const user = await knex('users')
         .where({id})
         .update({
-            name : data.name,
-            email : data.email,
-            password_hash : data.password,
+            ...data,
             updated_at : knex.fn.now()
         })
-        .returning(['id', 'name', 'email', 'role', 'created_at', 'updated_at']);
+        .returning('*');
 
         return user[0];
-    }
-    async deleteById(id){
-        const user = await knex('users')
-        .where({id})
-        .delete()
-
-        return user;
     }
 
     async updateRole(id, role){
@@ -59,6 +68,27 @@ class UserRepository {
         .returning('*');
 
         return user
+    }
+    async deactivate(id){
+        const user = await knex('users')
+        .where({id})
+        .update({
+            deleted_at : knex.fn.now()
+        })
+        .returning('*');
+
+        return user[0];
+    }
+
+    async activate(id){
+        const user = await knex('users')
+        .where({id})
+        .update({
+            deleted_at : null
+        })
+        .returning('*');
+
+        return user[0];
     }
 }
 

@@ -50,10 +50,10 @@ router.get(
 
 // Delete
 router.delete(
-    '/delete-client/:id',
+    '/deactivate-client/:id',
     authMiddleware,
     adminMiddleware,
-    clientsController.deleteClient
+    clientsController.deactivateClient
 )
 
 router.delete(
@@ -61,5 +61,13 @@ router.delete(
     authMiddleware,
     clientsController.deleteContact
 )
+
+// Activate
+router.patch(
+    '/activate-client/:id',
+    authMiddleware,
+    adminMiddleware,
+    clientsController.activateClient
+);
 
 module.exports = router;

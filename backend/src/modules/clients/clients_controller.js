@@ -89,21 +89,41 @@ class ClientsController {
         }
     }
 
-    async deleteClient(req, res){
+    async deactivateClient(req, res){
         try{
 
-            await clientsService.deleteClient({
+            const client = await clientsService.deactivateClient({
                 requesterRole : req.user.role,
                 targetClientId : req.params.id
             });
 
             return res.status(200).json({
-                message : "Client deleted successfully"
+                message : "Client deactivated successfully",
+                data : client
             })
 
         }catch(err){
             return res.status(400).json({
-                message : "Failed to delete client",
+                message : "Failed to deactivate client",
+                error : err.message
+            })
+        }
+    }
+
+    async activateClient(req, res){
+        try{
+            const user = await clientsService.activateClient({
+                requesterRole : req.user.role,
+                targetCientId : req.params.id
+            });
+
+            return res.status(200).json({
+                message : 'Client activated successfully',
+                data : user
+            })
+        }catch(err){
+            return res.status(400).json({
+                message : "Failed to activate client",
                 error : err.message
             })
         }

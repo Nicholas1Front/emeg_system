@@ -27,4 +27,9 @@ router.delete(
     equipamentsController.deactivateEquipament
 )
 
+router.patch(
+    '/activate-equipament/:id',
+    equipamentsController.activateEquipament
+)
+
 module.exports = router;

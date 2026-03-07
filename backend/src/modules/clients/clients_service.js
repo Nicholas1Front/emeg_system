@@ -57,7 +57,8 @@ class ClientsService{
             name : filters.name,
             address : filters.address,
             document : filters.document,
-            type : filters.type
+            type : filters.type,
+            includedDeactivated : filters.includedDeactivated
         });
 
         return clients;
@@ -132,12 +133,12 @@ class ClientsService{
         return updatedContact;
     }
 
-    async deleteClient({
+    async deactivateClient({
         requesterRole,
         targetClientId
     }){
         if(requesterRole !== 'admin'){
-            throw new Error('Only admins can delete clients');
+            throw new Error('Only admins can deactivate clients');
         }
 
         const existingClient = await clientsRepository.findClients({id : targetClientId});
@@ -146,10 +147,29 @@ class ClientsService{
             throw new Error('Client not found');
         }
 
-        await clientsRepository.deleteClient(targetClientId);
+        const deactivatedClient = await clientsRepository.deactivateClient(targetClientId);
 
-        return true;
+        return deactivatedClient;
 
+    }
+
+    async activateClient({
+        requesterRole,
+        targetClientId
+    }){
+        if(requesterRole !== 'admin'){
+            throw new Error('Only admins can activate clients');
+        }
+
+        const existingClient = await clientsRepository.findClients({id : targetClientId});
+
+        if(existingClient.length === 0){
+            throw new Error('Client not found');
+        }
+
+        const activatedClient = await clientsRepository.activateClient(targetClientId);
+
+        return activatedClient
     }
 
     async deleteContact({

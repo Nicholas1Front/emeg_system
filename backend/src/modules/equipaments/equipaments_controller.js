@@ -84,6 +84,21 @@ class EquipamentsController{
             })
         }
     }
+    async activateEquipament(req,res){
+        try{
+            const equipament = await equipamentsService.activate(req.params.id);
+
+            return res.status(200).json({
+                message : 'Equipament activated successfully',
+                data : equipament
+            })
+        }catch(err){
+            return res.status(500).json({
+                message : 'Error activating equipament',
+                error : err.message
+            })
+        }
+    }
 }
 
 module.exports = new EquipamentsController();

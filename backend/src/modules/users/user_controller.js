@@ -2,7 +2,8 @@ const userService = require('./user_service');
 const {
     registerSchema,
     updateUserSchema,
-    updateUserRoleSchema
+    updateUserRoleSchema,
+    findUserSchema
 } = require('./user_schema');
 
 class UserController{
@@ -24,7 +25,7 @@ class UserController{
         catch(err){
             return res.status(400).json({
                 message : `Error registering first user`,
-                error : err
+                error : err.message
             })
         }
     }
@@ -46,7 +47,7 @@ class UserController{
         }catch(err){
             return res.status(400).json({
                 message : `Error registering user`,
-                error : err
+                error : err.message
             })
         }
     }
@@ -71,7 +72,7 @@ class UserController{
         catch(err){
             return res.status(400).json({
                 message : `Error updating user`,
-                error : err
+                error : err.message
             })
         }
     }
@@ -96,73 +97,70 @@ class UserController{
         catch(err){
             return res.status(400).json({
                 message : `Error updating user role`,
-                error : err
+                error : err.message
             })
         }
     }
-    async deleteUser(req, res){
+    async deactivateUser(req, res){
         try{
-            const requesterId = req.user.id;
-            const requesterRole = req.user.role;
-            const targetUserId = req.params.id;
 
-            await userService.deleteUser({
-                requesterId : requesterId,
-                requesterRole : requesterRole,
-                targetUserId : targetUserId
+            const user = await userService.deactivateUser({
+                requesterId : req.user.id,
+                requesterRole : req.user.role,
+                targetUserId : req.params.id
             })
 
             return res.status(200).json({
-                message : `User deleted successfully`,
+                message : `User deactivated successfully`,
+                data : user
             })
         }
         catch(err){
             return res.status(400).json({
-                message : `Error deleting user`,
-                error : err
+                message : `Error deactivating user`,
+                error : err.message
             })
         }
     }
+
+    async activateUser(req, res){
+        try{
+            const user = await userService.activateUser({
+                requesterRole : req.user.role,
+                targetUserId : req.params.id
+            })
+
+            return res.status(200).json({
+                message : `User activated successfully`,
+                data : user
+            })
+        }catch(err){
+            return res.status(400).json({
+                message : `Error activating user`,
+                error : err.message
+            })
+        }
+
+    }
     async getUser(req, res){
         try{
-            const requesterRole = req.user.role;
+            
+            const parsedFilters = findUserSchema.parse(req.query);
 
-            const result = await userService.getUser({
+            const result = await userService.getUsers({
                 requesterRole : requesterRole,
-                email : req.body.email,
-                id : req.body.id
+                filters : parsedFilters 
             });
 
             return res.status(200).json({
-                message : `User finded successfully`,
+                message : `Users finded successfully`,
                 user : result
             })
 
         }catch(err){
             return res.status(400).json({
-                message : `Error getting user`,
-                error : err
-            })
-        }
-    }
-    async getAllUsers(req,res){
-        try{
-
-            const requesterRole = req.user.role;
-
-            const result = await userService.getAllUsers({
-                requesterRole : requesterRole
-            })
-
-            return res.status(200).json({
-                message : `All users finded successfully`,
-                users : result
-            })
-
-        }catch(err){
-            return res.status(400).json({
                 message : `Error getting users`,
-                error : err
+                error : err.message
             })
         }
     }

@@ -56,7 +56,9 @@ class EquipamentsService{
     }
 
     async deactivate(id){
-        const existingEquipament = await equipamentsRepository.find({id});
+        const existingEquipament = await equipamentsRepository.find({
+            id : id,
+        });
 
         if(existingEquipament.length === 0){
             throw new Error('Equipament not found');
@@ -65,6 +67,18 @@ class EquipamentsService{
         const deactivatedEquipament = await equipamentsRepository.deactivate(id);
 
         return deactivatedEquipament;
+    }
+
+    async activate(id){
+        const existingEquipament = await equipamentsRepository.find({id, includedDeleted : true});
+
+        if(existingEquipament.length === 0){
+            throw new Error('Equipament not found');
+        }
+
+        const activatedEquipament = await equipamentsRepository.activate(id);
+
+        return activatedEquipament;
     }
 };
 

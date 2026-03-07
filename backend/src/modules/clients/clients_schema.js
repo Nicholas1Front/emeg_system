@@ -38,7 +38,8 @@ const findClientSchema = z.object({
     name : z.string().min(1).optional(),
     address : z.string().min(1).optional(),
     document : z.string().min(11).optional(),
-    type : z.enum(['PF', 'PJ']).optional()
+    type : z.enum(['PF', 'PJ']).optional(),
+    includedDeactivated : z.boolean().optional()
 }).refine(
     data => Object.keys(data).length > 0,
     {message : "At least one field must be provided for get clients"}

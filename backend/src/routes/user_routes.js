@@ -12,26 +12,32 @@ router.post('/register', authMiddleware, adminMiddleware, userController.registe
 
 // Update
 router.put('/update-user/:id', authMiddleware, userController.updateUser);
+
 router.patch('/update-user-role/:id', 
     authMiddleware, 
     adminMiddleware, 
-    userController.updateUserRole);
+    userController.updateUserRole
+);
 
 // Delete
-router.delete('/delete-user/:id', 
+router.delete('/deactivate-user/:id', 
     authMiddleware, 
     adminMiddleware, 
-    userController.deleteUser);
+    userController.deactivateUser
+);
+
+// Activate
+router.patch('/activate-user/:id',
+    authMiddleware,
+    adminMiddleware,
+    userController.activateUser
+);
 
 // Get
-router.get('/get-user', 
+router.get('/get-users', 
     authMiddleware,
     adminMiddleware, 
-    userController.getUser);
-
-router.get('/get-all-users', 
-    authMiddleware,
-    adminMiddleware, 
-    userController.getAllUsers);
+    userController.getUser
+);
 
 module.exports = router;

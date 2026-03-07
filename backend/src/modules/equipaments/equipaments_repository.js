@@ -79,6 +79,14 @@ class EquipamentsRepository{
 
         return equipament[0];
     }
+
+    async activate(id){
+        const equipament = await knex('equipaments').where({id}).update({
+            deleted_at: null
+        }).returning('*');
+
+        return equipament[0];
+    }
 }
 
 module.exports = new EquipamentsRepository();

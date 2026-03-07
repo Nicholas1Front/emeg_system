@@ -34,7 +34,7 @@ class UserService{
             throw new Error('Unauthorized');
         }
 
-        const existingUser = await userRepository.findByEmail(email);
+        const existingUser = await userRepository.find({email : email});
 
         if(existingUser){
             throw new Error('Email already in use');
@@ -68,6 +68,12 @@ class UserService{
             throw new Error('Unauthorized');
         }
 
+        const existingUser = await userRepository.find({ id : targetUserId });
+
+        if(!existingUser || existingUser.length === 0){
+            throw new Error('User not found');
+        }
+
         let passwordHashed = undefined;
 
         if(password){
@@ -90,32 +96,7 @@ class UserService{
 
         return updatedUser;
     }
-    async deleteUser({
-        requesterId,
-        requesterRole,
-        targetUserId,
-    }){
-        const isAdmin = requesterRole === 'admin';
-        const isOwner = requesterId === targetUserId;
 
-        if(!isAdmin && !isOwner){
-            throw new Error('Unauthorized');
-        }
-
-        const targetIsAdmin = await userRepository.findById(targetUserId);
-
-        if(targetIsAdmin.role === 'admin'){
-            throw new Error('Cannot delete admin user');
-        }
-
-        const deletedUser = await userRepository.deleteById(targetUserId);
-
-        if(!deletedUser){
-            throw new Error('User not found');
-        }
-
-        return true;
-    }
     async updateUserRole({
         requesterRole,
         targetUserId,
@@ -125,6 +106,12 @@ class UserService{
 
         if(!isAdmin){
             throw new Error('Unauthorized');
+        }
+
+        const existingUser = await userRepository.find({ id : targetUserId });
+
+        if(!existingUser || existingUser.length === 0){
+            throw new Error('User not found');
         }
 
         const updateUser = await userRepository.updateRole(targetUserId, role);
@@ -137,54 +124,67 @@ class UserService{
 
         return updateUser;
     }
-    async getUser({
+    async deactivateUser({
+        requesterId,
         requesterRole,
-        email,
-        id
+        targetUserId,
     }){
         const isAdmin = requesterRole === 'admin';
+        const isOwner = requesterId === targetUserId;
 
-        if(!isAdmin){
+        if(!isAdmin && !isOwner){
             throw new Error('Unauthorized');
         }
 
-        if(email || email !== undefined){
-            const userByEmail = await userRepository.findByEmail(email);
+        const existingUser = await userRepository.find({ id : targetUserId });
 
-            if(!userByEmail){
-                throw new Error("No user found");
-            }
-
-            delete userByEmail.password_hash;
-
-            return userByEmail;
+        if(!existingUser || existingUser.length === 0){
+            throw new Error('User not found');
         }
 
-        if(id || id !== undefined){
-            const userById = await userRepository.findById(id);
+        const deactivatedUser = await userRepository.deactivate(targetUserId);
 
-            if(!userById){
-                throw new Error("No user found");
-            }
-
-            delete userById.password_hash;
-
-            return userById;
-        }
+        return deactivatedUser;
     }
-    async getAllUsers({
-        requesterRole        
+
+    async activateUser({
+        requesterRole,
+        targetUserId
     }){
         const isAdmin = requesterRole === 'admin';
+
         if(!isAdmin){
             throw new Error('Unauthorized');
         }
 
-        const users = await userRepository.findAll();
+        const existingUser = await userRepository.find({ id : targetUserId });
 
-        if(!users || users.length === 0){
-            throw new Error('No users found');
+        if(!existingUser || existingUser.length === 0){
+            throw new Error('User not found');
         }
+
+        const activatedUser = await userRepository.activate(targetUserId);
+
+        return activatedUser;
+    }
+
+    async getUsers({
+        requesterRole,
+        filters
+    }){
+        const isAdmin = requesterRole === 'admin';
+
+        if(!isAdmin){
+            throw new Error('Unauthorized');
+        }
+
+        const users = await userRepository.find({
+            id : filters.id,
+            email : filters.email,
+            name : filters.name,
+            role : filters.role,
+            includedDeactivated : filters.includedDeactivated
+        });
 
         users.map(user => delete user.password_hash);
 

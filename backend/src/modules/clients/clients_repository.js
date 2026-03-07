@@ -38,9 +38,18 @@ class ClientsRepository{
         name,
         address,
         document,
-        type
+        type,
+        includedDeactivated
     }){
         const query = knex('clients');
+
+        if(includedDeactivated === undefined || includedDeactivated === false){
+            query.whereNull('deleted_at');
+        }
+
+        if(includedDeactivated === true){
+            query.whereNotNull('deleted_at');
+        }
 
         if(id !== undefined){
             query.where('id', id);
@@ -131,10 +140,20 @@ class ClientsRepository{
         return contact[0];
     }
 
-    async deleteClient(id){
-        await knex('clients').where({ id }).delete();
+    async deactivateClient(id){
+        const client = await knex('clients').where({id}).update({
+            deleted_at: knex.fn.now()
+        }).returning('*');
 
-        return true;
+        return client[0];
+    }
+
+    async activateClient(id){
+        const client = await knex('clients').where({id}).update({
+            deleted_at : null
+        }).returning('*');
+
+        return client[0];
     }
 
     async deleteContact(id){
