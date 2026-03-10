@@ -152,7 +152,7 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 
 ---
 
-## Equipamentos [...]
+## Equipamentos [✅]
 
 ⏱️ Estimativa: 3 a 5 dias
 
@@ -164,13 +164,13 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 
 ### Checklist
 
-* [ ] Model equipments
-* [ ] CRUD completo
-* [ ] Relacionamento com clientes
-
+* [✅] Model equipments
+* [✅] CRUD completo
+* [✅] Relacionamento com clientes
+* [✅] Testes unitários
 ---
 
-## Tabela de Itens / Preços []
+## Tabela de Itens / Preços [...]
 
 ⏱️ Estimativa: 3 a 4 dias
 
@@ -190,10 +190,10 @@ Base de referência para peças e serviços.
 * [ ] Model items
 * [ ] CRUD completo
 * [ ] Busca textual
-
+* [ ] Testes unitários
 ---
 
-## Orçamentos
+## Orçamentos / Ordens de serviço [ ]
 
 ⏱️ Estimativa: 6 a 8 dias
 
@@ -201,35 +201,19 @@ Base de referência para peças e serviços.
 
 * Criar orçamento
 * Itens livres ou sugeridos
-* Status
-* Geração de PDF
+* Criação de OS a partir de ORÇ ou de maneira livre
+* Geração de PDF para ORÇ e OS
+* Status para ORÇ e para OS
 
 ### Checklist
 
 * [ ] Model budgets
 * [ ] Model budget_items
-* [ ] Fluxo de status
-* [ ] Geração de PDF
-
----
-
-## Ordem de Serviço
-
-⏱️ Estimativa: 6 a 8 dias
-
-### Funcionalidades
-
-* Criar OS manual ou via orçamento
-* Controle de datas
-* Serviços e peças executados
-* Anexos
-
-### Checklist
-
-* [ ] Model work_orders
+* [ ] Model work_order
 * [ ] Model work_order_items
-* [ ] Model work_order_attachments
-* [ ] Fluxo de status
+* [ ] Fluxo de status para ambas as entidades
+* [ ] Geração de PDF
+* [ ] Testes unitários
 
 ---
 
