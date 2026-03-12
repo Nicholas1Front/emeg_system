@@ -24,7 +24,10 @@ backend/
             users/✅
             notes/✅
             attachments/✅
-            clients ... 
+            clients/✅
+            equipaments/✅
+            dev/✅
+            
         routes/
             index.js ✅
             auth_routes.js ✅

@@ -183,7 +183,7 @@ Base de referência para peças e serviços.
 * Cadastro de itens
 * Preço padrão
 * Categorias
-* Ativação/desativação
+* Busca via texto/nome (além da busca por preço e etc...)
 
 ### Checklist
 
