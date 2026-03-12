@@ -215,3 +215,15 @@ O que isso impacta no projeto.
 - Mudança nas funções de delete e get em alguns modulos
 - Criação de novas migrations para incluir deleted_at nas tables necessárias
 - Analisar racionalmente a necessidade do uso do soft delete ou do hard delete para entidades temporárias ou de importância menor
+
+## 12/03/2026 – Items aceita preço igual a zero para peças
+
+### Decisão:
+- Fazer com que a lógica de items (principalmente no service) aceite peças com valor igual a zero
+
+### Motivo:
+- Items poderá ser usado como tabela de preço porém também como inventário sem necessariamente colocar preço base a não ser que seja de vontade de user
+
+### Consequência:
+- Pequena mudança na validação do preço base
+- User terá uma responsabilidade maior ao verificar se colocou preço base ou não

@@ -6,6 +6,7 @@ const devRoutes = require('./dev_routes');
 const attachmentsRoutes = require('./attachments_routes');
 const clientsRoutes = require('./clients_routes');
 const equipamentsRoutes = require('./equipaments_routes');
+const itemsRoutes = require('./items_routes');
 
 const router = Router();
 router.use('/auth', authRoutes);
@@ -15,5 +16,6 @@ router.use('/dev', devRoutes);
 router.use('/attachments', attachmentsRoutes);
 router.use('/clients', clientsRoutes);
 router.use('/equipaments', equipamentsRoutes);
+router.use('/items', itemsRoutes);
 
 module.exports = router;
