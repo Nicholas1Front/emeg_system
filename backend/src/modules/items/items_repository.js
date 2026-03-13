@@ -27,7 +27,10 @@ class ItemsRepository{
         id,
         itemData
     }){
-        const item = await knex('items').where({id}).update(itemData).returning('*');
+        const item = await knex('items').where({id}).update({
+            ...itemData,
+            updated_at : knex.fn.now()
+        }).returning('*');
 
         return item[0]
     }
@@ -71,11 +74,11 @@ class ItemsRepository{
             query.where('quantity_available', '>=', quantity_available);
         }
 
-        return query.orderBy('id', 'desc');
+        return query.orderBy('id', 'asc');
     }
 
     async delete(id){
-        await knex('items').where({id}).del();
+        await knex('items').where({id}).delete();
 
         return true;
     }

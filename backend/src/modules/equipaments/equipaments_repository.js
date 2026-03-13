@@ -57,7 +57,7 @@ class EquipamentsRepository{
             query.where('identification', identification);
         }
 
-        return query.orderBy('id', 'desc');
+        return query.orderBy('id', 'asc');
     }
 
     async update({

@@ -44,7 +44,7 @@ class UserRepository {
             query.where('role', role);
         }
 
-        return query.orderBy('id','desc');
+        return query.orderBy('id','asc');
     }
     async updateById({
         id, 

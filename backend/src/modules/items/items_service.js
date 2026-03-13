@@ -73,9 +73,9 @@ class ItemsService{
     }
 
     async deleteItem(id){
-        const deletedItem = await itemsRepository.delete(id);
+        await itemsRepository.delete(id);
 
-        return deletedItem;
+        return true;
     }
 }
 
