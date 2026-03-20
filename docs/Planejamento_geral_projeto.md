@@ -170,7 +170,7 @@ Criar modulo para armazenar anexos de maneira genérica (para todos os modulos),
 * [✅] Testes unitários
 ---
 
-## Tabela de Itens / Preços [...]
+## Tabela de Itens / Preços [✅]
 
 ⏱️ Estimativa: 3 a 4 dias
 
@@ -187,13 +187,13 @@ Base de referência para peças e serviços.
 
 ### Checklist
 
-* [ ] Model items
-* [ ] CRUD completo
-* [ ] Busca textual
-* [ ] Testes unitários
+* [✅] Model items
+* [✅] CRUD completo
+* [✅] Busca textual
+* [✅] Testes unitários
 ---
 
-## Orçamentos / Ordens de serviço [ ]
+## Orçamentos / Ordens de serviço [...]
 
 ⏱️ Estimativa: 6 a 8 dias
 
