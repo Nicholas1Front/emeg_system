@@ -26,12 +26,12 @@ class BudgetItemsRepositoty{
 
     async update({
         id,
-        budgetItemData
+        data
     }){
         const budgetItem = await knex('budget_items')
             .where({id})
             .update({
-                ...budgetItemData,
+                ...data,
                 updated_at: knex.fn.now()
             }).returning('*');
 

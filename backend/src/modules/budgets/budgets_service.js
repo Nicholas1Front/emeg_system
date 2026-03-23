@@ -247,7 +247,7 @@ class BudgetsService{
 
                     finishedItem = await budgetItemsRepository.update({
                         id : item.id,
-                        budgetItemData : itemData    
+                        data : itemData    
                     })
                 }
 
@@ -280,7 +280,7 @@ class BudgetsService{
 
         const updatedBudget = await budgetsRepository.update({
             id : budgetId,
-            budgetData : budgetData
+            data : budgetData
         });
 
         if(!updatedBudget){
