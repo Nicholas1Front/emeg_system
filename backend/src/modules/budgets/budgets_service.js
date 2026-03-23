@@ -42,6 +42,8 @@ class BudgetsService{
 
         let itemsData = budgetData.items;
 
+        delete budgetData.items
+
         if(client.id === undefined){
             if(
                 client.name === undefined || 
