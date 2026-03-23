@@ -299,18 +299,18 @@ class BudgetsService{
 
     async updateStatus({
         budgetId,
-        status
+        statusData
     }){
 
         const statusList = ['draft', 'pending', 'approved', 'rejected'];
 
-        if(!statusList.includes(status)){
-            throw new Error(`The status : ${status} is not valid`);
+        if(!statusList.includes(statusData.status)){
+            throw new Error(`The status : ${statusData.status} is not valid`);
         }
 
         const updatedBudget = await budgetsRepository.updateStatus({
             id : budgetId,
-            status
+            status : statusData.status
         });
 
         if(!updatedBudget){

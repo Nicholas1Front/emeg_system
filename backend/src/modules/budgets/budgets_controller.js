@@ -55,7 +55,7 @@ class BudgetsController{
 
             const budget = await budgetService.updateStatus({
                 budgetId : req.params.id,
-                status : statusParsed
+                statusData : statusParsed
             })
 
             return res.status(200).json({
