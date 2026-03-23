@@ -165,7 +165,7 @@ class BudgetsService{
 
         budgetData = await budgetsRepository.update({
             id : budgetData.id,
-            budgetData : budgetData
+            data : budgetData
         })
 
         if(!budgetData){
