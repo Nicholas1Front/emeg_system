@@ -151,10 +151,12 @@ class BudgetsService{
 
         if(client.name === undefined){
             client = await clientsService.findClients(client);
+            client = client[0];
         }
 
         if(equipament.name === undefined){
             equipament = await equipamentsService.find(equipament);
+            equipament = equipament[0];
         }
 
         budgetData.name = `Orçamento ${budgetData.id} - ${client.name} - ${equipament.name}`;

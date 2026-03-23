@@ -12,7 +12,7 @@ class BudgetsController{
             const data = createBudgetSchema.parse(req.body);
 
             const budget = await budgetService.create({
-                user_id : req.user_id,
+                user_id : req.user.id,
                 budgetData : data
             });
 
