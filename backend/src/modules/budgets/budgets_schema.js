@@ -69,7 +69,9 @@ const updateBudgetSchema = z.object({
     { message: "At least one field must be provided for the update" }
 );
 
-const updateStatusBudgetSchema = z.string().max(255, 'Status must be at most 255 characters long');
+const updateStatusBudgetSchema = z.object({
+    status : z.string().max(255, 'Status must be at most 255 characters long')
+});
 
 const findBudgetSchema = z.object({
     id : z.coerce.number().int().positive("Budget ID must be a positive integer").optional(),
