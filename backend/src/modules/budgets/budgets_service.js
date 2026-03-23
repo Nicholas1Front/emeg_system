@@ -278,6 +278,8 @@ class BudgetsService{
 
         budgetData.base_price = basePriceBudget;
 
+        delete budgetData.items;
+
         const updatedBudget = await budgetsRepository.update({
             id : budgetId,
             data : budgetData
