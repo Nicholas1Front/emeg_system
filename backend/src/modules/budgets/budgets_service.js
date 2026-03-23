@@ -34,7 +34,7 @@ function calculateBudgetDiscount(
 
 class BudgetsService{
     async create({
-        user_id,
+        userId,
         budgetData
     }){
         let client = budgetData.client;
@@ -84,7 +84,7 @@ class BudgetsService{
         }
 
         budgetData = await budgetsRepository.create({
-            user_id : user_id,
+            user_id : userId,
             client_id : client.id,
             equipament_id : equipament.id,
             name : `orçamento em rascunho - ${new Date().toLocaleString()}`,
@@ -111,7 +111,7 @@ class BudgetsService{
         equipament = await equipamentsService.find(equipament.id);
 
         if(equipament.length === 0){
-            throw new Error("Equipament not found after creating budget");
+            throw new Error("Equipament not found after creating budget"); 
         }
 
         let finsishedItems = [];
