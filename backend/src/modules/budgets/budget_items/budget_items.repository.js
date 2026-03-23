@@ -42,7 +42,7 @@ class BudgetItemsRepositoty{
         id,
         budgetId
     }){
-        const query = await knex('budget_items').select('*');
+        const query = knex('budget_items');
 
         if(id !== undefined){
             query.where({id});

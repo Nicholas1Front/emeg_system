@@ -103,6 +103,17 @@ class BudgetsService{
             throw new Error("Error creating budget");
         }
 
+        client = await clientsService.findClients(client.id);
+        if(client.length === 0){
+            throw new Error("Client not found after creating budget");
+        }
+
+        equipament = await equipamentsService.find(equipament.id);
+
+        if(equipament.length === 0){
+            throw new Error("Equipament not found after creating budget");
+        }
+
         let finsishedItems = [];
         let basePriceBudget = 0;
 

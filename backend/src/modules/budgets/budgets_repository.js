@@ -71,7 +71,7 @@ class BudgetsRepository{
         final_price,
         includedDeactivated
     }){
-        const query = await knex('budgets');
+        const query = knex('budgets');
 
         if(includedDeactivated === undefined || includedDeactivated === false){
             query.whereNull('deleted_at');
