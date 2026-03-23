@@ -29,7 +29,7 @@ class EquipamentsRepository{
     }){
         const query = knex('equipaments');
 
-        if(!includedDeleted){
+        if(includedDeactivated === undefined || !includedDeactivated){
             query.whereNull('deleted_at');
         }
 

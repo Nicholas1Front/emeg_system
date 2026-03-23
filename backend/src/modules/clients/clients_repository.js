@@ -43,7 +43,7 @@ class ClientsRepository{
     }){
         const query = knex('clients');
 
-        if(includedDeactivated === false){
+        if(includedDeactivated === undefined || includedDeactivated === false){
             query.whereNull('deleted_at');
         }
 
