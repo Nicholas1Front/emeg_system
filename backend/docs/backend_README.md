@@ -8,6 +8,8 @@ Backend responsável por toda a regra de negócio do sistema:
 - Orçamentos
 - Ordens de Serviço
 - Anotações
+- Relatórios técnicos
+- Laudos técnicos
 - Integração futura com IA
 
 
@@ -47,7 +49,7 @@ npm run dev
 ## Observações
 - Backend tem que ser desenvolvido para sempre ser escalável. Este projeto terá updates no futuro
 
-## Alguns comandos úteis
+## Comandos úteis
 
 ### Para criar uma migration
 

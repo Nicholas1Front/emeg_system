@@ -1,6 +1,5 @@
 # Frontend – Sistema de Gestão da Oficina
 
-
 ## Visão Geral
 Interface web para gestão da oficina:
 - Clientes

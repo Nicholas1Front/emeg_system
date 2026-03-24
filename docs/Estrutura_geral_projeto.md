@@ -125,13 +125,13 @@ docs/
 * cors
 * morgan (logs)
 
-### Uploads / Arquivos (futuro)
+### Uploads / Arquivos
 
 * Cloudflare
 
-### PDF / Relatórios (futuro)
+### PDF / Relatórios
 
-* pdfkit ou puppeteer
+* puppeteer
 
 ---
 

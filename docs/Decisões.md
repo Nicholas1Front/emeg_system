@@ -227,3 +227,21 @@ O que isso impacta no projeto.
 ### Consequência:
 - Pequena mudança na validação do preço base
 - User terá uma responsabilidade maior ao verificar se colocou preço base ou não
+
+## 24/03/2026 – Montar um modulo próprio para geração de PDF
+
+### Decisão:
+- Fazer um modulo dedicado a cuidar da geração de PDF (template, estilização e armazenamento no storage)
+- Montar layouts especializados para os documentos necessários (orçamentos, ordens de serviços e etc) respeitando estruturação do backend
+- Desenvolver este modulo e suas rotas especificas somente após finalizar a estruturação do backend
+- Utilizar puppeter juntamente com HTML + CSS
+
+### Motivo:
+- Pensando na perfomance, escalabilidade e custo de manutenção um modulo dedicado se torna a melhor opção
+- Persistência dos dados do backend será mantida através dos layouts pensados para documento
+- Visando não travar o desenvolvimento dos outros modulos este modulo será gerado somente após finalização do backend
+- Puppeter, por hora, é a melhor stack e possibilitará uma estrutura mais limpa, estavel e escalavel 
+
+### Consequência:
+- A estrutura de cada documento será definida pela sua estrutura no backend, então cada modulo e cada doc terá que ser analisado corretamente
+- Como causa direta deste modulo, o backend irá demorar um pouco mais de tempo para ser finalizado
