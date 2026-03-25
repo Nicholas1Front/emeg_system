@@ -12,6 +12,8 @@ const equipamentsService = require('../equipaments/equipaments_service');
         - rejected : Orçamento rejeitado pelo cliente
 */
 
+const statusList = ['draft', 'pending', 'approved', 'rejected'];
+
 function calculateItemDiscount(
     unit_price,
     quantity,
@@ -48,7 +50,8 @@ class BudgetsService{
             if(
                 client.name === undefined || 
                 client.document === undefined || 
-                client.type === undefined
+                client.type === undefined ||
+                client.address === undefined
             ){
                 throw new Error("Missing client data");
             }
@@ -97,7 +100,7 @@ class BudgetsService{
             base_price : 0,
             final_price : 0,
             status : "draft",
-            pdf_url : budgetData.pdf_url,
+            pdf_url : null,
             observations : budgetData.observations
         });
 
@@ -161,7 +164,7 @@ class BudgetsService{
             equipament = equipament[0];
         }
 
-        budgetData.name = `Orçamento ${budgetData.id} - ${client.name} - ${equipament.name}`;
+        budgetData.name = `Orçamento ${budgetData.id} - ${client.name} - ${equipament.name, equipament.brand, equipament.identification}`;
 
         budgetData = await budgetsRepository.update({
             id : budgetData.id,
@@ -282,6 +285,81 @@ class BudgetsService{
 
         delete budgetData.items;
 
+        let client = budgetData.client;
+        let equipament = budgetData.equipament;
+
+        if(client !== undefined && client.id !== undefined){
+            client = {
+                id : client.id
+            }
+
+            client = await clientsService.findClients(client);
+
+            if(client.length === 0){
+                throw new Error("Client not found");
+            }
+
+            client = client[0];
+        }
+
+        if(client !== undefined && client.id === undefined){
+            if(client.name === undefined ||
+                client.document === undefined || 
+                client.type === undefined ||
+                client.address === undefined 
+            ){
+                throw new Error("Client data is incomplete");
+            }
+
+            client = await clientsService.createClient(client);
+
+            if(!client){
+                throw new Error("Error creating client");
+            }
+        }
+
+        if(equipament !== undefined && equipament.id !== undefined){
+            equipament = {
+                id : equipament.id
+            }
+
+            equipament = await equipamentsService.find(equipament);
+
+            if(equipament.length === 0){
+                throw new Error("Equipament not found");
+            }
+
+            equipament = equipament[0];
+        }
+
+        if(equipament !== undefined && equipament.id === undefined){
+            if(
+                equipament.brand === undefined ||
+                equipament.name === undefined ||
+                equipament.identification === undefined
+            ){
+                throw new Error('Equipament data is incomplete');
+            }
+
+            equipament = await equipamentsService.create({
+                client_id : client.id,
+                brand : equipament.brand,
+                name : equipament.name,
+                identification : equipament.identification
+            })
+
+            if(!equipament){
+                throw new Error("Error creating equipament");
+            }
+        }
+
+        if(client !== undefined && equipament !== undefined){
+            budgetData.client_id = client.id;
+            budgetData.equipament_id = equipament.id;
+
+            budgetData.name = `Orçamento ${budgetId} - ${client.name} - ${equipament.name, equipament.brand, equipament.identification}`;
+        }
+
         const updatedBudget = await budgetsRepository.update({
             id : budgetId,
             data : budgetData
@@ -301,8 +379,6 @@ class BudgetsService{
         budgetId,
         statusData
     }){
-
-        const statusList = ['draft', 'pending', 'approved', 'rejected'];
 
         if(!statusList.includes(statusData.status)){
             throw new Error(`The status : ${statusData.status} is not valid`);
@@ -325,7 +401,7 @@ class BudgetsService{
 
         return {
             budget : updatedBudget,
-            items
+            items : items
         }
     }
 
@@ -349,7 +425,7 @@ class BudgetsService{
 
             finishedBudgets.push({
                 ...budget,
-                items
+                items : items
             })
         }
 
@@ -363,7 +439,16 @@ class BudgetsService{
             throw new Error("Error deactivating budget");
         }
 
-        return deactivatedBudget
+        const items = await budgetItemsRepository.find({budgetId : id});
+
+        if(items.length === 0){
+            throw new Error("No items found for this budget");
+        }
+
+        return {
+            ...deactivatedBudget,
+            items : items
+        }
     }
 
     async activate(id){
@@ -373,7 +458,16 @@ class BudgetsService{
             throw new Error("Error activating budget");
         }
 
-        return activatedBudget
+        const items = await budgetItemsRepository.find({budgetId : id});
+
+        if(items.length === 0){
+            throw new Error("No items found for this budget");
+        }
+
+        return {
+            ...activatedBudget,
+            items : items
+        }
     }
 }
 

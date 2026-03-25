@@ -245,3 +245,15 @@ O que isso impacta no projeto.
 ### Consequência:
 - A estrutura de cada documento será definida pela sua estrutura no backend, então cada modulo e cada doc terá que ser analisado corretamente
 - Como causa direta deste modulo, o backend irá demorar um pouco mais de tempo para ser finalizado
+
+## 25/03/2026 – Deactivate de work orders somente para admin
+
+### Decisão:
+- Somente usuários com role : admin podem desativar e ativar work_orders
+
+### Motivo:
+- Diferente de um budget, work_order além de um checklist é um registro de trabalho então tem uma importância maior
+
+### Consequência:
+- A responsabilidade e função do admin aumenta com mais essa feature
+- Evita erros por parte de usuários comuns ou mal-intencionados

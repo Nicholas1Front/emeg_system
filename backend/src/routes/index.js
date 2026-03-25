@@ -8,6 +8,7 @@ const clientsRoutes = require('./clients_routes');
 const equipamentsRoutes = require('./equipaments_routes');
 const itemsRoutes = require('./items_routes');
 const budgetsRoutes = require('./budgets_routes');
+const workOrdersRoutes = require('./work_orders_routes');
 
 const router = Router();
 router.use('/auth', authRoutes);
@@ -19,5 +20,6 @@ router.use('/clients', clientsRoutes);
 router.use('/equipaments', equipamentsRoutes);
 router.use('/items', itemsRoutes);
 router.use('/budgets', budgetsRoutes);
+router.use('/work-orders', workOrdersRoutes);
 
 module.exports = router;
