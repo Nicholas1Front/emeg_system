@@ -38,6 +38,11 @@ class WorkOrdersController{
                 id : req.params.id,
                 userId : req.user.id,
                 data : updatedData
+            });
+
+            return res.status(200).json({
+                message : "Work order updated successfully",
+                data : order
             })
         }catch(err){
             return res.status(400).json({
