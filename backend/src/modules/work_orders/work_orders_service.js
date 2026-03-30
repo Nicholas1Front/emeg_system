@@ -48,6 +48,8 @@ class WorkOrdersService{
             throw new Error("Client not found");
         }
 
+        client = client[0];
+
         let equipament = {
             id : budget.equipament_id
         }
@@ -57,6 +59,8 @@ class WorkOrdersService{
         if(!equipament){
             throw new Error("Equipament not found");
         }
+
+        equipament = equipament[0];
 
         let itemsData = [];
 
@@ -158,6 +162,8 @@ class WorkOrdersService{
             if(!client){
                 throw new Error("Client not found");
             }
+
+            client = client[0];
         }else{
             if(
                 client.name === undefined ||
@@ -176,6 +182,13 @@ class WorkOrdersService{
 
         if(equipament.id !== undefined){
             equipament = await equipamentsService.find(equipament);
+
+            if(!equipament){
+                throw new Error("Equipament not found");
+            }
+
+            equipament = equipament[0];
+
         }else{
             if(
                 equipament.brand === undefined ||
@@ -271,6 +284,8 @@ class WorkOrdersService{
         if(existingOrder.length === 0){
             throw new Error('Work order not found');
         }
+
+        existingOrder = existingOrder[0];
 
         let finishedItems = [];
 
@@ -437,6 +452,8 @@ class WorkOrdersService{
         if(existingOrder.length === 0){
             throw new Error('Work order not found');
         }
+
+        existingOrder = existingOrder[0];
 
         let finishedOrder = null;
 

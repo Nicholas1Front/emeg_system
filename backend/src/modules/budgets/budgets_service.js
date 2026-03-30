@@ -387,6 +387,14 @@ class BudgetsService{
         statusData
     }){
 
+        const existingBudget = await budgetsRepository.find({
+            id : budgetId
+        });
+
+        if(existingBudget.length === 0){
+            throw new Error("Budget not found");
+        }
+
         if(!statusList.includes(statusData.status)){
             throw new Error(`The status : ${statusData.status} is not valid`);
         }
@@ -439,6 +447,15 @@ class BudgetsService{
     }
 
     async deactivate(id){
+
+        const existingBudget = await budgetsRepository.find({
+            id : id
+        })
+
+        if(existingBudget.length === 0){
+            throw new Error("Budget not found!")
+        }
+
         const deactivatedBudget = await budgetsRepository.deactivate(id);
 
         if(!deactivatedBudget){
@@ -458,6 +475,15 @@ class BudgetsService{
     }
 
     async activate(id){
+
+        const existingBudget = await budgetsRepository.find({
+            id : id
+        })
+
+        if(existingBudget.length === 0){
+            throw new Error("Budget not found!")
+        }
+        
         const activatedBudget = await budgetsRepository.activate(id);
 
         if(!activatedBudget){
