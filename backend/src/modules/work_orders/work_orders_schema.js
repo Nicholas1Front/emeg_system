@@ -1,6 +1,4 @@
 const {z} = require('zod');
-const { update } = require('./work_orders_repository');
-const { updateStatus } = require('./work_orders_service');
 
 const createWorkOrderSchema = z.object({
     budget : z.object({
@@ -12,14 +10,14 @@ const createWorkOrderSchema = z.object({
         address: z.string().min(1, "Address is required").optional(),
         document: z.string().min(11, "Document is required").optional(),
         type: z.enum(['PF', 'PJ'], "Type must be either 'PF' or 'PJ'").optional()
-    }),
+    }).optional(),
     equipament : z.object({
         id : z.coerce.number().int().positive("Equipament ID must be a positive integer").optional(),
         client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
         name : z.string().min(1, "Name is required").optional(),
         brand : z.string().min(1, "Brand is required").optional(),
         identification : z.string().min(1, "Identification is required").optional(),
-    }),
+    }).optional(),
     entry_date : z.coerce.date({ message: "Entry date must be a valid date" }).optional(),
     exit_date : z.coerce.date({ message: "Exit date must be a valid date" }).optional(),
     warranty : z.string().min(1).max(255).optional(),

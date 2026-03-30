@@ -40,7 +40,7 @@ class WorkOrdersService{
             id : budget.client_id
         }
 
-        client = await clientsService.find(client);
+        client = await clientsService.findClients(client);
 
         if(!client){
             throw new Error("Client not found");
@@ -124,8 +124,19 @@ class WorkOrdersService{
             finishedItems.push(orderItem);
         }
 
+        const updatedOrder = await workOrdersRepository.update({
+            id : order.id,
+            data : {
+                name : `Ordem de serviço ${order.id} - ${client.name} - ${equipament.name} - ${equipament.brand} - ${equipament.identification}`
+            }
+        })
+
+        if(!updatedOrder){
+            throw new Error("Error updating work order");
+        }
+
         return{
-            ...order,
+            ...updatedOrder,
             items : finishedItems
         }
     }
@@ -140,7 +151,7 @@ class WorkOrdersService{
         let itemsData = orderData.items;
 
         if(client.id !== undefined){
-            client = await clientsService.find(client);
+            client = await clientsService.findClients(client);
 
             if(!client){
                 throw new Error("Client not found");
@@ -202,6 +213,10 @@ class WorkOrdersService{
             pdf_url: null
         })
 
+        if(!order){
+            throw new Error("Error creating work order");
+        }
+
         let finishedItems = [];
 
         for(const item of itemsData){
@@ -224,8 +239,19 @@ class WorkOrdersService{
             finishedItems.push(orderItem);
         }
 
+        const updatedOrder = await workOrdersRepository.update({
+            id : order.id,
+            data : {
+                name : `Ordem de serviço ${order.id} - ${client.name} - ${equipament.name} - ${equipament.brand} - ${equipament.identification}`
+            }
+        })
+
+        if(!updatedOrder){
+            throw new Error("Error updating work order");
+        }
+
         return{
-            ...order,
+            ...updatedOrder,
             items : finishedItems
         }
         
@@ -315,7 +341,7 @@ class WorkOrdersService{
                 id : client.id
             }
 
-            client = await clientsService.find(client);
+            client = await clientsService.findClients(client);
 
             if(!client){
                 throw new Error("Client not found");
@@ -374,7 +400,7 @@ class WorkOrdersService{
         if(client.id !== undefined || equipament.id !== undefined){
             updatedOrder.client_id = client.id;
             updatedOrder.equipament_id = equipament.id;
-            updatedOrder.name = `Ordem de serviço - ${client.name} - ${equipament.name}`; 
+            updatedOrder.name = `Ordem de serviço ${id} - ${client.name} - ${equipament.name}`; 
         }
 
         if(orderData.status !== undefined){

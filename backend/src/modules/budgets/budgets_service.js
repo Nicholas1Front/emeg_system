@@ -164,7 +164,9 @@ class BudgetsService{
             equipament = equipament[0];
         }
 
-        budgetData.name = `Orçamento ${budgetData.id} - ${client.name} - ${equipament.name, equipament.brand, equipament.identification}`;
+        const equipamentInfo = `${equipament.name} - ${equipament.brand} - ${equipament.identification}`;
+
+        budgetData.name = `Orçamento ${budgetData.id} - ${client.name} - ${equipamentInfo}`;
 
         budgetData = await budgetsRepository.update({
             id : budgetData.id,
@@ -288,6 +290,9 @@ class BudgetsService{
         let client = budgetData.client;
         let equipament = budgetData.equipament;
 
+        delete budgetData.client;
+        delete budgetData.equipament;
+
         if(client !== undefined && client.id !== undefined){
             client = {
                 id : client.id
@@ -357,7 +362,9 @@ class BudgetsService{
             budgetData.client_id = client.id;
             budgetData.equipament_id = equipament.id;
 
-            budgetData.name = `Orçamento ${budgetId} - ${client.name} - ${equipament.name, equipament.brand, equipament.identification}`;
+            const equipamentInfo = `${equipament.name} - ${equipament.brand} - ${equipament.identification}`;
+
+            budgetData.name = `Orçamento ${budgetId} - ${client.name} - ${equipamentInfo}`;
         }
 
         const updatedBudget = await budgetsRepository.update({
