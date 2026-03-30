@@ -358,7 +358,7 @@ class BudgetsService{
             }
         }
 
-        if(client !== undefined && equipament !== undefined){
+        if(client !== undefined || equipament !== undefined){
             budgetData.client_id = client.id;
             budgetData.equipament_id = equipament.id;
 
@@ -426,9 +426,8 @@ class BudgetsService{
             includedDeactivated : filters.includedDeactivated
         });
 
-        let items = [];
         for(const budget of budgets){
-            items = await budgetItemsRepository.find({budgetId : budget.id});
+            let items = await budgetItemsRepository.find({budgetId : budget.id});
 
             finishedBudgets.push({
                 ...budget,
