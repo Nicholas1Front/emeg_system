@@ -30,11 +30,13 @@ class WorkOrdersService{
         userId,
         orderData
     }){
-        const budget = await budgetsService.find(orderData.budget);
+        let budget = await budgetsService.find(orderData.budget);
         
-        if(!budget){
+        if(budget.length === 0){
             throw new Error("Budget not found");
         }
+
+        budget = budget[0];
 
         let client = {
             id : budget.client_id

@@ -427,11 +427,11 @@ class BudgetsService{
         });
 
         for(const budget of budgets){
-            let items = await budgetItemsRepository.find({budgetId : budget.id});
+            let budgetItems = await budgetItemsRepository.find({budgetId : budget.id});
 
             finishedBudgets.push({
                 ...budget,
-                items : items
+                items : budgetItems
             })
         }
 
