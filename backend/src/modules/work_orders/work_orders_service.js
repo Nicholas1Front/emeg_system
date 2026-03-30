@@ -343,7 +343,9 @@ class WorkOrdersService{
         }
 
         if(finishedItems.length === 0){
-            finishedItems = existingOrder.items;
+            finishedItems = await workOrderItemsRepository.find({
+                work_order_id : id
+            });
         }
 
         delete orderData.items;
