@@ -277,7 +277,7 @@ class WorkOrdersService{
         userId,
         orderData
     }){
-        const existingOrder = await workOrdersRepository.find({
+        let existingOrder = await workOrdersRepository.find({
             id : id
         });
 
@@ -445,7 +445,7 @@ class WorkOrdersService{
         workOrderStatus,
         itemsData
     }){
-        const existingOrder = await workOrdersRepository.find({
+        let existingOrder = await workOrdersRepository.find({
             id : id
         })
 
