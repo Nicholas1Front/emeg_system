@@ -289,7 +289,7 @@ class WorkOrdersService{
 
         let finishedItems = [];
 
-        if(orderData.items !== undefined || orderData.items.length > 0){
+        if(orderData.items !== undefined && orderData.items.length > 0){
             const existingItems = await workOrderItemsRepository.find({
                 work_order_id : id
             })
