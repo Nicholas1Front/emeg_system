@@ -529,9 +529,9 @@ class WorkOrdersService{
                     status : item.status
                 }
 
-                updatedItem = await workOrderItemsRepository.update({
+                updatedItem = await workOrderItemsRepository.updateStatus({
                     id : item.id,
-                    data : updatedItem
+                    status : item.status
                 })
 
                 finishedItems.push(updatedItem);
