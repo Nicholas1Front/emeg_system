@@ -275,7 +275,8 @@ class WorkOrdersService{
     async update({
         id,
         userId,
-        orderData
+        orderData,
+        itemsData
     }){
         let existingOrder = await workOrdersRepository.find({
             id : id
@@ -289,11 +290,9 @@ class WorkOrdersService{
 
         let items = null;
 
-        if(orderData.items !== undefined && orderData.items.length > 0){
-            items = orderData.items;
+        if(itemsData !== undefined && itemsData.length > 0){
+            items = itemsData;
         }
-
-        delete orderData.items;
 
         let finishedItems = [];
 
@@ -359,7 +358,11 @@ class WorkOrdersService{
         let client = null;
 
         if(orderData.client !== undefined){
-            client = orderData.client;
+            client = orderData.client
+        }else{
+            client = {
+                id : existingOrder.client_id
+            }
         }
 
         delete orderData.client;
@@ -367,91 +370,100 @@ class WorkOrdersService{
         let equipament = null;
 
         if(orderData.equipament !== undefined){
-            equipament = orderData.equipament;
+            equipament = orderData.equipament
+        }else{
+            equipament = {
+                id : existingOrder.equipament_id
+            }
         }
 
         delete orderData.equipament;
 
         if(client !== null && client.id !== undefined){
-            const filters = {
+
+            const foundClients = await clientsService.findClients({
                 id : client.id
-            }
+            });
 
-            client = await clientsService.findClients(filters);
-
-            if(!client){
+            if(foundClients.length === 0){
                 throw new Error("Client not found");
             }
+
+            client = foundClients[0];
         }
 
         if(client !== null && client.id === undefined){
             if(
                 client.name === undefined ||
-                client.document === undefined || 
+                client.document === undefined ||
                 client.type === undefined
             ){
                 throw new Error("Client data is incomplete");
             }
 
-            client = await clientsService.createClient(client);
+            const createdClient = await clientsService.createClient(client);
 
-            if(!client){
-                throw new Error("Error creating client");
+            if(!createdClient){
+                throw new Error('Error creating client');
             }
+
+            client = createdClient;
         }
 
         if(equipament !== null && equipament.id !== undefined){
-            const filters = {
+
+            const foundEquipaments = await equipamentsService.find({
                 id : equipament.id
-            }
+            });
 
-            equipament = await equipamentsService.find(filters);
-
-            if(!equipament){
+            if(foundEquipaments.length === 0){
                 throw new Error("Equipament not found");
             }
+
+            equipament = foundEquipaments[0];
         }
 
         if(equipament !== null && equipament.id === undefined){
             if(
-                equipament.brand === undefined ||
                 equipament.name === undefined ||
+                equipament.brand === undefined ||
                 equipament.identification === undefined
             ){
                 throw new Error("Equipament data is incomplete");
             }
 
-            equipament = await equipamentsService.create({
+            const createdEquipament = await equipamentsService.create({
                 client_id : client.id,
                 brand : equipament.brand,
                 name : equipament.name,
                 identification : equipament.identification
             });
 
-            if(!equipament){
-                throw new Error("Error creating equipament");
+            if(!createdEquipament){
+                throw new Error('Error creating equipament');
             }
+
+            equipament = createdEquipament;
         }
 
-        if(client.id !== null || equipament.id !== null){
-            orderData.client_id = client.id;
-            orderData.equipament_id = equipament.id;
-            orderData.name = `Ordem de serviço ${id} - ${client.name} - ${equipament.name}`; 
+        if(equipament !== null || client !== null){
+            orderData.name = `Ordem de serviço ${existingOrder.id} - ${client.name} - ${equipament.name} - ${equipament.brand} - ${equipament.identification}`;
         }
 
-        if(orderData.status !== undefined){
-            if(!statusList.includes(orderData.status)){
-                throw new Error(`Invalid status, valid status are: ${statusList.join(', ')}`);
-            }
+        orderData.user_id = userId;
+
+        if(orderData.status !== undefined && !statusList.includes(orderData.status)){
+            throw new Error(`Invalid status, valid status are: ${statusList.join(', ')}`);
         }
 
         const updatedOrder = await workOrdersRepository.update({
             id : id,
-            data : {
-                ...orderData,
-                user_id : userId
-            }
-        })
+            data : orderData
+        });
+
+        if(!updatedOrder){
+            throw new Error(`Error updating work order with id ${id}`);
+        }
 
         return {
             ...updatedOrder,

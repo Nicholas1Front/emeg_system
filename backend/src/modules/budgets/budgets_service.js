@@ -3,6 +3,7 @@ const budgetItemsRepository = require('./budget_items/budget_items.repository');
 
 const clientsService = require('../clients/clients_service');
 const equipamentsService = require('../equipaments/equipaments_service');
+const { id } = require('zod/v4/locales');
 
 /* 
     Budgets status list :
@@ -287,18 +288,34 @@ class BudgetsService{
 
         delete budgetData.items;
 
-        let client = budgetData.client;
-        let equipament = budgetData.equipament;
+        let client = null;
+
+        if(budgetData.client !== undefined){
+            client = budgetData.client;
+        }else{
+            client = {
+                id : existingBudget[0].client_id
+            }
+        }
+
+        let equipament = null;
+
+        if(budgetData.equipament !== undefined){
+            equipament = budgetData.equipament;
+        }else{
+            equipament = {
+                id : existingBudget[0].equipament_id
+            }
+        }
 
         delete budgetData.client;
         delete budgetData.equipament;
 
-        if(client !== undefined && client.id !== undefined){
-            client = {
-                id : client.id
-            }
+        if(client !== null && client.id !== undefined){
 
-            client = await clientsService.findClients(client);
+            client = await clientsService.findClients({
+                id : client.id
+            });
 
             if(client.length === 0){
                 throw new Error("Client not found");
@@ -307,7 +324,7 @@ class BudgetsService{
             client = client[0];
         }
 
-        if(client !== undefined && client.id === undefined){
+        if(client !== null && client.id === undefined){
             if(client.name === undefined ||
                 client.document === undefined || 
                 client.type === undefined ||
@@ -323,12 +340,11 @@ class BudgetsService{
             }
         }
 
-        if(equipament !== undefined && equipament.id !== undefined){
-            equipament = {
-                id : equipament.id
-            }
+        if(equipament !== null && equipament.id !== undefined){
 
-            equipament = await equipamentsService.find(equipament);
+            equipament = await equipamentsService.find({
+                id : equipament.id
+            });
 
             if(equipament.length === 0){
                 throw new Error("Equipament not found");
@@ -358,7 +374,7 @@ class BudgetsService{
             }
         }
 
-        if(client !== undefined || equipament !== undefined){
+        if(client !== null || equipament !== null){
             budgetData.client_id = client.id;
             budgetData.equipament_id = equipament.id;
 
