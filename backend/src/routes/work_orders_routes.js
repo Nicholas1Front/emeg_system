@@ -10,7 +10,7 @@ router.use(authMiddleware);
 router.post('/create-work-order', workOrdersController.createWorkOrder)
 
 router.put('/update-work-order/:id', workOrdersController.updateWorkOrder);
-router.put('/update-work-order-status/:id', workOrdersController.updateWorkOrderStatus);
+router.patch('/update-work-order-status/:id', workOrdersController.updateWorkOrderStatus);
 
 router.get('/get-work-orders', workOrdersController.getWorkOrders);
 

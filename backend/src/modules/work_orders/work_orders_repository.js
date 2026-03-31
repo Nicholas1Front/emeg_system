@@ -46,6 +46,20 @@ class WorkOrdersRepository{
         return order[0]
     }
 
+    async updateStatus({
+        id,
+        status,
+        user_id
+    }){
+        const order = await knex('work_orders').where({ id }).update({
+            status,
+            user_id,
+            updated_at: knex.fn.now()
+        }).returning('*');
+
+        return order[0];
+    }
+
     async find({
         budget_id,
         client_id,

@@ -70,7 +70,7 @@ const updateWorkOrderSchema = z.object({
 );
 
 const updateStatusWorkOrderSchema = z.object({
-    work_order_status : z.string().min(1).max(255).optional(),
+    status : z.string().min(1).max(255).optional(),
     items : z.array({
         id : z.coerce.number().int().positive("Item ID must be a positive integer").optional(),
         status : z.string().min(1).max(255).optional()

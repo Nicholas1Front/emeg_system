@@ -494,21 +494,19 @@ class WorkOrdersService{
                 throw new Error(`Invalid status, valid status are: ${statusList.join(', ')}`);
             }
 
-            finishedOrder = {
-                status : workOrderStatus
-            };
+            finishedOrder = await workOrdersRepository.updateStatus({
+                id : id,
+                status : workOrderStatus,
+                user_id : userId
+            })
+
+            if(!finishedOrder){
+                throw new Error(`Error updating work order status with id ${id}`);
+            }
         }
 
         if(finishedOrder === null){
             finishedOrder = existingOrder[0];
-        }else{
-
-            finishedOrder.user_id = userId;
-
-            finishedOrder = await workOrdersRepository.update({
-                id : id,
-                data : finishedOrder
-            })
         }
 
         let finishedItems = [];
