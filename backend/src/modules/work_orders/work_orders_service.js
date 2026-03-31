@@ -474,8 +474,7 @@ class WorkOrdersService{
     async updateStatus({
         id,
         userId,
-        workOrderStatus,
-        itemsData
+        orderData
     }){
         let existingOrder = await workOrdersRepository.find({
             id : id
@@ -487,9 +486,15 @@ class WorkOrdersService{
 
         existingOrder = existingOrder[0];
 
+        let workOrderStatus = null;
+
+        if(orderData.status !== undefined){
+            workOrderStatus = orderData.status;
+        }
+
         let finishedOrder = null;
 
-        if(workOrderStatus !== undefined){
+        if(workOrderStatus !== null){
             if(!statusList.includes(workOrderStatus)){
                 throw new Error(`Invalid status, valid status are: ${statusList.join(', ')}`);
             }
@@ -509,9 +514,15 @@ class WorkOrdersService{
             finishedOrder = existingOrder[0];
         }
 
+        let itemsData = null;
+
+        if(orderData.items !== undefined && orderData.items.length > 0){
+            itemsData = orderData.items;
+        }
+
         let finishedItems = [];
 
-        if(itemsData !== undefined && itemsData.length > 0){
+        if(itemsData !== null && itemsData.length > 0){
             for(const item of itemsData){
                 const existingItem = await workOrderItemsRepository.find({
                     id : item.id
@@ -535,7 +546,7 @@ class WorkOrdersService{
         }
 
         if(finishedItems.length === 0){
-            finishedItems = existingOrder.items;
+            finishedItems = existingOrder[0].items;
         }
 
         return {

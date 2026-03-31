@@ -67,8 +67,7 @@ class WorkOrdersController{
             const order = await workOrdersService.updateStatus({
                 id : req.params.id,
                 userId : req.user.id,
-                workOrderStatus : data.status,
-                itemsData : data.items
+                orderData : data
             })
 
             return res.status(200).json({
