@@ -26,7 +26,7 @@ class WorkOrderItemsRepository{
             .where({ id})
             .update({
                 ...data,
-                update_at : knex.fn.now()
+                updated_at : knex.fn.now()
             }).returning('*');
 
         return item[0]
@@ -36,10 +36,11 @@ class WorkOrderItemsRepository{
         id,
         status
     }){
-        const item = await knex('work_order_items').where({ id })
+        const item = await knex('work_order_items')
+            .where({ id })
             .update({
                 status,
-                update_at : knex.fn.now()
+                updated_at : knex.fn.now()
             }).returning('*');
 
         return item[0];

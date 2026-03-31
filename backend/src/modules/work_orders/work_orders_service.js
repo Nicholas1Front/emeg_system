@@ -525,11 +525,7 @@ class WorkOrdersService{
                     throw new Error(`Invalid status, valid status are: ${statusList.join(', ')}`);
                 }
 
-                let updatedItem = {
-                    status : item.status
-                }
-
-                updatedItem = await workOrderItemsRepository.updateStatus({
+                const updatedItem = await workOrderItemsRepository.updateStatus({
                     id : item.id,
                     status : item.status
                 })
