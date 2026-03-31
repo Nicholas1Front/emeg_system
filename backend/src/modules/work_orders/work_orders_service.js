@@ -356,24 +356,35 @@ class WorkOrdersService{
             });
         }
 
-        let client = orderData.client;
+        let client = null;
+
+        if(orderData.client !== undefined){
+            client = orderData.client;
+        }
+
         delete orderData.client;
-        let equipament = orderData.equipament;
+
+        let equipament = null;
+
+        if(orderData.equipament !== undefined){
+            equipament = orderData.equipament;
+        }
+
         delete orderData.equipament;
 
-        if(client !== undefined && client.id !== undefined){
-            client = {
+        if(client !== null && client.id !== undefined){
+            const filters = {
                 id : client.id
             }
 
-            client = await clientsService.findClients(client);
+            client = await clientsService.findClients(filters);
 
             if(!client){
                 throw new Error("Client not found");
             }
         }
 
-        if(client !== undefined && client.id === undefined){
+        if(client !== null && client.id === undefined){
             if(
                 client.name === undefined ||
                 client.document === undefined || 
@@ -389,19 +400,19 @@ class WorkOrdersService{
             }
         }
 
-        if(equipament !== undefined && equipament.id !== undefined){
-            equipament = {
+        if(equipament !== null && equipament.id !== undefined){
+            const filters = {
                 id : equipament.id
             }
 
-            equipament = await equipamentsService.find(equipament);
+            equipament = await equipamentsService.find(filters);
 
             if(!equipament){
                 throw new Error("Equipament not found");
             }
         }
 
-        if(equipament !== undefined && equipament.id === undefined){
+        if(equipament !== null && equipament.id === undefined){
             if(
                 equipament.brand === undefined ||
                 equipament.name === undefined ||
@@ -422,7 +433,7 @@ class WorkOrdersService{
             }
         }
 
-        if(client.id !== undefined || equipament.id !== undefined){
+        if(client.id !== null || equipament.id !== null){
             orderData.client_id = client.id;
             orderData.equipament_id = equipament.id;
             orderData.name = `Ordem de serviço ${id} - ${client.name} - ${equipament.name}`; 
