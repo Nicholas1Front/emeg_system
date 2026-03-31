@@ -291,9 +291,9 @@ class WorkOrdersService{
 
         if(orderData.items !== undefined && orderData.items.length > 0){
             items = orderData.items;
-            delete orderData.items;
         }
 
+        delete orderData.items;
 
         let finishedItems = [];
 
@@ -466,7 +466,7 @@ class WorkOrdersService{
 
         let finishedOrder = null;
 
-        if( workOrderStatus !== undefined){
+        if(workOrderStatus !== undefined){
             if(!statusList.includes(workOrderStatus)){
                 throw new Error(`Invalid status, valid status are: ${statusList.join(', ')}`);
             }

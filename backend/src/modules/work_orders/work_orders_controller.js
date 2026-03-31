@@ -6,7 +6,6 @@ const {
     updateStatusWorkOrderSchema,
     findWorkOrdersSchema,
 } = require('./work_orders_schema');
-const { update } = require('./work_orders_repository');
 
 class WorkOrdersController{
     async createWorkOrder(req,res){
@@ -37,7 +36,7 @@ class WorkOrdersController{
             const order = await workOrdersService.update({
                 id : req.params.id,
                 userId : req.user.id,
-                data : updatedData
+                orderData : updatedData
             });
 
             return res.status(200).json({
@@ -59,7 +58,8 @@ class WorkOrdersController{
             const order = await workOrdersService.updateStatus({
                 id : req.params.id,
                 userId : req.user.id,
-                workOrderStatus : data.status
+                workOrderStatus : data.status,
+                itemsData : data.items
             })
 
             return res.status(200).json({
