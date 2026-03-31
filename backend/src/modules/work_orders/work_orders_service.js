@@ -291,9 +291,9 @@ class WorkOrdersService{
 
         if(orderData.items !== undefined && orderData.items.length > 0){
             items = orderData.items;
+            delete orderData.items;
         }
 
-        delete orderData.items;
 
         let finishedItems = [];
 
