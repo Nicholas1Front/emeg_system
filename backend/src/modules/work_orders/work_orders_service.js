@@ -287,16 +287,24 @@ class WorkOrdersService{
 
         existingOrder = existingOrder[0];
 
-        let finishedItems = [];
+        let items = null;
 
         if(orderData.items !== undefined && orderData.items.length > 0){
+            items = orderData.items;
+        }
+
+        delete orderData.items;
+
+        let finishedItems = [];
+
+        if(items !== null && items.length > 0){
             const existingItems = await workOrderItemsRepository.find({
                 work_order_id : id
             })
 
             const existingItemsIds = existingItems.map(item => item.id);
 
-            const incomingItemsIds = orderData.items.map(item => item.id).filter(id => id !== undefined);
+            const incomingItemsIds = items.map(item => item.id).filter(id => id !== undefined);
 
             const idsToDelete = existingItemsIds.filter(id => !incomingItemsIds.includes(id));
 
@@ -308,7 +316,7 @@ class WorkOrdersService{
                 }
             }
 
-            for(const item of orderData.items){
+            for(const item of items){
                 if(item.status !== undefined && !statusList.includes(item.status)){
                     throw new Error(`Invalid status for item ${item.name}, valid status are: ${statusList.join(', ')}`);
                 }
@@ -326,7 +334,7 @@ class WorkOrdersService{
                     finishedItems.push(updatedItem);
                 }else{
                     const newItem = await workOrderItemsRepository.create({
-                        work_order_id : ImageCapture,
+                        work_order_id : id,
                         name : item.name,
                         quantity : item.quantity,
                         status : item.status
@@ -347,8 +355,6 @@ class WorkOrdersService{
                 work_order_id : id
             });
         }
-
-        delete orderData.items;
 
         let client = orderData.client;
         delete orderData.client;
@@ -417,9 +423,9 @@ class WorkOrdersService{
         }
 
         if(client.id !== undefined || equipament.id !== undefined){
-            updatedOrder.client_id = client.id;
-            updatedOrder.equipament_id = equipament.id;
-            updatedOrder.name = `Ordem de serviço ${id} - ${client.name} - ${equipament.name}`; 
+            orderData.client_id = client.id;
+            orderData.equipament_id = equipament.id;
+            orderData.name = `Ordem de serviço ${id} - ${client.name} - ${equipament.name}`; 
         }
 
         if(orderData.status !== undefined){
@@ -428,11 +434,12 @@ class WorkOrdersService{
             }
         }
 
-        updatedOrder.user_id = userId;
-
         const updatedOrder = await workOrdersRepository.update({
             id : id,
-            data : orderData
+            data : {
+                ...orderData,
+                user_id : userId
+            }
         })
 
         return {
