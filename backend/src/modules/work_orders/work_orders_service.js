@@ -476,7 +476,7 @@ class WorkOrdersService{
         userId,
         orderData
     }){
-        let existingOrder = await workOrdersRepository.find({
+        let existingOrder = await this.find({
             id : id
         })
 
@@ -522,40 +522,32 @@ class WorkOrdersService{
 
         let finishedItems = [];
 
-        let existingOrderItems = await workOrderItemsRepository.find({
-            work_order_id : id
-        });
+        let existingOrderItems = existingOrder.items;
 
         if(itemsData !== null && itemsData.length > 0){
-            let existingItemsIds = existingOrderItems.map(item => item.id);
             let incomingItemsIds = itemsData.map(item => item.id);
 
-            let idsToUpdate = existingItemsIds.filter(id => incomingItemsIds.includes(id));
-            let idsToKeep = existingItemsIds.filter(id => !incomingItemsIds.includes(id));
+            for(const item of existingOrderItems){
+                if(incomingItemsIds.includes(item.id)){
+                    if(!statusList.includes(item.status)){
+                        throw new Error(`Invalid status for item ${item.name}, valid status are: ${statusList.join(', ')}`);
+                    }
 
-            for(const itemId of idsToUpdate){
-                const itemData = itemsData.find(item => item.id === itemId);
+                    const updatedItem = await workOrderItemsRepository.updateStatus({
+                        id : item.id,
+                        status : item.status
+                    });
 
-                if(!statusList.includes(itemData.status)){
-                    throw new Error(`Invalid status for item ${itemData.name}, valid status are: ${statusList.join(', ')}`);
+                    if(!updatedItem){
+                        throw new Error(`Error updating item status with id ${item.id}`);
+                    }
+
+                    finishedItems.push(updatedItem);
                 }
 
-                const updatedItem = await workOrderItemsRepository.updateStatus({
-                    id : itemId,
-                    status : itemData.status
-                });
-                
-                if(!updatedItem){
-                    throw new Error(`Error updating item with id ${itemId}`);
+                if(!incomingItemsIds.includes(item.id)){
+                    finishedItems.push(item);
                 }
-
-                finishedItems.push(updatedItem);
-            }
-
-            for(const itemId of idsToKeep){
-                const itemData = existingOrderItems.find(item => item.id === itemId);
-
-                finishedItems.push(itemData);
             }
         }
         if(itemsData === null && itemsData.length === 0){
