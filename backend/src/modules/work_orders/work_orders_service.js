@@ -522,31 +522,42 @@ class WorkOrdersService{
 
         let finishedItems = [];
 
+        let existingOrderItems = existingOrder.items;
+
         if(itemsData !== null && itemsData.length > 0){
-            for(const item of itemsData){
-                const existingItem = await workOrderItemsRepository.find({
-                    id : item.id
-                })
+            let existingItemsIds = existingOrderItems.map(item => item.id);
+            let incomingItemsIds = itemsData.map(item => item.id);
 
-                if(existingItem.length === 0){
-                    throw new Error(`Item with id ${item.id} not found`);
-                }
+            let idsToUpdate = existingItemsIds.filter(id => incomingItemsIds.includes(id));
+            let idsToKeep = existingItemsIds.filter(id => !incomingItemsIds.includes(id));
 
-                if(!statusList.includes(item.status)){
-                    throw new Error(`Invalid status, valid status are: ${statusList.join(', ')}`);
+            for(const itemId of idsToUpdate){
+                const itemData = itemsData.find(item => item.id === itemId);
+
+                if(!statusList.includes(itemData.status)){
+                    throw new Error(`Invalid status for item ${itemData.name}, valid status are: ${statusList.join(', ')}`);
                 }
 
                 const updatedItem = await workOrderItemsRepository.updateStatus({
-                    id : item.id,
-                    status : item.status
-                })
+                    id : itemId,
+                    status : itemData.status
+                });
+                
+                if(!updatedItem){
+                    throw new Error(`Error updating item with id ${itemId}`);
+                }
 
                 finishedItems.push(updatedItem);
             }
-        }
 
-        if(finishedItems.length === 0){
-            finishedItems = existingOrder[0].items;
+            for(const itemId of idsToKeep){
+                const itemData = existingOrderItems.find(item => item.id === itemId);
+
+                finishedItems.push(itemData);
+            }
+        }
+        if(itemsData === null && itemsData.length === 0){
+            finishedItems = existingOrderItems;
         }
 
         return {
