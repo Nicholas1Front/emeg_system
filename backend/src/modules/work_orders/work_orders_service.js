@@ -522,7 +522,9 @@ class WorkOrdersService{
 
         let finishedItems = [];
 
-        let existingOrderItems = existingOrder.items;
+        let existingOrderItems = await workOrderItemsRepository.find({
+            work_order_id : id
+        });
 
         if(itemsData !== null && itemsData.length > 0){
             let existingItemsIds = existingOrderItems.map(item => item.id);
@@ -583,7 +585,7 @@ class WorkOrdersService{
         let finishedOrders = [];
 
         for(const order of orders){
-            items = await workOrderItemsRepository.find({
+            const items = await workOrderItemsRepository.find({
                 work_order_id : order.id
             });
 
