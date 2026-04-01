@@ -522,7 +522,11 @@ class WorkOrdersService{
 
         let existingItems = existingOrder.items;
 
-        let finishedItems = null;
+        let finishedItems = [];
+
+        if(itemsData === null && itemsData.length === 0){
+            finishedItems = existingItems;
+        }
 
         if(itemsData !== null && itemsData.length > 0){
 
@@ -554,10 +558,6 @@ class WorkOrdersService{
                     finishedItems.push(item);
                 }
 
-            }
-
-            if(itemsData === null || itemsData.length === 0){
-                finishedItems = existingItems;
             }
         }
 
