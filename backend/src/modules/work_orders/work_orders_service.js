@@ -631,7 +631,8 @@ class WorkOrdersService{
         }
 
         const existingOrder = await workOrdersRepository.find({
-            id : id
+            id : id,
+            includedDeactivated : true
         })
 
         if(existingOrder.length === 0){

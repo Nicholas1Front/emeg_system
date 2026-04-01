@@ -493,7 +493,8 @@ class BudgetsService{
     async activate(id){
 
         const existingBudget = await budgetsRepository.find({
-            id : id
+            id : id,
+            includedDeactivated : true
         })
 
         if(existingBudget.length === 0){
