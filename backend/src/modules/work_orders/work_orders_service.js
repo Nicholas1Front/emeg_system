@@ -526,6 +526,11 @@ class WorkOrdersService{
 
         if(itemsData === null && itemsData.length === 0){
             finishedItems = existingItems;
+
+            return {
+                ...finishedOrder,
+                items : finishedItems
+            }
         }
 
         if(itemsData !== null && itemsData.length > 0){
@@ -559,11 +564,11 @@ class WorkOrdersService{
                 }
 
             }
-        }
 
-        return {
-            ...finishedOrder,
-            items : finishedItems
+            return {
+                ...finishedOrder,
+                items : finishedItems
+            }
         }
     }
 
