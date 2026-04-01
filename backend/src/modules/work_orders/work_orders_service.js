@@ -522,54 +522,40 @@ class WorkOrdersService{
 
         let existingItems = existingOrder.items;
 
-        let finishedItems = [];
-
-        if(itemsData === null && itemsData.length === 0){
-            finishedItems = existingItems;
-
-            return {
-                ...finishedOrder,
-                items : finishedItems
-            }
-        }
-
         if(itemsData !== null && itemsData.length > 0){
+            let incomingItemsIds = itemsData.map(item => item.id);
 
-            const existingItemsIds = existingItems.map(item => item.id);
+            for(const existingItem of existingItems){
+                if(incomingItemsIds.includes(existingItem.id)){
+                    let updatedItem = itemsData.find(item => item.id === existingItem.id);
 
-            for(const item of itemsData){
-                if(item.id === undefined){
-                    throw new Error("Item id is required to update item status");
-                }
-
-                if(item.status !== undefined && !statusList.includes(item.status)){
-                    throw new Error(`Invalid status, valid status are: ${statusList.join(', ')}`);
-                }
-
-                if(existingItemsIds.includes(item.id)){
-                    const updatedItem = await workOrderItemsRepository.updateStatus({
-                        id : item.id,
-                        status : item.status
-                    });
-
-                    if(!updatedItem){
-                        throw new Error(`Error updating status for item with id ${item.id}`);
+                    if(!updatedItem || updatedItem.id === undefined){
+                        throw new Error(`Item with id ${existingItem.id} not found in request body`);
                     }
 
-                    finishedItems.push(updatedItem);
-                }else{
-                    const item = existingItems.find(i => i.id === item.id);
+                    if(updatedItem.status !== undefined && !statusList.includes(updatedItem.status)){ 
+                        throw new Error(`Invalid status for item with id ${existingItem.id}, valid status are: ${statusList.join(', ')}`);
+                    }
 
-                    finishedItems.push(item);
+                    const result = await workOrderItemsRepository.updateStatus({
+                        id : updatedItem.id,
+                        status : updatedItem.status
+                    })
+
+                    if(!result){
+                        throw new Error(`Error updating status for item with id ${updatedItem.id}`);
+                    }
+
+                    existingItem.status = updatedItem.status;
                 }
-
-            }
-
-            return {
-                ...finishedOrder,
-                items : finishedItems
             }
         }
+
+        return {
+            ...finishedOrder,
+            items : existingItems
+        }
+        
     }
 
     async find(filters){
