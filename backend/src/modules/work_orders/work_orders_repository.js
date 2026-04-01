@@ -127,7 +127,7 @@ class WorkOrdersRepository{
 
     async deactivate(id){
         const order = await knex('work_orders').where({ id }).update({
-            delete_at: knex.fn.now()
+            deleted_at: knex.fn.now()
         }).returning('*');
 
         return order[0];
@@ -135,7 +135,7 @@ class WorkOrdersRepository{
 
     async activate(id){
         const order = await knex('work_orders').where({ id }).update({
-            delete_at: null
+            deleted_at: null
         }).returning('*');
 
         return order[0];
