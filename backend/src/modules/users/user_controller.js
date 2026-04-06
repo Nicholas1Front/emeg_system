@@ -148,7 +148,7 @@ class UserController{
             const parsedFilters = findUserSchema.parse(req.query);
 
             const result = await userService.getUsers({
-                requesterRole : requesterRole,
+                requesterRole : req.user.role,
                 filters : parsedFilters 
             });
 

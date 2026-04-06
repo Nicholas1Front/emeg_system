@@ -199,7 +199,7 @@ Base de referência para peças e serviços.
 * [✅] Testes unitários
 ---
 
-## Orçamentos / Ordens de serviço [...]
+## Orçamentos / Ordens de serviço [✅]
 
 ⏱️ Estimativa: 6 a 8 dias
 
@@ -214,14 +214,14 @@ Base de referência para peças e serviços.
 
 * [✅] Model budgets
 * [✅] Model budget_items
-* [...] Model work_order
-* [ ] Model work_order_items
-* [ ] Fluxo de status para ambas as entidades
-* [ ] Testes unitários
+* [✅] Model work_order
+* [✅] Model work_order_items
+* [✅] Fluxo de status para ambas as entidades
+* [✅] Testes unitários
 
 ---
 
-## Módulo de Relatórios e Laudos []
+## Módulo de Relatórios e Laudos [...]
 
 ⏱️ Estimativa: 5 a 7 dias
 

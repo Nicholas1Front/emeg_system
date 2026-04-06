@@ -257,3 +257,20 @@ O que isso impacta no projeto.
 ### Consequência:
 - A responsabilidade e função do admin aumenta com mais essa feature
 - Evita erros por parte de usuários comuns ou mal-intencionados
+
+## 06/04/2026 – Relatórios e laudos em um único lugar
+
+### Decisão:
+- Usar somente uma table para armazenar relatórios técnicos (reports) e laudos técnicos (assessments)
+- O nome da table será technical_docs e usará type para definir entre um e outro
+- Modulo exportará o conteúdo do documento em docx 
+
+### Motivo:
+- Para não causar complicações devido a complexidade que dois modulos para ambos iria exigir
+- Manter o mesmo padrão e simplicidade dos outros modulos (como work_orders e notes)
+- "technical_docs" pode ser escalado no futuro para outros documentos técnicos como planos de manutenção e entre outros
+- Um arquivo docx permite a edição, adição e correção de informações e posteriormente pode ser exportado para PDF 
+
+### Consequência:
+- Menos carga e complexidade no desenvolvimento do modulo
+- Mais liberdade e flexibilidade na criação dos documentos tanto na parte da API quanto para o usuário final (documento criado no banco -> export em docx -> edição -> export em pdf)
