@@ -9,6 +9,7 @@ const equipamentsRoutes = require('./equipaments_routes');
 const itemsRoutes = require('./items_routes');
 const budgetsRoutes = require('./budgets_routes');
 const workOrdersRoutes = require('./work_orders_routes');
+const techDocsRoutes = require('./technical_docs_routes');
 
 const router = Router();
 router.use('/auth', authRoutes);
@@ -21,5 +22,6 @@ router.use('/equipaments', equipamentsRoutes);
 router.use('/items', itemsRoutes);
 router.use('/budgets', budgetsRoutes);
 router.use('/work-orders', workOrdersRoutes);
+router.use('/tech-docs', techDocsRoutes);
 
 module.exports = router;
