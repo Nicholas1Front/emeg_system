@@ -1,6 +1,6 @@
-const multer = require('multer');
-
 const { Router} = require('express');
+
+const multer = require('multer');
 const techDocsController = require('../modules/technical_docs/technical_docs_controller');
 const authMiddleware = require('../middlewares/auth_middleware');
 const adminMiddleware = require('../middlewares/admin_middleware');

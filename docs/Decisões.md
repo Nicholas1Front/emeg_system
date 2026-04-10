@@ -274,3 +274,15 @@ O que isso impacta no projeto.
 ### Consequência:
 - Menos carga e complexidade no desenvolvimento do modulo
 - Mais liberdade e flexibilidade na criação dos documentos tanto na parte da API quanto para o usuário final (documento criado no banco -> export em docx -> edição -> export em pdf)
+
+## 10/04/2026 - status de relatórios e laudos via assinatura
+
+### Decisão :
+- O status referente ao relatório e/ou ao laudo técnico serão somente alterados via assinatura
+
+### Motivo :
+- Evitar que users insiram status que não venham a condizer com a real situação do doc
+
+### Consequência :
+- A signature se tornará uma propriedade fundamental para alterar status do doc
+- Maior responsabilidade e atenção para alteração dessa propriedade
