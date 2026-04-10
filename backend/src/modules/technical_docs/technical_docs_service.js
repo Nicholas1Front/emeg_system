@@ -19,9 +19,14 @@ class TechnicalDocsService{
 
         let client = docData.client;
 
+        delete docData.client;
+
         client = await clientsService.findClients(client);
 
         if(client.length === 0){
+
+            client = client[0];
+
             if(
                 client.name === undefined ||
                 client.document === undefined ||
@@ -40,12 +45,10 @@ class TechnicalDocsService{
             client = client[0];
         }
 
+        docData.client_id = client.id;
+
         if(!allowedTypes.includes(docData.type)){
             throw new Error(`Invalid document type. Allowed types are: ${allowedTypes.join(', ')}`);
-        }
-
-        if(!statusList.includes(docData.status)){
-            throw new Error(`Invalid document status. Allowed status are: ${statusList.join(', ')}`);
         }
 
         if(docData.work_order_id === undefined){
@@ -72,7 +75,7 @@ class TechnicalDocsService{
         if(signatureImg){
             const signatureObject = await attachmentsService.uploadAttachment({
                 file : signatureImg,
-                entityType : 'technical_doc_signature',
+                entityType : 'tech_doc_signature_attachment',
                 entityId : doc.id,
                 requesterId : userId
             })
@@ -86,7 +89,7 @@ class TechnicalDocsService{
             doc.status = 'finished';
         }
 
-        if(!signatureImg || signatureImg === undefined){
+        if(!signatureImg){
             doc.is_signed = false;
             doc.status = 'pending_signature';
         }
@@ -180,8 +183,6 @@ class TechnicalDocsService{
                 if(!client){
                     throw new Error('Error creating client');
                 }
-
-                client = client[0];
             }
         }else{
             client = await clientsService.findClients({
@@ -211,63 +212,64 @@ class TechnicalDocsService{
             }
         }
 
-        if(signatureImg){
-            let existingSignature = await attachmentsService.findAttachments({
-                entityType : 'technical_doc_signature',
-                entityId : existingDoc.id
-            })
+        if(signatureImg !== undefined){
+            if(signatureImg){
+                const existingSignature = await attachmentsService.findAttachments({
+                    entityType : 'tech_doc_signature_attachment',
+                    entityId : id
+                })
 
-            if(existingSignature.length === 0){
-                throw new Error('Existing signature not found for this document');
+                if(existingSignature.length === 0){
+                    throw new Error('Signature image not found for the existing document');
+                }
+
+                const result = await attachmentsService.deleteAttachment({
+                    attachmentId : parseInt(existingSignature[0].id),
+                    requesterRole : 'admin'
+                })
+
+                if(!result || result.message !== "Attachment deleted successfully"){
+                    throw new Error('Error deleting existing signature image');
+                }
+
+                const signatureObject = await attachmentsService.uploadAttachment({
+                    file : signatureImg,
+                    entityType : docData.type,
+                    entityId : id,
+                    requesterId : userId   
+                })
+
+                if(!signatureObject){
+                    throw new Error('Error uploading signature image');
+                }
+
+                docData.signature_url = signatureObject.url;
+                docData.is_signed = true;
+                docData.status = 'finished';
+            }else{
+
+                const existingSignature = await attachmentsService.findAttachments({
+                    entityType : 'tech_doc_signature_attachment',
+                    entityId : id
+                })
+
+                if(existingSignature.length === 0){
+                    throw new Error('Signature image not found for the existing document');
+                }
+
+                const result = await attachmentsService.deleteAttachment({
+                    attachmentId : parseInt(existingSignature[0].id),
+                    requesterRole : 'admin'
+                })
+
+                if(!result || result.message !== "Attachment deleted successfully"){
+                    throw new Error('Error deleting existing signature image');
+                }
+
+                docData.signature_url = null;
+                docData.is_signed = false;
+                docData.status = 'pending_signature';
             }
-
-            existingSignature = existingSignature[0];
-
-            const result = await attachmentsService.deleteAttachment(existingSignature.id);
-
-            if(!result || result.message !== "Attachment deleted successfully"){
-                throw new Error('Error deleting existing signature');
-            }
-
-            const signatureObject = await attachmentsService.uploadAttachment({
-                file : signatureImg,
-                entityType : 'technical_doc_signature',
-                entityId : existingDoc.id,
-                requesterId : docData.user_id
-            })
-
-            if(!signatureObject){
-                throw new Error('Error uploading new signature image');
-            }
-
-            docData.signature_url = signatureObject.url;
-            docData.is_signed = true;
-            docData.status = 'finished';
-        }
-
-        if(!signatureImg){
-            let existingSignature = await attachmentsService.findAttachments({
-                entityType : 'technical_doc_signature',
-                entityId : parseInt(existingDoc.id)
-            });
-
-            if(existingSignature.length === 0){
-                throw new Error('Existing signature not found for this document');
-            }
-
-            existingSignature = existingSignature[0];
-
-            const result = await attachmentsService.deleteAttachment(
-                parseInt(existingSignature.id)
-            )
-
-            if(!result || result.message !== "Attachment deleted successfully"){
-                throw new Error('Error deleting existing signature');
-            }
-
-            docData.signature_url = null;
-            docData.is_signed = false;
-            docData.status = 'pending_signature';
         }
 
         const uploadedDoc = await techDocsRepository.update({
@@ -287,7 +289,10 @@ class TechnicalDocsService{
             for(let id of existingIds){
                 id = parseInt(id);
 
-                const result = await attachmentsService.deleteAttachment(id);
+                const result = await attachmentsService.deleteAttachment({
+                    attachmentId : id,
+                    requesterRole : 'admin'
+                });
 
                 if(!result || result.message !== "Attachment deleted successfully"){
                     throw new Error('Error deleting existing attachment with id ' + id);
@@ -310,7 +315,9 @@ class TechnicalDocsService{
             }
         }
 
-        if(attachmentsFiles || attachmentsFiles.length > 0 || finishedAttachments.length > 0){
+        if(
+            (attachmentsFiles && attachmentsFiles.length > 0) || finishedAttachments.length > 0
+        ){
             for(const attachment of existingDoc.attachments){
                 finishedAttachments.push(attachment);
             }

@@ -18,7 +18,7 @@ router.use(authMiddleware);
 router.post(
     '/create-tech-doc',
     upload.fields([
-        {name : 'files' , maxCount : 10},
+        {name : 'attachments' , maxCount : 10},
         {name : 'signatureImg' , maxCount : 1}
     ]),
     techDocsController.createDoc
@@ -27,7 +27,7 @@ router.post(
 router.put(
     '/update-tech-doc',
     upload.fields([
-        {name : 'files' , maxCount : 10},
+        {name : 'attachments' , maxCount : 10},
         {name : 'signatureImg' , maxCount : 1}
     ]),
     techDocsController.updateDoc
@@ -45,7 +45,7 @@ router.delete(
 )
 
 router.patch(
-    'activate-tech-doc/:id',
+    '/activate-tech-doc/:id',
     adminMiddleware,
     techDocsController.activateDoc
 )

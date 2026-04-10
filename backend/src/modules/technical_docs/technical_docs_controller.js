@@ -8,10 +8,11 @@ const {
 class TechnicalDocsController{
     async createDoc(req,res){
         try{
-            const data = createTechDocsSchema.parse(req.body);
+            let data = createTechDocsSchema.parse(req.body);
 
-            const files = req.files || false;
-            const signatureFile = req.signatureImg || false;
+            const files = req.files?.attachments || false;
+
+            const signatureFile = req.files?.signatureImg?.[0] || false;
 
             const doc = await techDocsService.create({
                 userId : req.user.id,
@@ -36,8 +37,17 @@ class TechnicalDocsController{
         try{
             const data = updateTechDocSchema.parse(req.body);
 
-            const files = req.files || false;
-            const signatureFile = req.signatureImg || false;
+            const files = req.files?.attachments || false;
+
+            let signatureFile = undefined;
+
+            if(!data.remove_signature){
+                signatureFile = req.files?.signatureImg?.[0];
+            }else{
+                signatureFile = false;
+            }
+
+            delete data.remove_signature;
 
             const doc = await techDocsService.update({
                 id : req.params.id,
