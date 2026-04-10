@@ -1,4 +1,4 @@
-const upload = require('multer');
+const multer = require('multer');
 
 const { Router} = require('express');
 const techDocsController = require('../modules/technical_docs/technical_docs_controller');
@@ -8,6 +8,13 @@ const adminMiddleware = require('../middlewares/admin_middleware');
 const router = Router();
 
 router.use(authMiddleware);
+
+const upload = multer({
+    storage : multer.memoryStorage(),
+    limits : {
+        fileSize : 500 * 1024 * 1024 // 500MB
+    }
+})
 
 router.post(
     '/create-tech-doc',
