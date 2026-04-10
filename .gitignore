@@ -1,3 +1,5 @@
+# Backend
+
 # Node
 node_modules/
 .env
@@ -13,3 +15,6 @@ build/
 
 # OS
 .DS_Store
+
+# tests
+mock_files
