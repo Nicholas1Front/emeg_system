@@ -35,7 +35,7 @@ router.put(
 
 router.get(
     '/get-tech-docs',
-    techDocsController.getDocs
+    techDocsController.findDoc
 )
 
 router.delete(
