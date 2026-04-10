@@ -6,15 +6,14 @@ const authMiddleware = require('../middlewares/auth_middleware');
 const adminMiddleware = require('../middlewares/admin_middleware');
 
 const router = Router();
-
-router.use(authMiddleware);
-
 const upload = multer({
     storage : multer.memoryStorage(),
     limits : {
         fileSize : 500 * 1024 * 1024 // 500MB
     }
 })
+
+router.use(authMiddleware);
 
 router.post(
     '/create-tech-doc',
@@ -27,7 +26,7 @@ router.post(
 
 router.put(
     '/update-tech-doc',
-    upload([
+    upload.fields([
         {name : 'files' , maxCount : 10},
         {name : 'signatureImg' , maxCount : 1}
     ]),
