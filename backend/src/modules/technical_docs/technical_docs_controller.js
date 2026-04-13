@@ -8,7 +8,20 @@ const {
 class TechnicalDocsController{
     async createDoc(req,res){
         try{
-            let data = createTechDocsSchema.parse(req.body);
+
+            if(req.body.client){
+                try{
+                    req.body.client = JSON.parse(req.body.client)
+                    /* Devido a requisição ser feita via form-data o client tem que ser parseado para json */
+                }catch(err){
+                    return res.status(400).json({
+                        message : 'Error parsing client',
+                        error : err.message
+                    })
+                }
+            }
+
+            const data = createTechDocsSchema.parse(req.body);
 
             const files = req.files?.attachments || false;
 
@@ -35,6 +48,19 @@ class TechnicalDocsController{
 
     async updateDoc(req, res){
         try{
+
+            if(req.body.client){
+                try{
+                    req.body.client = JSON.parse(req.body.client)
+                    /* Devido a requisição ser feita via form-data o client tem que ser parseado para json */
+                }catch(err){
+                    return res.status(400).json({
+                        message : 'Error parsing client',
+                        error : err.message
+                    })
+                }
+            }
+
             const data = updateTechDocSchema.parse(req.body);
 
             const files = req.files?.attachments || false;
