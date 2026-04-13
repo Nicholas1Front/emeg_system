@@ -4,48 +4,84 @@ const attachmentRepository = require("./attachments_repository");
 const max_file_size = 2 * 1024 * 1024 * 1024 // 2GB
 
 class AttachmentsService {
-    async uploadAttachment({ 
-        file, 
+    async generateUploadUrl({
+        fileName,
+        mimeType,
+        size,
         entityType,
         entityId,
-        requesterId 
     }){
-        if(!file || file === undefined){
-            throw new Error("No file provided");
+        if(!fileName || !mimeType || !size){
+            throw new Error('Missing file data');
         }
 
-        if(file.size <= 0){
-            throw new Error("File size must be greater than 0 bytes");
+        if(size <= 0){
+            throw new Error('Invalid file size');
         }
 
-        if(file.size > max_file_size){
-            throw new Error("File size exceeds the maximum allowed limit of 2GB");
+        if(size > max_file_size){
+            throw new Error('File size is too large');
         }
 
-        const fileKey = CloudflareR2Provider.generateFileKey(
-            file.originalname,
+        const key = CloudflareR2Provider.generateFileKey(
+            fileName,
             entityType,
             entityId
-        )
+        );
 
-        const fileUrl = await CloudflareR2Provider.uploadFile({
-            buffer : file.buffer,
-            mimeType : file.mimetype,
-            key : fileKey
+        const uploadUrl = await CloudflareR2Provider.generateSignedUploadUrl({
+            key,
+            mimeType
         })
+
+        const publicUrl = CloudflareR2Provider.getPublicUrl(key);
+
+        return {
+            upload_url : uploadUrl,
+            key : key,
+            public_url : publicUrl
+        }
+    }
+
+    async createAttachment({
+        key,
+        url,
+        size,
+        mimeType,
+        entityType,
+        entityId,
+        requesterId
+    }){
+        if(!key || !url){
+            throw new Error('Missing file data');
+        }
+
+        if(!key.startsWith(`${entityType}/${entityId}`)){
+            throw new Error('Invalid key structure')
+        }
+
+        const exists = await CloudflareR2Provider.fileExists(key);
+
+        if(!exists){
+            throw new Error('File does not exist');
+        }
 
         const attachment = await attachmentRepository.create({
-            original_name : file.originalname,
-            mime_type : file.mimetype,
-            size : file.size,
-            url : fileUrl,
-            storage_key : fileKey,
+            original_name : key.split('/').pop(),
             entity_type : entityType,
             entity_id : entityId,
-            created_by : requesterId
-        })
+            storage_key : key,
+            mime_type : mimeType,
+            size : size,
+            created_by : requesterId,
+            url : url
+        });
 
-        return attachment;
+        if(!attachment){
+            throw new Error('Error creating attachment');
+        }
+
+        return attachment
     }
 
     async deleteAttachment({

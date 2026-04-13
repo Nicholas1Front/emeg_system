@@ -286,3 +286,21 @@ O que isso impacta no projeto.
 ### Consequência :
 - A signature se tornará uma propriedade fundamental para alterar status do doc
 - Maior responsabilidade e atenção para alteração dessa propriedade
+
+## 13/04/2026 - Frontend irá enviar arquivos/attachments diretamente para Storage
+
+### Decisão :
+- Front-end enviará arquivos diretamente para storage (hoje : Cloudflare)
+- Backend apenas criará metadados, validará informações (antes e depois) e deixará a url pronta para get no database
+- Não utilizar multer nas rotas do backend
+
+### Motivo :
+- Deixar o backend mais leve e com melhor performance
+- Evitar que o server caia ao receber arquivos maiores que seu limite de RAM
+- Melhorar o fluxo de validação e de upload de arquivos no storage (tempo de resposta e de espera)
+
+### Consequência :
+- Refatoração em alguns pontos do modulo de attachments
+- Mudança no planejamento de alguns modulos que ainda não foram criados (doc e pdf generator)
+- Maior validação antes e depois da requisição de upload
+- Validação ainda mais especifica e robusta no front-end

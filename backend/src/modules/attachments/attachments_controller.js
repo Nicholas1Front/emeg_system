@@ -1,38 +1,58 @@
 const {
     createAttachmentSchema,
+    generateUploadUrlSchema,
     findAttachmentSchema
 } = require('./attachments_schema');
 
 const attachmentService = require('./attachments_service');
 
 class AttachmentsController{
-    async createAttachment(req, res){
+    async generateUploadUrl(req, res){
         try{
-            const file = req.file;
+            const data = generateUploadUrlSchema.parse(req.body);
 
-            const rawData = {
-                entity_type : req.body.entity_type,
-                entity_id : req.body.entity_id
-            }
+            const url = await attachmentService.generateUploadUrl({
+                fileName : data?.file_name || false,
+                mimeType : data?.mime_type || false,
+                size : data?.size || false,
+                entityType : data?.entity_type || false,
+                entityId : data?.entity_id || false,
+            });
 
-            const validateData = createAttachmentSchema.parse(rawData);
+            return res.status(200).json({
+                message : 'Upload url generated successfully',
+                data : url
+            })
+        }catch(err){
+            return res.status(400).json({
+                message : 'Failed to generate upload url',
+                error : err.message
+            })
+        }
+    }
 
-            const attachment = await attachmentService.uploadAttachment({
-                file,
-                entityType : validateData.entity_type,
-                entityId : validateData.entity_id,
+    async createAttachment(req,res){
+        try{
+            const data = createAttachmentSchema.parse(req.body);
+
+            const attachment = await attachmentService.createAttachment({
+                key : data?.key || false,
+                url : data?.url || false,
+                size : data?.size || false,
+                mimeType : data?.mime_type || false,
+                entityType : data?.entity_type || false,
+                entityId : data?.entity_id || false,
                 requesterId : req.user.id
             });
 
-            return res.status(201).json({
-                message : "Attachment uploaded successfully",
+            return res.status(200).json({
+                message : "Attachment created successfully",
                 data : attachment
             })
-
         }catch(err){
             return res.status(400).json({
-                message : "Failed to upload attachment",
-                error : err
+                message : "Failed to create attachment",
+                error : err.message
             })
         }
     }

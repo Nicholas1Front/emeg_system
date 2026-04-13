@@ -1,16 +1,19 @@
 const {
     S3Client,
     PutObjectCommand,
-    DeleteObjectCommand
-} = require('@aws-sdk/client-s3');
+    DeleteObjectCommand,
+    HeadObjectCommand
+} = require('@aws-sdk/client-s3')
+
+const { getSignedUrl } = require('@aws-sdk/s3-request-presigner');
 
 const path = require('path');
-const crypto = require('crypto');
+const crypto = require('crypto')
 
-class CloudflareR2Provider {
+class CloudflareR2Provider{
     constructor(){
         this.client = new S3Client({
-            region: 'auto',
+            region : 'auto',
             endpoint : process.env.CLOUDFLARE_R2_ENDPOINT_URL,
             credentials : {
                 accessKeyId : process.env.CLOUDFLARE_R2_ACCESS_KEY,
@@ -20,28 +23,58 @@ class CloudflareR2Provider {
         })
     }
 
-    generateFileKey(originalName, entityType, entityId){
+    generateFileKey(
+        originalName,
+        entityType,
+        entityId
+    ){
         const ext = path.extname(originalName);
+
         const randomHash = crypto.randomBytes(16).toString('hex');
 
-        return `${entityType}/${entityId}/${randomHash}${ext}`;
+        return `${entityType}/${entityId}/${randomHash}${ext}`
     }
 
-    async uploadFile({
-        buffer,
-        mimeType,
-        key
+    async generateSignedUploadUrl({
+        key,
+        mimeType
     }){
         const command = new PutObjectCommand({
             Bucket : process.env.CLOUDFLARE_R2_BUCKET,
             Key : key,
-            Body : buffer,
             ContentType : mimeType
-        })
+        });
 
-        await this.client.send(command);
+        const signedUrl = await getSignedUrl(
+            this.client,
+            command,
+            {
+                expiresIn : 180
+            }
+        )
 
-        return `${process.env.CLOUDFLARE_R2_PUBLIC_URL}/${key}`;
+        return signedUrl
+    }
+
+    getPublicUrl(key){
+        const baseUrl = process.env.CLOUDFLARE_R2_ENDPOINT_URL;
+
+        return `${baseUrl}/${key}`
+    }
+
+    async fileExists(key){
+        try{
+            const command = new HeadObjectCommand({
+                Bucket : process.env.CLOUDFLARE_R2_BUCKET,
+                Key : key
+            });
+
+            await this.client.send(command);
+
+            return true
+        }catch(err){
+            return false
+        }
     }
 
     async deleteFile(key){
@@ -50,7 +83,7 @@ class CloudflareR2Provider {
             Key : key
         });
 
-        await this.client.send(command)
+        await this.client.send(command);
     }
 }
 

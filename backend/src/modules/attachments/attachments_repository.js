@@ -1,8 +1,26 @@
 const knex = require('../../database/knex');
 
 class AttachmentsRepository{
-    async create(data){
-        const attachment = await knex('attachments').insert(data).returning('*');
+    async create({
+        entity_type,
+        entity_id,
+        original_name,
+        storage_key,
+        mime_type,
+        size,
+        created_by,
+        url
+    }){
+        const attachment = await knex('attachments').insert({
+            entity_type,
+            entity_id,
+            original_name,
+            storage_key,
+            mime_type,
+            size,
+            created_by,
+            url
+        }).returning('*');
 
         return attachment[0];
     }

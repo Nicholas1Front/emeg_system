@@ -1,35 +1,31 @@
 const { Router } = require('express');
-const multer = require('multer');
 
 const attachmentsController = require("../modules/attachments/attachments_controller");
 const authMiddleware = require("../middlewares/auth_middleware");
 const adminMiddleware = require("../middlewares/admin_middleware");
 
 const router = Router();
-const upload = multer({
-    storage : multer.memoryStorage(),
-    limits : {
-        fileSize : 2 * 1024 * 1024 * 1024 // 2GB
-    }
-})
+
+router.use(authMiddleware);
 
 router.post(
-    "/create",
-    authMiddleware,
-    upload.single('file'),
+    '/upload',
+    attachmentsController.generateUploadUrl
+)
+
+router.post(
+    '/create',
     attachmentsController.createAttachment
 )
 
 router.delete(
     "/delete/:id",
-    authMiddleware,
     adminMiddleware,
     attachmentsController.deleteAttachment
 )
 
 router.get(
     "/get",
-    authMiddleware,
     attachmentsController.getAttachments
 )
 
