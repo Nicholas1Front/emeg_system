@@ -57,9 +57,10 @@ class CloudflareR2Provider{
     }
 
     getPublicUrl(key){
-        const baseUrl = process.env.CLOUDFLARE_R2_ENDPOINT_URL;
+        const baseUrl = process.env.CLOUDFLARE_R2_PUBLIC_URL.replace(/\/+$/, '');
+        const safeKey = key.replace(/^\/+/, '');
 
-        return `${baseUrl}/${key}`
+        return `${baseUrl}/${safeKey}`;
     }
 
     async fileExists(key){
