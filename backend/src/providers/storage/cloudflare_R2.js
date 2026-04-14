@@ -49,7 +49,7 @@ class CloudflareR2Provider{
             this.client,
             command,
             {
-                expiresIn : 180
+                expiresIn : 60 * 5
             }
         )
 
