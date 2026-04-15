@@ -30,7 +30,11 @@ const updateTechDocSchema = z.object({
     responsible_name : z.string().min(1).optional(),
     responsible_document : z.string().min(11, "Responsible document must be at least 11 characters").optional(),
     responsible_role : z.string().min(1).optional(),
-    remove_signature : z.boolean().optional()
+    signature : z.object({
+        remove_signature : z.boolean().optional(),
+        update_signature : z.boolean().optional()
+    }),
+    remove_attachments : z.boolean().optional()
 }).refine(
     data => Object.keys(data).length > 0,
     { message: "At least one field must be provided for update"}
@@ -41,7 +45,6 @@ const findTechDocSchema = z.object({
     client_id : z.coerce.number().int().positive().min(1).optional(),
     work_order_id : z.coerce.number().int().positive().min(1).optional(),
     title : z.string().min(1).optional(),
-    status : z.string().min(1).optional(),
     responsible_name : z.string().min(1).optional(),
     is_signed : z.boolean().optional(),
     includedDeactivated : z.boolean().optional(),

@@ -23,15 +23,9 @@ class TechnicalDocsController{
 
             const data = createTechDocsSchema.parse(req.body);
 
-            const files = req.files?.attachments || false;
-
-            const signatureFile = req.files?.signatureImg?.[0] || false;
-
             const doc = await techDocsService.create({
                 userId : req.user.id,
-                docData : data,
-                attachmentsFiles : files,
-                signatureImg : signatureFile
+                docData : data
             });
 
             return res.status(200).json({
@@ -61,26 +55,30 @@ class TechnicalDocsController{
                 }
             }
 
-            const data = updateTechDocSchema.parse(req.body);
+            let data = updateTechDocSchema.parse(req.body);
 
-            const files = req.files?.attachments || false;
+            let signatureData = false;
 
-            let signatureFile = undefined;
-
-            if(!data.remove_signature){
-                signatureFile = req.files?.signatureImg?.[0];
-            }else{
-                signatureFile = false;
+            if(data.signature){
+                signatureData = data.signature;
             }
 
-            delete data.remove_signature;
+            delete data.signature;
+
+            let removeAttachments = false;
+
+            if(data.remove_attachments){
+                removeAttachments = data.remove_attachments;
+            }
+
+            delete data.remove_attachments;
 
             const doc = await techDocsService.update({
                 id : req.params.id,
                 userId : req.user.id,
                 docData : data,
-                signatureImg : signatureFile,
-                attachmentsFiles : files
+                signatureData,
+                removeAttachments
             });
 
             return res.status(200).json({

@@ -8,12 +8,12 @@ class TechnicalDocsRepository{
         title,
         type,
         description,
-        status,
         responsible_name,
         responsible_role,
         responsible_document,
         is_signed,
         signature_url,
+        signed_at
     }){
         const doc = await knex('technical_docs').insert({
             client_id,
@@ -22,12 +22,12 @@ class TechnicalDocsRepository{
             title,
             type,
             description,
-            status,
             responsible_name,
             responsible_role,
             responsible_document,
             is_signed,
             signature_url,
+            signed_at
         }).returning('*');
 
         return doc[0]
@@ -52,7 +52,6 @@ class TechnicalDocsRepository{
         client_id,
         work_order_id,
         title,
-        status,
         responsible_name,
         is_signed,
         includedDeactivated,
@@ -83,10 +82,6 @@ class TechnicalDocsRepository{
 
         if(title !== undefined){
             query.where('title', 'ilike', `%${title}%`);
-        }
-
-        if(status !== undefined){
-            query.where({status});
         }
 
         if(responsible_name !== undefined){

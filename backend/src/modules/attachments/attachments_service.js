@@ -92,7 +92,9 @@ class AttachmentsService {
             throw new Error("Only admins can delete attachments");
         }
 
-        const attachment = await attachmentRepository.find(attachmentId);
+        const attachment = await attachmentRepository.find({
+            id : attachmentId
+        });
 
         if(attachment.length === 0){
             throw new Error("Attachment not found");

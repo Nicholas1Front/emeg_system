@@ -11,8 +11,6 @@ class TechnicalDocsService{
     async create({
         userId,
         docData,
-        attachmentsFiles,
-        signatureImg
     }){
 
         docData.user_id = userId;
@@ -55,6 +53,12 @@ class TechnicalDocsService{
             docData.work_order_id = null;
         }
 
+        if(doc.type === 'report'){
+            doc.title = `RELATÓRIO TÉCNICO - ${doc.id} - ${client.name} `
+        }else{
+            doc.title = `LAUDO TÉCNICO - ${doc.id} - ${client.name} `
+        }
+
         let doc = await techDocsRepository.create({
             client_id : docData.client_id,
             work_order_id : docData.work_order_id,
@@ -62,91 +66,45 @@ class TechnicalDocsService{
             title : "technical_doc_draft",
             type : docData.type,
             description : docData.description,
-            status : 'draft',
             responsible_name : docData.responsible_name,
             responsible_role : docData.responsible_role,
-            responsible_document : docData.responsible_document
+            responsible_document : docData.responsible_document,
+            signature_url : null,
+            signed_at : null,
+            is_signed : false
         })
 
         if(!doc){
             throw new Error('Error creating technical document');
         }
 
-        if(signatureImg){
-            const signatureObject = await attachmentsService.uploadAttachment({
-                file : signatureImg,
-                entityType : 'tech_doc_signature_attachment',
-                entityId : doc.id,
-                requesterId : userId
-            })
+        let updatedDoc = doc;
 
-            if(!signatureObject){
-                throw new Error('Error uploading signature image');
-            }
-
-            doc.signature_url = signatureObject.url;
-            doc.is_signed = true;
-            doc.status = 'finished';
-        }
-
-        if(!signatureImg){
-            doc.is_signed = false;
-            doc.status = 'pending_signature';
-        }
-
-        let uploadedAttachments = [];
-
-        if(attachmentsFiles && attachmentsFiles.length > 0){
-            for(const file of attachmentsFiles){
-                const uploadedFile = await attachmentsService.uploadAttachment({
-                    file : file,
-                    entityType : doc.type,
-                    entityId : doc.id,
-                    requesterId : userId
-                });
-
-                if(!uploadedFile){
-                    throw new Error('Error uploading attachment');
-                }
-
-                uploadedAttachments.push(uploadedFile);
-            }
-        }
-
-        if(doc.type === 'report'){
-            doc.title = `RELATÓRIO TÉCNICO - ${doc.id} - ${client.name} `
+        if(updatedDoc.type === 'report'){
+            updatedDoc.title = `RELATÓRIO TÉCNICO - ${updatedDoc.id} - ${client.name}`
         }else{
-            doc.title = `LAUDO TÉCNICO - ${doc.id} - ${client.name} `
+            updatedDoc.title = `LAUDO TÉCNICO - ${updatedDoc.id} - ${client.name}`
         }
 
-        const updatedDoc = await techDocsRepository.update({
-            id : doc.id,
-            docData : doc
-        })
-        
+        updatedDoc = await techDocsRepository.update({
+            id : updatedDoc.id,
+            docData : updatedDoc
+        });
+
         if(!updatedDoc){
             throw new Error('Error updating technical document');
         }
 
-        if(uploadedAttachments.length > 0){
-            return {
-                ...updatedDoc,
-                attachments : uploadedAttachments
-            }
-        }else{
-            return {
-                ...updatedDoc,
-                attachments : []
-            }
-        }
+        return updatedDoc;
+
     }
 
     async update({
         id,
         userId,
         docData,
-        signatureImg,
-        attachmentsFiles
+        signatureData,
+        removeAttachments
     }){
         let existingDoc = await this.find({
             id : id
@@ -212,64 +170,69 @@ class TechnicalDocsService{
             }
         }
 
-        if(signatureImg !== undefined){
-            if(signatureImg){
+        if(signatureData){
+            if(signatureData.remove_signature){
                 const existingSignature = await attachmentsService.findAttachments({
-                    entityType : 'tech_doc_signature_attachment',
-                    entityId : id
-                })
+                    entity_type : 'technical_doc_signature',
+                    entity_id : id
+                });
 
-                if(existingSignature.length === 0){
-                    throw new Error('Signature image not found for the existing document');
+                if(existingSignature.length <= 0){
+                    throw new Error('Signature not found for the existing document');
                 }
 
                 const result = await attachmentsService.deleteAttachment({
-                    attachmentId : parseInt(existingSignature[0].id),
+                    attachmentId : existingSignature[0].id,
                     requesterRole : 'admin'
-                })
+                });
 
                 if(!result || result.message !== "Attachment deleted successfully"){
-                    throw new Error('Error deleting existing signature image');
-                }
-
-                const signatureObject = await attachmentsService.uploadAttachment({
-                    file : signatureImg,
-                    entityType : docData.type,
-                    entityId : id,
-                    requesterId : userId   
-                })
-
-                if(!signatureObject){
-                    throw new Error('Error uploading signature image');
-                }
-
-                docData.signature_url = signatureObject.url;
-                docData.is_signed = true;
-                docData.status = 'finished';
-            }else{
-
-                const existingSignature = await attachmentsService.findAttachments({
-                    entityType : 'tech_doc_signature_attachment',
-                    entityId : id
-                })
-
-                if(existingSignature.length === 0){
-                    throw new Error('Signature image not found for the existing document');
-                }
-
-                const result = await attachmentsService.deleteAttachment({
-                    attachmentId : parseInt(existingSignature[0].id),
-                    requesterRole : 'admin'
-                })
-
-                if(!result || result.message !== "Attachment deleted successfully"){
-                    throw new Error('Error deleting existing signature image');
+                    throw new Error('Error deleting existing signature with id ' + existingSignature[0].id);
                 }
 
                 docData.signature_url = null;
                 docData.is_signed = false;
-                docData.status = 'pending_signature';
+                docData.signed_at = null;
             }
+
+            if(signatureData.update_signature){
+                const signature = await attachmentsService.findAttachments({
+                    entity_tyoe : 'technical_doc_signature',
+                    entity_id : id
+                })
+
+                if(signature.length <= 0){
+                    throw new Error('Signature not found for the existing document');
+                }
+
+                docData.signature_url = signature[0].url;
+                docData.is_signed = true;
+                docData.signed_at = signature[0].created_at;
+            }
+        }
+
+        let finalAttachments = [];
+
+        const existingAttachments = await attachmentsService.findAttachments({
+            entity_type : 'technical_doc_attachment',
+            entity_id : id
+        });
+
+        finalAttachments = existingAttachments;
+
+        if(removeAttachments){
+            for(const attachment of existingAttachments){
+                const result =await attachmentsService.deleteAttachment({
+                    attachmentId : attachment.id,
+                    requesterRole : 'admin'
+                });
+
+                if(!result || result.message !== "Attachment deleted successfully!"){
+                    throw new Error('Error deleting existing attachment with id' + attachment.id);
+                }
+            }
+
+            finalAttachments = [];
         }
 
         const uploadedDoc = await techDocsRepository.update({
@@ -281,51 +244,9 @@ class TechnicalDocsService{
             throw new Error('Error updating technical document');
         }
 
-        let finishedAttachments = [];
-
-        if(attachmentsFiles && attachmentsFiles.length > 0){
-            const existingIds = existingDoc.attachments.map(att => att.id);
-
-            for(let id of existingIds){
-                id = parseInt(id);
-
-                const result = await attachmentsService.deleteAttachment({
-                    attachmentId : id,
-                    requesterRole : 'admin'
-                });
-
-                if(!result || result.message !== "Attachment deleted successfully"){
-                    throw new Error('Error deleting existing attachment with id ' + id);
-                }
-            }
-
-            for(const file of attachmentsFiles){
-                const uploadedFile = await attachmentsService.uploadAttachment({
-                    file : file,
-                    entityType : uploadedDoc.type,
-                    entityId : uploadedDoc.id,
-                    requesterId : uploadedDoc.user_id
-                });
-
-                if(!uploadedFile){
-                    throw new Error('Error uploading attachment');
-                }
-
-                finishedAttachments.push(uploadedFile);
-            }
-        }
-
-        if(
-            (attachmentsFiles && attachmentsFiles.length > 0) || finishedAttachments.length > 0
-        ){
-            for(const attachment of existingDoc.attachments){
-                finishedAttachments.push(attachment);
-            }
-        }
-
         return {
             ...uploadedDoc,
-            attachments : finishedAttachments
+            attachments : finalAttachments
         }
     }
 
@@ -347,8 +268,8 @@ class TechnicalDocsService{
 
         for(const doc of docs){
             const attachments = await attachmentsService.findAttachments({
-                entityType : doc.type,
-                entityId : doc.id
+                entity_type : 'technical_doc_attachment',
+                entity_id : doc.id
             });
 
             finishedDocs.push({
@@ -382,10 +303,11 @@ class TechnicalDocsService{
             throw new Error('Error deactivating document');
         }
 
-        for(const file of existingDoc[0].attachments){
-            const result = await attachmentsService.deleteAttachment(
-                parseInt(file.id)
-            )
+        for(const attachment of existingDoc[0].attachments){
+            const result = await attachmentsService.deleteAttachment({
+                attachmentId : attachment.id,
+                requesterRole : 'admin'
+            })
 
             if(!result || result.message !== "Attachment deleted successfully"){
                 throw new Error('Error deleting attachment with id ' + file.id);
