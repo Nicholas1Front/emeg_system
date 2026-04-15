@@ -1,6 +1,6 @@
 const techDocsService = require('./technical_docs_service');
 const {
-    createTechDocsSchema,
+    createTechDocSchema,
     updateTechDocSchema,
     findTechDocSchema
 } = require('./technical_docs_schema');
@@ -8,7 +8,7 @@ const {
 class TechnicalDocsController{
     async createDoc(req,res){
         try{
-            const data = createTechDocsSchema.parse(req.body);
+            const data = createTechDocSchema.parse(req.body);
 
             const doc = await techDocsService.create({
                 userId : req.user.id,
