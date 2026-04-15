@@ -19,12 +19,11 @@ class TechnicalDocsService{
 
         delete docData.client;
 
-        client = await clientsService.findClients(client);
+        client = await clientsService.findClients({
+            id : client.id
+        });
 
         if(client.length === 0){
-
-            client = client[0];
-
             if(
                 client.name === undefined ||
                 client.document === undefined ||
@@ -34,7 +33,7 @@ class TechnicalDocsService{
                 throw new Error('Client not found and insufficient data to create a new client');
             }
 
-            client = await clientsService.create(client);
+            client = await clientsService.createClient(client);
 
             if(!client){
                 throw new Error('Error creating client');
@@ -136,7 +135,7 @@ class TechnicalDocsService{
                     }
                 }
 
-                client = await clientsService.create(client);
+                client = await clientsService.createClient(client);
 
                 if(!client){
                     throw new Error('Error creating client');
