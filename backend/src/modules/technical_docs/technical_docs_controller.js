@@ -8,19 +8,6 @@ const {
 class TechnicalDocsController{
     async createDoc(req,res){
         try{
-
-            if(req.body.client){
-                try{
-                    req.body.client = JSON.parse(req.body.client)
-                    /* Devido a requisição ser feita via form-data o client tem que ser parseado para json */
-                }catch(err){
-                    return res.status(400).json({
-                        message : 'Error parsing client',
-                        error : err.message
-                    })
-                }
-            }
-
             const data = createTechDocsSchema.parse(req.body);
 
             const doc = await techDocsService.create({
@@ -42,19 +29,6 @@ class TechnicalDocsController{
 
     async updateDoc(req, res){
         try{
-
-            if(req.body.client){
-                try{
-                    req.body.client = JSON.parse(req.body.client)
-                    /* Devido a requisição ser feita via form-data o client tem que ser parseado para json */
-                }catch(err){
-                    return res.status(400).json({
-                        message : 'Error parsing client',
-                        error : err.message
-                    })
-                }
-            }
-
             let data = updateTechDocSchema.parse(req.body);
 
             let signatureData = false;
@@ -85,7 +59,7 @@ class TechnicalDocsController{
                 message : "Technical doc updated successfully",
                 data : doc
             })
-        }catch(err){
+        }catch(err){ 
             return res.status(400).json({
                 message : "Error updating technical doc",
                 error : err.message
