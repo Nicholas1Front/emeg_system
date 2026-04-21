@@ -33,7 +33,7 @@ const updateTechDocSchema = z.object({
     signature : z.object({
         remove_signature : z.boolean().optional(),
         update_signature : z.boolean().optional()
-    }),
+    }).optional(),
     remove_attachments : z.boolean().optional()
 }).refine(
     data => Object.keys(data).length > 0,

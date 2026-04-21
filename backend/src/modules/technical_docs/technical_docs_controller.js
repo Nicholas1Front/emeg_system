@@ -33,7 +33,7 @@ class TechnicalDocsController{
 
             let signatureData = false;
 
-            if(data.signature){
+            if(data.signature && data.signature !== undefined){
                 signatureData = data.signature;
             }
 
@@ -41,7 +41,7 @@ class TechnicalDocsController{
 
             let removeAttachments = false;
 
-            if(data.remove_attachments){
+            if(data.remove_attachments && data.remove_attachments !== undefined){
                 removeAttachments = data.remove_attachments;
             }
 
