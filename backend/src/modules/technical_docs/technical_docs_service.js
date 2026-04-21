@@ -50,7 +50,7 @@ class TechnicalDocsService{
             client = newClient;
         }
 
-        docData.client_id = client.id;
+        docData.client_id = parseInt(client.id);
 
         if(!allowedTypes.includes(docData.type)){
             throw new Error(`Invalid document type. Allowed types are: ${allowedTypes.join(', ')}`);
@@ -78,7 +78,7 @@ class TechnicalDocsService{
         if(!doc){
             throw new Error('Error creating technical document');
         }
-        
+
         let updatedDoc = doc;
 
         if(updatedDoc.type === 'report'){
@@ -88,7 +88,7 @@ class TechnicalDocsService{
         }
 
         updatedDoc = await techDocsRepository.update({
-            id : updatedDoc.id,
+            id : parseInt(updatedDoc.id),
             docData : updatedDoc
         });
 
