@@ -14,7 +14,7 @@ router.post(
 )
 
 router.put(
-    '/update-tech-doc',
+    '/update-tech-doc/:id',
     techDocsController.updateDoc
 )
 
