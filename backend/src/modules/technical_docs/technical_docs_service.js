@@ -60,12 +60,6 @@ class TechnicalDocsService{
             docData.work_order_id = null;
         }
 
-        if(doc.type === 'report'){
-            doc.title = `RELATÓRIO TÉCNICO - ${doc.id} - ${client.name} `
-        }else{
-            doc.title = `LAUDO TÉCNICO - ${doc.id} - ${client.name} `
-        }
-
         let doc = await techDocsRepository.create({
             client_id : docData.client_id,
             work_order_id : docData.work_order_id,
@@ -84,7 +78,7 @@ class TechnicalDocsService{
         if(!doc){
             throw new Error('Error creating technical document');
         }
-
+        
         let updatedDoc = doc;
 
         if(updatedDoc.type === 'report'){
