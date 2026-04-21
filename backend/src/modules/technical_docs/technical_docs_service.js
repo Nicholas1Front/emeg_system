@@ -19,27 +19,35 @@ class TechnicalDocsService{
 
         delete docData.client;
 
-        client = await clientsService.findClients({
-            id : client.id
-        });
+        if(client.id !== undefined){
+            client = await clientsService.findClients({
+                id : client.id
+            })
 
-        if(client.length === 0){
+            if(client.length === 0){
+                throw new Error("Client not found")
+            }
+
+            client = client[0];
+        }
+
+        if(client.id === undefined){
             if(
                 client.name === undefined ||
-                client.document === undefined ||
+                client.address === undefined ||
                 client.type === undefined ||
-                client.address === undefined
+                client.document === undefined
             ){
-                throw new Error('Client not found and insufficient data to create a new client');
+                throw new Error('Client data insuficient')
             }
 
-            client = await clientsService.createClient(client);
+            const newClient = await clientsService.createClient(client);
 
-            if(!client){
-                throw new Error('Error creating client');
+            if(!newClient){
+                throw new Error("Error creating client")
             }
-        }else{
-            client = client[0];
+
+            client = newClient;
         }
 
         docData.client_id = client.id;
@@ -124,33 +132,25 @@ class TechnicalDocsService{
         }
 
         if(client !== null){
-            client = await clientsService.findClients({
-                id : client.id
-            });
+            if(client.id !== undefined){
+                client = await clientsService.findClients({
+                    id : client.id
+                });
 
-            if(client.length === 0){
-                for(const key of client){
-                    if(client[key] === undefined){
-                        throw new Error(`Client not found and insufficient data to create a new client. Missing field: ${key}`);
-                    }
+                if(client.length === 0){
+                    throw new Error('Client not found')
                 }
+            }
 
-                client = await clientsService.createClient(client);
+            if(client.id === undefined){
+                const newClient = await clientsService.createClient(client);
 
-                if(!client){
+                if(!newClient){
                     throw new Error('Error creating client');
                 }
-            }
-        }else{
-            client = await clientsService.findClients({
-                id : existingDoc.client_id
-            });
 
-            if(client.length === 0){
-                throw new Error('Client not found for the existing document');
+                client = newClient;
             }
-
-            client = client[0];
         }
 
         delete docData.client;
