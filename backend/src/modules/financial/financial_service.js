@@ -1,0 +1,240 @@
+const financialRepository = require('./financial_repository');
+
+const allowedTypes = [
+    'income',
+    'expense'
+];
+
+class FinancialService{
+    async createRecord({
+        user_id,
+        categoryData,
+        description,
+        amount,
+        type,
+        date_reference
+    }){
+        if(!allowedTypes.includes(type)){
+            throw new Error('Invalid record type');
+        }
+
+        let category = null;
+
+        if(categoryData.id !== undefined){
+            category = await this.findCategories({
+                id : categoryData.id
+            });
+
+            if(category.length === 0){
+                const newCategory = await this.createCategory({
+                    user_id,
+                    title : categoryData.title,
+                    description : categoryData.description,
+                    type : categoryData.type
+                });
+
+                if(!newCategory){
+                    throw new Error('Failed to create category');
+                }
+
+                category = newCategory;
+            }
+        }
+
+        if(!description || description === undefined){
+            description = `descrição referente a ${title} - tipo : ${type}`
+        }
+
+        if(amount <= 0){
+            throw new Error('Amount must be greater than zero');
+        }
+
+        const record = await financialRepository.createRecord({
+            user_id,
+            category_id : category.id,
+            description,
+            amount,
+            type,
+            date_reference
+        })
+
+        if(!record){
+            throw new Error('Failed to create record');
+        }
+
+        return record
+    }
+
+    async createCategory({
+        user_id,
+        title,
+        description,
+        type
+    }){
+
+        if(!allowedTypes.includes(type)){
+            throw new Error('Invalid category type');
+        }
+
+        if(!description || description === undefined){
+            description = `descrição referente a ${title} - tipo : ${type}`
+        }
+
+        const result = await this.findCategories({
+            title : title,
+            type : type,
+        });
+
+        if(result.length > 0){
+            throw new Error('Category with the same title and type already exists');
+        }
+
+        const category = await financialRepository.createCategory({
+            user_id,
+            title,
+            description,
+            type
+        });
+
+        if(!category){
+            throw new Error('Failed to create category');
+        }
+
+        return category;
+    }
+
+    async findCategories(filters){
+        const categories = await financialRepository.findCategories({
+            user_id: filters.user_id,
+            id: filters.id,
+            title: filters.title,
+            description: filters.description,
+            type: filters.type
+        });
+
+        return categories;
+    }
+
+    async findRecords(filters){
+        const records = await financialRepository.findRecords({
+            user_id: filters.user_id,
+            month_start: filters.month_start,
+            month_end: filters.month_end,
+            year_start: filters.year_start,
+            year_end: filters.year_end,
+            date_reference_start: filters.date_reference_start,
+            date_reference_end: filters.date_reference_end,
+            type: filters.type,
+            amount: filters.amount
+        });
+
+        return records;
+    }
+
+    async updateRecord({
+        id,
+        recordData
+    }){
+        let record = await this.findRecords({
+            id : id
+        });
+
+        if(record.length === 0){
+            throw new Error('Record not found');
+        }
+
+        if(recordData.type && recordData.type !== undefined){
+            if(!allowedTypes.includes(recordData.type)){
+                throw new Error('Invalid record type');
+            }
+        }
+
+        if(recordData.category_id && recordData.category_id !== undefined){
+            const category = await this.findCategories({
+                id : recordData.category_id
+            });
+
+            if(category.length === 0){
+                throw new Error('Category not found');
+            }
+        }
+
+        if(recordData.amount && recordData.amount <= 0){
+            throw new Error('Amount must be greater than zero');
+        }
+
+        const updatedRecord = await financialRepository.updateRecord({
+            id,
+            recordData
+        });
+
+        if(!updatedRecord){
+            throw new Error('Failed to update record');
+        }
+
+        return updatedRecord;
+    }
+
+    async updateCategory({
+        id,
+        categoryData
+    }){
+       let existingCategory = await this.findCategories({
+           id : id
+       });
+
+       if(existingCategory.length === 0){
+            throw new Error('Category not found');
+       }
+
+       if(categoryData.type && categoryData.type !== undefined){
+            if(!allowedTypes.includes(categoryData.type)){
+                throw new Error('Invalid category type');
+            }
+       }
+
+       if(categoryData.title !== undefined && categoryData.type !== undefined){
+            const result = await this.findCategories({
+                title : categoryData.title,
+                type : categoryData.type,
+            });
+
+            if(result.length > 0 && result[0].id !== id){
+                throw new Error('Category with the same title and type already exists');
+            }
+       }
+
+       const updatedCategory = await financialRepository.updateCategory({
+            id,
+            categoryData
+       });
+
+       if(!updatedCategory){
+            throw new Error('Failed to update category')
+       }
+
+       return updatedCategory;
+    }
+
+    async deleteRecord(id){
+        const result = await financialRepository.deleteRecord(id);
+
+        if(!result){
+            throw new Error('Failed to delete record');
+        }
+
+        return result
+    }
+
+    async deleteCategory(id){
+        const result = await financialRepository.deleteCategory(id);
+
+        if(!result){
+            throw new Error('Failed to delete category');
+        }
+
+        return result;
+    }
+}
+
+module.exports = new FinancialService();

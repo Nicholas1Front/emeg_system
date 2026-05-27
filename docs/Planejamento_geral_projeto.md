@@ -221,7 +221,7 @@ Base de referência para peças e serviços.
 
 ---
 
-## Módulo de Relatórios e Laudos [...]
+## Módulo de Relatórios e Laudos [✅]
 
 ⏱️ Estimativa: 5 a 7 dias
 
@@ -235,15 +235,15 @@ Base de referência para peças e serviços.
 
 ### Checklist
 
-* [ ] Model technical_reports
-* [ ] Model technical_assessments
-* [ ] Anexo de imagens com modulo de anexos
-* [ ] Mecanismo de geração arquivo .docx
-* [ ] Testes unitários
+* [✅] Model technical_reports
+* [✅] Model technical_assessments
+* [✅] Anexo de imagens com modulo de anexos
+* [✅] Mecanismo de geração arquivo .docx
+* [✅] Testes unitários
 
 ---
 
-## Módulo Financeiro []
+## Módulo Financeiro [...]
 
 ⏱️ Estimativa: 7 a 10 dias
 
