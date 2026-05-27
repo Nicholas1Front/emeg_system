@@ -304,3 +304,15 @@ O que isso impacta no projeto.
 - Mudança no planejamento de alguns modulos que ainda não foram criados (doc e pdf generator)
 - Maior validação antes e depois da requisição de upload
 - Validação ainda mais especifica e robusta no front-end
+
+## 27/05/2026 - Equipaments terá brand, model, type e identification
+
+### Decisão :
+- Refatorar modulo de equipaments para que tenha a identificação completa de um equipamento : marca/brand, model/modelo, type/tipo (tipos como : Carro, Caminhão, Guindaste e etc)
+
+### Motivo :
+- Fazer com que identificação do equipamento fique mais clara e precisa
+- Refinar estrutura de pesquisa com as novas propriedades
+
+### Consequência :
+- Além do modulo de equipaments, refatorar : work_orders e budgets.
