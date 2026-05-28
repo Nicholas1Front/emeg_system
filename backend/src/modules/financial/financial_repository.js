@@ -135,9 +135,18 @@ class FinancialRepository{
         id,
         title,
         description,
-        type
+        type,
+        includedDeactivated
     }){
         const categories = knex('financial_categories');
+
+        if(!includedDeactivated){
+            categories.whereNull('deleted_at');
+        }
+
+        if(includedDeactivated){
+            categories.whereNotNull('deleted_at');
+        }
 
         if(id !== undefined){
             categories.where({id})
@@ -168,10 +177,16 @@ class FinancialRepository{
         return true
     }
 
-    async deleteCategory(id){
-        await knex('financial_categories').where({id}).del();
+    async deactivateCategory(id){
+        const category = await knex('financial_categories').where({id}).update({deleted_at: knex.fn.now()});
 
-        return true
+        return category
+    }
+
+    async activateCategory(id){
+        const category = await knex('financial_categories').where({id}).update({deleted_at: null});
+
+        return category
     }
 }
 

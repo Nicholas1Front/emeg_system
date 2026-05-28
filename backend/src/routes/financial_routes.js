@@ -16,6 +16,7 @@ router.get('/get-records', financialController.getRecords);
 router.get('/get-categories', financialController.getCategories);
 
 router.delete('/delete-record/:id', financialController.deleteRecord);
-router.delete('/delete-category/:id', financialController.deleteCategory);
+router.delete('/deactivate-category/:id', financialController.deactivateCategory);
+router.patch('/activate-category/:id', financialController.activateCategory);
 
 module.exports = router;

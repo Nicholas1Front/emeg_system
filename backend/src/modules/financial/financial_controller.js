@@ -128,6 +128,10 @@ class FinancialController{
         try{
             let filters = findCategoriesSchema.parse(req.query);
 
+            if(filters.includedDeactivated === undefined){
+                filters.includedDeactivated = false;
+            }
+
             const categories = await financialService.findCategories(filters);
 
             return res.status(200).json({
@@ -160,19 +164,37 @@ class FinancialController{
         }
     }
 
-    async deleteCategory(req,res){
+    async deactivateCategory(req,res){
         try{
-            const result = await financialService.deleteCategory({
+            const result = await financialService.deactivateCategory({
                 id : req.params.id
             });
 
             return res.status(200).json({
-                message : 'Category deleted successfully',
+                message : 'Category deactivated successfully',
                 data : result
             })
         }catch(err){
             return res.status(400).json({
-                message : 'Failed to delete category',
+                message : 'Failed to deactivate category',
+                error : err.message
+            })
+        }
+    }
+
+    async activateCategory(req,res){
+        try{
+            const result = await financialService.activateCategory({
+                id : req.params.id
+            });
+
+            return res.status(200).json({
+                message : 'Category activated successfully',
+                data : result
+            })
+        }catch(err){
+            return res.status(400).json({
+                message : 'Failed to activate category',
                 error : err.message
             })
         }

@@ -119,7 +119,8 @@ class FinancialService{
             id: filters.id,
             title: filters.title,
             description: filters.description,
-            type: filters.type
+            type: filters.type,
+            includedDeactivated: filters.includedDeactivated
         });
 
         return categories;
@@ -236,11 +237,21 @@ class FinancialService{
         return result
     }
 
-    async deleteCategory(id){
-        const result = await financialRepository.deleteCategory(id);
+    async deactivateCategory(id){
+        const result = await financialRepository.deactivateCategory(id);
 
         if(!result){
-            throw new Error('Failed to delete category');
+            throw new Error('Failed to deactivate category');
+        }
+
+        return result;
+    }
+
+    async activateCategory(id){
+        const result = await financialRepository.activateCategory(id);
+
+        if(!result){
+            throw new Error('Failed to activate category');
         }
 
         return result;

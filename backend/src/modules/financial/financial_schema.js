@@ -59,7 +59,8 @@ const findCategoriesSchema = z.object({
     id : z.coerce.number().positive('Category ID must be greater than zero').optional(),
     title : z.string().min(1, 'Title is required').optional(),
     description : z.string().min(1, 'Description is required').optional(),
-    type : z.string().min(1, 'Type is required').optional()
+    type : z.string().min(1, 'Type is required').optional(),
+    includedDeactivated : z.boolean().optional()
 })
 
 module.exports = {
