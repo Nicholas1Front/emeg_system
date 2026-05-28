@@ -104,7 +104,7 @@ class FinancialService{
     }
 
     async findCategories(filters){
-        const categories = await financialRepository.findCategories({
+        const categories = await financialRepository.getCategories({
             user_id: filters.user_id,
             id: filters.id,
             title: filters.title,
@@ -116,7 +116,7 @@ class FinancialService{
     }
 
     async findRecords(filters){
-        const records = await financialRepository.findRecords({
+        const records = await financialRepository.getRecords({
             user_id: filters.user_id,
             month_start: filters.month_start,
             month_end: filters.month_end,
