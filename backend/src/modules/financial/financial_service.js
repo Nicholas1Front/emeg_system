@@ -255,14 +255,6 @@ class FinancialService{
             throw new Error('Category not found');
         }
 
-        const category = await this.findCategories({
-            id : id
-        })
-
-        if(category.length === 0){
-            throw new Error('Category not found');
-        }
-
         const result = await financialRepository.deactivateCategory(id);
 
         if(!result){
