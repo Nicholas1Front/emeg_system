@@ -1,7 +1,7 @@
 const {z} = require('zod');
 
 const createRecordSchema = z.object({
-    categoryData : z.object({
+    category_data : z.object({
         id : z.coerce.number().optional(),
         title : z.string().optional(),
         description : z.string().optional(),
