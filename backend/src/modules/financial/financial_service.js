@@ -153,7 +153,7 @@ class FinancialService{
             throw new Error('Record not found');
         }
 
-        if(recordData.type && recordData.type !== undefined){
+        if(recordData.type !== undefined){
             if(!allowedTypes.includes(recordData.type)){
                 throw new Error('Invalid record type');
             }

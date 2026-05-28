@@ -6,7 +6,10 @@ const createRecordSchema = z.object({
         title : z.string().optional(),
         description : z.string().optional(),
         type : z.string().optional()
-    }),
+    }).refine(
+        data => Object.values(data).some(value => value !== undefined),
+        {message : "At least one field must be provided for create category"}
+    ),
     description : z.string().optional(),
     amount : z.coerce.number().positive('Amount must be greater than zero'),
     type : z.string().min(1, 'Type is required'),
@@ -23,15 +26,21 @@ const updateRecordSchema = z.object({
     category_id : z.coerce.number().positive('Category ID must be greater than zero').optional(),
     description : z.string().optional(),
     amount : z.coerce.number().positive('Amount must be greater than zero').optional(),
-    type : z.string().min(1, 'Type is required'),
+    type : z.string().min(1, 'Type is required').optional(),
     date_reference : z.coerce.date().optional()
-});
+}).refine(
+    data => Object.values(data).some(value => value !== undefined),
+    {message : "At least one field must be provided for update record"}
+);
 
 const updateCategorySchema = z.object({
     title : z.string().min(1, 'Title is required').optional(),
     description : z.string().min(1, 'Description is required').optional(),
     type : z.string().min(1, 'Type is required').optional()
-});
+}).refine(
+    data => Object.values(data).some(value => value !== undefined),
+    {message : "At least one field must be provided for update category"}
+);
 
 const findRecordsSchema = z.object({
     user_id : z.coerce.number().positive('User ID must be greater than zero').optional(),
