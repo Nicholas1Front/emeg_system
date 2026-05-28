@@ -15,7 +15,9 @@ class FinancialController{
 
             const record = await financialService.createRecord({
                 user_id : req.user.id,
-                categoryData : data.category_data,
+                categoryData : {
+                    ...data.category_data
+                },
                 description : data.description,
                 amount : data.amount,
                 type : data.type,

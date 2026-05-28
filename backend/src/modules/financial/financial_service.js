@@ -8,7 +8,7 @@ const allowedTypes = [
 class FinancialService{
     async createRecord({
         user_id,
-        categoryData,
+        category_data,
         description,
         amount,
         type,
@@ -20,24 +20,34 @@ class FinancialService{
 
         let category = null;
 
-        if(categoryData.id !== undefined){
+        if(category_data && category_data.id !== undefined){
             category = await this.findCategories({
-                id : categoryData.id
+                id : category_data.id
             });
 
             if(category.length === 0){
-                const newCategory = await this.createCategory({
-                    user_id,
-                    title : categoryData.title,
-                    description : categoryData.description,
-                    type : categoryData.type
-                });
+                throw new Error('Category not found');
+            }
 
-                if(!newCategory){
-                    throw new Error('Failed to create category');
-                }
+            category = category[0];
+        }else{
+            if(
+                category_data.title === undefined ||
+                category_data.description === undefined ||
+                category_data.type === undefined
+            ){
+                throw new Error('Category data is incomplete');
+            }
 
-                category = newCategory;
+            category = await this.createCategory({
+                user_id : user_id,
+                title : category_data.title,
+                description : category_data.description,
+                type : category_data.type
+            })
+
+            if(!category){
+                throw new Error('Failed to create category');
             }
         }
 
