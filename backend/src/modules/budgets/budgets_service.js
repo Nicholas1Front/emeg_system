@@ -69,7 +69,8 @@ class BudgetsService{
         if(equipament.id === undefined){
             if(
                 equipament.brand === undefined || 
-                equipament.name === undefined || 
+                equipament.model === undefined ||
+                equipament.type === undefined || 
                 equipament.identification === undefined
             ){
                 throw new Error("Missing equipament data");
@@ -78,7 +79,8 @@ class BudgetsService{
             const newEquipament = await equipamentsService.create({
                 client_id : client.id,
                 brand : equipament.brand,
-                name : equipament.name,
+                model : equipament.model,
+                type : equipament.type,
                 identification : equipament.identification
             });
 
@@ -160,12 +162,12 @@ class BudgetsService{
             client = client[0];
         }
 
-        if(equipament.name === undefined){
+        if(equipament.model === undefined){
             equipament = await equipamentsService.find(equipament);
             equipament = equipament[0];
         }
 
-        const equipamentInfo = `${equipament.name} - ${equipament.brand} - ${equipament.identification}`;
+        const equipamentInfo = `${equipament.type} ${equipament.brand} ${equipament.model} - ${equipament.identification}`;
 
         budgetData.name = `Orçamento ${budgetData.id} - ${client.name} - ${equipamentInfo}`;
 
@@ -356,7 +358,8 @@ class BudgetsService{
         if(equipament !== undefined && equipament.id === undefined){
             if(
                 equipament.brand === undefined ||
-                equipament.name === undefined ||
+                equipament.model === undefined ||
+                equipament.type === undefined ||
                 equipament.identification === undefined
             ){
                 throw new Error('Equipament data is incomplete');
@@ -365,7 +368,8 @@ class BudgetsService{
             equipament = await equipamentsService.create({
                 client_id : client.id,
                 brand : equipament.brand,
-                name : equipament.name,
+                model : equipament.model,
+                type : equipament.type,
                 identification : equipament.identification
             })
 
@@ -378,7 +382,7 @@ class BudgetsService{
             budgetData.client_id = client.id;
             budgetData.equipament_id = equipament.id;
 
-            const equipamentInfo = `${equipament.name} - ${equipament.brand} - ${equipament.identification}`;
+            const equipamentInfo = `${equipament.type} ${equipament.brand} ${equipament.model} - ${equipament.identification}`;
 
             budgetData.name = `Orçamento ${budgetId} - ${client.name} - ${equipamentInfo}`;
         }

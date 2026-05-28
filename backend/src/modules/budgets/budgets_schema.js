@@ -11,7 +11,8 @@ const createBudgetSchema = z.object({
     equipament : z.object({
         id : z.coerce.number().int().positive("Equipament ID must be a positive integer").optional(),
         client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
-        name : z.string().min(1).optional(),
+        model : z.string().min(1).optional(),
+        type : z.string().min(1).optional(),
         brand : z.string().min(1).optional(),
         identification : z.string().min(1).optional(),
     }),
@@ -44,7 +45,8 @@ const updateBudgetSchema = z.object({
     equipament : z.object({
         id : z.coerce.number().int().positive("Equipament ID must be a positive integer").optional(),
         client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
-        name : z.string().min(1).optional(),
+        model : z.string().min(1).optional(),
+        type : z.string().min(1).optional(),
         brand : z.string().min(1).optional(),
         identification : z.string().min(1).optional(),
     }).optional(),
