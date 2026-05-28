@@ -14,7 +14,8 @@ const createWorkOrderSchema = z.object({
     equipament : z.object({
         id : z.coerce.number().int().positive("Equipament ID must be a positive integer").optional(),
         client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
-        name : z.string().min(1, "Name is required").optional(),
+        model : z.string().min(1, "Model is required").optional(),
+        type : z.string().min(1, "Type is required").optional(),
         brand : z.string().min(1, "Brand is required").optional(),
         identification : z.string().min(1, "Identification is required").optional(),
     }).optional(),
@@ -47,7 +48,8 @@ const updateWorkOrderSchema = z.object({
     equipament : z.object({
         id : z.coerce.number().int().positive("Equipament ID must be a positive integer").optional(),
         client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
-        name : z.string().min(1, "Name is required").optional(),
+        model : z.string().min(1, "Model is required").optional(),
+        type : z.string().min(1, "Type is required").optional(),
         brand : z.string().min(1, "Brand is required").optional(),
         identification : z.string().min(1, "Identification is required").optional(),
     }).optional(),

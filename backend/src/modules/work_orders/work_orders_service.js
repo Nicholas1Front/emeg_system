@@ -38,11 +38,9 @@ class WorkOrdersService{
 
         budget = budget[0];
 
-        let client = {
+        let client = await clientsService.findClients({
             id : budget.client_id
-        }
-
-        client = await clientsService.findClients(client);
+        })
 
         if(!client){
             throw new Error("Client not found");
@@ -50,11 +48,9 @@ class WorkOrdersService{
 
         client = client[0];
 
-        let equipament = {
+        let equipament = await equipamentsService.find({
             id : budget.equipament_id
-        }
-
-        equipament = await equipamentsService.find(equipament);
+        })
 
         if(!equipament){
             throw new Error("Equipament not found");
@@ -99,12 +95,14 @@ class WorkOrdersService{
             orderData.entry_date = new Date(orderData.entry_date);
         }
 
+        const equipamentName = `${equipament.type} ${equipament.brand} ${equipament.model} - ${equipament.identification}`;
+
         const order = await workOrdersRepository.create({
             budget_id : budget.id,
             client_id : client.id,
             equipament_id : equipament.id,
             user_id : userId,
-            name : `Ordem de serviço - ${client.name} - ${equipament.name}`,
+            name : `Ordem de serviço - ${client.name} - ${equipamentName}`,
             entry_date : orderData.entry_date,
             exit_date : orderData.exit_date,
             warranty : orderData.warranty,
@@ -133,7 +131,7 @@ class WorkOrdersService{
         const updatedOrder = await workOrdersRepository.update({
             id : order.id,
             data : {
-                name : `Ordem de serviço ${order.id} - ${client.name} - ${equipament.name} - ${equipament.brand} - ${equipament.identification}`
+                name : `Ordem de serviço ${order.id} - ${client.name} - ${equipamentName}`
             }
         })
 
@@ -157,7 +155,9 @@ class WorkOrdersService{
         let itemsData = orderData.items;
 
         if(client.id !== undefined){
-            client = await clientsService.findClients(client);
+            client = await clientsService.findClients({
+                id : client.id
+            });
 
             if(!client){
                 throw new Error("Client not found");
@@ -181,7 +181,9 @@ class WorkOrdersService{
         }
 
         if(equipament.id !== undefined){
-            equipament = await equipamentsService.find(equipament);
+            equipament = await equipamentsService.find({
+                id : equipament.id
+            });
 
             if(!equipament){
                 throw new Error("Equipament not found");
@@ -192,7 +194,8 @@ class WorkOrdersService{
         }else{
             if(
                 equipament.brand === undefined ||
-                equipament.name === undefined ||
+                equipament.model === undefined ||
+                equipament.type === undefined ||
                 equipament.identification === undefined
             ){
                 throw new Error("Equipament data is incomplete");
@@ -201,7 +204,8 @@ class WorkOrdersService{
             equipament = await equipamentsService.create({
                 client_id : client.id,
                 brand : equipament.brand,
-                name : equipament.name,
+                model : equipament.model,
+                type : equipament.type,
                 identification : equipament.identification
             })
 
@@ -214,12 +218,14 @@ class WorkOrdersService{
             orderData.entry_date = new Date();
         }
 
+        const equipamentName = `${equipament.type} ${equipament.brand} ${equipament.model} - ${equipament.identification}`;
+
         const order = await workOrdersRepository.create({
             budget_id : null,
             client_id : client.id,
             equipament_id : equipament.id,
             user_id : userId,
-            name : `Ordem de serviço - ${client.name} - ${equipament.name}`,
+            name : `Ordem de serviço - ${client.name} - ${equipamentName}`,
             entry_date : orderData.entry_date,
             exit_date : orderData.exit_date,
             warranty: orderData.warranty,
@@ -257,7 +263,7 @@ class WorkOrdersService{
         const updatedOrder = await workOrdersRepository.update({
             id : order.id,
             data : {
-                name : `Ordem de serviço ${order.id} - ${client.name} - ${equipament.name} - ${equipament.brand} - ${equipament.identification}`
+                name : `Ordem de serviço ${order.id} - ${client.name} - ${equipamentName}`
             }
         })
 
@@ -425,7 +431,8 @@ class WorkOrdersService{
 
         if(equipament !== null && equipament.id === undefined){
             if(
-                equipament.name === undefined ||
+                equipament.model === undefined ||
+                equipament.type === undefined ||
                 equipament.brand === undefined ||
                 equipament.identification === undefined
             ){
@@ -435,7 +442,8 @@ class WorkOrdersService{
             const createdEquipament = await equipamentsService.create({
                 client_id : client.id,
                 brand : equipament.brand,
-                name : equipament.name,
+                model : equipament.model,
+                type : equipament.type,
                 identification : equipament.identification
             });
 
@@ -447,7 +455,8 @@ class WorkOrdersService{
         }
 
         if(equipament !== null || client !== null){
-            orderData.name = `Ordem de serviço ${existingOrder.id} - ${client.name} - ${equipament.name} - ${equipament.brand} - ${equipament.identification}`;
+            const equipamentName = `${equipament.type} ${equipament.brand} ${equipament.model} - ${equipament.identification}`;
+            orderData.name = `Ordem de serviço ${existingOrder.id} - ${client.name} - ${equipamentName}`;
         }
 
         orderData.user_id = userId;
