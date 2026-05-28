@@ -149,7 +149,7 @@ class FinancialController{
     async deleteRecord(req,res){
         try{
             const result = await financialService.deleteRecord({
-                id : req.params.id
+                id : parseInt(req.params.id)
             })
 
             return res.status(200).json({
@@ -167,7 +167,7 @@ class FinancialController{
     async deactivateCategory(req,res){
         try{
             const result = await financialService.deactivateCategory({
-                id : req.params.id
+                id : parseInt(req.params.id)
             });
 
             return res.status(200).json({
@@ -185,7 +185,7 @@ class FinancialController{
     async activateCategory(req,res){
         try{
             const result = await financialService.activateCategory({
-                id : req.params.id
+                id : parseInt(req.params.id)
             });
 
             return res.status(200).json({
