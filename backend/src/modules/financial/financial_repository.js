@@ -140,7 +140,7 @@ class FinancialRepository{
     }){
         const categories = knex('financial_categories');
 
-        if(!includedDeactivated){
+        if(!includedDeactivated || includedDeactivated === undefined){
             categories.whereNull('deleted_at');
         }
 

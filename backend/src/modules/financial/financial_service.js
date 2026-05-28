@@ -228,6 +228,14 @@ class FinancialService{
     }
 
     async deleteRecord(id){
+        const record = await this.findRecords({
+            id : id
+        });
+
+        if(record.length === 0){
+            throw new Error('Record not found');
+        }
+
         const result = await financialRepository.deleteRecord(id);
 
         if(!result){
@@ -238,6 +246,23 @@ class FinancialService{
     }
 
     async deactivateCategory(id){
+
+        const category = await this.findCategories({
+            id : id
+        })
+
+        if(category.length === 0){
+            throw new Error('Category not found');
+        }
+
+        const category = await this.findCategories({
+            id : id
+        })
+
+        if(category.length === 0){
+            throw new Error('Category not found');
+        }
+
         const result = await financialRepository.deactivateCategory(id);
 
         if(!result){
@@ -248,6 +273,15 @@ class FinancialService{
     }
 
     async activateCategory(id){
+
+        const category = await this.findCategories({
+            id : id
+        })
+
+        if(category.length === 0){
+            throw new Error('Category not found');
+        }
+
         const result = await financialRepository.activateCategory(id);
 
         if(!result){
