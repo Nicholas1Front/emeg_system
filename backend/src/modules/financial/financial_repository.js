@@ -77,7 +77,7 @@ class FinancialRepository{
         amount
     }){
 
-        const records = await knex('financial_transactions');
+        const records = knex('financial_transactions');
 
         if(user_id !== undefined){
             records.where({user_id})
@@ -137,7 +137,7 @@ class FinancialRepository{
         description,
         type
     }){
-        const categories = await knex('financial_categories');
+        const categories = knex('financial_categories');
 
         if(id !== undefined){
             categories.where({id})
