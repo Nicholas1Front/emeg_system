@@ -2,7 +2,8 @@ const {z} = require('zod');
 
 const createEquipamentSchema = z.object({
     client_id: z.coerce.number().int().positive("Client ID must be a positive integer"),
-    name : z.string().min(1, "Name is required"),
+    model : z.string().min(1, "Model is required"),
+    type : z.string().min(1, "Type is required"),
     brand : z.string().min(1, "Brand is required"),
     identification : z.string().min(1, "Identification is required"),
     deleted_at : z.date().optional()
@@ -10,7 +11,8 @@ const createEquipamentSchema = z.object({
 
 const updateEquipamentSchema = z.object({
     client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
-    name : z.string().min(1).optional(),
+    model : z.string().min(1).optional(),
+    type : z.string().min(1).optional(),
     brand : z.string().min(1).optional(),
     identification : z.string().min(1).optional()
 }).refine(
@@ -21,7 +23,8 @@ const updateEquipamentSchema = z.object({
 const findEquipamentSchema = z.object({
     id : z.coerce.number().int().positive("Equipament ID must be a positive integer").optional(),
     client_id: z.coerce.number().int().positive("Client ID must be a positive integer").optional(),
-    name : z.string().min(1).optional(),
+    model : z.string().min(1).optional(),
+    type : z.string().min(1).optional(),
     brand : z.string().min(1).optional(),
     identification : z.string().min(1).optional(),
     includedDeleted : z.boolean().optional()

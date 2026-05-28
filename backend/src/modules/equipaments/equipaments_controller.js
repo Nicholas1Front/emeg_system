@@ -4,7 +4,6 @@ const {
     updateEquipamentSchema,
     findEquipamentSchema
 } = require('./equipaments_schema');
-const { update } = require('./equipaments_repository');
 
 class EquipamentsController{
     async createEquipament(req,res){
@@ -14,7 +13,8 @@ class EquipamentsController{
             const equipament = await equipamentsService.create({
                 client_id : equipamentData.client_id,
                 brand : equipamentData.brand,
-                name : equipamentData.name,
+                model : equipamentData.model,
+                type : equipamentData.type,
                 identification : equipamentData.identification
             });
 

@@ -5,7 +5,8 @@ class EquipamentsService{
     async create({
         client_id,
         brand,
-        name,
+        model,
+        type,
         identification
     }){
         const existingClient = await clientRepository.findClients({id : client_id});
@@ -17,7 +18,8 @@ class EquipamentsService{
         const equipament = await equipamentsRepository.create({
             client_id,
             brand,
-            name,
+            model,
+            type,
             identification
         });
 
@@ -47,7 +49,8 @@ class EquipamentsService{
             id : filters.id,
             client_id : filters.client_id,
             brand : filters.brand,
-            name : filters.name,
+            model : filters.model,
+            type : filters.type,
             identification : filters.identification,
             includedDeleted : filters.includedDeleted
         });

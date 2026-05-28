@@ -4,14 +4,16 @@ class EquipamentsRepository{
     async create({
         client_id,
         brand,
-        name,
+        model,
+        type,
         identification,
         deleted_at
     }){
         const equipament = await knex('equipaments').insert({
             client_id,
             brand,
-            name,
+            model,
+            type,
             identification,
             deleted_at
         }).returning('*');
@@ -23,7 +25,8 @@ class EquipamentsRepository{
         id,
         client_id,
         brand,
-        name,
+        model,
+        type,
         identification,
         includedDeactivated
     }){
@@ -49,8 +52,12 @@ class EquipamentsRepository{
             query.where('brand', brand);
         }
 
-        if(name !== undefined){
-            query.where('name', name);
+        if(model !== undefined){
+            query.where('model', model);
+        }
+
+        if(type !== undefined){
+            query.where('type', type);
         }
 
         if(identification !== undefined){
