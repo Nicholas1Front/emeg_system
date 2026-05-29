@@ -148,9 +148,7 @@ class FinancialController{
 
     async deleteRecord(req,res){
         try{
-            const result = await financialService.deleteRecord({
-                id : req.params.id
-            })
+            const result = await financialService.deleteRecord(req.params.id);
 
             return res.status(200).json({
                 message : 'Record deleted successfully',
@@ -166,9 +164,7 @@ class FinancialController{
 
     async deactivateCategory(req,res){
         try{
-            const result = await financialService.deactivateCategory({
-                id : req.params.id
-            });
+            const result = await financialService.deactivateCategory(req.params.id);
 
             return res.status(200).json({
                 message : 'Category deactivated successfully',
@@ -184,9 +180,7 @@ class FinancialController{
 
     async activateCategory(req,res){
         try{
-            const result = await financialService.activateCategory({
-                id : req.params.id
-            });
+            const result = await financialService.activateCategory(req.params.id);
 
             return res.status(200).json({
                 message : 'Category activated successfully',
