@@ -180,13 +180,13 @@ class FinancialRepository{
     async deactivateCategory(id){
         const category = await knex('financial_categories').where({id}).update({deleted_at: knex.fn.now()});
 
-        return category
+        return category[0]
     }
 
     async activateCategory(id){
         const category = await knex('financial_categories').where({id}).update({deleted_at: null});
 
-        return category
+        return category[0]
     }
 }
 
