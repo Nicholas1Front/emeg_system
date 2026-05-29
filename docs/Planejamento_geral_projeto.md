@@ -243,7 +243,7 @@ Base de referência para peças e serviços.
 
 ---
 
-## Módulo Financeiro [...]
+## Módulo Financeiro [✅]
 
 ⏱️ Estimativa: 7 a 10 dias
 
@@ -251,17 +251,15 @@ Base de referência para peças e serviços.
 
 * Entradas e saídas
 * Categorias
-* Anexos de comprovantes :
-    * Upload de comprovante diretamente para entrada ou saida 
 * Balanço mensal/anual
 * Gráficos
 
 ### Checklist
 
-* [ ] Model para entrada e saida financeiras
-* [ ] Anexo de comprovantes possivelmente utilizando modulo de anexos
-* [ ] Mecanismo para desenvolver gráficos e balanço mensal e anual
-* [ ] Testes unitários
+* [✅] Model para entrada e saida financeiras
+* [✅] CRUD Completo com GET'S especifícos de pesquisa
+* [...] Mecanismo para desenvolver gráficos e balanço mensal e anual
+* [✅] Testes unitários
 
 ---
 

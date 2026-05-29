@@ -316,3 +316,15 @@ O que isso impacta no projeto.
 
 ### Consequência :
 - Além do modulo de equipaments, refatorar : work_orders e budgets.
+
+## 29/05/2026 - Soft delete em financial_categories
+
+### Decisão :
+- Usar deactivate (delete_at : timestamp) e/ou soft delete nas categorias que apontam para financial_transactions
+
+### Motivo :
+- Evitar exclusão em cascata de records em financial_transactions com algum delete (acidental ou não) de categoria
+
+### Consequência :
+- Categorias agora não serão excluidas somente desativadas ou ativadas
+- Maior segurança para manipulação dos dados por parte do usuários
