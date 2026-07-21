@@ -1,12 +1,14 @@
 const financialService = require('./financial_service');
+
 const {
     createRecordSchema,
     createCategorySchema,
     updateRecordSchema,
     updateCategorySchema,
     findRecordsSchema,
-    findCategoriesSchema
+    findCategoriesSchema,
 } = require('./financial_schema');
+
 
 class FinancialController{
     async createRecord(req,res){
@@ -144,7 +146,7 @@ class FinancialController{
                 error : err.message
             })
         }
-    } 
+    }
 
     async deleteRecord(req,res){
         try{

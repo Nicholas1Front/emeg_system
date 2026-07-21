@@ -328,3 +328,15 @@ O que isso impacta no projeto.
 ### Consequência :
 - Categorias agora não serão excluidas somente desativadas ou ativadas
 - Maior segurança para manipulação dos dados por parte do usuários
+
+## 01/06/2026 - Criação do sub-modulo financial_analytics
+
+### Decisão :
+- Criar um sub-modulo em financial chamado financial_analytics responsável por criar e administrar os dados que serão usados pelo frontend nos gráficos e métricas
+
+### Motivo :
+- Não deixar que frontend administre todos os nuances referentes a calculos de dados provenientes do backend
+- Promover uma melhor perfomance tanto no backend quanto no backend
+
+### Consequência :
+- Arquitetar e desenvolver um novo sub-modulo que consiga desenvolver e prover todas essas informações
