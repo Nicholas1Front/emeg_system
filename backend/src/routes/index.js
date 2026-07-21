@@ -26,6 +26,6 @@ router.use('/budgets', budgetsRoutes);
 router.use('/work-orders', workOrdersRoutes);
 router.use('/tech-docs', techDocsRoutes);
 router.use('/financial', financialRoutes);
-router.use('/financial/analytics', financialAnalyticsRoutes);
+router.use('/financial-analytics', financialAnalyticsRoutes);
 
 module.exports = router;
