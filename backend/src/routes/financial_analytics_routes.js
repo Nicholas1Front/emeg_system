@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const authMiddleware = require('../middlewares/auth_middleware');
-const financialAnalyticsController = require('../modules/financial_analytics/financial_analytics_controller');
+const financialAnalyticsController = require('../modules/financial/financial_analytics/financial_analytics_controller')
 
 const router = Router();
 
