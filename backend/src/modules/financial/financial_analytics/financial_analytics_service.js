@@ -34,11 +34,17 @@ class AnalyticsService{
         date_reference_end
     }){
 
-        const month_start = Number(date_reference_start.split('-')[1]);
-        const month_end = Number(date_reference_end.split('-')[1]);
+        const start = new Date(date_reference_start);
+        const end = new Date(date_reference_end);
 
-        if(month_start > month_end || month_start == month_end){
-            throw new Error('Invalid date range');
+        const start_string = start.toISOString();
+        const end_string = end.toISOString();
+
+        const month_start = Number(start_string.split('-')[1]);
+        const month_end = Number(end_string.split('-')[1]);
+
+        if(month_start >= month_end){
+            throw new Error('Invalid date range')
         }
 
         const monthly_summary = await analyticsRepository.getMonthlySummary({
@@ -60,8 +66,14 @@ class AnalyticsService{
         date_reference_end
     }){
 
-        const year_start = Number(date_reference_start.split('-')[0]);
-        const year_end = Number(date_reference_end.split('-')[0]);
+        const start = new Date(date_reference_start);
+        const end = new Date(date_reference_end);
+
+        const start_string = start.toISOString();
+        const end_string = end.toISOString();
+
+        const year_start = Number(start_string.split('-')[0]);
+        const year_end = Number(end_string.split('-')[0]);
 
         if(year_start > year_end || year_start == year_end){
             throw new Error('Invalid date range');

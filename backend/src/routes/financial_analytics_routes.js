@@ -1,6 +1,6 @@
 const {Router} = require('express');
 const authMiddleware = require('../middlewares/auth_middleware');
-const financialAnalyticsController = require('../modules/financial/financial_analytics/financial_analytics_controller')
+const analyticsController = require('../modules/financial/financial_analytics/financial_analytics_controller')
 
 const router = Router();
 
@@ -8,27 +8,27 @@ router.use(authMiddleware);
 
 router.get(
     '/dashboard',
-    financialAnalyticsController.getDashboard
+    analyticsController.getDashboard
 )
 
 router.get(
     '/monthly-summary',
-    financialAnalyticsController.getMonthlySummary
+    analyticsController.getMonthlySummary
 )
 
 router.get(
     '/yearly-summary',
-    financialAnalyticsController.getYearlySummary
+    analyticsController.getYearlySummary
 )
 
 router.get(
     '/total-by-category',
-    financialAnalyticsController.getTotalByCategory
+    analyticsController.getTotalByCategory
 )
 
 router.get(
     '/recent-transactions',
-    financialAnalyticsController.getRecentTransactions
+    analyticsController.getRecentTransactions
 )
 
 module.exports = router;
