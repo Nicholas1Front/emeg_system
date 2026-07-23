@@ -7,28 +7,6 @@ const {
 } = require('./user_schema');
 
 class UserController{
-    async registerFirstUser(req, res){
-        try{
-            const data = registerSchema.parse(req.body);
-
-            const result = await userService.createFirstUser({
-                name : data.name,
-                email : data.email,
-                password : data.password
-            });
-
-            return res.status(200).json({
-                message : `First user registered successfully`,
-                user : result
-            })
-        }
-        catch(err){
-            return res.status(400).json({
-                message : `Error registering first user`,
-                error : err.message
-            })
-        }
-    }
     async registerUser(req, res){
         try{
             const data = registerSchema.parse(req.body);

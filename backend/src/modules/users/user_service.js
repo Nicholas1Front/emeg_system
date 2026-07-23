@@ -2,24 +2,6 @@ const userRepository = require('./user_repository');
 const bcrypt = require('bcrypt');
 
 class UserService{
-    async createFirstUser({
-        name,
-        email,
-        password
-    }){
-        const hashedPassword = await bcrypt.hash(password, 10);
-
-        const newUser = await userRepository.create({
-            name : name,
-            email : email,
-            password : hashedPassword,
-            role: 'admin'
-        });
-
-        delete newUser.password_hash;
-
-        return newUser;
-    }
 
     async registerUser({
         requesterRole,

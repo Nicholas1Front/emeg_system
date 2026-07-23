@@ -258,60 +258,8 @@ Base de referência para peças e serviços.
 
 * [✅] Model para entrada e saida financeiras
 * [✅] CRUD Completo com GET'S especifícos de pesquisa
-* [...] Mecanismo para desenvolver gráficos e balanço mensal e anual
+* [✅] Mecanismo para desenvolver gráficos e balanço mensal e anual
 * [✅] Testes unitários
-
----
-
-## Módulo IA (Assistente) []
-
-⏱️ Estimativa: 6 a 10 dias
-
-### Funcionalidades
-
-* Consulta de preços
-* Sugestão de itens
-* Interpretação de texto
-* Interpretação de imagens (futuro)
-
-### Checklist
-
-* [ ] Controller de IA
-* [ ] Prompt base
-* [ ] Contratos JSON
-* [ ] Tela de confirmação
-
-⚠️ Regra: IA **NUNCA grava direto no banco**
-
----
-
-## Módulo PDF
-
-⏱️ Estimativa: 6 a 10 dias
-
-### Funcionalidades
-
-* Gerar documentos em PDF a partir de templates pré estabelecidos : 
-    * Orçamentos
-    * Ordens de serviço
-    * Laudos técnicos
-    * Relatórios técnicos
-    * Balanço mensal e anual
-    * Anotações
-* Armazenar docs no storage
-* Setar url's destes docs em seus locais especificos
-
-### Checklist
-
-* [ ] Templates em HTML e CSS
-* [ ] Model e CRUD completo para pdf_generator
-* [ ] Implementar CRUD para cada modulo :
-    * [ ] budgets
-    * [ ] work_orders
-    * [ ] technical_reports
-    * [ ] technical_assessments
-    * [ ] financial inflow and outflow
-* [ ] Testes unitários e em cada modulo
 
 ---
 

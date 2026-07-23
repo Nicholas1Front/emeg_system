@@ -340,3 +340,15 @@ O que isso impacta no projeto.
 
 ### Consequência :
 - Arquitetar e desenvolver um novo sub-modulo que consiga desenvolver e prover todas essas informações
+
+## 22/07/2026 - Modulos : IA e PDF para próxima atualização
+
+### Decisão :
+- Postegar o desenvolvimento e implementação dos modulos de IA e PDF para a próxima atualização do sistema
+
+### Motivo :
+- Evitar complicações no lançamento da primeira versão
+- Buscar mais conhecimento e planejar melhor antes de implementar um assistente IA no sistema
+
+### Consequência :
+- Como falado acima : buscar mais conhecimento e planejar melhor antes de construir supostas automações e atalhos para tarefas

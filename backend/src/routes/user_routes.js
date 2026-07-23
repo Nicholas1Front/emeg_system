@@ -6,8 +6,6 @@ const adminMiddleware = require('../middlewares/admin_middleware');
 const router = Router();
 
 // Register
-router.post('/create-first-user',
-    userController.registerFirstUser);
 router.post('/register', authMiddleware, adminMiddleware, userController.registerUser);
 
 // Update
